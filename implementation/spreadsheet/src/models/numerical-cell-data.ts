@@ -8,7 +8,7 @@ export class NumericalCellData extends ACellData {
     /**
      * The numerical constant value
      */
-    private data: number
+    //private data: number
 
     /**
      * Replaces the text content of this ACellData 

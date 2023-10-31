@@ -7,7 +7,7 @@ export class CellDataComposite extends ACellData {
     /**
      * The cells that make up the composite
      */
-    private data: Array<ACellData>
+    //private data: Array<ACellData>
 
     /**
      * Replaces the text content of this ACellData 

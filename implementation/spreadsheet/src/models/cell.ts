@@ -10,12 +10,12 @@ export class Cell extends ACell{
     /**
      * The unique ID number of this cell
      */
-    private id: number;
+    //private id: number;
 
     /**
      * The data contained by this cell
      */
-    private cellData: ACellData; 
+    //private cellData: ACellData; 
     
     /**
      * Clear the content of the cell
@@ -51,7 +51,7 @@ export class Cell extends ACell{
      * @param rule the rule to add to this cell
      * @returns the display value of the cell
      */
-    public createRule(rule: IValidationRule) {
+    public createRule(rule: IValidationRule) : string{
         return "";
     }
 
@@ -60,7 +60,8 @@ export class Cell extends ACell{
      * @param rule the rule to remove from this cell
      * @returns the display value of the cell
      */
-    public removeRule(rule: IValidationRule) {
+    public removeRule(rule: IValidationRule):string {
+        return "";
     }
 
     /**

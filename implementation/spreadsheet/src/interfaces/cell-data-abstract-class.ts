@@ -8,7 +8,7 @@ export abstract class ACellData {
     /**
      * An array of the custom data validation rules applied to this cell, if any
      */
-    protected rules: Array<IValidationRule>;
+    //protected rules: Array<IValidationRule>;
 
     /**
      * Replaces the text content of this ACellData 

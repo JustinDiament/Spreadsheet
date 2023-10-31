@@ -8,7 +8,7 @@ export class FormulaCellData extends ACellData {
     /**
      * The mathematical formula as entered by the user
      */
-    private data: string
+    //private data: string
 
     /**
      * Replaces the text content of this ACellData 

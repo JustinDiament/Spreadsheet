@@ -8,7 +8,7 @@ export class ReferenceCellData extends ACellData {
     /**
      * The cell that this cell refers to
      */
-    private data: ACellData
+    //private data: ACellData
 
     /**
      * Replaces the text content of this ACellData 

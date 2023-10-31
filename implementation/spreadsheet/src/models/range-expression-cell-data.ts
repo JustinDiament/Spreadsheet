@@ -9,12 +9,12 @@ export class RangeExpressionCellData extends ACellData {
     /**
      * The range expression as entered by the user
      */
-    private data: string
+    //private data: string
 
     /**
      * An object of the expression type of this range expression
      */
-    private expressionType: IExpressionType
+    //private expressionType: IExpressionType
 
     /**
      * Replaces the text content of this ACellData 
