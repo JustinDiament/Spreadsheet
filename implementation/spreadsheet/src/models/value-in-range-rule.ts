@@ -8,12 +8,12 @@ export class ValueInRangeRule implements IValidationRule {
     /**
      * Determines if the data in the cell needs to be equal, greater, or less than the value to be valid
      */
-    private equalGreaterLEss: string;
+    //private equalGreaterLEss: string;
 
     /**
      * The number that the cell data must be equal/greater/less than in order to be valid
      */
-    private value: number;
+    //private value: number;
 
     /**
      * Is the cell data this rule is applied to valid or invalid according to the rule?

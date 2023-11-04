@@ -3,6 +3,8 @@ import { IACellsIterator } from "../interfaces/cell-iterator-interface";
 import { IController } from "../interfaces/controller-interface";
 import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { ACellsIterator } from "./cells-iterator";
+import { Cell } from "./cell";
 
 /**
  * Represents the main controller for the spreadsheet application 
@@ -17,18 +19,31 @@ export class SpreadsheetController implements IController {
     /**
      * The graphs contained in the spreadsheet 
      */
-    private graphs: Array<IGraph>;
+    //private graphs: Array<IGraph>;
 
     /**
      * The cell(s), if any, that are currently selected by the user
      */
-    private currentlySelected: Array<ACell>;
+    //private currentlySelected: Array<ACell>;
 
     /**
      * An iterator that iterates over a 2D array of ACells, used to 
      * perform find and repalce operations
      */
     private cellsIterator: IACellsIterator
+
+    constructor() {
+        // for now, populate the grid of cells with an empty 10x10 grid
+        this.cells = new Array<Array<ACell>>;
+        for(let i:number = 0; i < 10; i++) {
+            let row : Array<ACell> = new Array<ACell>;
+            for(let j:number = 0; j < 10; j++) {
+                row.push(new Cell());
+            }
+            this.cells.push(row);
+        }
+        this.cellsIterator = new ACellsIterator();
+    }
 
     /**
      * Adds a new row to the spreadsheet
@@ -142,5 +157,9 @@ export class SpreadsheetController implements IController {
      * @param name the new name
      */
     setGraphName(id: number, name: string): void {
+    }
+
+    getCellIterator(): IACellsIterator {
+        return this.cellsIterator;
     }
 }

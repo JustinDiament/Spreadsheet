@@ -8,28 +8,28 @@ export class BarGraph implements IGraph{
     /**
      * The unique ID number of this cell
      */
-    private id: number;
+    //private id: number;
 
     /**
      * The x axis name for this bar graph
      */
-    private xAxisName: string;
+    //private xAxisName: string;
 
     /**
      * The y axis name for this bar graph
      */
-    private yAxisName: string;
+    //private yAxisName: string;
 
     /**
      * The name for this bar graph
      */
-    private graphName: string;
+    //private graphName: string;
 
     /**
      * The cells that this bar graph reads data from to determine 
      * axis names and data in its bars
      */
-    private data: Array<Array<ACell>>;
+    //private data: Array<Array<ACell>>;
 
     /**
      * Sets the name of the graph's X axis

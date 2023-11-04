@@ -8,7 +8,7 @@ export class StringCellData extends ACellData {
     /**
      * The string constant value
      */
-    private data: string
+    //private data: string
 
     /**
      * Replaces the text content of this ACellData 

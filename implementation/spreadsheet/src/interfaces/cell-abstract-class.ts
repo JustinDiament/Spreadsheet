@@ -33,14 +33,14 @@ export abstract class ACell {
      * @param rule the rule to add to this cell
      * @returns the display value of the cell
      */
-    public abstract createRule(rule: IValidationRule);
+    public abstract createRule(rule: IValidationRule): string;
 
     /**
      * Removes a validation rule from this cell 
      * @param rule the rule to remove from this cell
      * @returns the display value of the cell
      */
-    public abstract removeRule(rule: IValidationRule);
+    public abstract removeRule(rule: IValidationRule): string;
 
     /**
      * Determines whether the math in the cell is a calculation or 

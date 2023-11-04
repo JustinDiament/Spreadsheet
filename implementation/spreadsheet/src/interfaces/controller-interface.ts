@@ -1,4 +1,5 @@
 import { ACell } from "./cell-abstract-class";
+import { IACellsIterator } from "./cell-iterator-interface";
 import { IValidationRule } from "./validation-rule-interface";
 
 /**
@@ -104,4 +105,10 @@ export interface IController {
      * @param name the new name
      */
     setGraphName(id: number, name: string): void;
+
+    /**
+     * Returns the spreadsheet's cell iterator
+     * @return the cell iterator
+     */
+    getCellIterator() : IACellsIterator;
 }

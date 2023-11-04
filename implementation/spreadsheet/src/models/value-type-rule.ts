@@ -8,7 +8,7 @@ export class ValueTypeRule implements IValidationRule {
     /**
      * The type that the data in the cell needs to be in order to be valid
      */
-    private type: string;
+    //private type: string;
 
     /**
      * Is the cell data this rule is applied to valid or invalid according to the rule?

@@ -11,7 +11,7 @@ export class FindAndReplace implements IFindAndReplace {
     /**
      * The cells that are being looked through in the find and replace operation
      */
-    private cells: Array<Array<ACell>>; 
+    //private cells: Array<Array<ACell>>; 
 
     /**
      * Returns an iterator over a representation of a group of spreadsheet cells 
