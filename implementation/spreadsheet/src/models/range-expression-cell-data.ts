@@ -1,5 +1,7 @@
 import { ACellData } from "../interfaces/cell-data-abstract-class";
 import { IExpressionType } from "../interfaces/expression-type-interface";
+import { AverageExpression } from "./average-expression";
+import { SumExpression } from "./sum-expression";
 
 /**
  * Represents a range expression contained in a cell
@@ -9,12 +11,28 @@ export class RangeExpressionCellData extends ACellData {
     /**
      * The range expression as entered by the user
      */
-    //private data: string
+    private data: string
+
+    // TODO: how to modify text ([ike REF(A6)] in the event the name changes due to new column or row? 
 
     /**
      * An object of the expression type of this range expression
      */
-    //private expressionType: IExpressionType
+    private expressionType: IExpressionType
+
+    // MAYBE INCLUDE ACellDatas for every cell in the range so it will auto-update? 
+
+    constructor(data: string) {
+        super();
+        this.data = data;
+        
+        if (data.slice(0,3) == "SUM") {
+            this.expressionType = new SumExpression;
+        }
+        else {
+            this.expressionType = new AverageExpression;
+        }
+    }
 
     /**
      * Replaces the text content of this ACellData 

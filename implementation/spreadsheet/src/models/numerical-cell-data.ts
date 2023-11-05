@@ -8,7 +8,12 @@ export class NumericalCellData extends ACellData {
     /**
      * The numerical constant value
      */
-    //private data: number
+    private data: number
+
+    constructor(data: number) {
+        super()
+        this.data = data;
+    }
 
     /**
      * Replaces the text content of this ACellData 

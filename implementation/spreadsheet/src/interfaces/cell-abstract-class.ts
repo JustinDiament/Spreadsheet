@@ -14,7 +14,7 @@ export abstract class ACell {
      * Replaces the content of a cell 
      * @param newValue the new content ot the cell
      */
-    public abstract editCell(newValue: string): void;
+    public abstract editCell(newValue: string, grid: Array<Array<ACell>>): void;
 
     /**
      * Returns the true content of the cell in string form 

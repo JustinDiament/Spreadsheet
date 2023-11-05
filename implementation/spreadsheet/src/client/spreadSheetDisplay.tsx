@@ -10,7 +10,7 @@ export default function SpreadSheetDisplay() {
   
   return (
     <div>
-      <CellGridDisplay cellIterator={spreadsheetController.getCellIterator()} />
+      <CellGridDisplay spreadsheetController={spreadsheetController} />
     </div>
   )
 }

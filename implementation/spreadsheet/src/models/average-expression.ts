@@ -4,7 +4,7 @@ import { IExpressionType } from "../interfaces/expression-type-interface";
 /**
  * Represents an AVERAGE range expression
  */
-export class SumExpression implements IExpressionType {
+export class AverageExpression implements IExpressionType {
     
     /**
      * Parses the data in the cells the range expression is applied to and returns the calculated result

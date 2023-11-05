@@ -45,6 +45,10 @@ export class SpreadsheetController implements IController {
         this.cellsIterator = new ACellsIterator();
     }
 
+    public getCells(): Array<Array<ACell>> {
+        return this.cells;
+    }
+
     /**
      * Adds a new row to the spreadsheet
      * @param rowId the id representing where to insert the new row

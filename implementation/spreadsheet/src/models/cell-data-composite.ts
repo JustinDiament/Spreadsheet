@@ -7,13 +7,19 @@ export class CellDataComposite extends ACellData {
     /**
      * The cells that make up the composite
      */
-    //private data: Array<ACellData>
+    private data: Array<ACellData>
+
+    constructor(data: Array<ACellData>) {
+        super();
+        this.data = data;
+    }
 
     /**
      * Replaces the text content of this ACellData 
      * @param data the new text contained in this cell data
      */
     public setData(data: string): void {
+
     }
 
     /**
