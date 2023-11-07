@@ -8,7 +8,12 @@ export class StringCellData extends ACellData {
     /**
      * The string constant value
      */
-    //private data: string
+    private data: string
+
+    constructor(data: string) {
+        super();
+        this.data = data;
+    }
 
     /**
      * Replaces the text content of this ACellData 
@@ -22,7 +27,7 @@ export class StringCellData extends ACellData {
      * @return the text contained the cell 
      */
     public getData(): string {
-        return "";
+        return this.data;
     }
 
     /**
@@ -31,6 +36,6 @@ export class StringCellData extends ACellData {
      * @return the display value of the cell 
      */
     public getDisplayValue(): string {
-        return "";
+        return this.data;
     }
 }

@@ -111,4 +111,6 @@ export interface IController {
      * @return the cell iterator
      */
     getCellIterator() : IACellsIterator;
+
+    getCells(): Array<Array<ACell>>;
 }
