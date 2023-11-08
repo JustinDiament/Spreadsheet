@@ -47,18 +47,37 @@ export default function CellGridDisplay({ spreadsheetController } : { spreadshee
     // }
      
     //  const amt : number = grid.length;
+
+    function indToLetter(ind:number):string {
+      let strInd:string = "";
+      let runs:number = ind/26;
+      while(runs > 0) {
+        let currInd:number = (ind- 1)%26;
+        strInd += (String.fromCharCode(currInd+65));
+        ind-=26;
+        runs--;
+        
+      }
+      return strInd;
+    }
     
   return (
     <div>
-      <table className="table table-bordered ">
+    <div className = "overflow-auto sp-grid mt-4">
+      <table className="table table-bordered mb-0 overflow-y-hidden">
         <thead>
+          <tr>
+            <th className="sp-grid-header"></th>
+            {(grid.length > 0 && grid[0].map((curr, index) => (<th className="sp-grid-header sp-col-head">{indToLetter(index+1)}</th>)))}
+            
+          </tr>
 
         </thead>
 
-        <tbody>
+        <tbody className = "overflow-y-scroll sp-grid-body">
 
-            {grid.map((curr) => (<tr>
-                {curr.map((cell) => (<td className="m-0 p-1"><CellDisplay cell = {cell} grid={grid} updateCount={updateCount} /></td> ))}
+            {grid.map((curr, index) => (<tr><th className="sp-grid-header sp-row-head">{index+1}</th>
+                {curr.map((cell) => (<td className="m-0 p-1 sp-cell"><CellDisplay cell = {cell} grid={grid} updateCount={updateCount} /></td> ))}
                 
                 </tr> ))}
             
@@ -74,6 +93,7 @@ export default function CellGridDisplay({ spreadsheetController } : { spreadshee
       </table>
       
       
+    </div>
     </div>
   )
 }

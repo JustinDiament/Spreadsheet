@@ -11,3 +11,79 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input:focus {
+  /* border: 1pt solid blue !important; */
+}
+
+.sp-cell {
+  min-width: 200px;
+  margin-bottom: 0;
+  padding-bottom:0;
+}
+
+.sp-expandable-input {
+  min-width: 200px;
+  max-width: 1000px;
+  /* display:flex;
+  flex-grow: 1 !important;
+  width : fit-content; */
+  flex-wrap: nowrap;
+}
+
+
+.sp-grid-header{
+  min-width: 50px;
+  text-align: center;
+  background-color: RGB(250, 250, 250) !important;
+  font-weight: 500;
+}
+
+.sp-grid {
+  max-height: 80vh;
+ 
+}
+
+.sp-grid-body {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.sp-row-head {
+  position: sticky;
+  left: 0;
+}
+
+.sp-col-head {
+  position: sticky;
+  top:0;
+}
+
+CellGridDisplay {
+  overflow-y: hidden;
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: RGB(250, 250, 250);
+    width:14px;
+    height: 14px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: RGB(200, 200, 200);
+    border-radius: 10px;
+    border: 1px solid RGB(250, 250, 250);
+  }

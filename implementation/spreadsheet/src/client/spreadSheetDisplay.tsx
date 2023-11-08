@@ -10,7 +10,7 @@ export default function SpreadSheetDisplay() {
   
   return (
     <div>
-      <CellGridDisplay spreadsheetController={spreadsheetController} />
+      <CellGridDisplay spreadsheetController={spreadsheetController}/>
     </div>
   )
 }
