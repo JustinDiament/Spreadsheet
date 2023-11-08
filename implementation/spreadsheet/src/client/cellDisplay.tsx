@@ -65,10 +65,10 @@ export default function CellDisplay({ cell, grid, updateCount } : { cell : ACell
         contentEditable = 'true'
         className="form-control border-0 rounded-0 sp-expandable-input"
         onClick={() => setClickedIn(true)}
-        onBlur={() => {
-        setClickedIn(false);
-        updateCount();
-        }}
+        // onBlur={() => {
+        // //setClickedIn(false);
+        // updateCount();
+        // }}
         onChange={e => update((e.currentTarget.textContent != null) ? e.currentTarget.textContent : "")}
         
       >{clickedIn ? data : displayData}</div>

@@ -68,11 +68,11 @@ function clickOutside(e : any) {
         </div>
 
         <div tabIndex={98} className="sp-edit-menu float-left" onBlur={(e) => {clickOutside(e)}}>
-          <button className={"sp-menu-button " + (dropDisplayState("help") ? "selected" : '')} type = "button" aria-haspopup="menu" aria-expanded={dropdown ? "true" : "false"}
+          <button className={"sp-menu-button "} type = "button" aria-haspopup="menu" aria-expanded={dropdown ? "true" : "false"}
         onClick={() => {setDropdown((prev) => !prev); setCurrDrop("help")}} 
         onMouseEnter={() => {setCurrDrop("help")}}>Help</button>
      
-        <div><EditMenu disp={dropDisplayState("help")}/></div>
+        {/* <div><EditMenu disp={dropDisplayState("help")}/></div> */}
           
         </div>
         </div>
