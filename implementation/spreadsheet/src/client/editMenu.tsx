@@ -1,7 +1,9 @@
 import { IController } from "../interfaces/controller-interface";
 import { useEffect, useState } from "react";
 
-export default function editMenu({  }) {
+export default function EditMenu({ disp } : {disp : boolean}) {
+
+    //const disp : boolean = dropdown;
 
     
 
@@ -13,9 +15,9 @@ const menuFunctions: Array<{ (): void; }> = [];
     
 
     return (
-        <div>
-            <ul>
-                {menuItems.map((item, index) => (<li onClick={() => menuFunctions[index]()}>{item}</li>))}
+        <div id = "edit-menu" className="sp-dropdown p-1"style={disp ? {display:"block"} : {display:"none"}}>
+            <ul className="m-0 p-2">
+                {menuItems.map((item, index) => (<li className="sp-submenu-option" onClick={() => menuFunctions[index]()}>{item}</li>))}
             </ul>
 
         </div>

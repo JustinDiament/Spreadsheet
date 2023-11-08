@@ -63,6 +63,47 @@ CellGridDisplay {
   overflow-y: hidden;
 }
 
+.sp-dropdown {
+  position:absolute;
+  background-color: white;
+  z-index: 100;
+  box-shadow: lightgray 0 0 10px;
+  margin-left: 16px;
+}
+
+.sp-menu-button {
+  border: none;
+  margin: 16px 0 0 16px;
+  padding: 3px 15px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 13pt;
+  background-color: white;
+}
+
+.sp-menu-button.selected {
+  background-color: RGB(230, 230, 230);
+  border-radius: 0 !important;
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 4px !important;
+}
+
+.sp-menu-button:hover {
+  background-color: RGB(230, 230, 230);
+  border-radius: 4px;
+}
+
+.sp-submenu-option {
+  text-decoration: none;
+  list-style: none;
+  padding-left:0;
+}
+
+.sp-menu-bar {
+  display: flex;
+  
+}
+
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
   * {

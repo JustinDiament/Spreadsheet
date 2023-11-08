@@ -19,12 +19,12 @@ export class SpreadsheetController implements IController {
     /**
      * The graphs contained in the spreadsheet 
      */
-    //private graphs: Array<IGraph>;
+    private graphs: Array<IGraph> = [];
 
     /**
      * The cell(s), if any, that are currently selected by the user
      */
-    //private currentlySelected: Array<ACell>;
+    private currentlySelected: Array<ACell> = [];
 
     /**
      * An iterator that iterates over a 2D array of ACells, used to 
