@@ -8,13 +8,20 @@ export class FormulaCellData extends ACellData {
     /**
      * The mathematical formula as entered by the user
      */
-    //private data: string
+    private data: string
+
+
+	constructor() {
+        super();
+        this.data = "";
+	}
 
     /**
      * Replaces the text content of this ACellData 
      * @param data the new text contained in this cell data
      */
     public setData(data: string): void {
+        this.data = data;
     }
 
     /**
@@ -22,7 +29,7 @@ export class FormulaCellData extends ACellData {
      * @return the text contained the cell 
      */
     public getData(): string {
-        return "";
+        return this.data;
     }
 
     /**

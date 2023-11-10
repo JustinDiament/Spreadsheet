@@ -11,7 +11,29 @@ export class FindAndReplace implements IFindAndReplace {
     /**
      * The cells that are being looked through in the find and replace operation
      */
-    //private cells: Array<Array<ACell>>; 
+    private cells: Array<Array<ACell>>;
+
+    constructor(cells: Array<Array<ACell>>) {
+        this.cells = cells;
+	}
+
+
+    /**
+     * Getter $cells
+     * @return {Array<Array<ACell>>}
+     */
+	public get $cells(): Array<Array<ACell>> {
+		return this.cells;
+	}
+
+    /**
+     * Setter $cells
+     * @param {Array<Array<ACell>>} value
+     */
+	public set $cells(value: Array<Array<ACell>>) {
+		this.cells = value;
+	}
+
 
     /**
      * Returns an iterator over a representation of a group of spreadsheet cells 
