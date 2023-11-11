@@ -3,7 +3,7 @@ import { IValidationRule } from "../interfaces/validation-rule-interface";
 /**
  * Represents a data validation rule about if the data in the cell is one of a set number of options
  */
-export class ValueIsOneOfRule implements IValidationRule {
+export class ValueIsOneOfRule{
 
     /**
      * The set of values for the cell that it must be one of in order to be valid

@@ -10,4 +10,9 @@ export interface IValidationRule {
      * @return true if the data is valid, false if it is not 
      */
     checkRule(cellData: string): boolean;
+
+    /**
+     * Returns the appropriate error mesage to display
+     */
+    getErrorMessage(): string;
 }

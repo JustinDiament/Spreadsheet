@@ -3,7 +3,7 @@ import { IValidationRule } from "../interfaces/validation-rule-interface";
 /**
  * Represents a data validation rule about if the data in the cell is in a range of numerical values
  */
-export class ValueInRangeRule implements IValidationRule {
+export class ValueInRangeRule {
 
     /**
      * Determines if the data in the cell needs to be equal, greater, or less than the value to be valid

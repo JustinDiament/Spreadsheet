@@ -3,7 +3,7 @@ import { IValidationRule } from "../interfaces/validation-rule-interface";
 /**
  * Represents a data validation rule about the type the data in a cell is allowed to be 
  */
-export class ValueTypeRule implements IValidationRule {
+export class ValueTypeRule {
 
     /**
      * The type that the data in the cell needs to be in order to be valid

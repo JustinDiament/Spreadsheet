@@ -41,7 +41,18 @@ export class Cell {
      * Parses the entered value and evaluates the validation rules to update the display value
      */
     public updateDisplayValue(): void{
+        let foundError: boolean = false;
+        for (const rule of this.validationRules) {
+            if (!rule.checkRule(this.enteredValue)) {
+              this.displayValue = rule.getErrorMessage();
+              foundError = true;  
+              break; // This will exit the loop when the condition is met
+            }
+          }
+        //if an error has not been found through the validation rules, continue evaluating the value  
+        if(!foundError) {
 
+        }  
     }
 
     /**
