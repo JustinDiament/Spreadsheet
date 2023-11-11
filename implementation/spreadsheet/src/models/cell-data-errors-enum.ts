@@ -7,4 +7,5 @@ export enum ErrorCellData {
     INVALFORM = "INVALFORM",
     CIRCREF = "CIRCREF",
     INVALRULE = "INVALRULE",
+    NONE = "NONE"
   }

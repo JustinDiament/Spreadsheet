@@ -1,5 +1,6 @@
 import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { ErrorCellData } from "./cell-data-errors-enum";
 
 /**
  * Represents a spreadsheet cell
@@ -12,24 +13,12 @@ export class Cell {
 
     private displayValue: string;
 
+    private validationRules: IValidationRule[];
+
     public constructor() {
         this.enteredValue = "";
         this.displayValue = "";
-    }
-
-    /**
-     * Clear the content of the cell
-     */
-    public clearCell(): void {
-        this.enteredValue = "";
-    }
-
-    /**
-     * Replaces the content of a cell 
-     * @param newValue the new content ot the cell
-     */
-    public setEnteredValue(newValue: string) {
-        this.enteredValue = "";
+        this.validationRules = [];
     }
 
     /**
@@ -49,18 +38,42 @@ export class Cell {
     }
 
     /**
-     * Evaluates this cell against a validation rule
-     * @param rule the rule to add to this cell
+     * Parses the entered value and evaluates the validation rules to update the display value
      */
-    public evaluateRule(rule: IValidationRule): void {
+    public updateDisplayValue(): void{
 
     }
 
     /**
-     * Determines whether the math in the cell is a calculation or 
-     * concatenation and performs it, updating the display value accordingly
+     * Replaces the content of a cell 
+     * @param newValue the new content ot the cell
      */
-    public calculateOrConcatenate(): void {}
+    public setEnteredValue(newValue: string) {
+        this.enteredValue = "";
+        this.updateDisplayValue();
+    }
+
+    /**
+     * Clear the content of the cell
+     */
+    public clearCell(): void {
+        this.enteredValue = "";
+        this.updateDisplayValue(); //still using traditional update method in case having an empty cell violates a rule
+    }
+
+    /**
+     * Finds and replaces a string in the enterred value of the cell
+     * @param find the value to find
+     * @param replace the value to replace the found value in
+     */
+    public findReplace(find: string, replace: string): void {
+        if(this.enteredValue.includes(find)) {
+            let sections: string[] = this.enteredValue.split(new RegExp(`(${find})`));
+            sections.map((element) => (element === find ? replace : element));
+            let combinedString: string = sections.join('');
+            this.setEnteredValue(combinedString);
+        }
+    }
 
     /**
      * Adds a graph as an observer to this Cell
@@ -81,12 +94,5 @@ export class Cell {
     public notifyGraph(): void {
     }
 
-    public findReplace(find: string, replace: string): void {
-        if(this.enteredValue.includes(find)) {
-            let sections: string[] = this.enteredValue.split(new RegExp(`(${find})`));
-            sections.map((element) => (element === find ? replace : element));
-            let combinedString: string = sections.join('');
-            this.setEnteredValue(combinedString);
-        }
-    }
+
 }

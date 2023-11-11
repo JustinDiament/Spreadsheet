@@ -1,7 +1,7 @@
 //import Cell from "../models/cells.ts";
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { ACell } from "../models/cell";
+import { Cell } from "../models/cell";
 // import ContentEditable from 'react-contenteditable';
 // import sanitizeHtml from "sanitize-html"
 
@@ -9,11 +9,11 @@ import { ACell } from "../models/cell";
 
 
 
-export default function CellDisplay({ cell, grid, updateCount } : { cell : ACell, grid : Array<Array<ACell>>, updateCount: Function}) {
+export default function CellDisplay({ cell, grid, updateCount } : { cell : Cell, grid : Array<Array<Cell>>, updateCount: Function}) {
 
   let [clickedIn, setClickedIn] = useState(false);
-  const [data, setData] : Array<any> = useState(cell.getCellContent());
-  const [displayData, setDisplayData] : Array<any> = useState(cell.getCellDisplay());
+  const [data, setData] : Array<any> = useState(cell.getEnteredValue());
+  const [displayData, setDisplayData] : Array<any> = useState(cell.getDisplayValue());
 
 
   useEffect(() => {
@@ -22,9 +22,9 @@ export default function CellDisplay({ cell, grid, updateCount } : { cell : ACell
   }) // <-- here put the parameter to listen, react will re-render component when your state will be changed
   
  function update(data : string) : void {
-    cell.editCell(data, grid);
-    setData(cell.getCellContent());
-    setDisplayData(cell.getCellDisplay());
+    cell.setEnteredValue(data);
+    setData(cell.getEnteredValue());
+    setDisplayData(cell.getDisplayValue());
     // let elm = document.getElementById("cell-curr");
     // if (elm !=null) {
     //   elm.style.width = (data.length).toString() + "ch";
