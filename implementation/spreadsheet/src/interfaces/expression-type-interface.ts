@@ -1,4 +1,4 @@
-import { ACell } from "./cell-abstract-class";
+import { Cell } from "../models/cell";
 
 /**
  * Represents a type of range expression
@@ -10,5 +10,5 @@ export interface IExpressionType {
      * @return the result of the range expression calculation, or an error message if the data in the cells 
      *         does not fit what is required for the expression to be calculated
      */
-    expressionValue(cells: Array<ACell>): string;
+    expressionValue(cells: Array<Cell>): string;
 }

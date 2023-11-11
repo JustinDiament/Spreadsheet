@@ -1,117 +1,92 @@
-import { ACell } from "../interfaces/cell-abstract-class";
-import { ACellData } from "../interfaces/cell-data-abstract-class";
+import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
-import { CellDataComposite } from "./cell-data-composite";
-import { NumericalCellData } from "./numerical-cell-data";
-import { RangeExpressionCellData } from "./range-expression-cell-data";
-import { ReferenceCellData } from "./reference-cell-data";
-import { StringCellData } from "./string-cell-data";
-
 
 /**
  * Represents a spreadsheet cell
  */
-export class Cell extends ACell{
-    /**
-     * The unique ID number of this cell
-     */
-    //private id: number;
-
+export class Cell {
     /**
      * The data contained by this cell
      */
-    private cellData: ACellData; 
+    private enteredValue: string; 
 
-    constructor() {
-        super();
-        this.cellData = new StringCellData("");
+    private displayValue: string;
+
+    public constructor() {
+        this.enteredValue = "";
+        this.displayValue = "";
     }
-    
+
     /**
      * Clear the content of the cell
      */
     public clearCell(): void {
+        this.enteredValue = "";
     }
 
     /**
      * Replaces the content of a cell 
      * @param newValue the new content ot the cell
      */
-    public editCell(newValue: string, grid: Array<Array<ACell>>): void {
-        console.log("editcell");
-
-        let split = newValue.split(" "); 
-
-        if (split.length == 1) {
-            this.cellData = this.determineCellDataType(split[0], grid);
-        }
-        else {
-            // TODO actually loop here
-            this.cellData = this.determineCellDataType(split[0], grid);
-        }
-    }
-
-    private determineCellDataType(data: string, grid: Array<Array<ACell>>): ACellData {
-        if (data.slice(0, 3) == "REF") {
-            // here, make a cell reference cell data
-            // in the event the reference is malformed (like parenthesis are missing, the thing between the parens is not a number, etc),
-            // that will be handled by the cell reference data type, which will set its display value to an error message
-            return new ReferenceCellData(data, grid);
-        }
-        else if (data.slice(0, 3) == "SUM" || data.slice(0, 3) == "AVG") {
-            // range expression cell data
-            // same deal as the reference data in terms of error messages 
-            return new RangeExpressionCellData(data);
-        }
-        else if (!isNaN(parseFloat(data))) {
-            // numerical cell data
-            // this one doesn't really have error conditions
-            return new NumericalCellData(parseFloat(data));
-        }
-        else {
-            // otherwise, it's just a string 
-            return new StringCellData(data);
-        }
+    public setEnteredValue(newValue: string) {
+        this.enteredValue = "";
     }
 
     /**
      * Returns the true content of the cell in string form 
      * @returns what has been typed into the cell
      */
-    public getCellContent(): string {
-        return this.cellData.getData();
+    public getEnteredValue(): string {
+        return this.enteredValue;
     }
 
     /**
      * Returns what the cell displays
      * @returns the display value of the cell
      */
-    public getCellDisplay(): string {
-        return this.cellData.getDisplayValue();
+    public getDisplayValue(): string {
+        return this.displayValue;
     }
 
     /**
-     * Adds a validation rule to this cell 
+     * Evaluates this cell against a validation rule
      * @param rule the rule to add to this cell
-     * @returns the display value of the cell
      */
-    public createRule(rule: IValidationRule) : string{
-        return "";
-    }
+    public evaluateRule(rule: IValidationRule): void {
 
-    /**
-     * Removes a validation rule from this cell 
-     * @param rule the rule to remove from this cell
-     * @returns the display value of the cell
-     */
-    public removeRule(rule: IValidationRule):string {
-        return "";
     }
 
     /**
      * Determines whether the math in the cell is a calculation or 
      * concatenation and performs it, updating the display value accordingly
      */
-    public calculateOrConcatenate(): void {
+    public calculateOrConcatenate(): void {}
+
+    /**
+     * Adds a graph as an observer to this Cell
+     * @param graph the graph that observes this cell  
+     */
+    public attachGraph(graph: IGraph): void {}
+
+    /**
+     * Remotes a graph as an observer to this Cell
+     * @param graph the graph that will be removed from oberserving this Cell 
+     */
+    public detachGraph(graph: IGraph): void {
+    }
+
+    /**
+     * Notifies all overerving graphs that this cell has been updates 
+     */
+    public notifyGraph(): void {
+    }
+
+    public findReplace(find: string, replace: string): void {
+        if(this.enteredValue.includes(find)) {
+            let sections: string[] = this.enteredValue.split(new RegExp(`(${find})`));
+            sections.map((element) => (element === find ? replace : element));
+            let combinedString: string = sections.join('');
+            this.setEnteredValue(combinedString);
+        }
     }
 }

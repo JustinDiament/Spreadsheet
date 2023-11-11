@@ -1,4 +1,4 @@
-import { ACell } from "./cell-abstract-class";
+import { Cell } from "../models/cell";
 
 /**
  * Represents an iterator that iterates over a 2D array of ACells
@@ -24,5 +24,5 @@ export interface IACellsIterator {
      * Returns the current ACell the iterator is at
      * @return the current ACell the iterator is at
      */
-    currentCell(): ACell;
+    currentCell(): Cell;
 }

@@ -1,6 +1,5 @@
-import { ACell } from "../interfaces/cell-abstract-class";
-import { IACellsIterator } from "../interfaces/cell-iterator-interface";
 import { Cell } from "./cell";
+import { IACellsIterator } from "../interfaces/cell-iterator-interface";
 
 /**
  * Represents an iterator that iterates over a 2D array of ACells
@@ -30,7 +29,7 @@ export class ACellsIterator implements IACellsIterator {
      * Returns the current ACell the iterator is at
      * @return the current ACell the iterator is at
      */
-    public currentCell(): ACell {
+    public currentCell(): Cell {
         return new Cell();
     }
 }

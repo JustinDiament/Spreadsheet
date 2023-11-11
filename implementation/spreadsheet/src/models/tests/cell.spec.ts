@@ -7,7 +7,7 @@ describe('Cell Content', (): void => {
 
   it('initial cell content should be empty', (): void => {
     let cell: Cell = new Cell();
-    expect(cell.getCellContent()).toEqual('');
+    expect(cell.getEnteredValue()).toEqual('');
   });
 
 });
@@ -19,7 +19,7 @@ describe('Cell Display', (): void => {
   
     it('initial cell display should be empty', (): void => {
       let cell: Cell = new Cell();
-      expect(cell.getCellDisplay()).toEqual('');
+      expect(cell.getDisplayValue()).toEqual('');
     });
   
   });

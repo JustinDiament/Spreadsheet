@@ -1,4 +1,4 @@
-import { ACell } from "../interfaces/cell-abstract-class";
+import { Cell } from "./cell";
 import { IGraph } from "../interfaces/graph-interface";
 
 /**
@@ -29,9 +29,9 @@ export class BarGraph implements IGraph{
      * The cells that this bar graph reads data from to determine 
      * axis names and data in its bars
      */
-    private data: Array<Array<ACell>>;
+    private data: Array<Array<Cell>>;
 
-    public constructor(xAxisName: string, yAxisName: string, graphName: string, data: Array<Array<ACell>>) {
+    public constructor(xAxisName: string, yAxisName: string, graphName: string, data: Array<Array<Cell>>) {
         this.yAxisName = yAxisName;
         this.xAxisName = xAxisName;
         this.data = data;
@@ -41,17 +41,17 @@ export class BarGraph implements IGraph{
 
     /**
      * Getter data
-     * @return {Array<Array<ACell>>}
+     * @return {Array<Array<Cell>>}
      */
-	public getData(): Array<Array<ACell>> {
+	public getData(): Array<Array<Cell>> {
 		return this.data;
 	}
 
     /**
      * Setter data
-     * @param {Array<Array<ACell>>} value
+     * @param {Array<Array<Cell>>} value
      */
-	public setData(value: Array<Array<ACell>>) {
+	public setData(value: Array<Array<Cell>>) {
 		this.data = value;
 	}
 

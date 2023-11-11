@@ -1,4 +1,4 @@
-import { ACell } from "../interfaces/cell-abstract-class";
+import { Cell } from "./cell";
 import { IExpressionType } from "../interfaces/expression-type-interface";
 
 /**
@@ -12,7 +12,7 @@ export class AverageExpression implements IExpressionType {
      * @return the result of the range expression calculation, or an error message if the data in the cells 
      *         does not fit what is required for the expression to be calculated
      */
-    public expressionValue(cells: Array<ACell>): string {
+    public expressionValue(cells: Array<Cell>): string {
         return "";
     }
 }

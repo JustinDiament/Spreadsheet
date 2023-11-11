@@ -2,7 +2,7 @@ import CellDisplay from "./cellDisplay";
 import { IController } from "../interfaces/controller-interface";
 import { SpreadsheetController } from "../models/spreadsheet-controller";
 import { IACellsIterator } from "../interfaces/cell-iterator-interface";
-import { ACell } from "../interfaces/cell-abstract-class";
+import { ACell } from "../models/cell";
 import { Cell } from "../models/cell";
 import { useEffect, useState } from "react";
 

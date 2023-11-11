@@ -1,4 +1,3 @@
-import { ACell } from "../interfaces/cell-abstract-class";
 import { IACellsIterator } from "../interfaces/cell-iterator-interface";
 import { IController } from "../interfaces/controller-interface";
 import { IGraph } from "../interfaces/graph-interface";
@@ -14,7 +13,7 @@ export class SpreadsheetController implements IController {
     /**
      * The cells contained in the spreadsheet 
      */
-    private cells: Array<Array<ACell>>;
+    private cells: Array<Array<Cell>>;
 
     /**
      * The graphs contained in the spreadsheet 
@@ -24,7 +23,7 @@ export class SpreadsheetController implements IController {
     /**
      * The cell(s), if any, that are currently selected by the user
      */
-    private currentlySelected: Array<ACell> = [];
+    private currentlySelected: Array<Cell> = [];
 
     /**
      * An iterator that iterates over a 2D array of ACells, used to 
@@ -34,9 +33,9 @@ export class SpreadsheetController implements IController {
 
     constructor() {
         // for now, populate the grid of cells with an empty 10x10 grid
-        this.cells = new Array<Array<ACell>>;
+        this.cells = new Array<Array<Cell>>;
         for(let i:number = 0; i < 10; i++) {
-            let row : Array<ACell> = new Array<ACell>;
+            let row : Array<Cell> = new Array<Cell>;
             for(let j:number = 0; j < 10; j++) {
                 row.push(new Cell());
             }
@@ -45,7 +44,7 @@ export class SpreadsheetController implements IController {
         this.cellsIterator = new ACellsIterator();
     }
 
-    public getCells(): Array<Array<ACell>> {
+    public getCells(): Array<Array<Cell>> {
         return this.cells;
     }
 
@@ -109,27 +108,23 @@ export class SpreadsheetController implements IController {
     }
     
     /**
-     * Finds where a value is present and replaces it with a new value at the selected id
-     * @param find the value to find
-     * @param replace the value to change to
-     * @param id the id of the position of the found value
-     */
-    public findAndReplace(find: string, replace: string, id: number): void {
-    }
-    
-    /**
      * Finds where a value is present and replaces all instances of it with a new value at the selected id
      * @param find the value to find
      * @param replace the value to change to
      */
     findAndReplaceAll(find: string, replace: string): void {
+        this.cells.forEach((row) => {
+            row.forEach((element) => {
+              element.findReplace(find, replace);
+            });
+          });
     }
 
     /**
      * Creates a graph based on a selection of cells
      * @param cells the cells to base the graph on
      */
-    createGraph(cells: Array<ACell>): void {
+    createGraph(cells: Array<Cell>): void {
     }
 
     /**

@@ -1,7 +1,7 @@
 //import Cell from "../models/cells.ts";
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { ACell } from "../interfaces/cell-abstract-class";
+import { ACell } from "../models/cell";
 // import ContentEditable from 'react-contenteditable';
 // import sanitizeHtml from "sanitize-html"
 

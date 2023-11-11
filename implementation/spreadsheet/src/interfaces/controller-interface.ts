@@ -1,4 +1,4 @@
-import { ACell } from "./cell-abstract-class";
+import { Cell } from "../models/cell";
 import { IACellsIterator } from "./cell-iterator-interface";
 import { IValidationRule } from "./validation-rule-interface";
 
@@ -59,14 +59,6 @@ export interface IController {
     removeRule(cellId: number, rule: IValidationRule): void;
     
     /**
-     * Finds where a value is present and replaces it with a new value at the selected id
-     * @param find the value to find
-     * @param replace the value to change to
-     * @param id the id of the position of the found value
-     */
-    findAndReplace(find: string, replace: string, id: number): void;
-    
-    /**
      * Finds where a value is present and replaces all instances of it with a new value at the selected id
      * @param find the value to find
      * @param replace the value to change to
@@ -77,7 +69,7 @@ export interface IController {
      * Creates a graph based on a selection of cells
      * @param cells the cells to base the graph on
      */
-    createGraph(cells: Array<ACell>): void;
+    createGraph(cells: Array<Cell>): void;
 
     /**
      * Deletes a graph from the spreadsheet
@@ -112,5 +104,5 @@ export interface IController {
      */
     getCellIterator() : IACellsIterator;
 
-    getCells(): Array<Array<ACell>>;
+    getCells(): Array<Array<Cell>>;
 }
