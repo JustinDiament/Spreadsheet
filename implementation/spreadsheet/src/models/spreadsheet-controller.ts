@@ -48,6 +48,82 @@ export class SpreadsheetController implements IController {
         return this.cells;
     }
 
+    public setSelectedOne(cell: string):void {
+        //cellIndex = getlocation
+        this.currentlySelected = [];
+        try{
+            let location:Array<number> = this.getIndicesFromLocation(cell);
+            this.currentlySelected.push(this.cells[location[1]][location[0]]);
+        } catch {
+            // select nothing if there was an error
+            this.currentlySelected = [];
+        }
+
+    }
+
+    public setSelectedMany(cell1: string, cell2:string) : void {
+        this.currentlySelected = [];
+        try {
+            let location1:Array<number> = this.getIndicesFromLocation(cell1);
+            let location2:Array<number> = this.getIndicesFromLocation(cell2);
+            let colStart:number = Math.min(location1[0], location2[0]);
+            let colEnd:number = Math.max(location1[0], location2[0]);
+            let rowStart:number = Math.min(location1[1], location2[1]);
+            let rowEnd:number = Math.max(location1[1], location2[1]);
+            //console.log(colStart, colEnd,rowStart, rowEnd);
+            for(let i:number = rowStart; i <= rowEnd; i++) {
+                for(let j:number = colStart; j <= colEnd; j++) {
+                    this.currentlySelected.push(this.cells[i][j]);
+                    
+                }
+            }
+
+        } catch {
+            // select nothing if there was an error
+            this.currentlySelected = [];
+        }
+    }
+
+    public isSelected(cell: Cell): boolean {
+        try {
+           
+            return this.currentlySelected.includes(cell);
+        } catch {
+            // invalid cell cannot be selected, so return false
+            return false;
+        }
+    }
+
+    // if the function does not throw an error, it will always return an array of two numbers
+    private getIndicesFromLocation(location:string) : Array<number> {
+        let col:number = 0;
+        let row:number = 0;
+        let stillLetters = true;
+        let remainder:string = location;
+        if(remainder.length !=0) {
+            while(remainder.length > 0 && stillLetters) {
+                let sub:string = remainder[0];
+                if(sub.match(/[A-Z]/) != null) {
+                    (col += (sub.charCodeAt(0) - 65))
+                    //console.log(col);
+                    remainder = remainder.substring(1);
+                } else {
+                    stillLetters = false;
+                    row = Number(remainder.substring(0));
+                    if(isNaN(row)) {
+                        throw new Error("invalid location");
+                    }
+                }
+            }
+            //console.log(location + ", " + col, row-1);
+
+        } else {
+            throw new Error("invalid location");
+        }
+
+        return [col, row-1];
+    }
+
     /**
      * Adds a new row to the spreadsheet
      * @param rowId the id representing where to insert the new row
@@ -59,21 +135,19 @@ export class SpreadsheetController implements IController {
      * Adds a new column to the spreadsheet
      * @param colId the id representing where to insert the new column
      */
-    public addColumn(colId: string): void {
+    public addColumn(colId: number): void {
     }
 
     /**
-     * Removes a row from the spreadsheet
-     * @param rowId the id representing what row to delete
+     * Removes the currently selected rows from the spreadsheet
      */
-    public deleteRow(rowIdes: Array<number>): void {
+    public deleteRow(): void {
     }
 
     /**
-     * Removes a column from the spreadsheet
-     * @param colId the id representing what column to delete
+     * Removes the currently selected columns from the spreadsheet
      */
-    public deleteColumn(colIdes: Array<string>): void {
+    public deleteColumn(): void {
     }
 
     /**
@@ -86,9 +160,17 @@ export class SpreadsheetController implements IController {
 
     /**
      * Removes the value for a selection of cells
-     * @param cellIds the ids of the cells to clear
      */
-    public clearCells(cellIds: Array<number>): void {
+    public clearSelectedCells(): void {
+        this.currentlySelected.forEach((cell) => cell.clearCell());
+        console.log(this.currentlySelected[0].getDisplayValue());
+    }
+
+    /**
+     * Removes the value for a selection of cells
+     */
+    public clearAllCells(): void {
+        this.cells.forEach((row) => row.forEach((cell) => cell.clearCell()));
     }
 
     /**

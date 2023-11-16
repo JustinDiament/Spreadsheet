@@ -11,7 +11,12 @@ export default function SpreadSheetDisplay() {
 // const [display, setDisplay] = useState(calculatorModel.display());
 const [dropdown, setDropdown] = useState(false);
 const [currDrop, setCurrDrop] = useState("");
-const container = useRef();
+const [ignored, setForcedGridUpdate] = useState(0);
+
+useEffect(() => {
+
+}, [ignored]);
+
 
 // useEffect(() => {
 //     const handler : any = (event) => {
@@ -40,11 +45,21 @@ function clickOutside(e : any) {
     return (option == currDrop) && dropdown;
   }
 
-  function swapCurrDrop(newDrop : string) {
-    if (dropdown) {
-      setCurrDrop(newDrop);
-    }
+
+  function editFunctions(index:number) {
+    let menuFunctions: Array<{ (): void; }> = [() => spreadsheetController.deleteRow(), 
+                                             () => spreadsheetController.addRow(1), 
+                                             () => spreadsheetController.addRow(-1),
+                                             () => spreadsheetController.deleteColumn(),
+                                             () => spreadsheetController.addColumn(1),
+                                             () => spreadsheetController.addColumn(-1),
+                                             () => spreadsheetController.clearSelectedCells(),
+                                             () => spreadsheetController.clearAllCells(),];
+    menuFunctions[index]();
+    setDropdown(false);
+    setForcedGridUpdate(ignored+1);
   }
+ 
   
   return (
     <div>
@@ -54,7 +69,7 @@ function clickOutside(e : any) {
         onClick={() => {setDropdown((prev) => !prev); setCurrDrop("edit")}} 
         onMouseEnter={() => {setCurrDrop("edit")}}>Edit</button>
      
-        <div><EditMenu disp={dropDisplayState("edit")}/></div>
+        <div><EditMenu disp={dropDisplayState("edit")} functions={editFunctions}/></div>
           
         </div>
 
@@ -63,7 +78,7 @@ function clickOutside(e : any) {
         onClick={() => {setDropdown((prev) => !prev); setCurrDrop("data")}} 
         onMouseEnter={() => {setCurrDrop("data")}}>Data</button>
      
-        <div><EditMenu disp={dropDisplayState("data")}/></div>
+        <div><EditMenu disp={dropDisplayState("data")} functions={editFunctions}/></div>
           
         </div>
 
@@ -72,11 +87,10 @@ function clickOutside(e : any) {
         onClick={() => {setDropdown((prev) => !prev); setCurrDrop("help")}} 
         onMouseEnter={() => {setCurrDrop("help")}}>Help</button>
      
-        {/* <div><EditMenu disp={dropDisplayState("help")}/></div> */}
           
         </div>
         </div>
-        <CellGridDisplay spreadsheetController={spreadsheetController}/>
+        <CellGridDisplay spreadsheetController={spreadsheetController} ignore={ignored}/>
       
     </div>
   )

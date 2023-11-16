@@ -1,34 +1,38 @@
-//import Cell from "../models/cells.ts";
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
 import { Cell } from "../models/cell";
-// import ContentEditable from 'react-contenteditable';
 // import sanitizeHtml from "sanitize-html"
 
-
-
-
-
-export default function CellDisplay({ cell, grid, updateCount } : { cell : Cell, grid : Array<Array<Cell>>, updateCount: Function}) {
-
-  let [clickedIn, setClickedIn] = useState(false);
+// React component for rendering an editable cell
+export default function CellDisplay({ cell, grid, updateCount, setSelected, active, ignore } : { cell : Cell, grid : Array<Array<Cell>>, updateCount: Function, setSelected: Function, active:boolean, ignore:number}) {
+  //const [selected, setCellSelect] = useState(active);
+  const [clickedIn, setClickedIn] = useState(false);
   const [data, setData] : Array<any> = useState(cell.getEnteredValue());
   const [displayData, setDisplayData] : Array<any> = useState(cell.getDisplayValue());
 
-
   useEffect(() => {
-   // console.log(cell.getCellContent() + 'celldisplay use effect')
-    update(data);
-  }) // <-- here put the parameter to listen, react will re-render component when your state will be changed
-  
- function update(data : string) : void {
-    cell.setEnteredValue(data);
     setData(cell.getEnteredValue());
     setDisplayData(cell.getDisplayValue());
-    // let elm = document.getElementById("cell-curr");
-    // if (elm !=null) {
-    //   elm.style.width = (data.length).toString() + "ch";
-    // }
+    console.log("rerender cell?");
+  }, [ignore]);
+
+  // when the cell is clicked on, set it as either selected in the range 
+  // or selected as the single active cell
+  useEffect(() => {
+    (clickedIn && setSelected());    
+  }, [clickedIn]);
+
+  // useEffect(()=> {
+  //   //(clickedIn ? setDisplayData(cell.getEnteredValue()) : setDisplayData(cell.getDisplayValue()));
+  //   (clickedIn ? setDisplayData(cell.getEnteredValue()) : setDisplayData("test"));
+  // }, [clickedIn]);
+
+  // update the content of the cell based on the passed in data
+  function update(newData : string) : void {
+    cell.setEnteredValue(newData);
+    setData(cell.getEnteredValue());
+    setDisplayData(cell.getDisplayValue());
+    console.log(data);
+    setClickedIn(false);
   }
 
   // const [content, setContent] = React.useState("")
@@ -43,40 +47,16 @@ export default function CellDisplay({ cell, grid, updateCount } : { cell : Cell,
 	// }, [])
 
 
-
+  // using contentEditable so that the cell can resize based on content
   return (
-    <div className="sp-input-sizer">
-       {/* <button onClick={() => setCell(cell + 1)}>
-        <h1 className="text-dark">Cell </h1>
-       </button> */}
-      {/* <input id={"cell-curr"}
-      type="text"
-      // onInput={(e) => parentNode.dataset.value = this.value}
-        className="form-control border-0 rounded-0 sp-expandable-input"
-        onClick={() => setClickedIn(true)}
-        onBlur={(e) => {
-          setClickedIn(false);
-         updateCount();
-        }}
-        value={clickedIn ? data : displayData}
-        onChange={(e) => update(e.target.value)}
-      /> */}
+    <div className={'sp-input-sizer ' +  (clickedIn ? "active" : "")}>
       <div id={"cell-curr"}
+        tabIndex = {0}
         contentEditable = 'true'
         className="form-control border-0 rounded-0 sp-expandable-input"
         onClick={() => setClickedIn(true)}
-        // onBlur={() => {
-        // //setClickedIn(false);
-        // updateCount();
-        // }}
-        onChange={e => update((e.currentTarget.textContent != null) ? e.currentTarget.textContent : "")}
-        
-      >{clickedIn ? data : displayData}</div>
-
-
-      
-      
+        onBlur={(e) => update((e.currentTarget.textContent != null) ? e.currentTarget.textContent : "")}
+        dangerouslySetInnerHTML={{__html:  (clickedIn ? data : displayData)}}></div>
     </div>
   )
 }
-//export default CellDisplay;

@@ -7,6 +7,12 @@ import { IValidationRule } from "./validation-rule-interface";
  */
 export interface IController {
 
+    setSelectedOne(cell: string):void;
+
+    setSelectedMany(cell1: string, cell2: string) : void;
+
+    isSelected(cell: Cell) : boolean;
+
     /**
      * Adds a new row to the spreadsheet
      * @param rowId the id representing where to insert the new row
@@ -17,19 +23,17 @@ export interface IController {
      * Adds a new column to the spreadsheet
      * @param colId the id representing where to insert the new column
      */
-    addColumn(colId: string): void;
+    addColumn(colId: number): void;
 
     /**
-     * Removes a row from the spreadsheet
-     * @param rowId the id representing what row to delete
+     * Removes the currently selected rows from the spreadsheet
      */
-    deleteRow(rowIdes: Array<number>): void;
+    deleteRow(): void;
 
     /**
-     * Removes a column from the spreadsheet
-     * @param colId the id representing what column to delete
+     * Removes the selected columns from the spreadsheet
      */
-    deleteColumn(colIdes: Array<string>): void;
+    deleteColumn(): void;
 
     /**
      * Changes the value of a cell
@@ -39,10 +43,14 @@ export interface IController {
     editCell(cellId: number, newValue: any): void;
 
     /**
-     * Removes the value for a selection of cells
-     * @param cellIds the ids of the cells to clear
+     * Removes the value for the selected cells
      */
-    clearCells(cellIds: Array<number>): void;
+    clearSelectedCells(): void;
+
+     /**
+     * Removes the value for all cells
+     */
+    clearAllCells(): void;
 
     /**
      * Adds a validation rule to a cell

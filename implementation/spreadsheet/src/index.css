@@ -96,7 +96,15 @@ CellGridDisplay {
 .sp-submenu-option {
   text-decoration: none;
   list-style: none;
-  padding-left:0;
+  cursor: pointer;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.sp-submenu-option:hover {
+  background-color: RGB(230, 230, 230);
 }
 
 .sp-menu-bar {
@@ -104,12 +112,22 @@ CellGridDisplay {
   
 }
 
+.sp-selected, .sp-selected>div:not(.active)>div {
+  background-color: RGB(230, 250, 255) !important;
+}
+
+.active, .active>div {
+    background-color: white !important;
+  }
+
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
   * {
     scrollbar-width: auto;
     scrollbar-color: #8f54a0 #ffffff;
   }
+
+  
 
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {

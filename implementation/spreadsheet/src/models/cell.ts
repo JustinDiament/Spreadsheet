@@ -10,11 +10,20 @@ export class Cell {
      * The data contained by this cell
      */
     private enteredValue: string; 
-
+    
+    /**
+     * The data being displayed by this cell
+     */
     private displayValue: string;
 
+    /**
+     * A list of validation rules being applied to this cell
+     */
     private validationRules: IValidationRule[];
 
+    /**
+     * Create a new empty cell
+     */
     public constructor() {
         this.enteredValue = "";
         this.displayValue = "";
@@ -51,7 +60,7 @@ export class Cell {
           }
         //if an error has not been found through the validation rules, continue evaluating the value  
         if(!foundError) {
-
+            
         }  
     }
 
@@ -60,7 +69,8 @@ export class Cell {
      * @param newValue the new content ot the cell
      */
     public setEnteredValue(newValue: string) {
-        this.enteredValue = "";
+        this.enteredValue = newValue;
+        this.displayValue = newValue; //currently no way of calculating the displayValue 
         this.updateDisplayValue();
     }
 
@@ -69,6 +79,7 @@ export class Cell {
      */
     public clearCell(): void {
         this.enteredValue = "";
+        this.displayValue = "";
         this.updateDisplayValue(); //still using traditional update method in case having an empty cell violates a rule
     }
 
