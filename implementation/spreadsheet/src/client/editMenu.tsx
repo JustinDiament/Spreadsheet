@@ -1,7 +1,7 @@
 import { IController } from "../interfaces/controller-interface";
 import { useEffect, useState } from "react";
 
-export default function EditMenu({ disp, functions } : {disp : boolean, functions: Function}) {
+export default function EditMenu({ disp, menuItems, functions } : {disp : boolean, menuItems:Array<string>, functions: Function}) {
 
 
     //const disp : boolean = dropdown;
@@ -12,8 +12,7 @@ export default function EditMenu({ disp, functions } : {disp : boolean, function
 
 
 
-    const menuItems : Array<String> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)", 
-                                        "Insert Column Right", "Insert Column Left", "Clear Selected Cells", "Clear All Cells"];
+    
     
 
     return (

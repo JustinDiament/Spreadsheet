@@ -104,7 +104,7 @@ CellGridDisplay {
 }
 
 .sp-submenu-option:hover {
-  background-color: RGB(230, 230, 230);
+  background-color: RGB(240, 250, 255);
 }
 
 .sp-menu-bar {
@@ -113,7 +113,7 @@ CellGridDisplay {
 }
 
 .sp-selected, .sp-selected>div:not(.active)>div {
-  background-color: RGB(230, 250, 255) !important;
+  background-color: RGB(240, 250, 255) !important;
 }
 
 .active, .active>div {

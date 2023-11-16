@@ -17,19 +17,6 @@ useEffect(() => {
 
 }, [ignored]);
 
-
-// useEffect(() => {
-//     const handler : any = (event) => {
-//       if (!container.current.contains(event.target)) {
-//         setDropdown(false);
-//       }
-//     };
-//     document.addEventListener("click", handler);
-//     return () => {
-//       document.removeEventListener("click", handler);
-//     };
-//   });
-
 function clickOutside(e : any) {
   const currentTarget = e.currentTarget;
   // Give browser time to focus the next element
@@ -45,6 +32,10 @@ function clickOutside(e : any) {
     return (option == currDrop) && dropdown;
   }
 
+  const editMenuItems : Array<string> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)", 
+                                        "Insert Column Right", "Insert Column Left", "Clear Selected Cells", "Clear All Cells"];
+
+  const dataMenuItems : Array<string> = ["Data Validation", "Create Chart", "Find and Replace"];
 
   function editFunctions(index:number) {
     let menuFunctions: Array<{ (): void; }> = [() => spreadsheetController.deleteRow(), 
@@ -59,6 +50,15 @@ function clickOutside(e : any) {
     setDropdown(false);
     setForcedGridUpdate(ignored+1);
   }
+
+  function dataFunctions(index:number) {
+    let menuFunctions: Array<{ (): void; }> = [() => console.log("data validation"), 
+                                             () => console.log("create chart"), 
+                                             () => console.log("find and replace")]
+    menuFunctions[index]();
+    setDropdown(false);
+    setForcedGridUpdate(ignored+1);
+  }
  
   
   return (
@@ -69,7 +69,7 @@ function clickOutside(e : any) {
         onClick={() => {setDropdown((prev) => !prev); setCurrDrop("edit")}} 
         onMouseEnter={() => {setCurrDrop("edit")}}>Edit</button>
      
-        <div><EditMenu disp={dropDisplayState("edit")} functions={editFunctions}/></div>
+        <div><EditMenu disp={dropDisplayState("edit")} menuItems={editMenuItems} functions={editFunctions}/></div>
           
         </div>
 
@@ -78,7 +78,7 @@ function clickOutside(e : any) {
         onClick={() => {setDropdown((prev) => !prev); setCurrDrop("data")}} 
         onMouseEnter={() => {setCurrDrop("data")}}>Data</button>
      
-        <div><EditMenu disp={dropDisplayState("data")} functions={editFunctions}/></div>
+        <div><EditMenu disp={dropDisplayState("data")} menuItems={dataMenuItems} functions={editFunctions}/></div>
           
         </div>
 
