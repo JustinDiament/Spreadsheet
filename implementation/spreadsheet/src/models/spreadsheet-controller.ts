@@ -4,6 +4,8 @@ import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ACellsIterator } from "./cells-iterator";
 import { Cell } from "./cell";
+import { IStrategy } from "../interfaces/strategy-interface";
+import { CellRefStrategy } from "./strategy-cell-ref";
 
 /**
  * Represents the main controller for the spreadsheet application 
@@ -29,7 +31,7 @@ export class SpreadsheetController implements IController {
      * An iterator that iterates over a 2D array of ACells, used to 
      * perform find and repalce operations
      */
-    private cellsIterator: IACellsIterator
+    private cellsIterator: IACellsIterator;
 
     constructor() {
         // for now, populate the grid of cells with an empty 10x10 grid
@@ -156,6 +158,7 @@ export class SpreadsheetController implements IController {
      * @param newValue the new value of the cell
      */
     public editCell(cellId: number, newValue: any): void {
+        //I think this is where we would pass in the strategies and parse the string
     }
 
     /**
