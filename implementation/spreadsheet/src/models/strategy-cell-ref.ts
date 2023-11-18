@@ -46,16 +46,4 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         //get display value of referenced cell
         return this.otherCells[col][row].getDisplayValue();
     }
-
-    private findCol(letters: string): number {
-        let columnNumber = 0;
-
-        for (let i = 0; i < letters.length; i++) {
-          const charCode = letters.charCodeAt(i) - 65; // Convert ASCII to 0-based index
-          columnNumber = columnNumber * 26 + charCode + 1;
-        }
-        return columnNumber;
-    }
-
-    
 }
