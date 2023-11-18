@@ -14,14 +14,12 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     parse(currentValue: string): string {
         let sections: string[] = this.splitInput(currentValue);
         let combinedValue = "";
-        while (sections.length > 1) {
-            //add first string in array because it will be whatever is before the cell reference
-            combinedValue += sections[0];
-            //evaluate second string as a cell reference
-            combinedValue += this.evaluate(sections[1]);
-            //remove first two members of split array
-            sections.splice(0, 2);
-        }
+        //add first string in array because it will be whatever is before the cell reference
+        combinedValue += sections[0];
+        sections.splice(0, 1);
+        sections.forEach(element => {
+            combinedValue += this.evaluate(sections[0]);
+        });     
         combinedValue += sections[0];
         return combinedValue;
     }
