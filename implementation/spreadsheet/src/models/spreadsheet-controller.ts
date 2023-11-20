@@ -29,7 +29,7 @@ export class SpreadsheetController implements IController {
      * An iterator that iterates over a 2D array of ACells, used to 
      * perform find and repalce operations
      */
-    private cellsIterator: IACellsIterator
+    private cellsIterator: IACellsIterator;
 
     constructor() {
         // for now, populate the grid of cells with an empty 10x10 grid
@@ -94,7 +94,7 @@ export class SpreadsheetController implements IController {
         }
     }
 
-    // if the function does not throw an error, it will always return an array of two numbers
+    // if the function does not throw an error, it will always return an array of two numbers in the format of [col #, row #]
     private getIndicesFromLocation(location:string) : Array<number> {
         let col:number = 0;
         let row:number = 0;
@@ -152,10 +152,15 @@ export class SpreadsheetController implements IController {
 
     /**
      * Changes the value of a cell
-     * @param cellId the id of the cell to change
+     * @param cellId the location of the cell to change
      * @param newValue the new value of the cell
      */
-    public editCell(cellId: number, newValue: any): void {
+    public editCell(cellId: string, newValue: any): void {
+        let loc : Array<number> = this.getIndicesFromLocation(cellId);
+        let row : number = loc[1];
+        let col : number = loc[0];
+        let cell : Cell = this.cells[row][col];
+        cell.setEnteredValue(newValue);
     }
 
     /**
@@ -187,6 +192,42 @@ export class SpreadsheetController implements IController {
      * @param rule the rule that should no longer apply
      */
     public removeRule(cellId: number, rule: IValidationRule): void {
+    }
+
+    /**
+     * Find all the cells in the spreadsheet that contain the provided string
+     * and stores the data in an array
+     * @param find the string that the cells' entered value should contain
+     */
+    findCellsContaining(find:string): void {
+        // TODO
+        // find all the cells containing find and store them /somewhere/
+        // set currently selected to contain only the first of the cells we just stored
+    }
+
+    /**
+     * Change the content of the currently selected cell by replacing any instance
+     * of the 'find' string in the cell with the 'replace' string 
+     * @param find the value to be replaced
+     * @param replace the value to replace with
+     */
+    replaceCurrentCell(find:string, replace:string):void {
+        // TODO
+        // for(cells in currently selected): cell.findReplace(find, replace);
+        // there should either be one or zero currently selected cells
+    }
+
+    /**
+     * select the next cell that is in the list of currently found cells
+     * which is created in the findCellsContaining function
+     */
+    findNextContaining():void {
+        // TODO
+        // set currently selected to contain only the next of the cells we stored in
+        // findCellsContaining()
+        // if the currently selected is the last cell, set next to the first
+        // if there are no cells to be replaced, do nothing
+
     }
     
     /**

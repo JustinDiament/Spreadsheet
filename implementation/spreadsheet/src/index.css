@@ -12,10 +12,6 @@ code {
     monospace;
 }
 
-input:focus {
-  /* border: 1pt solid blue !important; */
-}
-
 .sp-cell {
   min-width: 200px;
   margin-bottom: 0;
@@ -25,12 +21,8 @@ input:focus {
 .sp-expandable-input {
   min-width: 200px;
   max-width: 1000px;
-  /* display:flex;
-  flex-grow: 1 !important;
-  width : fit-content; */
   flex-wrap: nowrap;
 }
-
 
 .sp-grid-header{
   min-width: 50px;
@@ -57,10 +49,6 @@ input:focus {
 .sp-col-head {
   position: sticky;
   top:0;
-}
-
-CellGridDisplay {
-  overflow-y: hidden;
 }
 
 .sp-dropdown {
@@ -109,7 +97,6 @@ CellGridDisplay {
 
 .sp-menu-bar {
   display: flex;
-  
 }
 
 .sp-selected, .sp-selected>div:not(.active)>div {
@@ -118,6 +105,60 @@ CellGridDisplay {
 
 .active, .active>div {
     background-color: white !important;
+  }
+
+  .sp-two-panel .sp-grid-box {
+    max-width: calc(80%);
+  }
+
+  .sp-grid-box {
+    max-height: calc(100vh - 48px);
+  }
+
+  .sp-two-panel {
+    display:flex;
+    flex-wrap: nowrap;
+  }
+
+  .sp-panel-close {
+    font-size: 20pt;
+    cursor: pointer;
+    text-align: end;
+    padding-right: 15px;
+    padding-top: 5px;
+    color: RGB(130, 130, 130);
+  }
+
+  .sp-panel-close:hover {
+    color: RGB(215, 215, 215);
+  }
+
+  .sp-side-panel {
+    
+    width: calc(20% - 40px);
+    margin: 20px;
+    margin-top: 24px;
+    border-radius: 16px;
+    height: calc(100vh - 92px);
+    box-shadow: RGB(240, 240, 240) 0 0 10px; ;
+  }
+
+  .sp-panel-interior {
+    max-width: calc(100% - 48px) !important;
+    height:fit-content;
+    max-height: calc(100% - 60px);
+    overflow-wrap: break-word;
+   
+  }
+
+  .sp-panel-int-body {
+    /* overflow-y: scroll; */
+    height: calc(100% - 60px);
+    display:flex;
+  }
+
+  .sp-work-space {
+    width: 100vw;
   }
 
 /* ===== Scrollbar CSS ===== */

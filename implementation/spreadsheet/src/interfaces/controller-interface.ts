@@ -37,10 +37,10 @@ export interface IController {
 
     /**
      * Changes the value of a cell
-     * @param cellId the id of the cell to change
+     * @param cellId the location of the cell to change
      * @param newValue the new value of the cell
      */
-    editCell(cellId: number, newValue: any): void;
+    editCell(cellId: string, newValue: any): void;
 
     /**
      * Removes the value for the selected cells
@@ -65,6 +65,27 @@ export interface IController {
      * @param rule the rule that should no longer apply
      */
     removeRule(cellId: number, rule: IValidationRule): void;
+
+    /**
+     * Find all the cells in the spreadsheet that contain the provided string
+     * and stores the data in an array
+     * @param find the string that the cells' entered value should contain
+     */
+    findCellsContaining(find:string): void;
+
+    /**
+     * Change the content of the currently selected cell by replacing any instance
+     * of the 'find' string in the cell with the 'replace' string 
+     * @param find the value to be replaced
+     * @param replace the value to replace with
+     */
+    replaceCurrentCell(find:string, replace:string):void;
+    
+    /**
+     * select the next cell that is in the list of currently found cells
+     * which is created in the findCellsContaining function
+     */
+    findNextContaining():void;
     
     /**
      * Finds where a value is present and replaces all instances of it with a new value at the selected id
