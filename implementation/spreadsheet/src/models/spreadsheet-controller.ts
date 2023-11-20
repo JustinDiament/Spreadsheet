@@ -4,6 +4,8 @@ import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ACellsIterator } from "./cells-iterator";
 import { Cell } from "./cell";
+import { IStrategy } from "../interfaces/strategy-interface";
+import { CellRefStrategy } from "./strategy-cell-ref";
 
 /**
  * Represents the main controller for the spreadsheet application 
@@ -155,12 +157,15 @@ export class SpreadsheetController implements IController {
      * @param cellId the location of the cell to change
      * @param newValue the new value of the cell
      */
+
     public editCell(cellId: string, newValue: any): void {
         let loc : Array<number> = this.getIndicesFromLocation(cellId);
         let row : number = loc[1];
         let col : number = loc[0];
         let cell : Cell = this.cells[row][col];
         cell.setEnteredValue(newValue);
+        //I think this is where we would pass in the strategies and parse the string
+
     }
 
     /**

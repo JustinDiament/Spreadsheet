@@ -1,6 +1,8 @@
 import { IGraph } from "../interfaces/graph-interface";
+import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ErrorCellData } from "./cell-data-errors-enum";
+import {CellRefStrategy} from "./strategy-cell-ref";
 
 /**
  * Represents a spreadsheet cell
@@ -30,6 +32,7 @@ export class Cell {
         this.validationRules = [];
     }
 
+
     /**
      * Returns the true content of the cell in string form 
      * @returns what has been typed into the cell
@@ -49,7 +52,7 @@ export class Cell {
     /**
      * Parses the entered value and evaluates the validation rules to update the display value
      */
-    public updateDisplayValue(): void{
+    public updateDisplayValue(strategies: IStrategy[]): void{
         let foundError: boolean = false;
         for (const rule of this.validationRules) {
             if (!rule.checkRule(this.enteredValue)) {
@@ -60,7 +63,10 @@ export class Cell {
           }
         //if an error has not been found through the validation rules, continue evaluating the value  
         if(!foundError) {
-            
+            let currentString: string = this.enteredValue;
+            strategies.forEach((strategy) => {
+                currentString = strategy.parse(currentString);
+            });
         }  
     }
 
@@ -71,7 +77,6 @@ export class Cell {
     public setEnteredValue(newValue: string) {
         this.enteredValue = newValue;
         this.displayValue = newValue; //currently no way of calculating the displayValue 
-        this.updateDisplayValue();
     }
 
     /**
@@ -80,7 +85,6 @@ export class Cell {
     public clearCell(): void {
         this.enteredValue = "";
         this.displayValue = "";
-        this.updateDisplayValue(); //still using traditional update method in case having an empty cell violates a rule
     }
 
     /**
