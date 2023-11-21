@@ -15,6 +15,14 @@ export class PlusSignStrategy implements IStrategy {
             return sections[0];
         }
 
+        let reducedSize = 0;
+        for (let i=0; i < sections.length - reducedSize; i++) {
+            if (sections[i] == '') {
+                sections.splice(i, 1);
+                i--;
+            }
+        }
+
         // set current string to first element and remove it from the array
         // let combinedValue = "";
         let combinedValue: string = ""

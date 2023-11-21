@@ -6,7 +6,7 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
 
     public constructor(otherCells: Cell[][]) {
-        super("AVG");
+        super("AVERAGE");
         this.otherCells = otherCells;
     }
 
