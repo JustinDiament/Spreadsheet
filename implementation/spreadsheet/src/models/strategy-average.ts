@@ -6,7 +6,7 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
 
     public constructor(otherCells: Cell[][]) {
-        super("AVERAGE");
+        super("AVG");
         this.otherCells = otherCells;
     }
 
@@ -15,7 +15,7 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
         let combinedValue = sections[0];
         sections.splice(0, 1);
         sections.forEach(element => {
-            combinedValue += this.evaluate(sections[0]);
+            combinedValue += this.evaluate(element);
         });     
         return combinedValue;
     }

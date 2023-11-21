@@ -6,6 +6,13 @@ import { ACellsIterator } from "./cells-iterator";
 import { Cell } from "./cell";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { CellRefStrategy } from "./strategy-cell-ref";
+// todo fix errors and warnings in terminal 
+// todo fix comments
+// todo fix imports
+// todo make things depend on a cell interface not the cell class
+// todo error checking
+// todo delete unneeded methods and members 
+// todo check the key errors in inspect element console
 
 /**
  * Represents the main controller for the spreadsheet application 
@@ -39,7 +46,7 @@ export class SpreadsheetController implements IController {
         for(let i:number = 0; i < 10; i++) {
             let row : Array<Cell> = new Array<Cell>;
             for(let j:number = 0; j < 10; j++) {
-                row.push(new Cell());
+                row.push(new Cell(i, j));
             }
             this.cells.push(row);
         }
@@ -128,28 +135,162 @@ export class SpreadsheetController implements IController {
 
     /**
      * Adds a new row to the spreadsheet
-     * @param rowId the id representing where to insert the new row
      */
-    public addRow(rowId: number): void {
+    public addRow(aboveOrBelow: string): void {
+        let belowRow: number = -1;
+        let aboveRow: number = this.cells[0].length;
+        let numRowsToAdd: number = 0;
+        let colToCheck = this.currentlySelected[0].getColumn();
+
+
+        for (const cell of this.currentlySelected) {
+            if (colToCheck == cell.getColumn()) {
+                if (cell.getRow() > belowRow) {
+                    belowRow = cell.getRow();
+                }
+
+                if (cell.getRow() < aboveRow) {
+                    aboveRow = cell.getRow();
+                }
+
+                numRowsToAdd++;
+            }
+        }
+
+        let insertLocation;
+        if (aboveOrBelow == "above") {
+            insertLocation = aboveRow;
+        }
+        else {
+            insertLocation = belowRow + 1;
+        }
+
+        let newCells: Array<Cell> = new Array<Cell>();
+        for (let i=0; i < this.cells[0].length; i++) {
+            newCells.push(new Cell(insertLocation, i));
+        }
+
+        for (let i=0; i < numRowsToAdd; i++) {
+            this.cells.splice(insertLocation, 0, newCells)
+        }
+
+        for (let i=insertLocation + 1; i < this.cells.length; i++) {
+            for (let j=0; j < this.cells[0].length; j++) {
+                this.cells[i][j].setRow(i);
+            }
+        }
     }
 
     /**
      * Adds a new column to the spreadsheet
-     * @param colId the id representing where to insert the new column
      */
-    public addColumn(colId: number): void {
+    public addColumn(leftOrRight: string): void {
+        let leftCol: number = -1;
+        let rightCol: number = this.cells.length;
+        let numColsToAdd: number = 0;
+        let rowToCheck = this.currentlySelected[0].getRow();
+
+        for (const cell of this.currentlySelected) {
+            if (rowToCheck == cell.getRow()) {
+                if (cell.getColumn() > leftCol) {
+                    leftCol = cell.getColumn();
+                }
+
+                if (cell.getColumn() < rightCol) {
+                    rightCol = cell.getColumn();
+                }
+
+                numColsToAdd++;
+            }
+        }
+
+        let insertLocation;
+        if (leftOrRight == "left") {
+            insertLocation = leftCol;
+        }
+        else {
+            insertLocation = rightCol + 1;
+        }
+
+        // let newCells: Array<Cell> = new Array<Cell>();
+        // for (let i=0; i < this.cells[0].length; i++) {
+        //     newCells.push(new Cell(insertLocation, i));
+        // }
+
+        for (let i=0; i < this.cells.length; i++) {
+            for (let j=0; j < numColsToAdd; j++) {
+                this.cells[i].splice(insertLocation, 0, new Cell(i, insertLocation));
+            }
+        }
+
+        for (let i=0; i < this.cells.length; i++) {
+            for (let j=insertLocation + 1; j < this.cells[0].length; j++) {
+                this.cells[i][j].setColumn(j);
+            }
+        }
     }
 
     /**
      * Removes the currently selected rows from the spreadsheet
      */
     public deleteRow(): void {
+        // todo check if any rows exist
+        // todo check if they are deleting the last row and don't let them do that 
+        let rowToDelete: number = this.cells[0].length;
+        let numRowsToDelete: number = 0;
+        let colToCheck = this.currentlySelected[0].getColumn();
+
+        for (const cell of this.currentlySelected) {
+            if (colToCheck == cell.getColumn()) {
+                if (cell.getRow() <  rowToDelete) {
+                    rowToDelete = cell.getRow();
+                }
+                numRowsToDelete++;
+            }
+        }
+
+        for (let i=0; i < numRowsToDelete; i++) {
+            this.cells.splice(rowToDelete, 1)
+        }
+
+        for (let i=rowToDelete; i < this.cells.length; i++) {
+            for (let j=0; j < this.cells[0].length; j++) {
+                this.cells[i][j].setRow(this.cells[i][j].getRow() - numRowsToDelete);
+            }
+        }
     }
 
     /**
      * Removes the currently selected columns from the spreadsheet
      */
     public deleteColumn(): void {
+        // todo check if any cols exist
+                // todo check if they are deleting the last col and don't let them do that 
+        let colToDelete: number = this.cells.length;
+        let numColsToDelete: number = 0;
+        let rowToCheck = this.currentlySelected[0].getRow();
+
+        for (const cell of this.currentlySelected) {
+            if (rowToCheck == cell.getRow()) {
+                if (cell.getColumn() <  colToDelete) {
+                    colToDelete = cell.getColumn();
+                }
+                numColsToDelete++;
+            }
+        }
+
+        for (let i=0; i < numColsToDelete; i++) {
+            for (let j=0; j < this.cells.length; j++) {
+                this.cells[j].splice(colToDelete, 1);
+            }
+        }
+
+        for (let i=0; i < this.cells.length; i++) {
+            for (let j=colToDelete; j < this.cells[0].length; j++) {
+                this.cells[i][j].setColumn(this.cells[i][j].getColumn() - numColsToDelete);
+            }
+        }
+        
     }
 
     /**
@@ -159,11 +300,14 @@ export class SpreadsheetController implements IController {
      */
 
     public editCell(cellId: string, newValue: any): void {
+        // todo: any should be string???
+        // todo: need interface for cell
         let loc : Array<number> = this.getIndicesFromLocation(cellId);
         let row : number = loc[1];
         let col : number = loc[0];
         let cell : Cell = this.cells[row][col];
         cell.setEnteredValue(newValue);
+        cell.updateDisplayValue(this.cells);
         //I think this is where we would pass in the strategies and parse the string
 
     }

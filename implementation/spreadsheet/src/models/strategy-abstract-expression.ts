@@ -1,4 +1,5 @@
 import { Cell } from "./cell";
+import { Util } from "./util";
 
 export abstract class AExpressionStrategy {
     code: string;
@@ -34,22 +35,27 @@ export abstract class AExpressionStrategy {
 
     public resolveRange(inputs: string, otherCells: Cell[][]): string[] {
         //split sum parameters by ...
-        let splitInputs: string[] = inputs.split("...");
+        let splitInputs: string[] = inputs.split("..");
         //find top left row and col
-        let firstCode: string[] = splitInputs[0].split(/(\d+)/);
-        let firstCol: number = this.findCol(firstCode[0]);
-        let firstRow: number = parseInt(firstCode[1]);
+        // let firstCode: string[] = splitInputs[0].split(/(\d+)/);
+        // let firstCol: number = this.findCol(firstCode[0]);
+        // let firstRow: number = parseInt(firstCode[1]);
+        let locationStart: Array<number> = Util.getIndicesFromLocation(splitInputs[0]);
+
 
         //find bottom right row and col
-        let secondCode: string[] = splitInputs[1].split(/(\d+)/);
-        let secondCol: number = this.findCol(secondCode[0]);
-        let secondRow: number = parseInt(secondCode[1]);
+        // let secondCode: string[] = splitInputs[1].split(/(\d+)/);
+        // let secondCol: number = this.findCol(secondCode[0]);
+        // let secondRow: number = parseInt(secondCode[1]);
+        let locationEnd: Array<number> = Util.getIndicesFromLocation(splitInputs[1]);
+
         //TODO: handle improper inputs
         let values: string[] = [];
         //for all cells in between those positions in grid, append value and + to string
         //+ will be resolved by a later strategy
-        for(let i = firstCol;i<=secondCol;i++) {
-            for(let j = firstRow; j<=secondRow; j++) {
+        for(let i = locationStart[1];i<=locationEnd[1];i++) {
+            // TODO check if contains self
+            for(let j = locationStart[0]; j<=locationEnd[0]; j++) {
                 values.push(otherCells[i][j].getDisplayValue());
             }
          }

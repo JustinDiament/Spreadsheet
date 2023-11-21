@@ -7,6 +7,12 @@ export default function CellGridDisplay({ spreadsheetController } : { spreadshee
   // track the changing state of the grid, which is the grid of cells of the provided spreadsheetcontroller
   const [grid, setGrid] = useState(spreadsheetController.getCells());
 
+  let [changesCount, setChangesCount] = useState(0);
+
+    const updateCount = () => {
+      setChangesCount(++changesCount);
+    }
+
   // when the value of the grid changes, rerender
   useEffect(() => {
     setGrid(spreadsheetController.getCells());
@@ -104,7 +110,9 @@ export default function CellGridDisplay({ spreadsheetController } : { spreadshee
                   {curr.map((cell, ind) => (<td className={'m-0 p-1 sp-cell ' + (spreadsheetController.isSelected(cell) ? 'sp-selected' : '')}>
                     <CellDisplay cell = {cell}
                                  setSelected={() => select(indToLetter(ind+1) + (index+1).toString())}
-                                 setValue={(value : string) => spreadsheetController.editCell(indToLetter(ind+1) + (index+1).toString(), value)}/></td> ))}
+                                 setValue={(value : string) => spreadsheetController.editCell(indToLetter(ind+1) + (index+1).toString(), value)}
+                                 updateCount={updateCount}
+                                 /></td> ))}
 
                   </tr> ))}
           </tbody>

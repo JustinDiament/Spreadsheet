@@ -30,6 +30,6 @@ export class ACellsIterator implements IACellsIterator {
      * @return the current ACell the iterator is at
      */
     public currentCell(): Cell {
-        return new Cell();
+        return new Cell(0, 0);
     }
 }

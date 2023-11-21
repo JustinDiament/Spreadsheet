@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Cell } from "../models/cell";
 
 // React component for rendering an editable cell
-export default function CellDisplay({ cell, setSelected, setValue } : { cell : Cell, setSelected: Function, setValue: Function }) {
+export default function CellDisplay({ cell, setSelected, setValue, updateCount } : { cell : Cell, setSelected: Function, setValue: Function, updateCount: Function }) {
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setClickedIn] = useState(false);
 
@@ -15,8 +15,10 @@ export default function CellDisplay({ cell, setSelected, setValue } : { cell : C
   // rerender the cell if the data is contains or shows has changed
   useEffect(() => {
     setData(cell.getEnteredValue());
+    setValue(cell.getEnteredValue());
+
     setDisplayData(cell.getDisplayValue());
-  }, [cell.getDisplayValue(), cell.getEnteredValue()]);
+  });
 
   // when the cell is clicked on, set it as either selected in the range 
   // or selected as the single active cell
@@ -28,11 +30,14 @@ export default function CellDisplay({ cell, setSelected, setValue } : { cell : C
   // update the content of the cell based on the passed in data
   function update(newData : string) : void {
     setValue(newData);
+    setDisplayData(cell.getDisplayValue());
+    console.log(cell.getDisplayValue());
     // console.log("set value to " + cell.getEnteredValue())
     // setData(cell.getEnteredValue());
     // setDisplayData(cell.getDisplayValue());
     
     setClickedIn(false);
+    updateCount();
   }
 
   // the actual HTML of the cell

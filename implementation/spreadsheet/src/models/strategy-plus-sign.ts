@@ -9,20 +9,65 @@ export class PlusSignStrategy implements IStrategy {
     }
 
     parse(currentValue: string): string {
-        // let sections: string[] = this.splitInput(currentValue);
-        //set current string to first element and remove it from the array
-        // let combinedValue = sections[0];
+        let sections: string[] = currentValue.split(" ");
+
+        if (sections.length == 1) {
+            return sections[0];
+        }
+
+        // set current string to first element and remove it from the array
+        // let combinedValue = "";
+        let combinedValue: string = ""
+
+        // todo bad if ends in + 
+        // todo check for reserved characters? like -, + etc
+        // todo include it as a design decision that this reduces all space blocks to 1 space in the display
+        for (let i=0; i < sections.length; i++) {
+            if (sections[i] == "+") {
+                if (isNaN(Number(sections[i-1].replace(/\(/g, ''))) || isNaN(Number(sections[i+1].replace(/\)/g, '')))) {
+                    sections[i+1] = sections[i-1].slice(0, -1) + sections[i+1] + " ";
+                    sections[i-1] = "";
+                    sections[i] = "";
+                    i++;
+                }
+                else {
+                    sections[i] += " ";
+                }
+            }
+            else {
+                sections[i] += " ";
+            }
+        }
+
+        combinedValue+= sections.join("");
+
+
+
+         //   let sections: string[] = str.split("+");
+            // for (let i=0; i < sections.length - 1; i++) {
+            //     console.log(sections[i]);
+            //     // stripping whitespace
+            //     if (isNaN(Number(sections[i].replace(/\s+$/, ''))) || isNaN(Number(sections[i+1].replace(/^\s+/, '')))) {
+            //         sections[i+1] = sections[i].replace(/\s+$/, '') + sections[i+1].replace(/^\s+/, '');
+            //         sections[i] = "";
+            //     }
+            //     else {
+            //         sections[i] += "+";
+            //     }
+
+        //     }
+        // }
+
+
         // sections.splice(0, 1);
         // //for the rest of the elements in the array check if both the current string and 
         // sections.forEach(element => {
         //     // sum + Number(element.replace(/\s/g, "")); 
-
         // });
         // while (sections.length > 1) {
         //     combinedValue += sections[0];
         // }
         // combinedValue += sections[0];
-        // return combinedValue;
-        return "sum"
+        return combinedValue;
     }
 }

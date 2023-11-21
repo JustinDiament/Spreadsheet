@@ -2,7 +2,11 @@ import { IGraph } from "../interfaces/graph-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ErrorCellData } from "./cell-data-errors-enum";
+import { AverageStrategy } from "./strategy-average";
 import {CellRefStrategy} from "./strategy-cell-ref";
+import { StrategyFormulas } from "./strategy-forumals";
+import { PlusSignStrategy } from "./strategy-plus-sign";
+import { SumStrategy } from "./strategy-sum";
 
 /**
  * Represents a spreadsheet cell
@@ -23,13 +27,35 @@ export class Cell {
      */
     private validationRules: IValidationRule[];
 
+    private row: number;
+
+    private col: number;
+
     /**
      * Create a new empty cell
      */
-    public constructor() {
+    public constructor(row: number, col: number) {
+        this.row = row;
+        this.col = col;
         this.enteredValue = "";
         this.displayValue = "";
         this.validationRules = [];
+    }
+
+    public getRow(): number {
+        return this.row;
+    }
+
+    public getColumn(): number {
+        return this.col;
+    }
+
+    public setRow(row: number): void {
+        this.row = row;
+    }
+
+    public setColumn(col: number): void {
+        this.col = col;
     }
 
 
@@ -52,7 +78,9 @@ export class Cell {
     /**
      * Parses the entered value and evaluates the validation rules to update the display value
      */
-    public updateDisplayValue(strategies: IStrategy[]): void{
+    public updateDisplayValue(cells: Array<Array<Cell>>): void{
+        let strategies: Array<IStrategy> = [new CellRefStrategy(cells), new AverageStrategy(cells), new SumStrategy(cells), new PlusSignStrategy(), new StrategyFormulas()];
+
         let foundError: boolean = false;
         for (const rule of this.validationRules) {
             if (!rule.checkRule(this.enteredValue)) {
@@ -63,11 +91,21 @@ export class Cell {
           }
         //if an error has not been found through the validation rules, continue evaluating the value  
         if(!foundError) {
+
             let currentString: string = this.enteredValue;
             strategies.forEach((strategy) => {
                 currentString = strategy.parse(currentString);
             });
+
+
+            // Need this so an update actually occurs if its empty
+            if (!/\S/.test(currentString)) {
+                currentString+=" ";
+              }
+            this.displayValue = currentString;
         }  
+
+
     }
 
     /**
@@ -76,7 +114,6 @@ export class Cell {
      */
     public setEnteredValue(newValue: string) {
         this.enteredValue = newValue;
-        this.displayValue = newValue; //currently no way of calculating the displayValue 
     }
 
     /**

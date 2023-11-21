@@ -59,11 +59,11 @@ function clickOutside(e : any) {
   // calls the function associated with the command in the edit menu at the provided index
   function editFunctions(index:number) {
     let menuFunctions: Array<{ (): void; }> = [() => spreadsheetController.deleteRow(), 
-                                             () => spreadsheetController.addRow(1), 
-                                             () => spreadsheetController.addRow(-1),
+                                             () => spreadsheetController.addRow("above"), 
+                                             () => spreadsheetController.addRow("below"),
                                              () => spreadsheetController.deleteColumn(),
-                                             () => spreadsheetController.addColumn(1),
-                                             () => spreadsheetController.addColumn(-1),
+                                             () => spreadsheetController.addColumn("right"),
+                                             () => spreadsheetController.addColumn("left"),
                                              () => spreadsheetController.clearSelectedCells(),
                                              () => spreadsheetController.clearAllCells(),];
     menuFunctions[index]();

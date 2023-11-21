@@ -15,15 +15,15 @@ export interface IController {
 
     /**
      * Adds a new row to the spreadsheet
-     * @param rowId the id representing where to insert the new row
+     * FIX
      */
-    addRow(rowId: number): void;
+    addRow(aboveOrBelow: string): void;
 
     /**
      * Adds a new column to the spreadsheet
-     * @param colId the id representing where to insert the new column
+     * FIX
      */
-    addColumn(colId: number): void;
+    addColumn(leftOrRight: string): void;
 
     /**
      * Removes the currently selected rows from the spreadsheet

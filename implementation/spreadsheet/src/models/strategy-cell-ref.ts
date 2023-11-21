@@ -2,6 +2,7 @@ import { error } from "console";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { Cell } from "./cell";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
+import { Util } from "./util";
 
 export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
@@ -18,9 +19,9 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         combinedValue += sections[0];
         sections.splice(0, 1);
         sections.forEach(element => {
-            combinedValue += this.evaluate(sections[0]);
+            combinedValue += this.evaluate(element);
         });     
-        combinedValue += sections[0];
+        // combinedValue += sections[0];
         return combinedValue;
     }
 
@@ -41,9 +42,12 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         if(referenceSections.length < 2) {
             //TODO: add error handling for improper input
         }
-        let col: number = this.findCol(referenceSections[0]);
-        let row: number = parseInt(referenceSections[1]);
+        // let col: number = this.findCol(referenceSections[0]);
+        // let row: number = parseInt(referenceSections[1]);
+
+        let location: Array<number> = Util.getIndicesFromLocation(cellCode);
+
         //get display value of referenced cell
-        return this.otherCells[col][row].getDisplayValue();
+        return this.otherCells[location[1]][location[0]].getDisplayValue();
     }
 }
