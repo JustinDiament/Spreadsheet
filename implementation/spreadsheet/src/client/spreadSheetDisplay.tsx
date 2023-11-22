@@ -130,7 +130,7 @@ function clickOutside(e : any) {
 
             <div className={"sp-side-panel"} style={sidePanel ? {display:"block"} : {display:"none"}}>
               <div className={"sp-panel-close float-right"} onClick={()=> setSidePanel(false)}><IoClose /></div>
-              <DataValidationMenu disp={panelDisplayState("data validation")}/>
+              <DataValidationMenu disp={panelDisplayState("data validation")} spreadsheetController={spreadsheetController}/>
               <CreateChartMenu disp={panelDisplayState("create chart")}/>
               <FindReplaceMenu disp={panelDisplayState("find and replace")} spreadsheetController={spreadsheetController}/>
           </div>

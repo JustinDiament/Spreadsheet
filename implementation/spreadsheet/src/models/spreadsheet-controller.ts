@@ -333,6 +333,7 @@ export class SpreadsheetController implements IController {
      * @param rule the new rule that the value must adhere to
      */
     public createRule(cellId: number, rule: IValidationRule): void {
+        // idea - skip cellID, just iterate through selected cells and apply the rule to them
     }
 
     /**
@@ -341,6 +342,9 @@ export class SpreadsheetController implements IController {
      * @param rule the rule that should no longer apply
      */
     public removeRule(cellId: number, rule: IValidationRule): void {
+
+        // idea - skip cellID, just iterate through selected cells and remove the rule from them
+        // IFF they contain that rule
     }
 
     /**
