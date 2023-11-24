@@ -12,7 +12,7 @@ export class StrategyFormulas implements IStrategy {
 
     parse(currentValue: string): string {
         let sections: string[] = currentValue.split(" ");
-        console.log(sections);
+        // console.log(sections);
 
         // let combinedValue: string = ""
 
@@ -59,7 +59,7 @@ export class StrategyFormulas implements IStrategy {
                 sections[i] += " ";
             }
         }
-        console.log(sections);
+        // console.log(sections);
         return sections.join("");
         
     }

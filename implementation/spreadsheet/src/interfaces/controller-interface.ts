@@ -13,6 +13,8 @@ export interface IController {
 
     isSelected(cell: Cell) : boolean;
 
+    // getSelected() : string;
+    getSelected() : Array<Cell>;
     /**
      * Adds a new row to the spreadsheet
      * FIX
@@ -54,17 +56,20 @@ export interface IController {
 
     /**
      * Adds a validation rule to a cell
-     * @param cellId the id for the cell to set 
      * @param rule the new rule that the value must adhere to
      */
-    createRule(cellId: number, rule: IValidationRule): void;
+    createRule(rule: IValidationRule): void;
 
     /**
      * Removes a validation rule from a cell
-     * @param cellId the id for the cell to set 
      * @param rule the rule that should no longer apply
      */
-    removeRule(cellId: number, rule: IValidationRule): void;
+    removeRule(rule: IValidationRule): void;
+
+    /**
+     * Returns an array containing all the validation rules that apply to EVERY selected cell
+     */
+    getAllRules(): Array<IValidationRule>;
 
     /**
      * Find all the cells in the spreadsheet that contain the provided string

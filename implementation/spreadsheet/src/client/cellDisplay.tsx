@@ -31,7 +31,7 @@ export default function CellDisplay({ cell, setSelected, setValue, updateCount }
   function update(newData : string) : void {
     setValue(newData);
     setDisplayData(cell.getDisplayValue());
-    console.log(cell.getDisplayValue());
+    // console.log(cell.getDisplayValue());
     // console.log("set value to " + cell.getEnteredValue())
     // setData(cell.getEnteredValue());
     // setDisplayData(cell.getDisplayValue());

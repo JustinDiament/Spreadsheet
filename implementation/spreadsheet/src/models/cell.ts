@@ -157,5 +157,31 @@ export class Cell {
     public notifyGraph(): void {
     }
 
+    /**
+     * Adds the provided rule to this Cell's list of rules
+     * @param rule the rule to be added
+     */
+    public addRule(rule : IValidationRule): void {
+        this.validationRules.push(rule);
+    }
+
+    /**
+     * Removes the provided rule from this Cell's list of rules if the list contains it
+     * @param rule the rule to be removed
+     */
+    public removeRule(rule : IValidationRule): void {
+        this.validationRules.filter((r) => r !==rule);
+    }
+
+    /**
+     * 
+     * @returns this Cell's validation rules
+     */
+    public getRules(): Array<IValidationRule> {
+        return this.validationRules;
+    }
+
+    
+
 
 }

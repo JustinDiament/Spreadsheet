@@ -59,19 +59,21 @@ export class SpreadsheetController implements IController {
 
     public setSelectedOne(cell: string):void {
         //cellIndex = getlocation
-        this.currentlySelected = [];
+        let newSelect:Array<Cell> = [];
         try{
             let location:Array<number> = this.getIndicesFromLocation(cell);
-            this.currentlySelected.push(this.cells[location[1]][location[0]]);
+            newSelect.push(this.cells[location[1]][location[0]]);
         } catch {
             // select nothing if there was an error
-            this.currentlySelected = [];
+            newSelect = [];
         }
+
+        this.currentlySelected = newSelect;
 
     }
 
     public setSelectedMany(cell1: string, cell2:string) : void {
-        this.currentlySelected = [];
+        let newSelect:Array<Cell> = new Array<Cell>;
         try {
             let location1:Array<number> = this.getIndicesFromLocation(cell1);
             let location2:Array<number> = this.getIndicesFromLocation(cell2);
@@ -82,15 +84,17 @@ export class SpreadsheetController implements IController {
             //console.log(colStart, colEnd,rowStart, rowEnd);
             for(let i:number = rowStart; i <= rowEnd; i++) {
                 for(let j:number = colStart; j <= colEnd; j++) {
-                    this.currentlySelected.push(this.cells[i][j]);
+                   newSelect.push(this.cells[i][j]);
                     
                 }
             }
 
         } catch {
             // select nothing if there was an error
-            this.currentlySelected = [];
+            newSelect = [];
         }
+        this.currentlySelected = newSelect;
+
     }
 
     public isSelected(cell: Cell): boolean {
@@ -101,6 +105,22 @@ export class SpreadsheetController implements IController {
             // invalid cell cannot be selected, so return false
             return false;
         }
+    }
+
+    // public getSelected(): string {
+    //     if(this.currentlySelected.length == 1) {
+    //         return `${(this.currentlySelected[0].getColumn())}-${this.currentlySelected[0].getRow()}`;
+    //     } else if(this.currentlySelected.length > 1) {
+
+    //         return `${this.currentlySelected[0].getColumn()}-${this.currentlySelected[0].getRow()} : 
+    //         ${this.currentlySelected[this.currentlySelected.length-1].getColumn()}-${this.currentlySelected[this.currentlySelected.length-1].getRow()}`;
+    //     } else {
+    //         return "";
+    //     }   
+    // }
+
+    public getSelected(): Array<Cell> {
+        return this.currentlySelected;
     }
 
     // if the function does not throw an error, it will always return an array of two numbers in the format of [col #, row #]
@@ -329,22 +349,40 @@ export class SpreadsheetController implements IController {
 
     /**
      * Adds a validation rule to a cell
-     * @param cellId the id for the cell to set 
      * @param rule the new rule that the value must adhere to
      */
-    public createRule(cellId: number, rule: IValidationRule): void {
+    public createRule( rule: IValidationRule): void {
         // idea - skip cellID, just iterate through selected cells and apply the rule to them
+        this.currentlySelected.forEach((element) => element.addRule(rule));
     }
 
     /**
      * Removes a validation rule from a cell
-     * @param cellId the id for the cell to set 
      * @param rule the rule that should no longer apply
      */
-    public removeRule(cellId: number, rule: IValidationRule): void {
+    public removeRule(rule: IValidationRule): void {
 
         // idea - skip cellID, just iterate through selected cells and remove the rule from them
         // IFF they contain that rule
+        this.currentlySelected.forEach((element) => element.removeRule(rule));
+    }
+
+    /**
+     * 
+     * @returns an array containing all the validation rules that apply to EVERY selected cell
+     */
+    public getAllRules(): IValidationRule[] {
+        let rules:Array<IValidationRule> = new Array<IValidationRule>;
+        if(this.currentlySelected.length > 0) {
+            let firstRules:Array<IValidationRule> = this.currentlySelected[0].getRules();
+            for(let i:number = 0; i < firstRules.length; i++) {
+                let contains:boolean = true;
+                this.currentlySelected.forEach((cell) => (contains && (cell.getRules().includes(firstRules[i]))));
+                console.log(contains);
+                contains && rules.push(firstRules[i]); 
+            }
+        }
+        return rules;
     }
 
     /**
