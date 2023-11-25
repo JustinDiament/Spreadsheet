@@ -24,12 +24,11 @@ export class PlusSignStrategy implements IStrategy {
         }
 
         // set current string to first element and remove it from the array
-        // let combinedValue = "";
-        let combinedValue: string = ""
+        let combinedValue: string = "";
 
-        // todo bad if ends in + 
         // todo check for reserved characters? like -, + etc
         // todo include it as a design decision that this reduces all space blocks to 1 space in the display
+        try {
         for (let i=0; i < sections.length; i++) {
             if (sections[i] == "+") {
                 if (isNaN(Number(sections[i-1].replace(/\(/g, ''))) || isNaN(Number(sections[i+1].replace(/\)/g, '')))) {
@@ -77,5 +76,8 @@ export class PlusSignStrategy implements IStrategy {
         // }
         // combinedValue += sections[0];
         return combinedValue;
+    } catch(e) {
+        return "ERROR: Invalid Equation";
+    }
     }
 }
