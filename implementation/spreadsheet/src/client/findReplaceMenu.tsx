@@ -3,10 +3,10 @@ import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 export default function FindReplaceMenu({ disp } : {disp: boolean}) {
     // the value to find
-    const [find, setFind] = useState<string>("");
+    const [find, setFind] = useState<string>("bruh");
 
     // the value to replace
-    const [replace, setReplace] = useState<string>("");
+    const [replace, setReplace] = useState<string>("hah");
 
     // a constant to contain the function findCellsContaining in the ISpreadSheetState
     const findCellsContaining = useSpreadsheetController((controller : ISpreadSheetState) => controller.findCellsContaining);
@@ -36,10 +36,10 @@ export default function FindReplaceMenu({ disp } : {disp: boolean}) {
                     <hr className = {"w-100"}></hr>
                     <h6 className="w-100">Find</h6>
                     {/* enter the value to find */}
-                    <input onChange={(e) => setFind((e.currentTarget.textContent != null) ? e.currentTarget.textContent : "")}className="w-100 mb-3"></input>
+                    <input id="find" onChange={(e) => e.currentTarget.textContent != null ? setFind((document.getElementById('find') as HTMLInputElement).value) : console.log("asd")}className="w-100 mb-3"></input>
                     <h6 className="w-100">Replace With</h6>
                     {/* enter the value to replace it with */}
-                    <input onChange={(e) => setReplace((e.currentTarget.textContent != null) ? e.currentTarget.textContent : "")} className="w-100"></input>
+                    <input id="replace" onChange={(e) => e.currentTarget.textContent != null ? setReplace((document.getElementById('replace') as HTMLInputElement).value) : console.log("asd")} className="w-100"></input>
                     <button className="w-100 my-2 border-0" onClick={() => findNextContaining()}>find next</button>
                     <button className="w-100 my-2 border-0" onClick={() => replaceCurrentCell(find, replace)}>replace</button>
                     <button className="w-100 my-2 border-0" onClick={() => findAndReplaceAll(find, replace)}>replace all</button>

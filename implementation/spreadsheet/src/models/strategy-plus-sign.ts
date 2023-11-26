@@ -11,7 +11,6 @@ export class PlusSignStrategy implements IStrategy {
 
 
     parse(currentValue: string): string {
-        console.log(currentValue);
 
         const inputArray = Array.from(currentValue);
 

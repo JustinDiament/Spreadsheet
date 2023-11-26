@@ -12,7 +12,6 @@ export class StrategyFormulas implements IStrategy {
 
 
     parse(currentValue: string): string {
-        console.log(currentValue);
 
         if (this.formulaCharacters.some(char => currentValue.includes(char))) {
             try {

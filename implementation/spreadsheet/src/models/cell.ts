@@ -135,10 +135,22 @@ export class Cell {
      * @param replace the value to replace the found value in
      */
     public findReplace(find: string, replace: string): void {
+
         if(this.enteredValue.includes(find)) {
+            console.log(find);
+            console.log(replace);
+            console.log("inside");
             let sections: string[] = this.enteredValue.split(new RegExp(`(${find})`));
-            sections.map((element) => (element === find ? replace : element));
+            console.log(sections);
+            
+            for (let i=0; i < sections.length; i++) {
+                if (sections[i] === find) {
+                    sections[i] = replace;
+                } 
+            }
+
             let combinedString: string = sections.join('');
+            console.log(sections)
             this.setEnteredValue(combinedString);
         }
     }
