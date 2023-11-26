@@ -1,6 +1,6 @@
 import CellGridDisplay from "./cellGridDisplay";
-import { IController } from "../interfaces/controller-interface";
-import { SpreadsheetController } from "../models/spreadsheet-controller";
+import { ISpreadSheetState } from "../interfaces/controller-interface";
+import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import { useState } from "react";
 import DropDownMenu from "./dropDownMenu";
 import CreateChartMenu from "./createChartMenu";
@@ -8,28 +8,20 @@ import DataValidationMenu from "./dataValidationMenu";
 import FindReplaceMenu from "./findReplaceMenu";
 import { IoClose } from "react-icons/io5";
 
-
-// create the spreadsheet data/backend
-const spreadsheetController: IController = new SpreadsheetController();
-
 // the react component for the entire spreadsheet frontend display
 export default function SpreadSheetDisplay() {
-  console.log("========")
-  console.log("rerendering spreadsheet display")
-    console.log("========")
-
 
   // is there an opened dropdown menu?
   const [dropdown, setDropdown] = useState(false);
-
+ 
   // what is the currently opened dropdown menu?
-  const [currDrop, setCurrDrop] = useState("");
+  const [currDrop, setCurrDrop] = useState<string>("");
 
   // is there an opened side panel?
-  const [sidePanel, setSidePanel] = useState(false);
+  const [sidePanel, setSidePanel] = useState<boolean>(false);
 
   // what is the currently opened side panel?
-  const [currPanel, setCurrPanel] = useState("");
+  const [currPanel, setCurrPanel] = useState<string>("");
 
   // close any opened dropdowns because the user clicked outside of the active dropdown area
   function clickOutside(e: any) {
@@ -41,17 +33,17 @@ export default function SpreadSheetDisplay() {
         setDropdown(false);
       }
     });
-  }
+  };
 
   // return true if the dropdown menu of the provided title is opened/expanded 
   function dropDisplayState(option: string): boolean {
-    return (option == currDrop) && dropdown;
-  }
+    return (option === currDrop) && dropdown;
+  };
 
   // return true if the sidepanel of the provided title is opened
   function panelDisplayState(option: string): boolean {
-    return (option == currPanel) && sidePanel;
-  }
+    return (option === currPanel) && sidePanel;
+  };
 
   // the list of options in the edit menu
   const editMenuItems: Array<string> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)",
@@ -60,21 +52,25 @@ export default function SpreadSheetDisplay() {
   // the list of options in the data menu
   const dataMenuItems: Array<string> = ["Data Validation", "Create Chart", "Find and Replace"];
 
+  // the list of functions associated with the options in the edit menu
+  const menuFunctions: Array<{ (): void; } | { (val:string): void; }> = [
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.deleteRow),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.addRow),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.addRow),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.deleteColumn),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.addColumn),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.addColumn),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.clearSelectedCells),
+    useSpreadsheetController((controller : ISpreadSheetState) => controller.clearAllCells)];
+
   // calls the function associated with the command in the edit menu at the provided index
-  function editFunctions(index: number) {
-    let menuFunctions: Array<{ (): void; }> = [() => spreadsheetController.deleteRow(),
-    () => spreadsheetController.addRow("above"),
-    () => spreadsheetController.addRow("below"),
-    () => spreadsheetController.deleteColumn(),
-    () => spreadsheetController.addColumn("right"),
-    () => spreadsheetController.addColumn("left"),
-    () => spreadsheetController.clearSelectedCells(),
-    () => spreadsheetController.clearAllCells(),];
-    menuFunctions[index]();
+  const editFunctions= (index: number) : void => {
+    let params:Array<string> = ['', "above", "below", '', "right", "left", '', ''];
+    menuFunctions[index]((params[index]));
     // close the dropdown because we have performed the selected task
     setDropdown(false);
 
-  }
+  };
 
   // calls the function associated with the command in the data menu at the provided index
   function dataFunctions(index: number) {
@@ -86,11 +82,7 @@ export default function SpreadSheetDisplay() {
     setDropdown(false);
     // let the component know that a side panel was opened
     setSidePanel(true);
-  }
-
-  // function findReplaceFunctions(index:number, string) {
-
-  // }
+  };
 
   // the actual HTML of the spreadsheet UI
   return (
@@ -130,16 +122,15 @@ export default function SpreadSheetDisplay() {
 
       <div className={(sidePanel ? 'sp-two-panel' : '') + ' sp-work-space'}>
         {/* actual grid of cells */}
-        <CellGridDisplay spreadsheetController={spreadsheetController} />
+        <CellGridDisplay  />
 
         <div className={"sp-side-panel"} style={sidePanel ? { display: "block" } : { display: "none" }}>
           <div className={"sp-panel-close float-right"} onClick={() => setSidePanel(false)}><IoClose /></div>
-          <DataValidationMenu disp={panelDisplayState("data validation")} spreadsheetController={spreadsheetController} />
+          <DataValidationMenu disp={panelDisplayState("data validation")}/>
           <CreateChartMenu disp={panelDisplayState("create chart")} />
-          <FindReplaceMenu disp={panelDisplayState("find and replace")} spreadsheetController={spreadsheetController} />
+          <FindReplaceMenu disp={panelDisplayState("find and replace")}  />
         </div>
       </div>
     </div>
-
   )
 }

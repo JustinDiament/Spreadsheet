@@ -170,7 +170,7 @@ export class Cell {
      * @param rule the rule to be removed
      */
     public removeRule(rule : IValidationRule): void {
-        this.validationRules.filter((r) => r !==rule);
+        this.validationRules = this.validationRules.filter((r) => r !== rule);
     }
 
     /**
