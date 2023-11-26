@@ -10,7 +10,10 @@ export class StrategyFormulas implements IStrategy {
     public constructor() {
     }
 
+
     parse(currentValue: string): string {
+        console.log(currentValue);
+
         if (this.formulaCharacters.some(char => currentValue.includes(char))) {
             try {
                 return evaluate(currentValue);

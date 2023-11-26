@@ -22,11 +22,23 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
 
     private evaluate(reference: string): string {
         //split based on closing parenthesis
-        let splitSections: string[] = reference.split(")", 2);
+        // let splitSections: string[] = reference.split(")", 2);
+        // //check that closed parenthesis exists
+        // if (splitSections.length < 2) {
+        //     throw new Error("#RANGE");
+        // }
+
+        const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (splitSections.length < 2) {
-            throw new Error("#RANGE");
+        if (index == -1) {
+            throw new Error('#RANGE');
         }
+
+        const firstPart = reference.slice(0, index);
+        const secondPart = reference.slice(index + 1);
+
+        let splitSections: string[] = [firstPart, secondPart];
+
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
         if(values.length < 1) {
             return "ERROR: Cell range must contain at least one cell"

@@ -7,20 +7,23 @@ import { AExpressionStrategy } from "./strategy-abstract-expression";
 export class PlusSignStrategy implements IStrategy {
     public constructor() {
     }
-    private formulaCharacters: Array<string> = ['+', '-', '*', '^', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '];
+    private formulaCharacters: Array<string> = ['+', '-', '*', '^', '/', ')', '(', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '];
 
 
     parse(currentValue: string): string {
-    const inputArray = Array.from(currentValue);
+        console.log(currentValue);
 
-    for (const char of inputArray) {
-        const index = this.formulaCharacters.indexOf(char);
-        if (index == -1) {
-            return currentValue.replace(/\+/g, '');
+        const inputArray = Array.from(currentValue);
+
+        for (const char of inputArray) {
+            const index = this.formulaCharacters.indexOf(char);
+            if (index == -1) {
+                return currentValue.replace(/\+/g, '');
+            }
         }
-    }
 
-    return currentValue; 
+        return currentValue; 
+    }
 //         // set current string to first element and remove it from the array
 //         let combinedValue: string = "";
 

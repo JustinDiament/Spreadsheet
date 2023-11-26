@@ -22,11 +22,23 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
 
     private evaluate(reference: string): string {
         //split based on closing parenthesis
-        let splitSections: string[] = reference.split(")", 2);
+        // let splitSections: string[] = reference.split(")", 2);
+        // //check that closed parenthesis exists
+        // if (splitSections.length < 2) {
+        //     //TODO: throw error that we set if there is no closing parenthesis and handle the error in the cell class
+        // }
+
+        const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (splitSections.length < 2) {
-            //TODO: throw error that we set if there is no closing parenthesis and handle the error in the cell class
+        if (index == -1) {
+            throw new Error('#RANGE');
         }
+
+        const firstPart = reference.slice(0, index);
+        const secondPart = reference.slice(index + 1);
+
+        let splitSections: string[] = [firstPart, secondPart];
+
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
         let sum = this.addRangeValues(values);
         return sum + splitSections[1];

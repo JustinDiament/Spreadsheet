@@ -49,9 +49,10 @@ describe('Average Strategy', (): void => {
     }
 
     //set up strategies with the grids defined above
-    let strategyWithSetValues: AverageStrategy = new AverageStrategy(otherCells)
-    let strategyWithDefaultValues: AverageStrategy = new AverageStrategy(otherCells)
+    let strategyWithSetValues: AverageStrategy = new AverageStrategy(otherCells, 100, 100)
+    let strategyWithDefaultValues: AverageStrategy = new AverageStrategy(otherCells, 100, 100)
 
+    /// TODO Add tests for errors like self ref
   
     it('should take return the value of the cell if only one defined', (): void => {
         expect(strategyWithSetValues.parse("AVERAGE(A1..A1)")).toBe("0");

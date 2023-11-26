@@ -28,11 +28,17 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
 
     private evaluate(reference: string) {
         //split based on closing parenthesis
-        let splitSections: string[] = reference.split(")", 2);
+        const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (splitSections.length < 2) {
+        if (index == -1) {
             throw new Error('#REF');
         }
+
+        const firstPart = reference.slice(0, index);
+        const secondPart = reference.slice(index + 1);
+
+        let splitSections: string[] = [firstPart, secondPart];
+
         //the cell we are looking for is the first section in the split string
         let resolvedReference = this.resolveReference(splitSections[0]);
         return resolvedReference + splitSections[1];
