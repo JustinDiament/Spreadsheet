@@ -491,10 +491,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to change to
      */
     findAndReplaceAll: (find: string, replace: string) => {
-        console.log(find);
       get().cells.forEach((row) => {
         row.forEach((element) => {
-          element.findReplace(find, replace);
+           element.findReplace(find, replace);
         });
       });
     },
