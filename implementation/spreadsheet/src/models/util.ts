@@ -15,14 +15,14 @@ export class Util {
                     stillLetters = false;
                     row = Number(remainder.substring(0));
                     if(isNaN(row)) {
-                        throw new Error("invalid location");
+                        throw new Error("#INVALIDCELL");
                     }
                 }
             }
             //console.log(location + ", " + col, row-1);
     
         } else {
-            throw new Error("invalid location");
+            throw new Error("#INVALIDCELL");
         }
     
         return [col, row-1];

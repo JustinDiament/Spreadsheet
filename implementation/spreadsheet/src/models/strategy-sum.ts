@@ -5,8 +5,8 @@ import { AExpressionStrategy } from "./strategy-abstract-expression";
 export class SumStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
 
-    public constructor(otherCells: Cell[][]) {
-        super("SUM");
+    public constructor(otherCells: Cell[][], row: number, col: number) {
+        super("SUM", row, col);
         this.otherCells = otherCells;
     }
 
