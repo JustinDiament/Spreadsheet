@@ -1,297 +1,348 @@
-import { IACellsIterator } from "../interfaces/cell-iterator-interface";
-import { IController } from "../interfaces/controller-interface";
+import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
-import { ACellsIterator } from "./cells-iterator";
 import { Cell } from "./cell";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { CellRefStrategy } from "./strategy-cell-ref";
-// todo fix errors and warnings in terminal 
+import { create } from "zustand";
+// todo fix errors and warnings in terminal
 // todo fix comments
 // todo fix imports
 // todo make things depend on a cell interface not the cell class
 // todo error checking
-// todo delete unneeded methods and members 
+// todo delete unneeded methods and members
 // todo check the key errors in inspect element console
 
-/**
- * Represents the main controller for the spreadsheet application 
- */
-export class SpreadsheetController implements IController {
+// local helper function to allow controller to easily convert a location such
+// as "A1" to a set of column/row coordinates
+const getIndicesFromLocation = (location: string): Array<number> => {
+  // initiate the value of column and number to return
+  let col: number = 0;
+  let row: number = 0;
+  // are we still parsing letters, or have we moved on to numbers?
+  let stillLetters = true;
+  // the remaining substring of the provided location
+  let remainder: string = location;
+  // check the provided location is not empty
+  if (remainder.length !== 0) {
+    // while there are characters to parse and we are still parsing letters
+    while (remainder.length > 0 && stillLetters) {
+      // is the first character of the remaining string an uppercase letter?
+      let sub: string = remainder[0];
+      if (sub.match(/[A-Z]/) !== null) {
+        // get unicode value of letter and convert it to the format where A=0, B=1, ... Z=25
+        // add to column because column values work as follows:
+        // A = column 0, B = column 1, ... Z = column 25, AA = column 26, BB = column 27, .. etc
+        col += sub.charCodeAt(0) - 65;
+        // remove the value we just parsed from the remaining string
+        remainder = remainder.substring(1);
+      } else {
+        // we are no longer parsing numbers, so convert what is left to a number
+        stillLetters = false;
+        row = Number(remainder.substring(0));
+        if (isNaN(row)) {
+          // if remaining location could not be converted to a number, it was invalid
+          throw new Error("invalid location");
+        }
+      }
+    }
+  } else {
+    throw new Error("invalid location");
+  }
+  // subtract 1 from row because the provided location started counting at 1, but we start at 0
+  return [col, row - 1];
+};
+
+// local helper function to create an empty 10x10 grid of cells
+// which the controller uses to instantiate the spreadsheet
+const createCells = (): Array<Array<Cell>> => {
+  // create empty 2d array of cells
+  let cells: Array<Array<Cell>> = [];
+  // iterate through 10 rows and add 10 cells to each row
+  for (let i: number = 0; i < 10; i++) {
+    let row: Array<Cell> = new Array<Cell>();
+    for (let j: number = 0; j < 10; j++) {
+      row.push(new Cell(i, j));
+    }
+    cells.push(row);
+  }
+  return cells;
+};
+
+// representation of the spreadsheet controller, which manages the current state
+// of the spreadsheet
+export const useSpreadsheetController = create<ISpreadSheetState>(
+  (set, get) => ({
+    // the 2d array/grid of cells in the spreadsheet, instantiated as an
+    // empty 10x10 grid of cells
+    cells: createCells(),
+
+    // the list of graphs created inside the spreadsheet by the user
+    graphs: [],
+
+    // the list of cells in the spreadsheet that are currently selected by the user
+    currentlySelected: [],
 
     /**
-     * The cells contained in the spreadsheet 
+     * Set the list of currently selected cells in the spreadsheet to contain
+     * only the provided cell, and no other
+     * @param cell the cell to set as the currently selected cell, provided via its location
      */
-    private cells: Array<Array<Cell>>;
+    setSelectedOne: (cell: string) => {
+      let newSelect: Array<Cell> = [];
+      try {
+        // parse the location of the cell and add the cell at that location to the new list
+        // of currently selected cells
+        let location: Array<number> = getIndicesFromLocation(cell);
+        newSelect.push(get().cells[location[1]][location[0]]);
+      } catch {
+        // select nothing if there was an error
+        newSelect = [];
+      }
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
+      set({ currentlySelected: newSelect });
+    },
 
     /**
-     * The graphs contained in the spreadsheet 
+     * Set the list of currently selected cells in the spreadsheet to contain only
+     * the cells that fall within the range of cells determined by the provided starting and ending points
+     * @param cell1 the first cell in the range of cells to select
+     * @param cell2  the last cell in the range of cells to select
      */
-    private graphs: Array<IGraph> = [];
+    setSelectedMany: (cell1: string, cell2: string) => {
+      let newSelect: Array<Cell> = new Array<Cell>();
+      try {
+        // parse the location of the starting and ending cells and determine the range of values the selected cells fall within
+        let location1: Array<number> = getIndicesFromLocation(cell1);
+        let location2: Array<number> = getIndicesFromLocation(cell2);
+        // using min and max so that a user could select a starting value that is below and to the right of the 
+        // ending value, and still be able to select all cells within that range
+        let colStart: number = Math.min(location1[0], location2[0]);
+        let colEnd: number = Math.max(location1[0], location2[0]);
+        let rowStart: number = Math.min(location1[1], location2[1]);
+        let rowEnd: number = Math.max(location1[1], location2[1]);
+        // iterate through all cells in the determined range and add them to the new list of currently selected cells
+        for (let i: number = rowStart; i <= rowEnd; i++) {
+          for (let j: number = colStart; j <= colEnd; j++) {
+            newSelect.push(get().cells[i][j]);
+          }
+        }
+      } catch {
+        // select nothing if there was an error
+        newSelect = [];
+      }
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
+      set({ currentlySelected: newSelect });
+    },
 
     /**
-     * The cell(s), if any, that are currently selected by the user
+     * Returns whether the provided cell is contained in the list of currently
+     * selected cells
+     * @param cell the cell to be determined if it is selected
      */
-    private currentlySelected: Array<Cell> = [];
+    isSelected: (cell: Cell) => {
+      try {
+        return get().currentlySelected.includes(cell);
+      } catch {
+        // invalid cell cannot be selected, so return false
+        return false;
+      }
+    },
 
-    /**
-     * An iterator that iterates over a 2D array of ACells, used to 
-     * perform find and repalce operations
+     /**
+     * Get the list of all currently selected cells
      */
-    private cellsIterator: IACellsIterator;
-
-    constructor() {
-        // for now, populate the grid of cells with an empty 10x10 grid
-        this.cells = new Array<Array<Cell>>;
-        for(let i:number = 0; i < 10; i++) {
-            let row : Array<Cell> = new Array<Cell>;
-            for(let j:number = 0; j < 10; j++) {
-                row.push(new Cell(i, j));
-            }
-            this.cells.push(row);
-        }
-        this.cellsIterator = new ACellsIterator();
-    }
-
-    public getCells(): Array<Array<Cell>> {
-        return this.cells;
-    }
-
-    public setSelectedOne(cell: string):void {
-        //cellIndex = getlocation
-        this.currentlySelected = [];
-        try{
-            let location:Array<number> = this.getIndicesFromLocation(cell);
-            this.currentlySelected.push(this.cells[location[1]][location[0]]);
-        } catch {
-            // select nothing if there was an error
-            this.currentlySelected = [];
-        }
-
-    }
-
-    public setSelectedMany(cell1: string, cell2:string) : void {
-        this.currentlySelected = [];
-        try {
-            let location1:Array<number> = this.getIndicesFromLocation(cell1);
-            let location2:Array<number> = this.getIndicesFromLocation(cell2);
-            let colStart:number = Math.min(location1[0], location2[0]);
-            let colEnd:number = Math.max(location1[0], location2[0]);
-            let rowStart:number = Math.min(location1[1], location2[1]);
-            let rowEnd:number = Math.max(location1[1], location2[1]);
-            //console.log(colStart, colEnd,rowStart, rowEnd);
-            for(let i:number = rowStart; i <= rowEnd; i++) {
-                for(let j:number = colStart; j <= colEnd; j++) {
-                    this.currentlySelected.push(this.cells[i][j]);
-                    
-                }
-            }
-
-        } catch {
-            // select nothing if there was an error
-            this.currentlySelected = [];
-        }
-    }
-
-    public isSelected(cell: Cell): boolean {
-        try {
-           
-            return this.currentlySelected.includes(cell);
-        } catch {
-            // invalid cell cannot be selected, so return false
-            return false;
-        }
-    }
-
-    // if the function does not throw an error, it will always return an array of two numbers in the format of [col #, row #]
-    private getIndicesFromLocation(location:string) : Array<number> {
-        let col:number = 0;
-        let row:number = 0;
-        let stillLetters = true;
-        let remainder:string = location;
-        if(remainder.length !=0) {
-            while(remainder.length > 0 && stillLetters) {
-                let sub:string = remainder[0];
-                if(sub.match(/[A-Z]/) != null) {
-                    (col += (sub.charCodeAt(0) - 65))
-                    //console.log(col);
-                    remainder = remainder.substring(1);
-                } else {
-                    stillLetters = false;
-                    row = Number(remainder.substring(0));
-                    if(isNaN(row)) {
-                        throw new Error("invalid location");
-                    }
-                }
-            }
-            //console.log(location + ", " + col, row-1);
-
-        } else {
-            throw new Error("invalid location");
-        }
-
-        return [col, row-1];
-    }
+    getSelected: () => {
+      return get().currentlySelected;
+    },
 
     /**
      * Adds a new row to the spreadsheet
+     * @param aboveOrBelow a string value that states whether the row should be added above the topmost currently selected cell
+     * or below the bottommost currently selected cell
      */
-    public addRow(aboveOrBelow: string): void {
-        let belowRow: number = -1;
-        let aboveRow: number = this.cells[0].length;
-        let numRowsToAdd: number = 0;
-        let colToCheck = this.currentlySelected[0].getColumn();
+    addRow: (aboveOrBelow: string) => {
+      let belowRow: number = -1;
+      let aboveRow: number = get().cells[0].length;
+      let numRowsToAdd: number = 0;
+      let colToCheck = get().currentlySelected[0].getColumn();
 
+      for (const cell of get().currentlySelected) {
+        if (colToCheck === cell.getColumn()) {
+          if (cell.getRow() > belowRow) {
+            belowRow = cell.getRow();
+          }
 
-        for (const cell of this.currentlySelected) {
-            if (colToCheck == cell.getColumn()) {
-                if (cell.getRow() > belowRow) {
-                    belowRow = cell.getRow();
-                }
+          if (cell.getRow() < aboveRow) {
+            aboveRow = cell.getRow();
+          }
 
-                if (cell.getRow() < aboveRow) {
-                    aboveRow = cell.getRow();
-                }
-
-                numRowsToAdd++;
-            }
+          numRowsToAdd++;
         }
+      }
 
-        let insertLocation;
-        if (aboveOrBelow == "above") {
-            insertLocation = aboveRow;
-        }
-        else {
-            insertLocation = belowRow + 1;
-        }
+      let insertLocation;
+      if (aboveOrBelow === "above") {
+        insertLocation = aboveRow;
+      } else {
+        insertLocation = belowRow + 1;
+      }
 
-        let newCells: Array<Cell> = new Array<Cell>();
-        for (let i=0; i < this.cells[0].length; i++) {
-            newCells.push(new Cell(insertLocation, i));
-        }
+      let newCells: Array<Cell> = new Array<Cell>();
+      for (let i = 0; i < get().cells[0].length; i++) {
+        newCells.push(new Cell(insertLocation, i));
+      }
 
-        for (let i=0; i < numRowsToAdd; i++) {
-            this.cells.splice(insertLocation, 0, newCells)
-        }
+      let newGrid: Array<Array<Cell>> = [];
+      get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
 
-        for (let i=insertLocation + 1; i < this.cells.length; i++) {
-            for (let j=0; j < this.cells[0].length; j++) {
-                this.cells[i][j].setRow(i);
-            }
+      for (let i = 0; i < numRowsToAdd; i++) {
+        newGrid.splice(insertLocation, 0, newCells);
+      }
+
+      for (let i = insertLocation + 1; i < newGrid.length; i++) {
+        for (let j = 0; j < newGrid[0].length; j++) {
+          newGrid[i][j].setRow(i);
         }
-    }
+      }
+
+      set({ cells: newGrid });
+    },
 
     /**
      * Adds a new column to the spreadsheet
+     * @param leftOrRight a string value that states whether the column should be added left of the leftmost currently selected cell
+     * or right of the rightmost currently selected cell
      */
-    public addColumn(leftOrRight: string): void {
-        let leftCol: number = -1;
-        let rightCol: number = this.cells.length;
-        let numColsToAdd: number = 0;
-        let rowToCheck = this.currentlySelected[0].getRow();
+    addColumn: (leftOrRight: string) => {
+      let leftCol: number = -1;
+      let rightCol: number = get().cells.length;
+      let numColsToAdd: number = 0;
+      let rowToCheck = get().currentlySelected[0].getRow();
 
-        for (const cell of this.currentlySelected) {
-            if (rowToCheck == cell.getRow()) {
-                if (cell.getColumn() > leftCol) {
-                    leftCol = cell.getColumn();
-                }
+      for (const cell of get().currentlySelected) {
+        if (rowToCheck === cell.getRow()) {
+          if (cell.getColumn() > leftCol) {
+            leftCol = cell.getColumn();
+          }
 
-                if (cell.getColumn() < rightCol) {
-                    rightCol = cell.getColumn();
-                }
+          if (cell.getColumn() < rightCol) {
+            rightCol = cell.getColumn();
+          }
 
-                numColsToAdd++;
-            }
+          numColsToAdd++;
         }
+      }
 
-        let insertLocation;
-        if (leftOrRight == "left") {
-            insertLocation = leftCol;
-        }
-        else {
-            insertLocation = rightCol + 1;
-        }
+      let insertLocation;
+      if (leftOrRight === "left") {
+        insertLocation = leftCol;
+      } else {
+        insertLocation = rightCol + 1;
+      }
 
-        // let newCells: Array<Cell> = new Array<Cell>();
-        // for (let i=0; i < this.cells[0].length; i++) {
-        //     newCells.push(new Cell(insertLocation, i));
-        // }
+      let newGrid: Array<Array<Cell>> = [];
+      get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
 
-        for (let i=0; i < this.cells.length; i++) {
-            for (let j=0; j < numColsToAdd; j++) {
-                this.cells[i].splice(insertLocation, 0, new Cell(i, insertLocation));
-            }
+      for (let i = 0; i < newGrid.length; i++) {
+        for (let j = 0; j < numColsToAdd; j++) {
+          newGrid[i].splice(insertLocation, 0, new Cell(i, insertLocation));
         }
+      }
 
-        for (let i=0; i < this.cells.length; i++) {
-            for (let j=insertLocation + 1; j < this.cells[0].length; j++) {
-                this.cells[i][j].setColumn(j);
-            }
+      for (let i = 0; i < newGrid.length; i++) {
+        for (let j = insertLocation + 1; j < newGrid[0].length; j++) {
+          newGrid[i][j].setColumn(j);
         }
-    }
+      }
+      set({ cells: newGrid });
+    },
 
     /**
      * Removes the currently selected rows from the spreadsheet
      */
-    public deleteRow(): void {
-        // todo check if any rows exist
-        // todo check if they are deleting the last row and don't let them do that 
-        let rowToDelete: number = this.cells[0].length;
-        let numRowsToDelete: number = 0;
-        let colToCheck = this.currentlySelected[0].getColumn();
+    deleteRow: () => {
+      // todo check if any rows exist
+      // todo check if they are deleting the last row and don't let them do that
+      let rowToDelete: number = get().cells[0].length;
+      let numRowsToDelete: number = 0;
+      let colToCheck = get().currentlySelected[0].getColumn();
 
-        for (const cell of this.currentlySelected) {
-            if (colToCheck == cell.getColumn()) {
-                if (cell.getRow() <  rowToDelete) {
-                    rowToDelete = cell.getRow();
-                }
-                numRowsToDelete++;
-            }
+      for (const cell of get().currentlySelected) {
+        if (colToCheck === cell.getColumn()) {
+          if (cell.getRow() < rowToDelete) {
+            rowToDelete = cell.getRow();
+          }
+          numRowsToDelete++;
         }
+      }
 
-        for (let i=0; i < numRowsToDelete; i++) {
-            this.cells.splice(rowToDelete, 1)
-        }
+      let newGrid: Array<Array<Cell>> = [];
+      get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
 
-        for (let i=rowToDelete; i < this.cells.length; i++) {
-            for (let j=0; j < this.cells[0].length; j++) {
-                this.cells[i][j].setRow(this.cells[i][j].getRow() - numRowsToDelete);
-            }
+      for (let i = 0; i < numRowsToDelete; i++) {
+        newGrid.splice(rowToDelete, 1);
+      }
+
+      for (let i = rowToDelete; i < newGrid.length; i++) {
+        for (let j = 0; j < newGrid[0].length; j++) {
+          newGrid[i][j].setRow(newGrid[i][j].getRow() - numRowsToDelete);
         }
-    }
+      }
+      set({ cells: newGrid });
+    },
 
     /**
      * Removes the currently selected columns from the spreadsheet
      */
-    public deleteColumn(): void {
-        // todo check if any cols exist
-                // todo check if they are deleting the last col and don't let them do that 
-        let colToDelete: number = this.cells.length;
-        let numColsToDelete: number = 0;
-        let rowToCheck = this.currentlySelected[0].getRow();
+    deleteColumn: () => {
+      // todo check if any cols exist
+      // todo check if they are deleting the last col and don't let them do that
+      let colToDelete: number = get().cells.length;
+      let numColsToDelete: number = 0;
+      let rowToCheck = get().currentlySelected[0].getRow();
 
-        for (const cell of this.currentlySelected) {
-            if (rowToCheck == cell.getRow()) {
-                if (cell.getColumn() <  colToDelete) {
-                    colToDelete = cell.getColumn();
-                }
-                numColsToDelete++;
-            }
+      for (const cell of get().currentlySelected) {
+        if (rowToCheck === cell.getRow()) {
+          if (cell.getColumn() < colToDelete) {
+            colToDelete = cell.getColumn();
+          }
+          numColsToDelete++;
         }
+      }
 
-        for (let i=0; i < numColsToDelete; i++) {
-            for (let j=0; j < this.cells.length; j++) {
-                this.cells[j].splice(colToDelete, 1);
-            }
-        }
+      let newGrid: Array<Array<Cell>> = [];
+      get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
 
-        for (let i=0; i < this.cells.length; i++) {
-            for (let j=colToDelete; j < this.cells[0].length; j++) {
-                this.cells[i][j].setColumn(this.cells[i][j].getColumn() - numColsToDelete);
-            }
+      for (let i = 0; i < numColsToDelete; i++) {
+        for (let j = 0; j < newGrid.length; j++) {
+          newGrid[j].splice(colToDelete, 1);
         }
-        
-    }
+      }
+
+      for (let i = 0; i < newGrid.length; i++) {
+        for (let j = colToDelete; j < newGrid[0].length; j++) {
+          newGrid[i][j].setColumn(newGrid[i][j].getColumn() - numColsToDelete);
+        }
+      }
+      set({ cells: newGrid });
+    },
 
     /**
      * Changes the value of a cell
@@ -299,138 +350,185 @@ export class SpreadsheetController implements IController {
      * @param newValue the new value of the cell
      */
 
-    public editCell(cellId: string, newValue: any): void {
-        // todo: any should be string???
-        // todo: need interface for cell
-        let loc : Array<number> = this.getIndicesFromLocation(cellId);
-        let row : number = loc[1];
-        let col : number = loc[0];
-        let cell : Cell = this.cells[row][col];
-        cell.setEnteredValue(newValue);
-        cell.updateDisplayValue(this.cells);
-        //I think this is where we would pass in the strategies and parse the string
+    editCell: (cellId: string, newValue: any) => {
+      // todo: any should be string???
+      // todo: need interface for cell
 
-    }
+      let newGrid: Array<Array<Cell>> = [];
+      get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
+      let loc: Array<number> = getIndicesFromLocation(cellId);
+      let row: number = loc[1];
+      let col: number = loc[0];
+      let cell: Cell = newGrid[row][col];
+      cell.setEnteredValue(newValue);
+      cell.updateDisplayValue(get().cells);
+      set({ cells: newGrid });
+      //I think this is where we would pass in the strategies and parse the string
+    },
 
     /**
-     * Removes the value for a selection of cells
+     * Removes the value of all the currently selected cells
      */
-    public clearSelectedCells(): void {
-        this.currentlySelected.forEach((cell) => cell.clearCell());
-        console.log(this.currentlySelected[0].getDisplayValue());
-    }
+    clearSelectedCells: () => {
+      let newSelectedGrid: Array<Cell> = [];
+      // iterate through all currently selected cells and adds them to the new list of currently selected cells
+      // doing this so that we can set the state of the spreadsheet at the end of this function
+      get().currentlySelected.forEach((element) => {
+        newSelectedGrid.push(element);
+      });
+      // clear every cell in the new list of selected cells
+      newSelectedGrid.forEach((cell) => cell.clearCell());
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
+      set({ currentlySelected: newSelectedGrid });
+    },
 
     /**
-     * Removes the value for a selection of cells
+     * Removes the value of every cell in the spreadsheet
      */
-    public clearAllCells(): void {
-        this.cells.forEach((row) => row.forEach((cell) => cell.clearCell()));
-    }
+    clearAllCells: () => {
+      let newGrid: Array<Array<Cell>> = [];
+      // iterate through all cells and adds them to the new grid of cells
+      // doing this so that we can set the state of the spreadsheet at the end of this function
+      get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
+      // clear every cell in the new grid of cells
+      newGrid.forEach((row) => row.forEach((cell) => cell.clearCell()));
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of cells
+      set({ cells: newGrid });
+    },
 
     /**
      * Adds a validation rule to a cell
-     * @param cellId the id for the cell to set 
      * @param rule the new rule that the value must adhere to
      */
-    public createRule(cellId: number, rule: IValidationRule): void {
-    }
+    createRule: (rule: IValidationRule) => {
+      // add rule to every selected cell
+      get().currentlySelected.forEach((element) => element.addRule(rule));
+    },
 
     /**
      * Removes a validation rule from a cell
-     * @param cellId the id for the cell to set 
      * @param rule the rule that should no longer apply
      */
-    public removeRule(cellId: number, rule: IValidationRule): void {
-    }
+    removeRule: (rule: IValidationRule) => {
+      // remove rule from every selected cell
+      get().currentlySelected.forEach((element) => element.removeRule(rule));
+    },
+
+    /**
+     * Get a list of every rule that applies to every cell that is currently selected
+     * @returns an array containing all the validation rules that apply to EVERY selected cell
+     */
+    getAllRules: () => {
+      let rules: Array<IValidationRule> = new Array<IValidationRule>();
+      // there will only be rules if there are cells selected
+      if (get().currentlySelected.length > 0) {
+        // start by getting all the rules of the first selected cell
+        // which cell is being used is arbitrary, but using the first works for any number of selected cells
+        // we do this because if a rule is not in the first cell, it is not in EVERY selected cell, and therefore wouldn't be returned
+        let firstRules: Array<IValidationRule> =
+          get().currentlySelected[0].getRules();
+        // go through all currently selected cells and see if they contain the rules contained in firstRules
+        for (let i: number = 0; i < firstRules.length; i++) {
+          let contains: boolean = true;
+          // if the rule is not in every cell, contains will be false, and we will not add the rule to our final list of rules
+          // if it is every cell, contains will be true, and we will add the rule to our final list of rules
+          get().currentlySelected.forEach(
+            (cell) => contains && cell.getRules().includes(firstRules[i])
+          );
+          contains && rules.push(firstRules[i]);
+        }
+      }
+      // return our final list of rules
+      return rules;
+    },
 
     /**
      * Find all the cells in the spreadsheet that contain the provided string
      * and stores the data in an array
      * @param find the string that the cells' entered value should contain
      */
-    findCellsContaining(find:string): void {
-        // TODO
-        // find all the cells containing find and store them /somewhere/
-        // set currently selected to contain only the first of the cells we just stored
-    }
+    findCellsContaining: (find: string) => {
+      // TODO
+      // find all the cells containing find and store them /somewhere/
+      // set currently selected to contain only the first of the cells we just stored
+    },
 
     /**
      * Change the content of the currently selected cell by replacing any instance
-     * of the 'find' string in the cell with the 'replace' string 
+     * of the 'find' string in the cell with the 'replace' string
      * @param find the value to be replaced
      * @param replace the value to replace with
      */
-    replaceCurrentCell(find:string, replace:string):void {
-        // TODO
-        // for(cells in currently selected): cell.findReplace(find, replace);
-        // there should either be one or zero currently selected cells
-    }
+    replaceCurrentCell: (find: string, replace: string) => {
+      // TODO
+      // for(cells in currently selected): cell.findReplace(find, replace);
+      // there should either be one or zero currently selected cells
+    },
 
     /**
      * select the next cell that is in the list of currently found cells
      * which is created in the findCellsContaining function
      */
-    findNextContaining():void {
-        // TODO
-        // set currently selected to contain only the next of the cells we stored in
-        // findCellsContaining()
-        // if the currently selected is the last cell, set next to the first
-        // if there are no cells to be replaced, do nothing
+    findNextContaining: () => {
+      // TODO
+      // set currently selected to contain only the next of the cells we stored in
+      // findCellsContaining()
+      // if the currently selected is the last cell, set next to the first
+      // if there are no cells to be replaced, do nothing
+    },
 
-    }
-    
     /**
      * Finds where a value is present and replaces all instances of it with a new value at the selected id
      * @param find the value to find
      * @param replace the value to change to
      */
-    findAndReplaceAll(find: string, replace: string): void {
-        this.cells.forEach((row) => {
-            row.forEach((element) => {
-              element.findReplace(find, replace);
-            });
-          });
-    }
+    findAndReplaceAll: (find: string, replace: string) => {
+      get().cells.forEach((row) => {
+        row.forEach((element) => {
+          element.findReplace(find, replace);
+        });
+      });
+    },
 
     /**
      * Creates a graph based on a selection of cells
      * @param cells the cells to base the graph on
      */
-    createGraph(cells: Array<Cell>): void {
-    }
+    createGraph: (cells: Array<Cell>) => {},
 
     /**
      * Deletes a graph from the spreadsheet
      * @param graphId the id of the graph to remove
      */
-    deleteGraph(graphId: number): void {
-    }
+    deleteGraph: (graphId: number) => {},
 
     /**
      * Sets a graph x axis name
      * @param id the id of the graph to be renamed
      * @param name the new name
      */
-    setGraphXAxisName(id: number, name: string): void {
-    }
+    setGraphXAxisName: (id: number, name: string) => {},
 
     /**
      * Sets a graph y axis name
      * @param id the id of the graph to have its x axis renamed
      * @param name the new name
      */
-    setGraphYAxisName(id: number, name: string): void {
-    }
+    setGraphYAxisName: (id: number, name: string) => {},
 
     /**
      * Sets a graph name
      * @param id the id of the graph to have its y axis renamed
      * @param name the new name
      */
-    setGraphName(id: number, name: string): void {
-    }
-
-    getCellIterator(): IACellsIterator {
-        return this.cellsIterator;
-    }
-}
+    setGraphName: (id: number, name: string) => {},
+  })
+);

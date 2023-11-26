@@ -79,7 +79,7 @@ export class Cell {
      * Parses the entered value and evaluates the validation rules to update the display value
      */
     public updateDisplayValue(cells: Array<Array<Cell>>): void{
-        let strategies: Array<IStrategy> = [new CellRefStrategy(cells), new AverageStrategy(cells), new SumStrategy(cells), new PlusSignStrategy(), new StrategyFormulas()];
+        let strategies: Array<IStrategy> = [new CellRefStrategy(cells, this.row, this.col), new AverageStrategy(cells, this.row, this.col), new SumStrategy(cells, this.row, this.col), new PlusSignStrategy(), new StrategyFormulas()];
 
         let foundError: boolean = false;
         for (const rule of this.validationRules) {
@@ -93,9 +93,14 @@ export class Cell {
         if(!foundError) {
 
             let currentString: string = this.enteredValue;
-            strategies.forEach((strategy) => {
-                currentString = strategy.parse(currentString);
-            });
+            try {
+                strategies.forEach((strategy) => {
+                    currentString = strategy.parse(currentString);
+                });
+            }
+            catch(error) {
+                if (error instanceof Error) currentString = error.message;
+            }
 
 
             // Need this so an update actually occurs if its empty
@@ -156,6 +161,32 @@ export class Cell {
      */
     public notifyGraph(): void {
     }
+
+    /**
+     * Adds the provided rule to this Cell's list of rules
+     * @param rule the rule to be added
+     */
+    public addRule(rule : IValidationRule): void {
+        this.validationRules.push(rule);
+    }
+
+    /**
+     * Removes the provided rule from this Cell's list of rules if the list contains it
+     * @param rule the rule to be removed
+     */
+    public removeRule(rule : IValidationRule): void {
+        this.validationRules = this.validationRules.filter((r) => r !== rule);
+    }
+
+    /**
+     * 
+     * @returns this Cell's validation rules
+     */
+    public getRules(): Array<IValidationRule> {
+        return this.validationRules;
+    }
+
+    
 
 
 }

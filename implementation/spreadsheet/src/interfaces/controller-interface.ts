@@ -1,17 +1,46 @@
 import { Cell } from "../models/cell";
-import { IACellsIterator } from "./cell-iterator-interface";
+import { IGraph } from "./graph-interface";
 import { IValidationRule } from "./validation-rule-interface";
 
-/**
- * Represents the main controller for the spreadsheet application 
- */
-export interface IController {
+// representation of the spreadsheet controller, which manages the current state
+// of the spreadsheet
+export interface ISpreadSheetState {
+    // the 2d array/grid of cells in the spreadsheet, instantiated as an
+    // empty 10x10 grid of cells
+    cells: Cell[][],
+    
+    // the list of cells in the spreadsheet that are currently selected by the user
+    currentlySelected:Cell[];
 
+    // the list of graphs created inside the spreadsheet by the user
+    graphs: IGraph[];
+
+    /**
+     * Set the list of currently selected cells in the spreadsheet to contain
+     * only the provided cell, and no other
+     * @param cell the cell to set as the currently selected cell, provided via its location
+     */
     setSelectedOne(cell: string):void;
 
+    /**
+     * Set the list of currently selected cells in the spreadsheet to contain only
+     * the cells that fall within the range of cells determined by the provided starting and ending points
+     * @param cell1 the first cell in the range of cells to select
+     * @param cell2  the last cell in the range of cells to select
+     */
     setSelectedMany(cell1: string, cell2: string) : void;
 
+    /**
+     * Returns whether the provided cell is contained in the list of currently
+     * selected cells
+     * @param cell the cell to be determined if it is selected
+     */
     isSelected(cell: Cell) : boolean;
+
+    /**
+     * Get the list of all currently selected cells
+     */
+    getSelected() : Array<Cell>;
 
     /**
      * Adds a new row to the spreadsheet
@@ -54,17 +83,20 @@ export interface IController {
 
     /**
      * Adds a validation rule to a cell
-     * @param cellId the id for the cell to set 
      * @param rule the new rule that the value must adhere to
      */
-    createRule(cellId: number, rule: IValidationRule): void;
+    createRule(rule: IValidationRule): void;
 
     /**
      * Removes a validation rule from a cell
-     * @param cellId the id for the cell to set 
      * @param rule the rule that should no longer apply
      */
-    removeRule(cellId: number, rule: IValidationRule): void;
+    removeRule(rule: IValidationRule): void;
+
+    /**
+     * Returns an array containing all the validation rules that apply to EVERY selected cell
+     */
+    getAllRules(): Array<IValidationRule>;
 
     /**
      * Find all the cells in the spreadsheet that contain the provided string
@@ -125,13 +157,5 @@ export interface IController {
      * @param id the id of the graph to have its y axis renamed
      * @param name the new name
      */
-    setGraphName(id: number, name: string): void;
-
-    /**
-     * Returns the spreadsheet's cell iterator
-     * @return the cell iterator
-     */
-    getCellIterator() : IACellsIterator;
-
-    getCells(): Array<Array<Cell>>;
+    setGraphName(id: number, name: string): void; 
 }

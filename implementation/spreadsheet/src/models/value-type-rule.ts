@@ -3,7 +3,7 @@ import { IValidationRule } from "../interfaces/validation-rule-interface";
 /**
  * Represents a data validation rule about the type the data in a cell is allowed to be 
  */
-export class ValueTypeRule {
+export class ValueTypeRule implements IValidationRule{
 
     /**
      * The type that the data in the cell needs to be in order to be valid
@@ -23,5 +23,14 @@ export class ValueTypeRule {
      */
     public checkRule(cellData: string): boolean {
         return true;
+    }
+
+    public getType():string {
+        return this.type;
+    }
+
+    public getErrorMessage(): string {
+        
+        return "";
     }
 }

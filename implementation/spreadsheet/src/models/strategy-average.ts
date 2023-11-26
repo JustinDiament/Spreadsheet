@@ -5,8 +5,8 @@ import { AExpressionStrategy } from "./strategy-abstract-expression";
 export class AverageStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
 
-    public constructor(otherCells: Cell[][]) {
-        super("AVERAGE");
+    public constructor(otherCells: Cell[][], row: number, col: number) {
+        super("AVERAGE", row, col);
         this.otherCells = otherCells;
     }
 
@@ -25,7 +25,7 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
         let splitSections: string[] = reference.split(")", 2);
         //check that closed parenthesis exists
         if (splitSections.length < 2) {
-            return "ERROR: Missing closing parenthesis"
+            throw new Error("#RANGE");
         }
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
         if(values.length < 1) {

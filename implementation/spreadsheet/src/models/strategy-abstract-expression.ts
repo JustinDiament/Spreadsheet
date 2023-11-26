@@ -3,9 +3,13 @@ import { Util } from "./util";
 
 export abstract class AExpressionStrategy {
     code: string;
-    
-    constructor(code: string) {
+    row: number;
+    col: number;
+
+    constructor(code: string, row: number, col: number) {
         this.code = code;
+        this.row = row;
+        this.col = col;
     }
 
     useStrategy(currentValue: string): boolean {
@@ -54,8 +58,11 @@ export abstract class AExpressionStrategy {
         //for all cells in between those positions in grid, append value and + to string
         //+ will be resolved by a later strategy
         for(let i = locationStart[1];i<=locationEnd[1];i++) {
-            // TODO check if contains self
             for(let j = locationStart[0]; j<=locationEnd[0]; j++) {
+                if (this.row == i && this.col == j) {
+                    throw new Error("#SELFREF");
+                }
+
                 values.push(otherCells[i][j].getDisplayValue());
             }
          }
