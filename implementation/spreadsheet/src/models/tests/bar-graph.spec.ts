@@ -1,11 +1,15 @@
+import { assert } from "console";
 import { BarGraph } from "../bar-graph";
+
 
 describe('Bar Graph', (): void => {
     let graph: BarGraph = new BarGraph("x", "y", "name", [])
 
+
     beforeEach((): void => {
     });
   
+
     it('should update the y axis name when the setter is called', (): void => {
         graph.setYAxisName("new");
         expect(graph.getYAxisName()).toBe("new");

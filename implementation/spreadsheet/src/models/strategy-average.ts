@@ -5,8 +5,8 @@ import { AExpressionStrategy } from "./strategy-abstract-expression";
 export class AverageStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
 
-    public constructor(otherCells: Cell[][]) {
-        super("AVERAGE");
+    public constructor(otherCells: Cell[][], row: number, col: number) {
+        super("AVERAGE", row, col);
         this.otherCells = otherCells;
     }
 
@@ -22,14 +22,32 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
 
     private evaluate(reference: string): string {
         //split based on closing parenthesis
-        let splitSections: string[] = reference.split(")", 2);
+        // let splitSections: string[] = reference.split(")", 2);
+        // //check that closed parenthesis exists
+        // if (splitSections.length < 2) {
+        //     throw new Error("#RANGE");
+        // }
+
+        const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (splitSections.length < 2) {
-            //TODO: throw error that we set if there is no closing parenthesis and handle the error in the cell class
+        if (index == -1) {
+            throw new Error('#RANGE');
         }
+
+        const firstPart = reference.slice(0, index);
+        const secondPart = reference.slice(index + 1);
+
+        let splitSections: string[] = [firstPart, secondPart];
+
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
+        if(values.length < 1) {
+            return "ERROR: Cell range must contain at least one cell"
+        }
         let sum: number = this.addRangeValues(values);
         let average: number = sum / values.length;
+        if(isNaN(average)) {
+            return "ERROR: Connot take average of non-numbers"
+        }
         return average + splitSections[1];
     }
 }

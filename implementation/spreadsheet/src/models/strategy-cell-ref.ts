@@ -7,9 +7,10 @@ import { Util } from "./util";
 export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
 
-    public constructor(otherCells: Cell[][]) {
-        super("REF");
+    public constructor(otherCells: Cell[][], row: number, col: number) {
+        super("REF", row, col);
         this.otherCells = otherCells;
+
     }
 
     parse(currentValue: string): string {
@@ -27,11 +28,17 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
 
     private evaluate(reference: string) {
         //split based on closing parenthesis
-        let splitSections: string[] = reference.split(")", 2);
+        const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (splitSections.length < 2) {
-            //TODO: throw error that we set if there is no closing parenthesis and handle the error in the cell class
+        if (index == -1) {
+            throw new Error('#REF');
         }
+
+        const firstPart = reference.slice(0, index);
+        const secondPart = reference.slice(index + 1);
+
+        let splitSections: string[] = [firstPart, secondPart];
+
         //the cell we are looking for is the first section in the split string
         let resolvedReference = this.resolveReference(splitSections[0]);
         return resolvedReference + splitSections[1];
@@ -40,14 +47,23 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     private resolveReference(cellCode: string): string {
         let referenceSections: string[] = cellCode.split(/(\d+)/);
         if(referenceSections.length < 2) {
-            //TODO: add error handling for improper input
+            throw new Error('#REF');
         }
         // let col: number = this.findCol(referenceSections[0]);
         // let row: number = parseInt(referenceSections[1]);
 
-        let location: Array<number> = Util.getIndicesFromLocation(cellCode);
+            let location: Array<number> = Util.getIndicesFromLocation(cellCode);
 
-        //get display value of referenced cell
-        return this.otherCells[location[1]][location[0]].getDisplayValue();
+        if (location[1] == this.row && location[0] == this.col) {
+            throw new Error("#SELFREF");
+        }
+
+        try {
+            //get display value of referenced cell
+            return this.otherCells[location[1]][location[0]].getDisplayValue();
+        }
+        catch {
+            throw new Error('#OUTOFRANGE');
+        }
     }
 }
