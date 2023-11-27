@@ -7,13 +7,15 @@ import { IValidationRule } from "./validation-rule-interface";
 export interface ISpreadSheetState {
     // the 2d array/grid of cells in the spreadsheet, instantiated as an
     // empty 10x10 grid of cells
-    cells: Cell[][],
+    cells: Cell[][];
     
     // the list of cells in the spreadsheet that are currently selected by the user
-    currentlySelected:Cell[];
+    currentlySelected: Cell[];
 
     // the list of graphs created inside the spreadsheet by the user
     graphs: IGraph[];
+
+    findAndReplaceCells: Cell[];
 
     /**
      * Set the list of currently selected cells in the spreadsheet to contain
