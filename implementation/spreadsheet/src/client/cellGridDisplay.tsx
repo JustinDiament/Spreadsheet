@@ -24,7 +24,9 @@ export default function CellGridDisplay() {
   const setSelectedOne = useSpreadsheetController((controller : ISpreadSheetState) => controller.setSelectedOne);
 
   // constant to be used in order to call isSelected on the controller
-  const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
+  // const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
+  const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
+  // const [selected, setSelected] = useState(useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected));
 
   // constant to be used in order to call editCell on the controller
   const editCell = useSpreadsheetController((controller : ISpreadSheetState) => controller.editCell)
@@ -53,6 +55,12 @@ export default function CellGridDisplay() {
       window.removeEventListener('keyup', upHandler);
     };
   }, []);
+
+  
+
+  useEffect(() => {
+
+  },   [isSelected]);
 
   // function to convert an number to its corresponding letter
   // where 1 = A, 2 = B,... 27 = AA, 28 = BB, 53 = AAA, etc
@@ -110,7 +118,7 @@ export default function CellGridDisplay() {
               {/* map through the grid to create the row headers */}
               {getCells.map((curr, index) => (<tr><th className="sp-grid-header sp-row-head">{index+1}</th>
                   {/* map through the row in the grid to get the cells in the row */}
-                  {curr.map((cell, ind) => (<td className={'m-0 p-1 sp-cell ' + (isSelected(cell) ? 'sp-selected' : '')}>
+                  {curr.map((cell, ind) => (<td className={'m-0 p-1 sp-cell ' + (isSelected().includes(cell) ? 'sp-selected' : '')}>
                     <CellDisplay cell = {cell}
                                  // the setSelected function in this cell will select cells given the location of this cell
                                  setSelected={() => select(indToLetter(ind+1) + (index+1).toString())}

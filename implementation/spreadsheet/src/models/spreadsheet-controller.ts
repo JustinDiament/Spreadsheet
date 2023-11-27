@@ -494,6 +494,19 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
     replaceCurrentCell: (find: string, replace: string) => {
         get().currentlySelected[0].findReplace(find, replace);
 
+        //const row: number = get().currentlySelected[0].getRow();
+       // const col: number = get().currentlySelected[0].getColumn();
+
+        // get().cells.forEach((row) => {
+        //     row.forEach((element) => {
+        //         if (element.getEnteredValue().indexOf(find) !== -1 && element.getRow() >= get().currentlySelected[0].getRow() && element.getColumn() >= get().currentlySelected[0].getColumn()) {
+        //             console.log("adding");
+        //             findAndReplaceCellsTemp.push(element);
+        //         }
+        //     })
+
+        // });
+
         let findReplaceCellsTemp: Cell[] = get().findAndReplaceCells;
         let nextCell: Cell | undefined = findReplaceCellsTemp.shift();
 
@@ -506,6 +519,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
 
         set({ findAndReplaceCells: findReplaceCellsTemp, currentlySelected: currentlySelectedTemp });
+              // TODO make page actually autoupdate for highlight (all else autoupdates already)
     },
 
     /**
@@ -526,11 +540,20 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to change to
      */
     findAndReplaceAll: (find: string, replace: string) => {
-      get().cells.forEach((row) => {
+        let newGrid: Array<Array<Cell>> = [];
+        get().cells.forEach((element) => {
+          let row: Array<Cell> = [];
+          element.forEach((cell) => row.push(cell));
+          newGrid.push(element);
+        });
+
+        newGrid.forEach((row) => {
         row.forEach((element) => {
            element.findReplace(find, replace);
         });
       });
+
+      set( { cells: newGrid });
     },
 
     /**
