@@ -494,8 +494,28 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
     replaceCurrentCell: (find: string, replace: string) => {
         get().currentlySelected[0].findReplace(find, replace);
 
-        //const row: number = get().currentlySelected[0].getRow();
-       // const col: number = get().currentlySelected[0].getColumn();
+        const rowCurrent: number = get().currentlySelected[0].getRow();
+       const colCurrent: number = get().currentlySelected[0].getColumn();
+
+       set({ currentlySelected: [] });
+
+       let done = false;
+       for (let i=rowCurrent; i < get().cells.length; i++) {
+            for (let j=0; j < get().cells[0].length; j++) {
+                if (j=0) {
+                    j = j + colCurrent;
+                }
+                const currentCell = get().cells[i][j];
+                if (currentCell.getEnteredValue().indexOf(find) !== -1) {
+                    set({ currentlySelected: [currentCell] });
+                    done = true;
+                    break;
+                }
+            }  
+            if (done) {
+                break;
+            }
+       }
 
         // get().cells.forEach((row) => {
         //     row.forEach((element) => {
@@ -507,18 +527,18 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 
         // });
 
-        let findReplaceCellsTemp: Cell[] = get().findAndReplaceCells;
-        let nextCell: Cell | undefined = findReplaceCellsTemp.shift();
+        // let findReplaceCellsTemp: Cell[] = get().findAndReplaceCells;
+        // let nextCell: Cell | undefined = findReplaceCellsTemp.shift();
 
-        let currentlySelectedTemp: Cell[];
-        if (!nextCell) {
-            currentlySelectedTemp = [];
-        }
-        else {
-            currentlySelectedTemp = [nextCell];
-        }
+        // let currentlySelectedTemp: Cell[];
+        // if (!nextCell) {
+        //     currentlySelectedTemp = [];
+        // }
+        // else {
+        //     currentlySelectedTemp = [nextCell];
+        // }
 
-        set({ findAndReplaceCells: findReplaceCellsTemp, currentlySelected: currentlySelectedTemp });
+        // set({ findAndReplaceCells: findReplaceCellsTemp, currentlySelected: currentlySelectedTemp });
               // TODO make page actually autoupdate for highlight (all else autoupdates already)
     },
 
