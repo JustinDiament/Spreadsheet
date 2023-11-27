@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 
 // the react component for the grid of cells
-export default function CellGridDisplay() {
+export default function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
+  console.log("rerender cellgrid display");
   // track the changing state of the grid, which is the grid of cells of the provided spreadsheetState
   const getCells = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells)
 
@@ -76,20 +77,24 @@ export default function CellGridDisplay() {
  
   // function to select a cell or multiple cells
   const select = (cell:string) => {
-    // if there is no first selected cell or the user is not trying to select multiple by holding shift
-    // then just update the firstSelected cell, and clear any lastselected cell value
-    if(firstSelected==="" || shiftHeld===false) {
-      setFirst(cell);
-      setLast('');
-      setSelectedOne(cell);
+    // only allow selection if find and replace is not active
+    if(!findReplaceOpen()) {
+      // if there is no first selected cell or the user is not trying to select multiple by holding shift
+      // then just update the firstSelected cell, and clear any lastselected cell value
+      if(firstSelected==="" || shiftHeld===false) {
+        setFirst(cell);
+        setLast('');
+        setSelectedOne(cell);
+      }
+      
+      // if there is a first selected cell and the user is holding shift to select multiple,
+      // then update the lastSelected cell
+      else {
+        setLast(cell);
+        setSelectedMany(firstSelected, cell);
+      }
     }
     
-    // if there is a first selected cell and the user is holding shift to select multiple,
-    // then update the lastSelected cell
-    else {
-      setLast(cell);
-      setSelectedMany(firstSelected, cell);
-    }
   };
 
   // the actual HTML of the grid of cells
@@ -115,7 +120,8 @@ export default function CellGridDisplay() {
                                  // the setSelected function in this cell will select cells given the location of this cell
                                  setSelected={() => select(indToLetter(ind+1) + (index+1).toString())}
                                  // the setValue function in this cell will edit the value of this cell given its location
-                                 setValue={(value : string) => editCell(indToLetter(ind+1) + (index+1).toString(), value)}/></td> ))}
+                                 setValue={(value : string) => editCell(indToLetter(ind+1) + (index+1).toString(), value)}
+                                 enabled={findReplaceOpen()}/></td> ))}
 
                   </tr> ))}
           </tbody>

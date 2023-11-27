@@ -80,7 +80,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
     // the list of graphs created inside the spreadsheet by the user
     graphs: [],
 
-    findAndReplaceCells: new Array<Cell>,
+    findAndReplaceCells: new Array<Cell>(),
 
     // the list of cells in the spreadsheet that are currently selected by the user
     currentlySelected: [],
@@ -462,6 +462,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
     //   find all the cells containing find and store them /somewhere/
     //   set currently selected to contain only the first of the cells we just stored
         let findAndReplaceCellsTemp: Array<Cell> = [];
+        let selectCells: Array<Cell> = get().currentlySelected;
         console.log("did this");
         get().cells.forEach((row) => {
             row.forEach((element) => {
@@ -476,13 +477,22 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 
         if (findAndReplaceCellsTemp.length > 0) {
             console.log("doing this too");
-            set({ currentlySelected: [findAndReplaceCellsTemp[0]] });
+            selectCells = [];
+            selectCells.push(findAndReplaceCellsTemp[0]);
+            // set({ currentlySelected: [findAndReplaceCellsTemp[0]] });
             findAndReplaceCellsTemp.shift();
         }
         console.log(findAndReplaceCellsTemp);
-        set({ findAndReplaceCells: findAndReplaceCellsTemp });
+        set({ currentlySelected: selectCells, findAndReplaceCells: findAndReplaceCellsTemp });
+        // set({  });
         console.log(get().findAndReplaceCells);
-
+        if(get().currentlySelected.length > 0) {
+          console.log(get().currentlySelected[0].getColumn() + " currently selected")
+        }
+        else {
+          console.log("nothing selected");
+        }
+        
     },
 
     /**
