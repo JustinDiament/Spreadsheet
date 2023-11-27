@@ -7,6 +7,7 @@ import SpreadSheetDisplay from './client/spreadSheetDisplay';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+document.title = "Spreadsheet";
 root.render(
   <React.StrictMode>
     <SpreadSheetDisplay />
