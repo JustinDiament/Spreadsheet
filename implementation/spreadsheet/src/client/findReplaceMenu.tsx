@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
-export default function FindReplaceMenu({ disp } : {disp: boolean}) {
+import React from "react";
+
+// an interface to define the FindReplaceMenuProps type for the FindReplaceMenu component
+interface FindReplaceMenuProps {
+  disp:boolean;
+}
+
+function FindReplaceMenu({ disp } : FindReplaceMenuProps) {
     // the value to find
     const [find, setFind] = useState<string>("bruh");
 
@@ -47,4 +54,6 @@ export default function FindReplaceMenu({ disp } : {disp: boolean}) {
             </div>
         </div>
     ) 
-}
+};
+// memoize to avoid unnecessary rerenders
+export default React.memo(FindReplaceMenu);

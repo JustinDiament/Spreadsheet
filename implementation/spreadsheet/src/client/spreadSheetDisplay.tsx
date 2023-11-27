@@ -7,6 +7,15 @@ import CreateChartMenu from "./createChartMenu";
 import DataValidationMenu from "./dataValidationMenu";
 import FindReplaceMenu from "./findReplaceMenu";
 import { IoClose } from "react-icons/io5";
+import HelpMenu from "./helpMenu";
+
+// the list of options in the edit menu
+const editMenuItems: Array<string> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)",
+    "Insert Column Right", "Insert Column Left", "Clear Selected Cells", "Clear All Cells"];
+
+// the list of options in the data menu
+const dataMenuItems: Array<string> = ["Data Validation", "Create Chart", "Find and Replace"];
+
 
 // the react component for the entire spreadsheet frontend display
 export default function SpreadSheetDisplay() {
@@ -19,6 +28,9 @@ export default function SpreadSheetDisplay() {
 
   // is there an opened side panel?
   const [sidePanel, setSidePanel] = useState<boolean>(false);
+
+  // is the help pop-up open?
+  const [helpOpen, setHelpOpen] = useState<boolean>(false);
 
   // what is the currently opened side panel?
   const [currPanel, setCurrPanel] = useState<string>("");
@@ -44,13 +56,6 @@ export default function SpreadSheetDisplay() {
   function panelDisplayState(option: string): boolean {
     return (option === currPanel) && sidePanel;
   };
-
-  // the list of options in the edit menu
-  const editMenuItems: Array<string> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)",
-    "Insert Column Right", "Insert Column Left", "Clear Selected Cells", "Clear All Cells"];
-
-  // the list of options in the data menu
-  const dataMenuItems: Array<string> = ["Data Validation", "Create Chart", "Find and Replace"];
 
   // the list of functions associated with the options in the edit menu
   const menuFunctions: Array<{ (): void; } | { (val:string): void; }> = [
@@ -86,8 +91,8 @@ export default function SpreadSheetDisplay() {
 
   // the actual HTML of the spreadsheet UI
   return (
-
     <div>
+      <div className="position-fixed top-50 start-50 translate-middle" style={helpOpen ? {display:"flex"} : {display:"none"}}><div className={"sp-panel-close float-end"} onClick={() => setHelpOpen(false)}><IoClose /></div><HelpMenu disp={helpOpen} menuOpen={setHelpOpen} /></div>
       {/* the top bar with the menu items */}
       <div className="sp-menu-bar">
         {/* edit menu */}
@@ -115,7 +120,7 @@ export default function SpreadSheetDisplay() {
         {/* help menu */}
         <div tabIndex={98} className="sp-edit-menu float-left" onBlur={(e) => { clickOutside(e) }}>
           <button className={"sp-menu-button "} type="button" aria-haspopup="menu" aria-expanded={dropdown ? "true" : "false"}
-            onClick={() => { setDropdown((prev) => !prev); setCurrDrop("help") }}
+            onClick={() => { setDropdown((prev) => !prev); setCurrDrop("help"); setHelpOpen(true)}}
             onMouseEnter={() => { setCurrDrop("help") }}>Help</button>
         </div>
       </div>
