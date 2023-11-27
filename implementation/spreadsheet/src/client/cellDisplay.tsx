@@ -4,7 +4,7 @@ import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 
 // React component for rendering an editable cell
-export default function CellDisplay({cell, setSelected, setValue}: {cell: Cell; setSelected: Function; setValue: Function}) {
+export default function CellDisplay({cell, setSelected, setValue, enabled}: {cell: Cell; setSelected: Function; setValue: Function, enabled: boolean}) {
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setClickedIn] = useState(false);
 
@@ -53,9 +53,11 @@ export default function CellDisplay({cell, setSelected, setValue}: {cell: Cell; 
       {/* using contentEditable so that the cell can resize based on content and dangerousltSetInnerHTML so that
            the actual content of the cell displays, not only the manually entered value */}
       <div
+      // disabled={enabled}
         tabIndex={0}
-        contentEditable="true"
-        className="form-control border-0 rounded-0 sp-expandable-input"
+        contentEditable={(!enabled ? "true" : "false")}
+        // contentEditable="false"
+        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2 lh-1.5')}
         onClick={() => setClickedIn(true)}
         onBlur={(e) =>
           update(
