@@ -29,6 +29,6 @@ describe('Cells Iterator', (): void => {
     });
   
   
-  
-  });
+    });
+
 export {}
