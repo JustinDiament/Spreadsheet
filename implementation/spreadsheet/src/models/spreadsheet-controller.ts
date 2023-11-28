@@ -5,6 +5,8 @@ import { Cell } from "./cell";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { CellRefStrategy } from "./strategy-cell-ref";
 import { create } from "zustand";
+import { ICellStyle } from "../interfaces/cell-style-interface";
+import { CellStyle } from "./cell-style";
 // todo fix errors and warnings in terminal
 // todo fix comments
 // todo fix imports
@@ -12,6 +14,9 @@ import { create } from "zustand";
 // todo error checking
 // todo delete unneeded methods and members
 // todo check the key errors in inspect element console
+
+
+
 
 // local helper function to allow controller to easily convert a location such
 // as "A1" to a set of column/row coordinates
@@ -682,5 +687,48 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param name the new name
      */
     setGraphName: (id: number, name: string) => {},
+
+    
+     /**
+     * Set the style of the selected cells using the provided functions for determining
+     * if a style property is active, and function to set that property's value
+     * 
+     * If all selected cells have the provided style property activated, it will be deactivated. 
+     * Otherwise, it will be activated for all selected cells
+     * @param isCellStyled the function for determining if a style property is active
+     * @param setCellStyle the function to set a style property's value
+     */
+    setStyle:(isCellStyled:(style:ICellStyle) => boolean, setCellStyle:(style:ICellStyle, value:boolean) => void) =>{
+      let newSelected:Cell[] = [];
+      let allStyled:boolean = true;
+      get().currentlySelected.forEach(cell => {
+        allStyled = allStyled && isCellStyled(cell.getStyle());
+      });
+      
+        get().currentlySelected.forEach(cell => {
+          let newStyle: ICellStyle = cell.getStyle();
+          setCellStyle(newStyle, !allStyled);
+          cell.setStyle(newStyle);
+          newSelected.push(cell);
+      });
+      
+      set({currentlySelected: newSelected});
+    },
+
+    /**
+     * Update the color of the text for all selected cells
+     * @param textColor the color the text in the cells should be
+     */
+    setTextColor: (textColor:string) => {
+      let newSelected:Cell[] = [];
+      get().currentlySelected.forEach(cell => {
+          let newStyle: ICellStyle = cell.getStyle();
+          newStyle.setTextColor(textColor);
+          cell.setStyle(newStyle);
+          newSelected.push(cell);
+      });
+      set({currentlySelected: newSelected});
+    },
   })
+
 );

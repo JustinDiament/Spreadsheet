@@ -1,6 +1,8 @@
+import { ICellStyle } from "../interfaces/cell-style-interface";
 import { IGraph } from "../interfaces/graph-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { CellStyle } from "./cell-style";
 import { AverageStrategy } from "./strategy-average";
 import {CellRefStrategy} from "./strategy-cell-ref";
 import { StrategyFormulas } from "./strategy-forumals";
@@ -31,6 +33,11 @@ export class Cell {
     private col: number;
 
     /**
+     * The style to be applied to the text inside of this cell
+     */
+    private style: ICellStyle;
+
+    /**
      * Create a new empty cell
      */
     public constructor(row: number, col: number) {
@@ -39,6 +46,7 @@ export class Cell {
         this.enteredValue = "";
         this.displayValue = "";
         this.validationRules = [];
+        this.style = new CellStyle();
     }
 
     public getRow(): number {
@@ -178,7 +186,20 @@ export class Cell {
         return this.validationRules;
     }
 
-    
+    /**
+     * 
+     * @returns the style applied to this cell
+     */
+    public getStyle(): ICellStyle {
+        return this.style;
+    }
 
+    /**
+     * Apply a new style to this cell
+     * @param newStyle the new style to apply to this cell
+     */
+    public setStyle(newStyle: ICellStyle): void {
+        this.style=newStyle;
+    }
 
 }
