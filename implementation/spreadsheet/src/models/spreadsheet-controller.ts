@@ -512,7 +512,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
        let done = false;
        for (let i=rowCurrent; i < get().cells.length; i++) {
             for (let j=0; j < get().cells[0].length; j++) {
-                if (j=0) {
+                if (j===0) {
                     j = j + colCurrent;
                 }
                 const currentCell = get().cells[i][j];
@@ -526,6 +526,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
                 break;
             }
        }
+
+       console.log("got out");
 
         // get().cells.forEach((row) => {
         //     row.forEach((element) => {
