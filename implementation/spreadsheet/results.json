@@ -1,0 +1,719 @@
+{
+  "suites": {
+    "title": "",
+    "fullTitle": "",
+    "suites": [],
+    "tests": [
+      {
+        "title": "should have the title \"Spreadsheet\"",
+        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
+        "status": "PASS",
+        "error": null
+      }
+    ],
+    "pass": 1,
+    "fail": 0
+  },
+  "stats": {
+    "numFailedTestSuites": 0,
+    "numFailedTests": 0,
+    "numPassedTestSuites": 11,
+    "numPassedTests": 24,
+    "numPendingTestSuites": 0,
+    "numPendingTests": 0,
+    "numRuntimeErrorTestSuites": 0,
+    "numTodoTests": 0,
+    "numTotalTestSuites": 11,
+    "numTotalTests": 24,
+    "openHandles": [],
+    "snapshot": {
+      "added": 0,
+      "didUpdate": false,
+      "failure": false,
+      "filesAdded": 0,
+      "filesRemoved": 0,
+      "filesRemovedList": [],
+      "filesUnmatched": 0,
+      "filesUpdated": 0,
+      "matched": 0,
+      "total": 0,
+      "unchecked": 0,
+      "uncheckedKeysByFile": [],
+      "unmatched": 0,
+      "updated": 0
+    },
+    "startTime": 1701039699313,
+    "success": false,
+    "testResults": [
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 3,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708108,
+          "runtime": 8094,
+          "slow": true,
+          "start": 1701039700014
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\average-expression.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Average Expression"
+            ],
+            "duration": 9,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Expression should return the average of the provided range of numeric cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the average of the provided range of numeric cells"
+          },
+          {
+            "ancestorTitles": [
+              "Average Expression"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Expression should the value of the cell if only one is provided",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should the value of the cell if only one is provided"
+          },
+          {
+            "ancestorTitles": [
+              "Average Expression"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Expression should return an error if no cells are provided",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error if no cells are provided"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708201,
+          "runtime": 8189,
+          "slow": true,
+          "start": 1701039700012
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\sum-expression.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Sum Expression"
+            ],
+            "duration": 9,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Expression should contain the correct display value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the correct display value"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Expression"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Expression should contain the correct content value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the correct content value"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708266,
+          "runtime": 8261,
+          "slow": true,
+          "start": 1701039700005
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\value-is-one-of.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 10,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should allow values that follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that follow the rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should not allow values that do not follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that do not follow the rule"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708391,
+          "runtime": 8396,
+          "slow": true,
+          "start": 1701039699995
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\cell.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cell Display"
+            ],
+            "duration": 12,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Display initial cell display should be empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "initial cell display should be empty"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708397,
+          "runtime": 8383,
+          "slow": true,
+          "start": 1701039700014
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\value-in-range-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 9,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should allow values that follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that follow the rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should not allow values that do not follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that do not follow the rule"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 3,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708439,
+          "runtime": 8425,
+          "slow": true,
+          "start": 1701039700014
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\bar-graph.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Bar Graph"
+            ],
+            "duration": 7,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Bar Graph should update the y axis name when the setter is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should update the y axis name when the setter is called"
+          },
+          {
+            "ancestorTitles": [
+              "Bar Graph"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Bar Graph should update the x axis name when the setter is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should update the x axis name when the setter is called"
+          },
+          {
+            "ancestorTitles": [
+              "Bar Graph"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Bar Graph should update the graph name when the setter is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should update the graph name when the setter is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708440,
+          "runtime": 8427,
+          "slow": true,
+          "start": 1701039700013
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\value-type-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 8,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should allow values that follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that follow the rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should not allow values that do not follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that do not follow the rule"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708503,
+          "runtime": 8492,
+          "slow": true,
+          "start": 1701039700011
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\calculator.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Calculator"
+            ],
+            "duration": 6,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Calculator should handle an empty string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle an empty string"
+          },
+          {
+            "ancestorTitles": [
+              "Calculator"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Calculator should perform the operation",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should perform the operation"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 5,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708589,
+          "runtime": 8565,
+          "slow": true,
+          "start": 1701039700024
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\cells-iterator.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 5,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should give the correct next value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should give the correct next value"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should give the correct current value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should give the correct current value"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should reset back to the first cell when first() is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should reset back to the first cell when first() is called"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should return true when finished iterating and isDone() is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return true when finished iterating and isDone() is called"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should return false when not finished iterating and isDone() is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return false when not finished iterating and isDone() is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039708593,
+          "runtime": 8584,
+          "slow": true,
+          "start": 1701039700009
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\spreadsheet-controller.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Spreadsheet Controller"
+            ],
+            "duration": 6,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Spreadsheet Controller should invoke the correct service when each method is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should invoke the correct service when each method is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701039711732,
+          "runtime": 11722,
+          "slow": true,
+          "start": 1701039700010
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aidan\\Dropbox\\NU\\Semester7\\CS 4530\\team508-project\\implementation\\spreadsheet\\src\\client\\tests\\cellDisplay.e2e.test.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "cellDisplay component"
+            ],
+            "duration": 1840,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should have the title \"Spreadsheet\""
+          }
+        ],
+        "failureMessage": null
+      }
+    ],
+    "wasInterrupted": false
+  }
+}

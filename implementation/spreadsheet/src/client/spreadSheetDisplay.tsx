@@ -8,6 +8,8 @@ import DataValidationMenu from "./dataValidationMenu";
 import FindReplaceMenu from "./findReplaceMenu";
 import { IoClose } from "react-icons/io5";
 import HelpMenu from "./helpMenu";
+import ColorPickerComp from "./colorPicker";
+import TextStyleMenu from "./textStyleMenu";
 
 // the list of options in the edit menu
 const editMenuItems: Array<string> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)",
@@ -97,8 +99,9 @@ export default function SpreadSheetDisplay() {
   return (
     <div>
       <div className="position-fixed top-50 start-50 translate-middle" style={helpOpen ? {display:"flex"} : {display:"none"}}><div className={"sp-panel-close float-end"} onClick={() => setHelpOpen(false)}><IoClose /></div><HelpMenu disp={helpOpen} menuOpen={setHelpOpen} /></div>
+
       {/* the top bar with the menu items */}
-      <div className="sp-menu-bar">
+      <div className="d-flex flex-nowrap sp-menu-bar w-100 align-items-center">
         {/* edit menu */}
         <div tabIndex={100} className="sp-edit-menu float-left" onBlur={(e) => { clickOutside(e) }}>
           <button className={"sp-menu-button " + (dropDisplayState("edit") ? "selected" : '')}
@@ -122,11 +125,14 @@ export default function SpreadSheetDisplay() {
         </div>
 
         {/* help menu */}
-        <div tabIndex={98} className="sp-edit-menu float-left" onBlur={(e) => { clickOutside(e) }}>
+        <div tabIndex={98} className="sp-edit-menu float-left flex-fill" onBlur={(e) => { clickOutside(e) }}>
           <button className={"sp-menu-button "} type="button" aria-haspopup="menu" aria-expanded={dropdown ? "true" : "false"}
             onClick={() => { setDropdown((prev) => !prev); setCurrDrop("help"); setHelpOpen(true)}}
             onMouseEnter={() => { setCurrDrop("help") }}>Help</button>
         </div>
+
+        {/* text styling buttons */}
+        <div className="sp-edit-menu float-end me-3 bg-light rounded p-1 mt-2"><TextStyleMenu /></div>
       </div>
 
       <div className={(sidePanel ? 'sp-two-panel' : '') + ' sp-work-space'}>

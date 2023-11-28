@@ -3,6 +3,7 @@ import { Cell } from "../models/cell";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
+import { ICellStyle } from "../interfaces/cell-style-interface";
 
 // an interface to define the CellDisplayProps type for the CellDisplay component
 interface CellDisplayProps {
@@ -26,8 +27,14 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
   // set the 'display data' of the cell - the data displayed when the cell is not clicked in
   const [displayData, setDisplayData]: Array<any> = useState(cell.getDisplayValue());
 
+  const [style, setStyle]: Array<any> = useState<ICellStyle>(cell.getStyle())
+
   // a function to edit a cell's entered data
   const setValue = useSpreadsheetController((controller) => controller.editCell);
+
+
+
+
 
   // storing the current state of the cells in the spreadsheet
   const grid = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells);
@@ -42,8 +49,9 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
     cell.updateDisplayValue(grid);
     setDisplayData(cell.getDisplayValue()); 
     setIsSelected(currentlySelected.includes(cell)); 
+    setStyle(cell.getStyle());
     console.log(isSelected); 
-  }, [cell, grid, currentlySelected, enabled, isSelected]);
+  }, [cell, grid, currentlySelected, enabled, isSelected, style]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
@@ -53,6 +61,10 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
     }
   }, [clickedIn, setSelected, cell]);
 
+  // useEffect(() => {
+  //   setStyle(cell.getStyle())
+  // }, [cell.getStyle(), cell, style]);
+
   // update the content of the cell based on the passed in data
   function update(newData: string): void {
     setValue(index, newData);
@@ -60,6 +72,15 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
     setDisplayData(cell.getDisplayValue());
     setClickedIn(false);
   };
+
+
+
+  const myComponentStyle = {
+   color: style.getTextColor(),
+   fontWeight: (style.isCellBold() ? 'bold' : 'normal'),
+   fontStyle: (style.isCellItalic() ? 'italic' : 'normal'),
+   textDecorationLine: (style.isCellUnderlined() ? 'underline' : 'none')
+}
 
   // the actual HTML of the cell
   return (
@@ -69,8 +90,9 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
       <div
         tabIndex={0}
         contentEditable={(!enabled ? "true" : "false")}
-        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2')}
+        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control ': 'p-2 ')}
         onClick={() => !enabled && setClickedIn(true)}
+        style={myComponentStyle}
         // update cell value when user clicks away
         onBlur={(e) =>
           update(

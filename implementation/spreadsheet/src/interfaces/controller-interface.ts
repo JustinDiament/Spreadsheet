@@ -1,4 +1,5 @@
 import { Cell } from "../models/cell";
+import { ICellStyle } from "./cell-style-interface";
 import { IGraph } from "./graph-interface";
 import { IValidationRule } from "./validation-rule-interface";
 
@@ -160,4 +161,27 @@ export interface ISpreadSheetState {
      * @param name the new name
      */
     setGraphName(id: number, name: string): void; 
+
+    /**
+     * Update whether or not the selected cells should be bolded
+     * If all cells are bold, unbold. Otherwise, bold all
+     */
+    
+
+    /**
+     * Set the style of the selected cells using the provided functions for determining
+     * if a style property is active, and function to set that property's value
+     * 
+     * If all selected cells have the provided style property activated, it will be deactivated. 
+     * Otherwise, it will be activated for all selected cells
+     * @param isCellStyled the function for determining if a style property is active
+     * @param setCellStyle the function to set a style property's value
+     */
+    setStyle(isCellStyled:(style:ICellStyle) => boolean, setCellStyle:(style:ICellStyle, value:boolean) => void): void;
+
+    /**
+     * Update the color of the text for all selected cells
+     * @param textColor the color the text in the cells should be
+     */
+    setTextColor(textColor:string): void;
 }
