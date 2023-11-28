@@ -19,13 +19,18 @@ code {
 }
 
 .sp-input-sizer {
-  min-height: 36px;
+  min-height: 32px;
 }
+
+/* .sp-cell-disabled {
+  min-height: 34px;
+} */
 
 .sp-expandable-input {
   min-width: 200px;
   max-width: 1000px;
   flex-wrap: nowrap;
+  min-height: 32px;
 }
 
 .sp-grid-header{

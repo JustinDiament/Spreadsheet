@@ -52,7 +52,7 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
 
   // constant to be used in order to call isSelected on the controller
   // const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
-   const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
+   let isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
 
   // function to update the shift useState depending on if the key being pressed is shift
   function downHandler({key}:{key:string}):void {
@@ -67,6 +67,10 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
       setShiftHeld(false);
     }
   };
+
+  useEffect(() => {
+    
+  }, [useSpreadsheetController((controller) => controller.currentlySelected)])
 
   // useEffect to update if the shift key is being pressed or lifted
   useEffect(() => {
