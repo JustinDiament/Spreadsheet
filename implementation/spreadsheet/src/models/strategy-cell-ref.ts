@@ -30,7 +30,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         //split based on closing parenthesis
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (index == -1) {
+        if (index === -1) {
             throw new Error('#REF');
         }
 
@@ -54,7 +54,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
 
             let location: Array<number> = Util.getIndicesFromLocation(cellCode);
 
-        if (location[1] == this.row && location[0] == this.col) {
+        if (location[1] === this.row && location[0] === this.col) {
             throw new Error("#SELFREF");
         }
 

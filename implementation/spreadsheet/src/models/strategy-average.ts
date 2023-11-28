@@ -30,7 +30,7 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
 
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (index == -1) {
+        if (index === -1) {
             throw new Error('#RANGE');
         }
 
