@@ -58,7 +58,6 @@ export class Cell {
         this.col = col;
     }
 
-
     /**
      * Returns the true content of the cell in string form 
      * @returns what has been typed into the cell
@@ -154,25 +153,6 @@ export class Cell {
             this.setEnteredValue(combinedString);
         }
         console.log(this.getEnteredValue());
-    }
-
-    /**
-     * Adds a graph as an observer to this Cell
-     * @param graph the graph that observes this cell  
-     */
-    public attachGraph(graph: IGraph): void {}
-
-    /**
-     * Remotes a graph as an observer to this Cell
-     * @param graph the graph that will be removed from oberserving this Cell 
-     */
-    public detachGraph(graph: IGraph): void {
-    }
-
-    /**
-     * Notifies all overerving graphs that this cell has been updates 
-     */
-    public notifyGraph(): void {
     }
 
     /**

@@ -47,4 +47,59 @@ describe('Cell Ref Strategy', (): void => {
 
         expect(strategy.parse("1 + REF(A1)")).toBe("1 + 3");
     });
+
+    it('should return an error when there is no closing parenthesis', (): void => {
+        let cells: Cell[][] = [];
+        let cell: Cell = new Cell(0, 0)
+        cell.setEnteredValue("string");
+        cell.updateDisplayValue(cells);
+        cells.push([cell]);
+        let strategy = new CellRefStrategy(cells, 100, 100);
+
+        expect(strategy.parse("REF(A1")).toBe("#REF");
+    });
+
+    it('should return an error when there is not a number', (): void => {
+        let cells: Cell[][] = [];
+        let cell: Cell = new Cell(0, 0)
+        cell.setEnteredValue("string");
+        cell.updateDisplayValue(cells);
+        cells.push([cell]);
+        let strategy = new CellRefStrategy(cells, 100, 100);
+
+        expect(strategy.parse("REF(A)")).toBe("#REF");
+    });
+
+    it('should return an error when there is not a letter', (): void => {
+        let cells: Cell[][] = [];
+        let cell: Cell = new Cell(0, 0)
+        cell.setEnteredValue("string");
+        cell.updateDisplayValue(cells);
+        cells.push([cell]);
+        let strategy = new CellRefStrategy(cells, 100, 100);
+
+        expect(strategy.parse("REF(1)")).toBe("#REF");
+    });
+
+    it('should return an error when there is an out of range cell', (): void => {
+        let cells: Cell[][] = [];
+        let cell: Cell = new Cell(0, 0)
+        cell.setEnteredValue("string");
+        cell.updateDisplayValue(cells);
+        cells.push([cell]);
+        let strategy = new CellRefStrategy(cells, 100, 100);
+
+        expect(strategy.parse("REF(A2)")).toBe("#OUTOFRANGE");
+    });
+
+    it('should return an error when there is a cell reference', (): void => {
+        let cells: Cell[][] = [];
+        let cell: Cell = new Cell(0, 0)
+        cell.setEnteredValue("string");
+        cell.updateDisplayValue(cells);
+        cells.push([cell]);
+        let strategy = new CellRefStrategy(cells, 0, 0);
+
+        expect(strategy.parse("REF(A1)")).toBe("#SELFREF");
+    });
   });

@@ -40,7 +40,13 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
         let splitSections: string[] = [firstPart, secondPart];
 
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
+        if(values.length < 1) {
+            return "ERROR: Cell range must contain at least one cell"
+        }
         let sum = this.addRangeValues(values);
+        if(isNaN(sum)) {
+            return "ERROR: Connot take sum of non-numbers"
+        }
         return sum + splitSections[1];
     }
 

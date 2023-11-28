@@ -17,12 +17,10 @@ export class Util {
                     if(isNaN(row)) {
                         console.log("row " + row);
                         throw new Error("#INVALIDCELL");
-                        
                     }
                 }
             }
             //console.log(location + ", " + col, row-1);
-    
         } else {
             console.log("col " + col);
             throw new Error("#INVALIDCELL");
