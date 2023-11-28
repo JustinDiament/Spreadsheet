@@ -3,6 +3,7 @@ import { IStrategy } from "../interfaces/strategy-interface";
 import { Cell } from "./cell";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 import { evaluate } from 'mathjs';
+import { ErrorDisplays } from "./cell-data-errors-enum";
 
 export class StrategyFormulas implements IStrategy {
     private formulaCharacters: Array<string> = ['+', '-', '*', '^', '/'];
@@ -18,7 +19,7 @@ export class StrategyFormulas implements IStrategy {
                 return evaluate(currentValue);
             }
             catch (e){
-                return '#FORMULAERROR'
+                return ErrorDisplays.INVALID_FORMULA;
             }
         }
         

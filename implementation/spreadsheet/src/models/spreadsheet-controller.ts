@@ -573,7 +573,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * which is created in the findCellsContaining function
      */
     findNextContaining: (find: string) => {
-        if (!(get().currentlySelected.length > 0)) {
+        if (!(get().currentlySelected.length > 0 || find==="")) {
             return;
         }
 

@@ -1,4 +1,5 @@
 import { Cell } from "./cell";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 import { Util } from "./util";
 
 export abstract class AExpressionStrategy {
@@ -12,23 +13,10 @@ export abstract class AExpressionStrategy {
         this.col = col;
     }
 
-    useStrategy(currentValue: string): boolean {
-        return currentValue.includes((this.code + "("));
-    }
-
     splitInput(currentValue: string): string[] {
         return currentValue.split((this.code + "(")); 
     }
 
-    public findCol(letters: string): number {
-        let columnNumber = 0;
-
-        for (let i = 0; i < letters.length; i++) {
-          const charCode = letters.charCodeAt(i) - 65; // Convert ASCII to 0-based index
-          columnNumber = columnNumber * 26 + charCode + 1;
-        }
-        return columnNumber;
-    }
     public addRangeValues(values: string[]): number {
         let combinedValue: number = 0;
         values.forEach(element => {
@@ -43,9 +31,9 @@ export abstract class AExpressionStrategy {
         //find top left row and col
         // let firstCode: string[] = splitInputs[0].split(/(\d+)/);
         // let firstCol: number = this.findCol(firstCode[0]);
+        console.log("did this");
         // let firstRow: number = parseInt(firstCode[1]);
         let locationStart: Array<number> = Util.getIndicesFromLocation(splitInputs[0]);
-
 
         //find bottom right row and col
         // let secondCode: string[] = splitInputs[1].split(/(\d+)/);
@@ -57,6 +45,18 @@ export abstract class AExpressionStrategy {
         let values: string[] = [];
         //for all cells in between those positions in grid, append value and + to string
         //+ will be resolved by a later strategy
+
+        if (locationStart[1] > locationEnd[1] || locationStart[0] > locationEnd[0]) {
+            throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
+        }
+
+
+        if (locationEnd[1] > otherCells.length || locationEnd[0] > otherCells[0].length) {
+            throw new Error(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
+        }
+
+
+
         for(let i = locationStart[1];i<=locationEnd[1];i++) {
             for(let j = locationStart[0]; j<=locationEnd[0]; j++) {
                 if (this.row === i && this.col === j) {

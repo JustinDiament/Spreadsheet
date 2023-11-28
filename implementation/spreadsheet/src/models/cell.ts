@@ -2,7 +2,6 @@ import { ICellStyle } from "../interfaces/cell-style-interface";
 import { IGraph } from "../interfaces/graph-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
-import { ErrorCellData } from "./cell-data-errors-enum";
 import { CellStyle } from "./cell-style";
 import { AverageStrategy } from "./strategy-average";
 import {CellRefStrategy} from "./strategy-cell-ref";
@@ -65,7 +64,6 @@ export class Cell {
     public setColumn(col: number): void {
         this.col = col;
     }
-
 
     /**
      * Returns the true content of the cell in string form 
@@ -162,25 +160,6 @@ export class Cell {
             this.setEnteredValue(combinedString);
         }
         console.log(this.getEnteredValue());
-    }
-
-    /**
-     * Adds a graph as an observer to this Cell
-     * @param graph the graph that observes this cell  
-     */
-    public attachGraph(graph: IGraph): void {}
-
-    /**
-     * Remotes a graph as an observer to this Cell
-     * @param graph the graph that will be removed from oberserving this Cell 
-     */
-    public detachGraph(graph: IGraph): void {
-    }
-
-    /**
-     * Notifies all overerving graphs that this cell has been updates 
-     */
-    public notifyGraph(): void {
     }
 
     /**

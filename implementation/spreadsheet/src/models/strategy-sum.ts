@@ -1,5 +1,6 @@
 import { IStrategy } from "../interfaces/strategy-interface";
 import { Cell } from "./cell";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 
 export class SumStrategy extends AExpressionStrategy implements IStrategy {
@@ -31,7 +32,7 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
         if (index == -1) {
-            throw new Error('#RANGE');
+            throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
         }
 
         const firstPart = reference.slice(0, index);
@@ -40,7 +41,13 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
         let splitSections: string[] = [firstPart, secondPart];
 
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
+        if(values.length < 1) {
+            return "ERROR: Cell range must contain at least one cell"
+        }
         let sum = this.addRangeValues(values);
+        if(isNaN(sum)) {
+            return "ERROR: Connot take sum of non-numbers"
+        }
         return sum + splitSections[1];
     }
 

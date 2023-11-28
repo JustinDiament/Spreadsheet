@@ -3,6 +3,7 @@ import { IStrategy } from "../interfaces/strategy-interface";
 import { Cell } from "./cell";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 import { Util } from "./util";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 
 export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: Cell[][];
@@ -31,7 +32,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
         if (index === -1) {
-            throw new Error('#REF');
+            throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
         }
 
         const firstPart = reference.slice(0, index);
@@ -47,7 +48,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     private resolveReference(cellCode: string): string {
         let referenceSections: string[] = cellCode.split(/(\d+)/);
         if(referenceSections.length < 2) {
-            throw new Error('#REF');
+            throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
         }
         // let col: number = this.findCol(referenceSections[0]);
         // let row: number = parseInt(referenceSections[1]);
@@ -55,7 +56,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
             let location: Array<number> = Util.getIndicesFromLocation(cellCode);
 
         if (location[1] === this.row && location[0] === this.col) {
-            throw new Error("#SELFREF");
+            throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
         }
 
         try {
@@ -63,7 +64,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
             return this.otherCells[location[1]][location[0]].getDisplayValue();
         }
         catch {
-            throw new Error('#OUTOFRANGE');
+            throw new Error(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
         }
     }
 }

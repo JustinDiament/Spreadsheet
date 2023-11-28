@@ -33,5 +33,13 @@ export default {
   testMatch: ["**/*.test.ts", "**/*.spec.ts"],
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
   watchAll: false,
-  testTimeout: 30_000
+  testTimeout: 30_000,
+  coverageThreshold: {
+    global: {
+      branches: 90,
+      functions: 90,
+      lines: 90,
+      statements: 90,
+    },
+  }
 }
