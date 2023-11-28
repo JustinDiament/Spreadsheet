@@ -7,7 +7,6 @@ import DataValidationMenu from "./dataValidationMenu";
 import FindReplaceMenu from "./findReplaceMenu";
 import { IoClose } from "react-icons/io5";
 import HelpMenu from "./helpMenu";
-import ColorPickerComp from "./colorPicker";
 import TextStyleMenu from "./textStyleMenu";
 
 // the list of options in the edit menu
@@ -96,7 +95,12 @@ export default function SpreadSheetDisplay() {
   // the actual HTML of the spreadsheet UI
   return (
     <div>
-      <div className="position-fixed top-50 start-50 translate-middle" style={helpOpen ? {display:"flex"} : {display:"none"}}><div className={"sp-panel-close float-end"} onClick={() => setHelpOpen(false)}><IoClose /></div><HelpMenu disp={helpOpen} menuOpen={setHelpOpen} /></div>
+      {/* help menu popup */}
+      <div className="position-fixed w-100 h-100 sp-grey-out"style={helpOpen ? {display:"flex"} : {display:"none"}} ><div className="position-fixed top-50 start-50 translate-middle bg-white sp-help-menu " >
+        <div className={"sp-panel-close float-right m-0 p-0"} onClick={() => setHelpOpen(false)}><IoClose /></div>
+        <h3 className="my-1 p-0">Help & Documentation</h3>
+        <hr className = {"w-100"}></hr>
+        <HelpMenu disp={helpOpen} menuOpen={setHelpOpen} /></div></div>
 
       {/* the top bar with the menu items */}
       <div className="d-flex flex-nowrap sp-menu-bar w-100 align-items-center">
