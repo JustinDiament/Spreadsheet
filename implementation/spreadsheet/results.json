@@ -3,28 +3,21 @@
     "title": "",
     "fullTitle": "",
     "suites": [],
-    "tests": [
-      {
-        "title": "should have the title \"Spreadsheet\"",
-        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
-        "status": "PASS",
-        "error": null
-      }
-    ],
-    "pass": 1,
+    "tests": [],
+    "pass": 0,
     "fail": 0
   },
   "stats": {
-    "numFailedTestSuites": 1,
-    "numFailedTests": 1,
-    "numPassedTestSuites": 12,
-    "numPassedTests": 38,
+    "numFailedTestSuites": 4,
+    "numFailedTests": 3,
+    "numPassedTestSuites": 10,
+    "numPassedTests": 55,
     "numPendingTestSuites": 0,
     "numPendingTests": 0,
-    "numRuntimeErrorTestSuites": 0,
+    "numRuntimeErrorTestSuites": 2,
     "numTodoTests": 0,
-    "numTotalTestSuites": 13,
-    "numTotalTests": 39,
+    "numTotalTestSuites": 14,
+    "numTotalTests": 58,
     "openHandles": [],
     "snapshot": {
       "added": 0,
@@ -42,7 +35,7 @@
       "unmatched": 0,
       "updated": 0
     },
-    "startTime": 1701138184410,
+    "startTime": 1701194380009,
     "success": false,
     "testResults": [
       {
@@ -53,10 +46,10 @@
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138198275,
-          "runtime": 12504,
+          "end": 1701194390137,
+          "runtime": 9077,
           "slow": true,
-          "start": 1701138185771
+          "start": 1701194381060
         },
         "skipped": false,
         "snapshot": {
@@ -74,7 +67,7 @@
             "ancestorTitles": [
               "Cells Iterator"
             ],
-            "duration": 15,
+            "duration": 39,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Cells Iterator should give the correct next value",
@@ -104,7 +97,7 @@
             "ancestorTitles": [
               "Cells Iterator"
             ],
-            "duration": 1,
+            "duration": 2,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Cells Iterator should reset back to the first cell when first() is called",
@@ -119,7 +112,7 @@
             "ancestorTitles": [
               "Cells Iterator"
             ],
-            "duration": 1,
+            "duration": 2,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Cells Iterator should return true when finished iterating and isDone() is called",
@@ -134,7 +127,7 @@
             "ancestorTitles": [
               "Cells Iterator"
             ],
-            "duration": 0,
+            "duration": 10,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Cells Iterator should return false when not finished iterating and isDone() is called",
@@ -151,279 +144,15 @@
       {
         "leaks": false,
         "numFailingTests": 0,
-        "numPassingTests": 3,
-        "numPendingTests": 0,
-        "numTodoTests": 0,
-        "openHandles": [],
-        "perfStats": {
-          "end": 1701138198347,
-          "runtime": 12594,
-          "slow": true,
-          "start": 1701138185753
-        },
-        "skipped": false,
-        "snapshot": {
-          "added": 0,
-          "fileDeleted": false,
-          "matched": 0,
-          "unchecked": 0,
-          "uncheckedKeys": [],
-          "unmatched": 0,
-          "updated": 0
-        },
-        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\bar-graph.spec.ts",
-        "testResults": [
-          {
-            "ancestorTitles": [
-              "Bar Graph"
-            ],
-            "duration": 25,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Bar Graph should update the y axis name when the setter is called",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should update the y axis name when the setter is called"
-          },
-          {
-            "ancestorTitles": [
-              "Bar Graph"
-            ],
-            "duration": 1,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Bar Graph should update the x axis name when the setter is called",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should update the x axis name when the setter is called"
-          },
-          {
-            "ancestorTitles": [
-              "Bar Graph"
-            ],
-            "duration": 2,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Bar Graph should update the graph name when the setter is called",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should update the graph name when the setter is called"
-          }
-        ],
-        "failureMessage": null
-      },
-      {
-        "leaks": false,
-        "numFailingTests": 0,
-        "numPassingTests": 8,
-        "numPendingTests": 0,
-        "numTodoTests": 0,
-        "openHandles": [],
-        "perfStats": {
-          "end": 1701138198418,
-          "runtime": 12648,
-          "slow": true,
-          "start": 1701138185770
-        },
-        "skipped": false,
-        "snapshot": {
-          "added": 0,
-          "fileDeleted": false,
-          "matched": 0,
-          "unchecked": 0,
-          "uncheckedKeys": [],
-          "unmatched": 0,
-          "updated": 0
-        },
-        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-plus-sign.spec.ts",
-        "testResults": [
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 22,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should concatenate 2 strings",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should concatenate 2 strings"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 0,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should concatenate 1 string with 1 number",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should concatenate 1 string with 1 number"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 1,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should add two numbers",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should add two numbers"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 1,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should add two numbers when one is negative",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should add two numbers when one is negative"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 1,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should add more than two strings",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should add more than two strings"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 0,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should add more than two numbers",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should add more than two numbers"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 0,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should add more than two numbers with negatived",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should add more than two numbers with negatived"
-          },
-          {
-            "ancestorTitles": [
-              "Plus Sign Strategy"
-            ],
-            "duration": 0,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Plus Sign Strategy should return an error when the equation ends in +",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should return an error when the equation ends in +"
-          }
-        ],
-        "failureMessage": null
-      },
-      {
-        "leaks": false,
-        "numFailingTests": 0,
-        "numPassingTests": 1,
-        "numPendingTests": 0,
-        "numTodoTests": 0,
-        "openHandles": [],
-        "perfStats": {
-          "end": 1701138198845,
-          "runtime": 488,
-          "slow": false,
-          "start": 1701138198357
-        },
-        "skipped": false,
-        "snapshot": {
-          "added": 0,
-          "fileDeleted": false,
-          "matched": 0,
-          "unchecked": 0,
-          "uncheckedKeys": [],
-          "unmatched": 0,
-          "updated": 0
-        },
-        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-sum.spec.ts",
-        "testResults": [
-          {
-            "ancestorTitles": [
-              "Cell Ref Strategy"
-            ],
-            "duration": 2,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Cell Ref Strategy should concatenate 2 strings",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should concatenate 2 strings"
-          }
-        ],
-        "failureMessage": null
-      },
-      {
-        "leaks": false,
-        "numFailingTests": 0,
         "numPassingTests": 2,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138198916,
-          "runtime": 497,
-          "slow": false,
-          "start": 1701138198419
+          "end": 1701194390592,
+          "runtime": 9530,
+          "slow": true,
+          "start": 1701194381062
         },
         "skipped": false,
         "snapshot": {
@@ -441,7 +170,7 @@
             "ancestorTitles": [
               "Value in Range Rule"
             ],
-            "duration": 4,
+            "duration": 13,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Value in Range Rule should allow values that follow the rule",
@@ -473,15 +202,58 @@
       {
         "leaks": false,
         "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701194390662,
+          "runtime": 421,
+          "slow": false,
+          "start": 1701194390241
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\spreadsheet-controller.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Spreadsheet Controller"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Spreadsheet Controller should invoke the correct service when each method is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should invoke the correct service when each method is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
         "numPassingTests": 2,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138198975,
-          "runtime": 449,
+          "end": 1701194391097,
+          "runtime": 382,
           "slow": false,
-          "start": 1701138198526
+          "start": 1701194390715
         },
         "skipped": false,
         "snapshot": {
@@ -499,7 +271,7 @@
             "ancestorTitles": [
               "Value is one of"
             ],
-            "duration": 4,
+            "duration": 2,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Value is one of should allow values that follow the rule",
@@ -514,7 +286,7 @@
             "ancestorTitles": [
               "Value is one of"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Value is one of should not allow values that do not follow the rule",
@@ -536,10 +308,10 @@
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138199413,
-          "runtime": 473,
+          "end": 1701194391104,
+          "runtime": 413,
           "slow": false,
-          "start": 1701138198940
+          "start": 1701194390691
         },
         "skipped": false,
         "snapshot": {
@@ -589,15 +361,15 @@
       {
         "leaks": false,
         "numFailingTests": 0,
-        "numPassingTests": 1,
+        "numPassingTests": 8,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138199467,
-          "runtime": 484,
+          "end": 1701194391550,
+          "runtime": 408,
           "slow": false,
-          "start": 1701138198983
+          "start": 1701194391142
         },
         "skipped": false,
         "snapshot": {
@@ -609,22 +381,127 @@
           "unmatched": 0,
           "updated": 0
         },
-        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\spreadsheet-controller.spec.ts",
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-plus-sign.spec.ts",
         "testResults": [
           {
             "ancestorTitles": [
-              "Spreadsheet Controller"
+              "Plus Sign Strategy"
             ],
-            "duration": 3,
+            "duration": 2,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Spreadsheet Controller should invoke the correct service when each method is called",
+            "fullName": "Plus Sign Strategy should concatenate 2 strings",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 0,
             "retryReasons": [],
             "status": "passed",
-            "title": "should invoke the correct service when each method is called"
+            "title": "should concatenate 2 strings"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should concatenate 1 string with 1 number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should concatenate 1 string with 1 number"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add two numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add two numbers"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add two numbers when one is negative",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add two numbers when one is negative"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two strings"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two numbers"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two numbers with negatived",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two numbers with negatived"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should return an error when the equation ends in +",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when the equation ends in +"
           }
         ],
         "failureMessage": null
@@ -637,10 +514,10 @@
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138199550,
-          "runtime": 486,
+          "end": 1701194391563,
+          "runtime": 386,
           "slow": false,
-          "start": 1701138199064
+          "start": 1701194391177
         },
         "skipped": false,
         "snapshot": {
@@ -658,7 +535,7 @@
             "ancestorTitles": [
               "Calculator"
             ],
-            "duration": 1,
+            "duration": 4,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Calculator should handle an empty string",
@@ -689,16 +566,16 @@
       },
       {
         "leaks": false,
-        "numFailingTests": 0,
-        "numPassingTests": 1,
+        "numFailingTests": 1,
+        "numPassingTests": 3,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138201944,
-          "runtime": 16243,
+          "end": 1701194394526,
+          "runtime": 13537,
           "slow": true,
-          "start": 1701138185701
+          "start": 1701194380989
         },
         "skipped": false,
         "snapshot": {
@@ -710,38 +587,234 @@
           "unmatched": 0,
           "updated": 0
         },
-        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\cell.spec.ts",
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\util.spec.ts",
         "testResults": [
           {
             "ancestorTitles": [
-              "Cell Display"
+              "Util Tests"
             ],
-            "duration": 23,
+            "duration": 97,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Cell Display initial cell display should be empty",
+            "fullName": "Util Tests should throw error if invalid reference",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "initial cell display should be empty"
+            "title": "should throw error if invalid reference"
+          },
+          {
+            "ancestorTitles": [
+              "Util Tests"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Util Tests should throw error if invalid reference",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error if invalid reference"
+          },
+          {
+            "ancestorTitles": [
+              "Util Tests"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Util Tests should throw error if invalid reference",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error if invalid reference"
+          },
+          {
+            "ancestorTitles": [
+              "Util Tests"
+            ],
+            "duration": 23,
+            "failureDetails": [
+              {
+                "matcherResult": {
+                  "actual": [
+                    0,
+                    0
+                  ],
+                  "expected": [
+                    0,
+                    0
+                  ],
+                  "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n\u001b[2mIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\u001b[22m\n\nExpected: \u001b[32m[0, 0]\u001b[39m\nReceived: serializes to the same string",
+                  "name": "toBe",
+                  "pass": false
+                }
+              }
+            ],
+            "failureMessages": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n\u001b[2mIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\u001b[22m\n\nExpected: \u001b[32m[0, 0]\u001b[39m\nReceived: serializes to the same string\n    at Object.<anonymous> (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\util.spec.ts:27:51)\n    at Promise.then.completed (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"
+            ],
+            "fullName": "Util Tests should take the value of the cell if only one defined",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "failed",
+            "title": "should take the value of the cell if only one defined"
+          }
+        ],
+        "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mUtil Tests › should take the value of the cell if only one defined\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n    \u001b[2mIf it should pass with deep equality, replace \"toBe\" with \"toStrictEqual\"\u001b[22m\n\n    Expected: \u001b[32m[0, 0]\u001b[39m\n    Received: serializes to the same string\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 25 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 26 |\u001b[39m     it(\u001b[32m'should take the value of the cell if only one defined'\u001b[39m\u001b[33m,\u001b[39m ()\u001b[33m:\u001b[39m \u001b[36mvoid\u001b[39m \u001b[33m=>\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 27 |\u001b[39m         expect(\u001b[33mUtil\u001b[39m\u001b[33m.\u001b[39mgetIndicesFromLocation(\u001b[32m\"A1\"\u001b[39m))\u001b[33m.\u001b[39mtoBe([\u001b[35m0\u001b[39m\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m])\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 29 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 30 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/models/tests/util.spec.ts\u001b[39m\u001b[0m\u001b[2m:27:51)\u001b[22m\u001b[2m\u001b[22m\n"
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 7,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701194394750,
+          "runtime": 13735,
+          "slow": true,
+          "start": 1701194381015
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-average.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 94,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should take return the value of the cell if only one defined",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should take return the value of the cell if only one defined"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return the average of a row of cells with number values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the average of a row of cells with number values"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return the average of a selection of cells with number values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the average of a selection of cells with number values"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return an error if string values are involved",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error if string values are involved"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return an error if there are no values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error if there are no values"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 22,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return an error if there is no closing parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error if there is no closing parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 7,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return error if range contains no cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return error if range contains no cells"
           }
         ],
         "failureMessage": null
       },
       {
         "leaks": false,
-        "numFailingTests": 0,
-        "numPassingTests": 4,
+        "numFailingTests": 2,
+        "numPassingTests": 7,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138202232,
-          "runtime": 16541,
+          "end": 1701194394767,
+          "runtime": 13768,
           "slow": true,
-          "start": 1701138185691
+          "start": 1701194380999
         },
         "skipped": false,
         "snapshot": {
@@ -759,7 +832,7 @@
             "ancestorTitles": [
               "Cell Ref Strategy"
             ],
-            "duration": 33,
+            "duration": 18,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Cell Ref Strategy should return the display value of a cell with a set value",
@@ -774,7 +847,7 @@
             "ancestorTitles": [
               "Cell Ref Strategy"
             ],
-            "duration": 10,
+            "duration": 8,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Cell Ref Strategy should return the display value of a cell with an enterred value that is different than the display value",
@@ -814,22 +887,115 @@
             "retryReasons": [],
             "status": "passed",
             "title": "should return a simplified equation when the cell ref is not all that is present"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 4,
+            "failureDetails": [
+              {
+                "matcherResult": {
+                  "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoThrow\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected substring: \u001b[32m\"#INVALID-EXPR\"\u001b[39m\n\nReceived function did not throw",
+                  "pass": false
+                }
+              }
+            ],
+            "failureMessages": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoThrow\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected substring: \u001b[32m\"#INVALID-EXPR\"\u001b[39m\n\nReceived function did not throw\n    at Object.<anonymous> (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-cell-ref.spec.ts:62:14)\n    at Promise.then.completed (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"
+            ],
+            "fullName": "Cell Ref Strategy should return an error when there is no closing parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "failed",
+            "title": "should return an error when there is no closing parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 10,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return an error when there is not a number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is not a number"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [
+              {
+                "matcherResult": {
+                  "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoThrow\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected substring: \u001b[32m\"#INVALID-REF\"\u001b[39m\n\nReceived function did not throw",
+                  "pass": false
+                }
+              }
+            ],
+            "failureMessages": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoThrow\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected substring: \u001b[32m\"#INVALID-REF\"\u001b[39m\n\nReceived function did not throw\n    at Object.<anonymous> (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-cell-ref.spec.ts:87:14)\n    at Promise.then.completed (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"
+            ],
+            "fullName": "Cell Ref Strategy should return an error when there is not a letter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "failed",
+            "title": "should return an error when there is not a letter"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return an error when there is an out of range cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is an out of range cell"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return an error when there is a cell reference",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is a cell reference"
           }
         ],
-        "failureMessage": null
+        "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mCell Ref Strategy › should return an error when there is no closing parenthesis\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoThrow\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n    Expected substring: \u001b[32m\"#INVALID-EXPR\"\u001b[39m\n\n    Received function did not throw\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 60 |\u001b[39m         expect(() \u001b[33m=>\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 61 |\u001b[39m             strategy\u001b[33m.\u001b[39mparse(\u001b[32m\"AVERAGE(A1..A1\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 62 |\u001b[39m           })\u001b[33m.\u001b[39mtoThrow(\u001b[33mErrorDisplays\u001b[39m\u001b[33m.\u001b[39m\u001b[33mINVALID_RANGE_EXPR\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 63 |\u001b[39m         })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 64 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 65 |\u001b[39m     it(\u001b[32m'should return an error when there is not a number'\u001b[39m\u001b[33m,\u001b[39m ()\u001b[33m:\u001b[39m \u001b[36mvoid\u001b[39m \u001b[33m=>\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/models/tests/strategy-cell-ref.spec.ts\u001b[39m\u001b[0m\u001b[2m:62:14)\u001b[22m\u001b[2m\u001b[22m\n\n\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mCell Ref Strategy › should return an error when there is not a letter\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoThrow\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n    Expected substring: \u001b[32m\"#INVALID-REF\"\u001b[39m\n\n    Received function did not throw\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 85 |\u001b[39m         expect(() \u001b[33m=>\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 86 |\u001b[39m             strategy\u001b[33m.\u001b[39mparse(\u001b[32m\"REF(1)\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 87 |\u001b[39m           })\u001b[33m.\u001b[39mtoThrow(\u001b[33mErrorDisplays\u001b[39m\u001b[33m.\u001b[39m\u001b[33mINVALID_CELL_REFERENCE\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 88 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 89 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 90 |\u001b[39m     it(\u001b[32m'should return an error when there is an out of range cell'\u001b[39m\u001b[33m,\u001b[39m ()\u001b[33m:\u001b[39m \u001b[36mvoid\u001b[39m \u001b[33m=>\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/models/tests/strategy-cell-ref.spec.ts\u001b[39m\u001b[0m\u001b[2m:87:14)\u001b[22m\u001b[2m\u001b[22m\n"
       },
       {
         "leaks": false,
-        "numFailingTests": 1,
-        "numPassingTests": 6,
+        "numFailingTests": 0,
+        "numPassingTests": 15,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138202304,
-          "runtime": 16606,
+          "end": 1701194394786,
+          "runtime": 13730,
           "slow": true,
-          "start": 1701138185698
+          "start": 1701194381056
         },
         "skipped": false,
         "snapshot": {
@@ -841,119 +1007,263 @@
           "unmatched": 0,
           "updated": 0
         },
-        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-average.spec.ts",
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\cell.spec.ts",
         "testResults": [
           {
             "ancestorTitles": [
-              "Average Strategy"
+              "Cell Location"
             ],
-            "duration": 26,
+            "duration": 17,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Average Strategy should take return the value of the cell if only one defined",
+            "fullName": "Cell Location cell row should be as set when constructed",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should take return the value of the cell if only one defined"
+            "title": "cell row should be as set when constructed"
           },
           {
             "ancestorTitles": [
-              "Average Strategy"
-            ],
-            "duration": 1,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Average Strategy should return the average of a row of cells with number values",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should return the average of a row of cells with number values"
-          },
-          {
-            "ancestorTitles": [
-              "Average Strategy"
+              "Cell Location"
             ],
             "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Average Strategy should return the average of a selection of cells with number values",
+            "fullName": "Cell Location cell row should be as set",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should return the average of a selection of cells with number values"
+            "title": "cell row should be as set"
           },
           {
             "ancestorTitles": [
-              "Average Strategy"
+              "Cell Location"
             ],
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Average Strategy should return an error if string values are involved",
+            "fullName": "Cell Location cell col should be as set when constructed",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should return an error if string values are involved"
+            "title": "cell col should be as set when constructed"
           },
           {
             "ancestorTitles": [
-              "Average Strategy"
-            ],
-            "duration": 2,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Average Strategy should return an error if there are no values",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "should return an error if there are no values"
-          },
-          {
-            "ancestorTitles": [
-              "Average Strategy"
-            ],
-            "duration": 2,
-            "failureDetails": [
-              {}
-            ],
-            "failureMessages": [
-              "Error: #RANGE\n    at AverageStrategy.evaluate (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\strategy-average.ts:34:19)\n    at evaluate (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\strategy-average.ts:18:35)\n    at Array.forEach (<anonymous>)\n    at AverageStrategy.forEach [as parse] (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\strategy-average.ts:17:18)\n    at Object.<anonymous> (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-average.spec.ts:78:38)\n    at Promise.then.completed (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"
-            ],
-            "fullName": "Average Strategy should return an error if there is no closing parenthesis",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 0,
-            "retryReasons": [],
-            "status": "failed",
-            "title": "should return an error if there is no closing parenthesis"
-          },
-          {
-            "ancestorTitles": [
-              "Average Strategy"
+              "Cell Location"
             ],
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Average Strategy should return error if range contains no cells",
+            "fullName": "Cell Location cell column should be as set",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should return error if range contains no cells"
+            "title": "cell column should be as set"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Content"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Content initial cell content should be empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "initial cell content should be empty"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Display"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Display initial cell display should be empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "initial cell display should be empty"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Display"
+            ],
+            "duration": 6,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Display should return the display value after it has been set and updated",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the display value after it has been set and updated"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Display"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Display should catch errors when updating",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should catch errors when updating"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Display"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Display should be able to update to become empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should be able to update to become empty"
+          },
+          {
+            "ancestorTitles": [
+              "Clear Cell"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Clear Cell Cell entered value should be cleared",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Cell entered value should be cleared"
+          },
+          {
+            "ancestorTitles": [
+              "Clear Cell"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Clear Cell Cell display should be cleared",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Cell display should be cleared"
+          },
+          {
+            "ancestorTitles": [
+              "Find and Replace"
+            ],
+            "duration": 60,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Find and Replace Should not change entered value if the value is not present",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should not change entered value if the value is not present"
+          },
+          {
+            "ancestorTitles": [
+              "Find and Replace"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Find and Replace Should not change display value if the value is not present",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should not change display value if the value is not present"
+          },
+          {
+            "ancestorTitles": [
+              "Find and Replace"
+            ],
+            "duration": 8,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Find and Replace Cell entered value should be changed",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Cell entered value should be changed"
+          },
+          {
+            "ancestorTitles": [
+              "Find and Replace"
+            ],
+            "duration": 5,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Find and Replace Cell display value should be changed",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Cell display value should be changed"
           }
         ],
-        "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mAverage Strategy › should return an error if there is no closing parenthesis\u001b[39m\u001b[22m\n\n    #RANGE\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 32 |\u001b[39m         \u001b[90m//check that closed parenthesis exists\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 33 |\u001b[39m         \u001b[36mif\u001b[39m (index \u001b[33m===\u001b[39m \u001b[33m-\u001b[39m\u001b[35m1\u001b[39m) {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 34 |\u001b[39m             \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m'#RANGE'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 35 |\u001b[39m         }\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 36 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 37 |\u001b[39m         \u001b[36mconst\u001b[39m firstPart \u001b[33m=\u001b[39m reference\u001b[33m.\u001b[39mslice(\u001b[35m0\u001b[39m\u001b[33m,\u001b[39m index)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat AverageStrategy.evaluate (\u001b[22m\u001b[2msrc/models/strategy-average.ts\u001b[2m:34:19)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat evaluate (\u001b[22m\u001b[2msrc/models/strategy-average.ts\u001b[2m:18:35)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m          at Array.forEach (<anonymous>)\u001b[22m\n\u001b[2m      \u001b[2mat AverageStrategy.forEach [as parse] (\u001b[22m\u001b[2msrc/models/strategy-average.ts\u001b[2m:17:18)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/models/tests/strategy-average.spec.ts\u001b[39m\u001b[0m\u001b[2m:78:38)\u001b[22m\u001b[2m\u001b[22m\n"
+        "failureMessage": null
+      },
+      {
+        "failureMessage": "  \u001b[1m● \u001b[22mTest suite failed to run\n\n    \u001b[96msrc/models/tests/bar-graph.spec.ts\u001b[0m:\u001b[93m2\u001b[0m:\u001b[93m26\u001b[0m - \u001b[91merror\u001b[0m\u001b[90m TS2307: \u001b[0mCannot find module '../bar-graph' or its corresponding type declarations.\n\n    \u001b[7m2\u001b[0m import { BarGraph } from \"../bar-graph\";\n    \u001b[7m \u001b[0m \u001b[91m                         ~~~~~~~~~~~~~~\u001b[0m\n",
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 0,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 0,
+          "runtime": 0,
+          "slow": false,
+          "start": 0
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testExecError": "\u001b[96msrc/models/tests/bar-graph.spec.ts\u001b[0m:\u001b[93m2\u001b[0m:\u001b[93m26\u001b[0m - \u001b[91merror\u001b[0m\u001b[90m TS2307: \u001b[0mCannot find module '../bar-graph' or its corresponding type declarations.\n\n\u001b[7m2\u001b[0m import { BarGraph } from \"../bar-graph\";\n\u001b[7m \u001b[0m \u001b[91m                         ~~~~~~~~~~~~~~\u001b[0m",
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\bar-graph.spec.ts",
+        "testResults": []
       },
       {
         "leaks": false,
@@ -963,10 +1273,10 @@
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701138206311,
-          "runtime": 20560,
+          "end": 1701194397544,
+          "runtime": 16530,
           "slow": true,
-          "start": 1701138185751
+          "start": 1701194381014
         },
         "skipped": false,
         "snapshot": {
@@ -984,7 +1294,7 @@
             "ancestorTitles": [
               "cellDisplay component"
             ],
-            "duration": 3638,
+            "duration": 3788,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
@@ -997,6 +1307,34 @@
           }
         ],
         "failureMessage": null
+      },
+      {
+        "failureMessage": "  \u001b[1m● \u001b[22mTest suite failed to run\n\n    Missing second argument. It must be a callback function. Perhaps you want to use `test.todo` for a test placeholder.\n\n    \u001b[0m \u001b[90m 88 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 89 |\u001b[39m\u001b[0m\n    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 90 |\u001b[39m     it(\u001b[32m'should throw error when there are no cells in range'\u001b[39m)\u001b[33m,\u001b[39m ()\u001b[33m:\u001b[39m \u001b[36mvoid\u001b[39m \u001b[33m=>\u001b[39m {\u001b[0m\n    \u001b[0m \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 91 |\u001b[39m         expect(strategyWithSetValues\u001b[33m.\u001b[39mparse(\u001b[32m\"SUM()\"\u001b[39m))\u001b[33m.\u001b[39mtoBe(\u001b[32m\"ERROR: Cell range must contain at least one cell\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 92 |\u001b[39m     }\u001b[0m\n    \u001b[0m \u001b[90m 93 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\n      \u001b[2mat \u001b[22m\u001b[0m\u001b[36msrc/models/tests/strategy-sum.spec.ts\u001b[39m\u001b[0m\u001b[2m:90:5\u001b[22m\n      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[0m\u001b[36msrc/models/tests/strategy-sum.spec.ts\u001b[39m\u001b[0m\u001b[2m:6:1)\u001b[22m\n",
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 0,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 0,
+          "runtime": 0,
+          "slow": false,
+          "start": 0
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testExecError": "Missing second argument. It must be a callback function. Perhaps you want to use `test.todo` for a test placeholder.",
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-sum.spec.ts",
+        "testResults": []
       }
     ],
     "wasInterrupted": false

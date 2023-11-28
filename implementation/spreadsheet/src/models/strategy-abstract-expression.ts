@@ -13,23 +13,10 @@ export abstract class AExpressionStrategy {
         this.col = col;
     }
 
-    useStrategy(currentValue: string): boolean {
-        return currentValue.includes((this.code + "("));
-    }
-
     splitInput(currentValue: string): string[] {
         return currentValue.split((this.code + "(")); 
     }
 
-    public findCol(letters: string): number {
-        let columnNumber = 0;
-
-        for (let i = 0; i < letters.length; i++) {
-          const charCode = letters.charCodeAt(i) - 65; // Convert ASCII to 0-based index
-          columnNumber = columnNumber * 26 + charCode + 1;
-        }
-        return columnNumber;
-    }
     public addRangeValues(values: string[]): number {
         let combinedValue: number = 0;
         values.forEach(element => {
@@ -47,7 +34,6 @@ export abstract class AExpressionStrategy {
         console.log("did this");
         // let firstRow: number = parseInt(firstCode[1]);
         let locationStart: Array<number> = Util.getIndicesFromLocation(splitInputs[0]);
-
 
         //find bottom right row and col
         // let secondCode: string[] = splitInputs[1].split(/(\d+)/);

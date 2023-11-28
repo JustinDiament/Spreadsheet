@@ -1,4 +1,5 @@
 import { Cell } from "../cell";
+import { ErrorDisplays } from "../cell-data-errors-enum";
 import { AverageStrategy } from "../strategy-average";
 import { CellRefStrategy } from "../strategy-cell-ref";
 
@@ -75,10 +76,14 @@ describe('Average Strategy', (): void => {
     });
 
     it('should return an error if there is no closing parenthesis', (): void => {
-        expect(strategyWithSetValues.parse("AVERAGE(A1..A1")).toBe("ERROR: Missing closing parenthesis");
+        expect(() => {
+            strategyWithSetValues.parse("AVERAGE(A1..A1");
+          }).toThrow(ErrorDisplays.INVALID_RANGE_EXPR);
     });
 
     it('should return error if range contains no cells', (): void => {
-        expect(strategyWithSetValues.parse("AVERAGE(B1..A1)")).toBe("ERROR: Cell range must contain at least one cell");
+        expect(() => {
+            strategyWithSetValues.parse("AVERAGE(B1..A1)");
+          }).toThrow(ErrorDisplays.INVALID_RANGE_EXPR);
     });
   });

@@ -3,18 +3,18 @@ import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import { useState } from "react";
 import DropDownMenu from "./dropDownMenu";
-import CreateChartMenu from "./createChartMenu";
 import DataValidationMenu from "./dataValidationMenu";
 import FindReplaceMenu from "./findReplaceMenu";
 import { IoClose } from "react-icons/io5";
 import HelpMenu from "./helpMenu";
+import TextStyleMenu from "./textStyleMenu";
 
 // the list of options in the edit menu
 const editMenuItems: Array<string> = ["Delete Row(s)", "Insert Row Above", "Insert Row Below", "Delete Column(s)",
     "Insert Column Right", "Insert Column Left", "Clear Selected Cells", "Clear All Cells"];
 
 // the list of options in the data menu
-const dataMenuItems: Array<string> = ["Data Validation", "Create Chart", "Find and Replace"];
+const dataMenuItems: Array<string> = ["Data Validation", "Find and Replace"];
 
 
 // the react component for the entire spreadsheet frontend display
@@ -84,7 +84,6 @@ export default function SpreadSheetDisplay() {
   // calls the function associated with the command in the data menu at the provided index
   function dataFunctions(index: number) {
     let dataFunctions: Array<{ (): void; }> = [() => setCurrPanel("data validation"),
-    () => setCurrPanel("create chart"),
     () => setCurrPanel("find and replace")]
     dataFunctions[index]();
     // close the dropdown because we have performed the selected task
@@ -96,9 +95,15 @@ export default function SpreadSheetDisplay() {
   // the actual HTML of the spreadsheet UI
   return (
     <div>
-      <div className="position-fixed top-50 start-50 translate-middle" style={helpOpen ? {display:"flex"} : {display:"none"}}><div className={"sp-panel-close float-end"} onClick={() => setHelpOpen(false)}><IoClose /></div><HelpMenu disp={helpOpen} menuOpen={setHelpOpen} /></div>
+      {/* help menu popup */}
+      <div className="position-fixed w-100 h-100 sp-grey-out"style={helpOpen ? {display:"flex"} : {display:"none"}} ><div className="position-fixed top-50 start-50 translate-middle bg-white sp-help-menu " >
+        <div className={"sp-panel-close float-right m-0 p-0"} onClick={() => setHelpOpen(false)}><IoClose /></div>
+        <h3 className="my-1 p-0">Help & Documentation</h3>
+        <hr className = {"w-100"}></hr>
+        <HelpMenu disp={helpOpen} menuOpen={setHelpOpen} /></div></div>
+
       {/* the top bar with the menu items */}
-      <div className="sp-menu-bar">
+      <div className="d-flex flex-nowrap sp-menu-bar w-100 align-items-center">
         {/* edit menu */}
         <div tabIndex={100} className="sp-edit-menu float-left" onBlur={(e) => { clickOutside(e) }}>
           <button className={"sp-menu-button " + (dropDisplayState("edit") ? "selected" : '')}
@@ -122,11 +127,14 @@ export default function SpreadSheetDisplay() {
         </div>
 
         {/* help menu */}
-        <div tabIndex={98} className="sp-edit-menu float-left" onBlur={(e) => { clickOutside(e) }}>
+        <div tabIndex={98} className="sp-edit-menu float-left flex-fill" onBlur={(e) => { clickOutside(e) }}>
           <button className={"sp-menu-button "} type="button" aria-haspopup="menu" aria-expanded={dropdown ? "true" : "false"}
             onClick={() => { setDropdown((prev) => !prev); setCurrDrop("help"); setHelpOpen(true)}}
             onMouseEnter={() => { setCurrDrop("help") }}>Help</button>
         </div>
+
+        {/* text styling buttons */}
+        <div className="sp-edit-menu float-end me-3 bg-light rounded p-1 mt-2"><TextStyleMenu /></div>
       </div>
 
       <div className={(sidePanel ? 'sp-two-panel' : '') + ' sp-work-space'}>
@@ -136,7 +144,6 @@ export default function SpreadSheetDisplay() {
         <div className={"sp-side-panel"} style={sidePanel ? { display: "block" } : { display: "none" }}>
           <div className={"sp-panel-close float-right"} onClick={() => setSidePanel(false)}><IoClose /></div>
           <DataValidationMenu disp={panelDisplayState("data validation")}/>
-          <CreateChartMenu disp={panelDisplayState("create chart")} />
           <FindReplaceMenu disp={panelDisplayState("find and replace")}  />
         </div>
       </div>

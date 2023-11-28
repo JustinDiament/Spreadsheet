@@ -1,9 +1,11 @@
+import { ICellStyle } from "../interfaces/cell-style-interface";
 import { IGraph } from "../interfaces/graph-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { CellStyle } from "./cell-style";
 import { AverageStrategy } from "./strategy-average";
 import {CellRefStrategy} from "./strategy-cell-ref";
-import { StrategyFormulas } from "./strategy-forumals";
+import { StrategyFormulas } from "./strategy-formulas";
 import { PlusSignStrategy } from "./strategy-plus-sign";
 import { SumStrategy } from "./strategy-sum";
 
@@ -31,6 +33,11 @@ export class Cell {
     private col: number;
 
     /**
+     * The style to be applied to the text inside of this cell
+     */
+    private style: ICellStyle;
+
+    /**
      * Create a new empty cell
      */
     public constructor(row: number, col: number) {
@@ -39,6 +46,7 @@ export class Cell {
         this.enteredValue = "";
         this.displayValue = "";
         this.validationRules = [];
+        this.style = new CellStyle();
     }
 
     public getRow(): number {
@@ -56,7 +64,6 @@ export class Cell {
     public setColumn(col: number): void {
         this.col = col;
     }
-
 
     /**
      * Returns the true content of the cell in string form 
@@ -156,25 +163,6 @@ export class Cell {
     }
 
     /**
-     * Adds a graph as an observer to this Cell
-     * @param graph the graph that observes this cell  
-     */
-    public attachGraph(graph: IGraph): void {}
-
-    /**
-     * Remotes a graph as an observer to this Cell
-     * @param graph the graph that will be removed from oberserving this Cell 
-     */
-    public detachGraph(graph: IGraph): void {
-    }
-
-    /**
-     * Notifies all overerving graphs that this cell has been updates 
-     */
-    public notifyGraph(): void {
-    }
-
-    /**
      * Adds the provided rule to this Cell's list of rules
      * @param rule the rule to be added
      */
@@ -198,7 +186,20 @@ export class Cell {
         return this.validationRules;
     }
 
-    
+    /**
+     * 
+     * @returns the style applied to this cell
+     */
+    public getStyle(): ICellStyle {
+        return this.style;
+    }
 
+    /**
+     * Apply a new style to this cell
+     * @param newStyle the new style to apply to this cell
+     */
+    public setStyle(newStyle: ICellStyle): void {
+        this.style=newStyle;
+    }
 
 }

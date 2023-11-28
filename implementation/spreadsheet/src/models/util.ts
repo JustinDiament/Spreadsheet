@@ -24,7 +24,6 @@ export class Util {
                 }
             }
             //console.log(location + ", " + col, row-1);
-    
         } else {
             console.log("col " + col);
             throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
