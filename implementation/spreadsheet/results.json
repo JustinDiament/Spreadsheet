@@ -1,0 +1,1004 @@
+{
+  "suites": {
+    "title": "",
+    "fullTitle": "",
+    "suites": [],
+    "tests": [
+      {
+        "title": "should have the title \"Spreadsheet\"",
+        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
+        "status": "PASS",
+        "error": null
+      }
+    ],
+    "pass": 1,
+    "fail": 0
+  },
+  "stats": {
+    "numFailedTestSuites": 1,
+    "numFailedTests": 1,
+    "numPassedTestSuites": 12,
+    "numPassedTests": 38,
+    "numPendingTestSuites": 0,
+    "numPendingTests": 0,
+    "numRuntimeErrorTestSuites": 0,
+    "numTodoTests": 0,
+    "numTotalTestSuites": 13,
+    "numTotalTests": 39,
+    "openHandles": [],
+    "snapshot": {
+      "added": 0,
+      "didUpdate": false,
+      "failure": false,
+      "filesAdded": 0,
+      "filesRemoved": 0,
+      "filesRemovedList": [],
+      "filesUnmatched": 0,
+      "filesUpdated": 0,
+      "matched": 0,
+      "total": 0,
+      "unchecked": 0,
+      "uncheckedKeysByFile": [],
+      "unmatched": 0,
+      "updated": 0
+    },
+    "startTime": 1701138184410,
+    "success": false,
+    "testResults": [
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 5,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138198275,
+          "runtime": 12504,
+          "slow": true,
+          "start": 1701138185771
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\cells-iterator.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 15,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should give the correct next value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should give the correct next value"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should give the correct current value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should give the correct current value"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should reset back to the first cell when first() is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should reset back to the first cell when first() is called"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should return true when finished iterating and isDone() is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return true when finished iterating and isDone() is called"
+          },
+          {
+            "ancestorTitles": [
+              "Cells Iterator"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cells Iterator should return false when not finished iterating and isDone() is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return false when not finished iterating and isDone() is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 3,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138198347,
+          "runtime": 12594,
+          "slow": true,
+          "start": 1701138185753
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\bar-graph.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Bar Graph"
+            ],
+            "duration": 25,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Bar Graph should update the y axis name when the setter is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should update the y axis name when the setter is called"
+          },
+          {
+            "ancestorTitles": [
+              "Bar Graph"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Bar Graph should update the x axis name when the setter is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should update the x axis name when the setter is called"
+          },
+          {
+            "ancestorTitles": [
+              "Bar Graph"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Bar Graph should update the graph name when the setter is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should update the graph name when the setter is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 8,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138198418,
+          "runtime": 12648,
+          "slow": true,
+          "start": 1701138185770
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-plus-sign.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 22,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should concatenate 2 strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should concatenate 2 strings"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should concatenate 1 string with 1 number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should concatenate 1 string with 1 number"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add two numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add two numbers"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add two numbers when one is negative",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add two numbers when one is negative"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two strings"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two numbers"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two numbers with negatived",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two numbers with negatived"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should return an error when the equation ends in +",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when the equation ends in +"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138198845,
+          "runtime": 488,
+          "slow": false,
+          "start": 1701138198357
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-sum.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should concatenate 2 strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should concatenate 2 strings"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138198916,
+          "runtime": 497,
+          "slow": false,
+          "start": 1701138198419
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\value-in-range-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should allow values that follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that follow the rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should not allow values that do not follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that do not follow the rule"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138198975,
+          "runtime": 449,
+          "slow": false,
+          "start": 1701138198526
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\value-is-one-of.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should allow values that follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that follow the rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should not allow values that do not follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that do not follow the rule"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138199413,
+          "runtime": 473,
+          "slow": false,
+          "start": 1701138198940
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\value-type-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should allow values that follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that follow the rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should not allow values that do not follow the rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that do not follow the rule"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138199467,
+          "runtime": 484,
+          "slow": false,
+          "start": 1701138198983
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\spreadsheet-controller.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Spreadsheet Controller"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Spreadsheet Controller should invoke the correct service when each method is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should invoke the correct service when each method is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 2,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138199550,
+          "runtime": 486,
+          "slow": false,
+          "start": 1701138199064
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\calculator.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Calculator"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Calculator should handle an empty string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle an empty string"
+          },
+          {
+            "ancestorTitles": [
+              "Calculator"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Calculator should perform the operation",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should perform the operation"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138201944,
+          "runtime": 16243,
+          "slow": true,
+          "start": 1701138185701
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\cell.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cell Display"
+            ],
+            "duration": 23,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Display initial cell display should be empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "initial cell display should be empty"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 4,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138202232,
+          "runtime": 16541,
+          "slow": true,
+          "start": 1701138185691
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-cell-ref.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 33,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return the display value of a cell with a set value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the display value of a cell with a set value"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 10,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return the display value of a cell with an enterred value that is different than the display value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the display value of a cell with an enterred value that is different than the display value"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return an empty string for a cell with no entered value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an empty string for a cell with no entered value"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Ref Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Ref Strategy should return a simplified equation when the cell ref is not all that is present",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return a simplified equation when the cell ref is not all that is present"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 1,
+        "numPassingTests": 6,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138202304,
+          "runtime": 16606,
+          "slow": true,
+          "start": 1701138185698
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-average.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 26,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should take return the value of the cell if only one defined",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should take return the value of the cell if only one defined"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return the average of a row of cells with number values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the average of a row of cells with number values"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return the average of a selection of cells with number values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the average of a selection of cells with number values"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return an error if string values are involved",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error if string values are involved"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return an error if there are no values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error if there are no values"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [
+              {}
+            ],
+            "failureMessages": [
+              "Error: #RANGE\n    at AverageStrategy.evaluate (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\strategy-average.ts:34:19)\n    at evaluate (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\strategy-average.ts:18:35)\n    at Array.forEach (<anonymous>)\n    at AverageStrategy.forEach [as parse] (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\strategy-average.ts:17:18)\n    at Object.<anonymous> (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\models\\tests\\strategy-average.spec.ts:78:38)\n    at Promise.then.completed (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"
+            ],
+            "fullName": "Average Strategy should return an error if there is no closing parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "failed",
+            "title": "should return an error if there is no closing parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should return error if range contains no cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return error if range contains no cells"
+          }
+        ],
+        "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mAverage Strategy › should return an error if there is no closing parenthesis\u001b[39m\u001b[22m\n\n    #RANGE\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 32 |\u001b[39m         \u001b[90m//check that closed parenthesis exists\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 33 |\u001b[39m         \u001b[36mif\u001b[39m (index \u001b[33m===\u001b[39m \u001b[33m-\u001b[39m\u001b[35m1\u001b[39m) {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 34 |\u001b[39m             \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m'#RANGE'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 35 |\u001b[39m         }\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 36 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 37 |\u001b[39m         \u001b[36mconst\u001b[39m firstPart \u001b[33m=\u001b[39m reference\u001b[33m.\u001b[39mslice(\u001b[35m0\u001b[39m\u001b[33m,\u001b[39m index)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat AverageStrategy.evaluate (\u001b[22m\u001b[2msrc/models/strategy-average.ts\u001b[2m:34:19)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat evaluate (\u001b[22m\u001b[2msrc/models/strategy-average.ts\u001b[2m:18:35)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m          at Array.forEach (<anonymous>)\u001b[22m\n\u001b[2m      \u001b[2mat AverageStrategy.forEach [as parse] (\u001b[22m\u001b[2msrc/models/strategy-average.ts\u001b[2m:17:18)\u001b[22m\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/models/tests/strategy-average.spec.ts\u001b[39m\u001b[0m\u001b[2m:78:38)\u001b[22m\u001b[2m\u001b[22m\n"
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701138206311,
+          "runtime": 20560,
+          "slow": true,
+          "start": 1701138185751
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "C:\\Users\\aylan\\gitprojects\\team508-project\\implementation\\spreadsheet\\src\\client\\tests\\cellDisplay.e2e.test.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "cellDisplay component"
+            ],
+            "duration": 3638,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should have the title \"Spreadsheet\""
+          }
+        ],
+        "failureMessage": null
+      }
+    ],
+    "wasInterrupted": false
+  }
+}
