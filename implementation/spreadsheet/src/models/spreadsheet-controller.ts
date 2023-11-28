@@ -502,6 +502,17 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to replace with
      */
     replaceCurrentCell: (find: string, replace: string) => {
+      console.log(get().currentlySelected[0]);
+      let newGrid:Array<Array<Cell>> = [];
+        // let selectCells: Array<Cell> = get().currentlySelected;
+        console.log("did this");
+       get().cells.forEach((element) => {
+        let row: Array<Cell> = [];
+        element.forEach((cell) => row.push(cell));
+        newGrid.push(element);
+      });
+
+
         get().currentlySelected[0].findReplace(find, replace);
 
         const rowCurrent: number = get().currentlySelected[0].getRow();
@@ -526,6 +537,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
                 break;
             }
        }
+
+       set({cells: newGrid});
 
        console.log("got out");
 

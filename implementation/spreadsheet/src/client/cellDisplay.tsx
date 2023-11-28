@@ -39,7 +39,7 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
     // check to see if the value of any of its cell dependencies have changed
     cell.updateDisplayValue(grid);
     setDisplayData(cell.getDisplayValue());    
-  }, [cell, grid]);
+  }, [cell, grid, cell.getEnteredValue()]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
@@ -68,7 +68,7 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
         contentEditable={(!enabled ? "true" : "false")}
         // contentEditable="false"
         className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2 lh-1.5')}
-        onClick={() => setClickedIn(true)}
+        onClick={() => !enabled && setClickedIn(true)}
         // update cell value when user clicks away
         onBlur={(e) =>
           update(

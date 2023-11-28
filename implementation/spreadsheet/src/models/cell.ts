@@ -153,6 +153,7 @@ export class Cell {
             console.log(sections)
             this.setEnteredValue(combinedString);
         }
+        console.log(this.getEnteredValue());
     }
 
     /**
