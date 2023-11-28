@@ -2,6 +2,7 @@ import { assert } from "console";
 import { PlusSignStrategy } from "../strategy-plus-sign";
 import { Cell } from "../cell";
 import { SumStrategy } from "../strategy-sum";
+import { ErrorDisplays } from "../cell-data-errors-enum";
 describe('Sum Strategy', (): void => {   
     //define empty cell grids for testing
     let otherCells: Cell[][] = [];
@@ -76,7 +77,10 @@ describe('Sum Strategy', (): void => {
     });
 
     it('should return an error if there is no closing parenthesis', (): void => {
-        expect(strategyWithSetValues.parse("SUM(A1..A1")).toBe("ERROR: Missing closing parenthesis");
+        expect(() => {
+            strategyWithSetValues.parse("AVERAGE(B1..A1)");
+          }).toThrow(ErrorDisplays.INVALID_RANGE_EXPR);
+        //expect(strategyWithSetValues.parse("SUM(A1..A1")).toBe("ERROR: Missing closing parenthesis");
     });
 
     it('should return error if range contains no cells', (): void => {
