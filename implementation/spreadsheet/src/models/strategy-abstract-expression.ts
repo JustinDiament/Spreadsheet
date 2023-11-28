@@ -74,7 +74,7 @@ export abstract class AExpressionStrategy {
         for(let i = locationStart[1];i<=locationEnd[1];i++) {
             for(let j = locationStart[0]; j<=locationEnd[0]; j++) {
                 if (this.row === i && this.col === j) {
-                    throw new Error("#SELFREF");
+                    throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
                 }
 
                 values.push(otherCells[i][j].getDisplayValue());
