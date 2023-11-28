@@ -5,13 +5,104 @@ import { ValueTypeRule } from "../models/value-type-rule";
 import { ValueInRangeRule } from "../models/value-in-range-rule";
 import { ValueIsOneOfRule } from "../models/value-is-one-of-rule";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
+import React from "react";
+
+
+/**
+     * a function that returns an HTML element displaying the provided ValueTypeRule
+     * @param rule the ValueTypeRule to be rendered
+     * @param ind the index of the rule, to be used as a key
+     * @param onClick the function to be called on click
+     * @returns the HTML element to display
+     */
+    function dispValTypeRule(rule:ValueTypeRule, ind:number, onClick:((rule:IValidationRule) => void)) {
+        return (<div className={"d-flex flex-wrap w-100 mb-4"} key={ind}>
+                        <span className={'w-100'}>Value is</span>
+                        {/* disable editing - user can only view this rule or delete it */}
+                        <select disabled className="form-select w-100 my-1" aria-label="Default select example"
+                                value={rule.getType()}>
+                            <option value="num">a number</option>
+                            <option value="word">a word</option>
+                            <option value="any">anything</option>
+                        </select>
+                        {/* Allow user to delete this rule from the currently selected cells */}
+                        <button className = {'btn btn-danger w-100 mt-2'} onClick={() => onClick(rule)}>Delete Rule</button></div>);
+    }
+
+    /**
+     * a function that returns an HTML element displaying the provided ValueInRangeRule
+     * @param rule the ValueInRangeRule to be rendered
+     * @param ind the index of the rule, to be used as a key
+     * @param onClick the function to be called on click
+     * @returns the HTML element to display
+     */
+    function dispValIsRule(rule:ValueInRangeRule, ind:number, onClick:((rule:IValidationRule) => void)) {
+        return ( <div className={'flex-wrap w-100 mb-4'} key={ind}>
+                        <span className={'w-100'}>Value is</span>
+                        {/* disable editing - user can only view this rule or delete it */}
+                        <select disabled className="form-select w-100 my-1" aria-label="Default select example"
+                                value={rule.getComparison()}>
+                            <option value=""></option>
+                            <option value="equal">equal to</option>
+                            <option value="less">less than</option>
+                            <option value="greater">greater than</option>
+                        </select>
+                        {/* disable editing - user can only view this rule or delete it */}
+                        <input className="float-end w-100 my-1 form-control" type="number" disabled value={rule.getValue()}></input>
+                         {/* Allow user to delete this rule from the currently selected cells */}
+                        <button className = {'btn btn-danger w-100 mt-2'} onClick={() => onClick(rule)}>Delete Rule</button></div>);
+    }
+
+    /**
+     * a function that returns an HTML element displaying the provided ValueIsOneOfRule
+     * @param rule the ValueIsOneOfRule to be rendered
+     * @param ind the index of the rule, to be used as a key
+     * @param ind the index of the rule, to be used as a key
+     * @param onClick the function to be called on click
+     * @param type the rule's type (i.e. anything, word, number)
+     * @returns the HTML element to display
+     */
+    function dispValOneOf(rule:ValueIsOneOfRule, ind:number, onClick:((rule:IValidationRule) => void), type:string) {
+        return(<div className={'d-flex flex-wrap w-100 mb-4'} key={ind}>
+                    <span className={'w-100'}>Value is one of</span>
+                    <div>
+                        {/* map through the values that the cell can contain and display them */}
+                        {/* disable editing - user can only view this rule or delete it */}
+                        {rule.getValues().map((opt) => (<input className={'form-control w-100 my-1'} type={type==="num" ? 'number' : 'text'} disabled value={opt}></input>))}
+                    </div>
+                    {/* Allow user to delete this rule from the currently selected cells */}
+                    <button className = {'btn btn-danger w-100 mt-2'} onClick={() => onClick(rule)}>Delete Rule</button>
+                </div>);
+    }
+
+    /**
+     * a function that returns an HTML element displaying the provided IValidationRule
+     * by determining which type of data validation rule it is, and sending it to the corresponding
+     * helper function to render
+     * @param rule the data validation rule to be rendered
+     * @param ind the index of the rule, to be used as a key
+     * @param onClick the function to be called on click
+     * @param type the rule's type (i.e. anything, word, number)
+     * @returns the HTML element to display
+     */
+    function dispRule(rule:IValidationRule, ind:number, onClick:((rule:IValidationRule) => void), type:string) {
+        if(rule instanceof ValueTypeRule) {
+            return dispValTypeRule(rule as ValueTypeRule, ind, onClick);
+        } else if(rule instanceof ValueInRangeRule) {
+            return dispValIsRule(rule as ValueInRangeRule, ind, onClick);
+        } else if(rule instanceof ValueIsOneOfRule) {
+            return dispValOneOf(rule as ValueIsOneOfRule, ind, onClick, type);
+        } else {return}
+    }
+
+// an interface to define the DataValidationMenuProps type for the DataValidationMenu component
+interface DataValidationMenuProps {
+  disp:boolean;
+}
 
 // A React component to respresent the side menu that allows for the creation, deletion, and viewing of data validation rules
 // the value of disp determines whether this menu is rendered or not
-export default function DataValidationMenu({ disp } : {disp: boolean}) {
-
-    // store the currently selected cells in the spreadsheet
-    const selection = useSpreadsheetController((controller) => controller.currentlySelected);
+function DataValidationMenu({ disp } : DataValidationMenuProps) {
 
     // store the currently displayed list of data validation rules
     const [rules, setRules] = useState<IValidationRule[]>(useSpreadsheetController((controller : ISpreadSheetState) => controller.getAllRules));
@@ -28,6 +119,9 @@ export default function DataValidationMenu({ disp } : {disp: boolean}) {
 
     // the list of values that the cell can contain ("value is one of...")
     const [options, setOptions] = useState<Array<string | number>>([]);
+
+    // store the currently selected cells in the spreadsheet
+    const selection = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
 
     // a constant to allow createRule to be called on the spreadsheet using the ISpreadSheetState
     const createRule = useSpreadsheetController((controller : ISpreadSheetState) => controller.createRule);
@@ -84,85 +178,6 @@ export default function DataValidationMenu({ disp } : {disp: boolean}) {
         setRules(getAllRules());
     };
 
-    /**
-     * a function that returns an HTML element displaying the provided ValueTypeRule
-     * @param rule the ValueTypeRule to be rendered
-     * @param ind the index of the rule, to be used as a key
-     * @returns the HTML element to display
-     */
-    function dispValTypeRule(rule:ValueTypeRule, ind:number) {
-        return (<div className={"d-flex flex-wrap w-100 mb-4"} key={ind}>
-                        <span className={'w-100'}>Value is</span>
-                        {/* disable editing - user can only view this rule or delete it */}
-                        <select disabled className="form-select w-100 my-1" aria-label="Default select example"
-                                value={rule.getType()}>
-                            <option value="num">a number</option>
-                            <option value="word">a word</option>
-                            <option value="any">anything</option>
-                        </select>
-                        {/* Allow user to delete this rule from the currently selected cells */}
-                        <button className = {'btn btn-danger w-100 mt-2'} onClick={() => deleteRule(rule as IValidationRule)}>Delete Rule</button></div>);
-    }
-
-    /**
-     * a function that returns an HTML element displaying the provided ValueInRangeRule
-     * @param rule the ValueInRangeRule to be rendered
-     * @param ind the index of the rule, to be used as a key
-     * @returns the HTML element to display
-     */
-    function dispValIsRule(rule:ValueInRangeRule, ind:number) {
-        return ( <div className={'flex-wrap w-100 mb-4'} key={ind}>
-                        <span className={'w-100'}>Value is</span>
-                        {/* disable editing - user can only view this rule or delete it */}
-                        <select disabled className="form-select w-100 my-1" aria-label="Default select example"
-                                value={rule.getComparison()}>
-                            <option value=""></option>
-                            <option value="equal">equal to</option>
-                            <option value="less">less than</option>
-                            <option value="greater">greater than</option>
-                        </select>
-                        {/* disable editing - user can only view this rule or delete it */}
-                        <input className="float-end w-100 my-1 form-control" type="number" disabled value={rule.getValue()}></input>
-                         {/* Allow user to delete this rule from the currently selected cells */}
-                        <button className = {'btn btn-danger w-100 mt-2'} onClick={() => deleteRule(rule as IValidationRule)}>Delete Rule</button></div>);
-    }
-
-    /**
-     * a function that returns an HTML element displaying the provided ValueIsOneOfRule
-     * @param rule the ValueIsOneOfRule to be rendered
-     * @param ind the index of the rule, to be used as a key
-     * @returns the HTML element to display
-     */
-    function dispValOneOf(rule:ValueIsOneOfRule, ind:number) {
-        return(<div className={'d-flex flex-wrap w-100 mb-4'} key={ind}>
-                    <span className={'w-100'}>Value is one of</span>
-                    <div>
-                        {/* map through the values that the cell can contain and display them */}
-                        {/* disable editing - user can only view this rule or delete it */}
-                        {rule.getValues().map((opt) => (<input className={'form-control w-100 my-1'} type={type==="num" ? 'number' : 'text'} disabled value={opt}></input>))}
-                    </div>
-                    {/* Allow user to delete this rule from the currently selected cells */}
-                    <button className = {'btn btn-danger w-100 mt-2'} onClick={() => deleteRule(rule as IValidationRule)}>Delete Rule</button>
-                </div>);
-    }
-
-    /**
-     * a function that returns an HTML element displaying the provided IValidationRule
-     * by determining which type of data validation rule it is, and sending it to the corresponding
-     * helper function to render
-     * @param rule the data validation rule to be rendered
-     * @param ind the index of the rule, to be used as a key
-     * @returns the HTML element to display
-     */
-    function dispRule(rule:IValidationRule, ind:number) {
-        if(rule instanceof ValueTypeRule) {
-            return dispValTypeRule(rule as ValueTypeRule, ind);
-        } else if(rule instanceof ValueInRangeRule) {
-            return dispValIsRule(rule as ValueInRangeRule, ind);
-        } else if(rule instanceof ValueIsOneOfRule) {
-            return dispValOneOf(rule as ValueIsOneOfRule, ind);
-        } else {return}
-    }
 
     /**
      * a function to add to the currently selected cells the new rule(s) containing the edited type, comp, val, options states 
@@ -209,7 +224,7 @@ export default function DataValidationMenu({ disp } : {disp: boolean}) {
                 <div className="w-100 d-flex flex-wrap justify-content-center">
                     <hr className = {"w-100"}></hr>
                     {/* display the existing rules */}
-                    {rules.map((rule, ind) => (dispRule(rule, ind)))}
+                    {rules.map((rule, ind) => (dispRule(rule, ind, deleteRule, type)))}
                     <hr className="w-100" style={rules.length>0 ? {display:"flex"} : {display:"none"}}></hr>
                     {/* display the UI for adding a new set of rules */}
                     {/* add a rule for the type of value (number, word, anything) */}
@@ -250,4 +265,7 @@ export default function DataValidationMenu({ disp } : {disp: boolean}) {
             </div>
         </div>
     ) 
-}
+};
+
+// memoize to avoid unnecessary rerenders
+export default React.memo(DataValidationMenu);

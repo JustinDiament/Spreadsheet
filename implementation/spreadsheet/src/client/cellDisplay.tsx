@@ -1,51 +1,61 @@
 import { useEffect, useState } from "react";
 import { Cell } from "../models/cell";
-import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
+import React from "react";
+import { ISpreadSheetState } from "../interfaces/controller-interface";
+
+// an interface to define the CellDisplayProps type for the CellDisplay component
+interface CellDisplayProps {
+  cell: Cell;
+  index: string;
+  setSelected: (x:number, y:number) => void;
+  enabled: boolean
+}
 
 // React component for rendering an editable cell
-export default function CellDisplay({cell, setSelected, setValue, enabled}: {cell: Cell; setSelected: Function; setValue: Function, enabled: boolean}) {
+
+function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
+  // console.log("cell rerender");
+
   // set whether the cell is currently "clicked in" / being edited
-  const [clickedIn, setClickedIn] = useState(false);
+  const [clickedIn, setClickedIn]: Array<any> = useState(false);
 
   // set the 'entered data' of the cell - the data displayed when the cell is clicked in
   const [data, setData]: Array<any> = useState(cell.getEnteredValue());
 
   // set the 'display data' of the cell - the data displayed when the cell is not clicked in
-  const [displayData, setDisplayData]: Array<any> = useState(
-    cell.getDisplayValue()
-  );
+  const [displayData, setDisplayData]: Array<any> = useState(cell.getDisplayValue());
+
+  // a function to edit a cell's entered data
+  const setValue = useSpreadsheetController((controller) => controller.editCell);
 
   // storing the current state of the cells in the spreadsheet
   const grid = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells);
-
-  // sotring the current state of the selected cells in the spreadsheet
-  const selected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
-
  
   // rerender the cell and update its data/display data if the data it contains, shows, or refers to has changed
   // as well as if the currently selected cells changes
   useEffect(() => {
     setData(cell.getEnteredValue());
+    // check to see if the value of any of its cell dependencies have changed
     cell.updateDisplayValue(grid);
-    setDisplayData(cell.getDisplayValue());
-  }, [cell, data, displayData, grid, selected]);
+    setDisplayData(cell.getDisplayValue());    
+  }, [cell, grid, cell.getEnteredValue()]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
   useEffect(() => {
     if (clickedIn) {
-      setSelected();
+      setSelected(cell.getColumn(), cell.getRow());
     }
-  }, [clickedIn, setSelected]);
+  }, [clickedIn, setSelected, cell]);
 
   // update the content of the cell based on the passed in data
   function update(newData: string): void {
-    setValue(newData);
+    setValue(index, newData);
     setData(cell.getEnteredValue());
     setDisplayData(cell.getDisplayValue());
     setClickedIn(false);
-  }
+  };
 
   // the actual HTML of the cell
   return (
@@ -58,7 +68,8 @@ export default function CellDisplay({cell, setSelected, setValue, enabled}: {cel
         contentEditable={(!enabled ? "true" : "false")}
         // contentEditable="false"
         className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2 lh-1.5')}
-        onClick={() => setClickedIn(true)}
+        onClick={() => !enabled && setClickedIn(true)}
+        // update cell value when user clicks away
         onBlur={(e) =>
           update(
             e.currentTarget.textContent != null
@@ -70,4 +81,6 @@ export default function CellDisplay({cell, setSelected, setValue, enabled}: {cel
       ></div>
     </div>
   );
-}
+};
+// memoize to avoid unnecessary rerenders
+export default React.memo(CellDisplay);

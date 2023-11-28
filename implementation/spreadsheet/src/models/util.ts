@@ -4,7 +4,7 @@ export class Util {
         let row:number = 0;
         let stillLetters = true;
         let remainder:string = location;
-        if(remainder.length !=0) {
+        if(remainder.length !==0) {
             while(remainder.length > 0 && stillLetters) {
                 let sub:string = remainder[0];
                 if(sub.match(/[A-Z]/) != null) {
@@ -15,13 +15,16 @@ export class Util {
                     stillLetters = false;
                     row = Number(remainder.substring(0));
                     if(isNaN(row)) {
+                        console.log("row " + row);
                         throw new Error("#INVALIDCELL");
+                        
                     }
                 }
             }
             //console.log(location + ", " + col, row-1);
     
         } else {
+            console.log("col " + col);
             throw new Error("#INVALIDCELL");
         }
     

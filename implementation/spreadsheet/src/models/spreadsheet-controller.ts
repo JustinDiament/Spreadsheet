@@ -507,6 +507,36 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
 
         get().findNextContaining(find);
+     
+      
+
+
+
+    //     const rowCurrent: number = get().currentlySelected[0].getRow();
+    //    const colCurrent: number = get().currentlySelected[0].getColumn();
+
+    //    set({ currentlySelected: [] });
+
+    //    let done = false;
+    //    for (let i=rowCurrent; i < get().cells.length; i++) {
+    //         for (let j=0; j < get().cells[0].length; j++) {
+    //             if (j===0) {
+    //                 j = j + colCurrent;
+    //             }
+    //             const currentCell = get().cells[i][j];
+    //             if (currentCell.getEnteredValue().indexOf(find) !== -1) {
+    //                 set({ currentlySelected: [currentCell] });
+    //                 done = true;
+    //                 break;
+    //             }
+    //         }  
+    //         if (done) {
+    //             break;
+    //         }
+    //    }
+
+
+       console.log("got out");
 
         // get().cells.forEach((row) => {
         //     row.forEach((element) => {
@@ -542,6 +572,16 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
             return;
         }
 
+        console.log(get().currentlySelected[0]);
+        let newGrid:Array<Array<Cell>> = [];
+          // let selectCells: Array<Cell> = get().currentlySelected;
+          console.log("did this");
+         get().cells.forEach((element) => {
+          let row: Array<Cell> = [];
+          element.forEach((cell) => row.push(cell));
+          newGrid.push(element);
+        });
+
         const rowCurrent: number = get().currentlySelected[0].getRow();
 
         const colCurrent: number = get().currentlySelected[0].getColumn();
@@ -575,7 +615,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
                  break;
              }
         }
-        set({ currentlySelected: currentlySelectedTemp });
+
+        set({ cells: newGrid, currentlySelected: currentlySelectedTemp });
  
         console.log("got out");
 
