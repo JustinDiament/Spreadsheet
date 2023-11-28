@@ -1,3 +1,5 @@
+import { ErrorDisplays } from "./cell-data-errors-enum";
+
 export class Util {
     public static getIndicesFromLocation(location:string) : Array<number> {
         let col:number = 0;
@@ -16,7 +18,7 @@ export class Util {
                     row = Number(remainder.substring(0));
                     if(isNaN(row)) {
                         console.log("row " + row);
-                        throw new Error("#INVALIDCELL");
+                        throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
                         
                     }
                 }
@@ -25,7 +27,7 @@ export class Util {
     
         } else {
             console.log("col " + col);
-            throw new Error("#INVALIDCELL");
+            throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
         }
     
         return [col, row-1];
