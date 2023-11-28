@@ -119,7 +119,7 @@ export interface ISpreadSheetState {
      * select the next cell that is in the list of currently found cells
      * which is created in the findCellsContaining function
      */
-    findNextContaining():void;
+    findNextContaining(find: string):void;
     
     /**
      * Finds where a value is present and replaces all instances of it with a new value at the selected id

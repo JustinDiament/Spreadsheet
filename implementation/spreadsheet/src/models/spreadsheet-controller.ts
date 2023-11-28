@@ -502,32 +502,11 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to replace with
      */
     replaceCurrentCell: (find: string, replace: string) => {
-        get().currentlySelected[0].findReplace(find, replace);
+        if (get().currentlySelected.length > 0) {
+            get().currentlySelected[0].findReplace(find, replace);
+        }
 
-        const rowCurrent: number = get().currentlySelected[0].getRow();
-       const colCurrent: number = get().currentlySelected[0].getColumn();
-
-       set({ currentlySelected: [] });
-
-       let done = false;
-       for (let i=rowCurrent; i < get().cells.length; i++) {
-            for (let j=0; j < get().cells[0].length; j++) {
-                if (j===0) {
-                    j = j + colCurrent;
-                }
-                const currentCell = get().cells[i][j];
-                if (currentCell.getEnteredValue().indexOf(find) !== -1) {
-                    set({ currentlySelected: [currentCell] });
-                    done = true;
-                    break;
-                }
-            }  
-            if (done) {
-                break;
-            }
-       }
-
-       console.log("got out");
+        get().findNextContaining(find);
 
         // get().cells.forEach((row) => {
         //     row.forEach((element) => {
@@ -558,7 +537,49 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * select the next cell that is in the list of currently found cells
      * which is created in the findCellsContaining function
      */
-    findNextContaining: () => {
+    findNextContaining: (find: string) => {
+        if (!(get().currentlySelected.length > 0)) {
+            return;
+        }
+
+        const rowCurrent: number = get().currentlySelected[0].getRow();
+
+        const colCurrent: number = get().currentlySelected[0].getColumn();
+
+        let currentlySelectedTemp: Array<Cell> = []
+ 
+     //   set({ currentlySelected: [] });
+ 
+        let done = false;
+        for (let i=rowCurrent; i < get().cells.length; i++) {
+             for (let j=0; j < get().cells[0].length; j++) {
+                let jj = j;
+                 if (i===rowCurrent) {
+                    if (j==0) {
+                        continue;
+                    }
+                     jj = j + colCurrent;
+
+                     if (jj >= get().cells[0].length) {
+                        continue;
+                     }
+                 }
+                 const currentCell = get().cells[i][jj];
+                 if (currentCell.getEnteredValue().indexOf(find) !== -1) {
+                     done = true;
+                     currentlySelectedTemp = [currentCell];
+                     break;
+                 }
+             }  
+             if (done) {
+                 break;
+             }
+        }
+        set({ currentlySelected: currentlySelectedTemp });
+ 
+        console.log("got out");
+
+
       // TODO
       // set currently selected to contain only the next of the cells we stored in
       // findCellsContaining()

@@ -3,10 +3,10 @@ import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 export default function FindReplaceMenu({ disp } : {disp: boolean}) {
     // the value to find
-    const [find, setFind] = useState<string>("bruh");
+    const [find, setFind] = useState<string>("");
 
     // the value to replace
-    const [replace, setReplace] = useState<string>("hah");
+    const [replace, setReplace] = useState<string>("");
 
     // a constant to contain the function findCellsContaining in the ISpreadSheetState
     const findCellsContaining = useSpreadsheetController((controller : ISpreadSheetState) => controller.findCellsContaining);
@@ -40,7 +40,7 @@ export default function FindReplaceMenu({ disp } : {disp: boolean}) {
                     <h6 className="w-100">Replace With</h6>
                     {/* enter the value to replace it with */}
                     <input id="replace" onChange={(e) => e.currentTarget.textContent != null ? setReplace((document.getElementById('replace') as HTMLInputElement).value) : console.log("asd")} className="w-100"></input>
-                    <button className="w-100 my-2 border-0" onClick={() => findNextContaining()}>find next</button>
+                    <button className="w-100 my-2 border-0" onClick={() => findNextContaining(find)}>find next</button>
                     <button className="w-100 my-2 border-0" onClick={() => replaceCurrentCell(find, replace)}>replace</button>
                     <button className="w-100 my-2 border-0" onClick={() => findAndReplaceAll(find, replace)}>replace all</button>
                 </div>
