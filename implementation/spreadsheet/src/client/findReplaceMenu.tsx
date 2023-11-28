@@ -32,6 +32,15 @@ function FindReplaceMenu({ disp } : FindReplaceMenuProps) {
     useEffect(() => {
         findCellsContaining(find);
     }, [find, findCellsContaining]);
+
+    useEffect(() => {
+        if(!disp) {
+            setFind("");
+            setReplace("");
+            (document.getElementById('find') as HTMLInputElement).value = find;
+            (document.getElementById('replace') as HTMLInputElement).value = replace;
+        };
+    }, [disp, find, replace])
     
     // return the HTML to render the find and replace menu
     return (

@@ -31,6 +31,8 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
 
   // storing the current state of the cells in the spreadsheet
   const grid = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells);
+  const currentlySelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
+  const [isSelected, setIsSelected] = useState<boolean>(currentlySelected.includes(cell));
  
   // rerender the cell and update its data/display data if the data it contains, shows, or refers to has changed
   // as well as if the currently selected cells changes
@@ -38,8 +40,10 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
     setData(cell.getEnteredValue());
     // check to see if the value of any of its cell dependencies have changed
     cell.updateDisplayValue(grid);
-    setDisplayData(cell.getDisplayValue());    
-  }, [cell, grid, cell.getEnteredValue()]);
+    setDisplayData(cell.getDisplayValue()); 
+    setIsSelected(currentlySelected.includes(cell)); 
+    console.log(isSelected); 
+  }, [cell, grid, currentlySelected, enabled, isSelected]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
@@ -63,11 +67,9 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
       {/* using contentEditable so that the cell can resize based on content and dangerousltSetInnerHTML so that
            the actual content of the cell displays, not only the manually entered value */}
       <div
-      // disabled={enabled}
         tabIndex={0}
         contentEditable={(!enabled ? "true" : "false")}
-        // contentEditable="false"
-        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2 lh-1.5')}
+        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2')}
         onClick={() => !enabled && setClickedIn(true)}
         // update cell value when user clicks away
         onBlur={(e) =>
@@ -77,7 +79,7 @@ function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
               : ""
           )
         }
-        dangerouslySetInnerHTML={{ __html: clickedIn ? data : displayData }}
+        dangerouslySetInnerHTML={{ __html: ((clickedIn || (enabled && isSelected)) ? data : displayData) }}
       ></div>
     </div>
   );
