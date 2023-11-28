@@ -130,6 +130,54 @@ code {
     flex-wrap: nowrap;
   }
 
+  .sp-help-menu {
+    /* box-shadow: RGB(240, 240, 240) 0 0 10px; */
+    width: 75%;
+    height: 75%;
+    border-radius: 4px;
+    padding: 10px 30px;
+    flex-wrap: wrap;
+    align-items: top;
+    align-content: flex-start;
+    
+    /* overflow: auto; */
+  }
+
+  .sp-help-menu .sp-panel-close, .sp-help-menu h3 {
+    
+    width: 100%;
+    height: fit-content;
+    /* overflow: auto; */
+  }
+
+  .sp-help-section h4 {
+    padding-bottom: 9px !important;
+  }
+
+  .sp-help-section {
+    height: fit-content;
+    padding-bottom: 24px;
+  }
+
+  .sp-help-section li{
+    padding-bottom: 12px;
+  }
+
+  /* .sp-help-section li li{
+    padding-bottom: 6px;
+  } */
+
+  .sp-help-interior {
+    height:calc(100% - 108px);
+    /* calc(100% - 80px) */
+    /* width: calc(75% - 30px); */
+  }
+
+  .sp-grey-out {
+    background-color: RGBA(0,0,0,.50);
+    z-index: 100;
+  }
+
   .sp-panel-close {
     font-size: 20pt;
     cursor: pointer;
