@@ -18,6 +18,10 @@ code {
   padding-bottom:0;
 }
 
+.sp-input-sizer {
+  min-height: 36px;
+}
+
 .sp-expandable-input {
   min-width: 200px;
   max-width: 1000px;

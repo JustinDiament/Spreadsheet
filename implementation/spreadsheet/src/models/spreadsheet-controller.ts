@@ -80,6 +80,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
     // the list of graphs created inside the spreadsheet by the user
     graphs: [],
 
+    findAndReplaceCells: new Array<Cell>(),
+
     // the list of cells in the spreadsheet that are currently selected by the user
     currentlySelected: [],
 
@@ -456,9 +458,41 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param find the string that the cells' entered value should contain
      */
     findCellsContaining: (find: string) => {
-      // TODO
-      // find all the cells containing find and store them /somewhere/
-      // set currently selected to contain only the first of the cells we just stored
+    //   TODO
+    //   find all the cells containing find and store them /somewhere/
+    //   set currently selected to contain only the first of the cells we just stored
+        let findAndReplaceCellsTemp: Array<Cell> = [];
+        let selectCells: Array<Cell> = get().currentlySelected;
+        console.log("did this");
+        get().cells.forEach((row) => {
+            row.forEach((element) => {
+                if (element.getEnteredValue().indexOf(find) !== -1) {
+                    console.log("adding");
+                    findAndReplaceCellsTemp.push(element);
+                }
+            })
+
+        });
+        console.log(findAndReplaceCellsTemp);
+
+        if (findAndReplaceCellsTemp.length > 0) {
+            console.log("doing this too");
+            selectCells = [];
+            selectCells.push(findAndReplaceCellsTemp[0]);
+            // set({ currentlySelected: [findAndReplaceCellsTemp[0]] });
+            findAndReplaceCellsTemp.shift();
+        }
+        console.log(findAndReplaceCellsTemp);
+        set({ currentlySelected: selectCells, findAndReplaceCells: findAndReplaceCellsTemp });
+        // set({  });
+        console.log(get().findAndReplaceCells);
+        if(get().currentlySelected.length > 0) {
+          console.log(get().currentlySelected[0].getColumn() + " currently selected")
+        }
+        else {
+          console.log("nothing selected");
+        }
+        
     },
 
     /**
@@ -468,9 +502,56 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to replace with
      */
     replaceCurrentCell: (find: string, replace: string) => {
-      // TODO
-      // for(cells in currently selected): cell.findReplace(find, replace);
-      // there should either be one or zero currently selected cells
+        get().currentlySelected[0].findReplace(find, replace);
+
+        const rowCurrent: number = get().currentlySelected[0].getRow();
+       const colCurrent: number = get().currentlySelected[0].getColumn();
+
+       set({ currentlySelected: [] });
+
+       let done = false;
+       for (let i=rowCurrent; i < get().cells.length; i++) {
+            for (let j=0; j < get().cells[0].length; j++) {
+                if (j===0) {
+                    j = j + colCurrent;
+                }
+                const currentCell = get().cells[i][j];
+                if (currentCell.getEnteredValue().indexOf(find) !== -1) {
+                    set({ currentlySelected: [currentCell] });
+                    done = true;
+                    break;
+                }
+            }  
+            if (done) {
+                break;
+            }
+       }
+
+       console.log("got out");
+
+        // get().cells.forEach((row) => {
+        //     row.forEach((element) => {
+        //         if (element.getEnteredValue().indexOf(find) !== -1 && element.getRow() >= get().currentlySelected[0].getRow() && element.getColumn() >= get().currentlySelected[0].getColumn()) {
+        //             console.log("adding");
+        //             findAndReplaceCellsTemp.push(element);
+        //         }
+        //     })
+
+        // });
+
+        // let findReplaceCellsTemp: Cell[] = get().findAndReplaceCells;
+        // let nextCell: Cell | undefined = findReplaceCellsTemp.shift();
+
+        // let currentlySelectedTemp: Cell[];
+        // if (!nextCell) {
+        //     currentlySelectedTemp = [];
+        // }
+        // else {
+        //     currentlySelectedTemp = [nextCell];
+        // }
+
+        // set({ findAndReplaceCells: findReplaceCellsTemp, currentlySelected: currentlySelectedTemp });
+              // TODO make page actually autoupdate for highlight (all else autoupdates already)
     },
 
     /**
@@ -491,11 +572,20 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to change to
      */
     findAndReplaceAll: (find: string, replace: string) => {
-      get().cells.forEach((row) => {
+        let newGrid: Array<Array<Cell>> = [];
+        get().cells.forEach((element) => {
+          let row: Array<Cell> = [];
+          element.forEach((cell) => row.push(cell));
+          newGrid.push(element);
+        });
+
+        newGrid.forEach((row) => {
         row.forEach((element) => {
            element.findReplace(find, replace);
         });
       });
+
+      set( { cells: newGrid });
     },
 
     /**

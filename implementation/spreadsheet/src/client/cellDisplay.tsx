@@ -9,11 +9,14 @@ interface CellDisplayProps {
   cell: Cell;
   index: string;
   setSelected: (x:number, y:number) => void;
+  enabled: boolean
 }
 
 // React component for rendering an editable cell
-function CellDisplay({cell, index, setSelected}: CellDisplayProps) {
+
+function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
   // console.log("cell rerender");
+
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setClickedIn]: Array<any> = useState(false);
 
@@ -60,9 +63,11 @@ function CellDisplay({cell, index, setSelected}: CellDisplayProps) {
       {/* using contentEditable so that the cell can resize based on content and dangerousltSetInnerHTML so that
            the actual content of the cell displays, not only the manually entered value */}
       <div
+      // disabled={enabled}
         tabIndex={0}
-        contentEditable="true"
-        className="form-control border-0 rounded-0 sp-expandable-input"
+        contentEditable={(!enabled ? "true" : "false")}
+        // contentEditable="false"
+        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control': 'p-2 lh-1.5')}
         onClick={() => setClickedIn(true)}
         // update cell value when user clicks away
         onBlur={(e) =>

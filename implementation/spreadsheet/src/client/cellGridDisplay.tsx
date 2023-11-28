@@ -25,7 +25,9 @@ import React from "react";
 
 
 // the react component for the grid of cells
-function CellGridDisplay() {
+
+function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
+
   console.log("rerender cellgrid display");
   // track the changing state of the grid, which is the grid of cells of the provided spreadsheetState
   const getCells = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells)
@@ -77,6 +79,7 @@ function CellGridDisplay() {
   }, []);
 
 
+
  // useEffect to select a cell or multiple cells in the backend whenever the lastmost selected cell is changed
  useEffect(() => {
   // we only want to bother running the following code if we haven't already updated the selected cells in the model
@@ -103,10 +106,13 @@ function CellGridDisplay() {
   // using useCallback to prevent every cell rerendering everytime select is passed as Props
   // @param cell the location of the cell that was selected in the frontend
   const select = useCallback((cell:string) => {
-      // a new cell was clicked on, but we haven't sent it to the model yet
-      setSentSelected(false);
-      // update the last-clicked cell to the one provided
-      setLast(cell);
+      // only allow selection if find and replace is not active
+      if(!findReplaceOpen()) {
+        // a new cell was clicked on, but we haven't sent it to the model yet
+        setSentSelected(false);
+        // update the last-clicked cell to the one provided
+        setLast(cell);
+      }
   }, [setLast])
 
   const setSelected = useCallback((col: number, row: number) => {
@@ -137,8 +143,11 @@ function CellGridDisplay() {
                                 //  setSelected={() => select(indToLetter(cell.getColumn()) + (cell.getRow()).toString())}
                                 setSelected={setSelected}
                                  // the setValue function in this cell will edit the value of this cell given its location
+
                                  key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
                                  index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}/></td> ))}
+                                 enabled={findReplaceOpen()}/></td> ))}
+
 
                   </tr> ))}
           </tbody>
