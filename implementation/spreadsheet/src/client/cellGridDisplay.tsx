@@ -145,8 +145,9 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
                                  // the setValue function in this cell will edit the value of this cell given its location
 
                                  key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
-                                 index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}/></td> ))}
+                                 index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
                                  enabled={findReplaceOpen()}/></td> ))}
+                                 
 
 
                   </tr> ))}
