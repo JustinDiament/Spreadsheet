@@ -62,7 +62,7 @@ describe('Cell Display', (): void => {
       let cell: Cell = new Cell(1, 1);
       cell.setEnteredValue("REF(!)");
       cell.updateDisplayValue([]);
-      expect(cell.getDisplayValue()).toEqual('#INVALIDREF');
+      expect(cell.getDisplayValue()).toEqual('#INVALID-REF');
     });
 
     it('should be able to update to become empty', (): void => {
@@ -128,8 +128,8 @@ describe('Cell Display', (): void => {
     it('Cell display value should be changed', (): void => {
       let cell: Cell = new Cell(1,1);
       cell.setEnteredValue("find")
-      cell.updateDisplayValue([]);
       cell.findReplace("find", "replace")
+      cell.updateDisplayValue([]);
       expect(cell.getDisplayValue()).toEqual('replace');
     });
   

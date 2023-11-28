@@ -2,6 +2,7 @@ import { assert } from "console";
 import { PlusSignStrategy } from "../strategy-plus-sign";
 import { CellRefStrategy } from "../strategy-cell-ref";
 import { Cell } from "../cell";
+import { ErrorDisplays } from "../cell-data-errors-enum";
 describe('Cell Ref Strategy', (): void => {
 
     // TODO Add tests for errors like self ref
@@ -56,8 +57,10 @@ describe('Cell Ref Strategy', (): void => {
         cells.push([cell]);
         let strategy = new CellRefStrategy(cells, 100, 100);
 
-        expect(strategy.parse("REF(A1")).toBe("#REF");
-    });
+        expect(() => {
+            strategy.parse("AVERAGE(A1..A1");
+          }).toThrow(ErrorDisplays.INVALID_RANGE_EXPR);
+        });
 
     it('should return an error when there is not a number', (): void => {
         let cells: Cell[][] = [];
@@ -67,8 +70,9 @@ describe('Cell Ref Strategy', (): void => {
         cells.push([cell]);
         let strategy = new CellRefStrategy(cells, 100, 100);
 
-        expect(strategy.parse("REF(A)")).toBe("#REF");
-    });
+        expect(() => {
+            strategy.parse("REF(A)");
+          }).toThrow(ErrorDisplays.INVALID_CELL_REFERENCE);    });
 
     it('should return an error when there is not a letter', (): void => {
         let cells: Cell[][] = [];
@@ -78,7 +82,9 @@ describe('Cell Ref Strategy', (): void => {
         cells.push([cell]);
         let strategy = new CellRefStrategy(cells, 100, 100);
 
-        expect(strategy.parse("REF(1)")).toBe("#REF");
+        expect(() => {
+            strategy.parse("REF(1)");
+          }).toThrow(ErrorDisplays.INVALID_CELL_REFERENCE);
     });
 
     it('should return an error when there is an out of range cell', (): void => {
@@ -89,7 +95,9 @@ describe('Cell Ref Strategy', (): void => {
         cells.push([cell]);
         let strategy = new CellRefStrategy(cells, 100, 100);
 
-        expect(strategy.parse("REF(A2)")).toBe("#OUTOFRANGE");
+        expect(() => {
+            strategy.parse("REF(A2)");
+          }).toThrow(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
     });
 
     it('should return an error when there is a cell reference', (): void => {
@@ -100,6 +108,8 @@ describe('Cell Ref Strategy', (): void => {
         cells.push([cell]);
         let strategy = new CellRefStrategy(cells, 0, 0);
 
-        expect(strategy.parse("REF(A1)")).toBe("#SELFREF");
+        expect(() => {
+            strategy.parse("REF(A1)");
+          }).toThrow(ErrorDisplays.REFERENCE_TO_SELF);
     });
   });
