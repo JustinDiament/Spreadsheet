@@ -5,7 +5,7 @@ import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { CellStyle } from "./cell-style";
 import { AverageStrategy } from "./strategy-average";
 import {CellRefStrategy} from "./strategy-cell-ref";
-import { StrategyFormulas } from "./strategy-forumals";
+import { StrategyFormulas } from "./strategy-formulas";
 import { PlusSignStrategy } from "./strategy-plus-sign";
 import { SumStrategy } from "./strategy-sum";
 
