@@ -1,7 +1,6 @@
 import { IGraph } from "../interfaces/graph-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
-import { ErrorCellData } from "./cell-data-errors-enum";
 import { AverageStrategy } from "./strategy-average";
 import {CellRefStrategy} from "./strategy-cell-ref";
 import { StrategyFormulas } from "./strategy-forumals";
