@@ -223,12 +223,4 @@ export class Cell {
         this.style=newStyle;
     }
 
-    
-// public isUnderlined(): boolean {
-//     return this.isUnderlined;
-// }
-
-//     public isBold() { boolean;
-//     return this.isUnderlined;}
-
 }

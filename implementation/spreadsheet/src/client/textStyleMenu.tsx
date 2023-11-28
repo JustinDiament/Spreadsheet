@@ -1,8 +1,6 @@
-import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 import ColorPickerComp from "./colorPicker";
 import { useState } from "react";
-import { BiFontColor } from "react-icons/bi";
 import { AiOutlineFontColors, AiOutlineUnderline, AiOutlineItalic   } from 
 "react-icons/ai";
 import { BiBold } from "react-icons/bi";
@@ -11,19 +9,8 @@ import { ICellStyle } from "../interfaces/cell-style-interface";
 
 export default function TextStyleMenu() {
   const [pickerDisp, setPickerDisp] = useState<boolean>(false);
-  // close any opened dropdowns because the user clicked outside of the active dropdown area
-  function clickOutside(e: any) {
-    const currentTarget = e.currentTarget;
-    // Give browser time to focus the next element
-    requestAnimationFrame(() => {
-      // Check if the new focused element is a child of the original container
-      if (!currentTarget.contains(document.activeElement)) {
-        setPickerDisp(false);
-      }
-    });
-  };
 
-const setStyle = useSpreadsheetController((controller) => controller.setStyle);
+  const setStyle = useSpreadsheetController((controller) => controller.setStyle);
 
 
 

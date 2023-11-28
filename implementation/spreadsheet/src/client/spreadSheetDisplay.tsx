@@ -3,7 +3,6 @@ import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import { useState } from "react";
 import DropDownMenu from "./dropDownMenu";
-import CreateChartMenu from "./createChartMenu";
 import DataValidationMenu from "./dataValidationMenu";
 import FindReplaceMenu from "./findReplaceMenu";
 import { IoClose } from "react-icons/io5";
@@ -16,7 +15,7 @@ const editMenuItems: Array<string> = ["Delete Row(s)", "Insert Row Above", "Inse
     "Insert Column Right", "Insert Column Left", "Clear Selected Cells", "Clear All Cells"];
 
 // the list of options in the data menu
-const dataMenuItems: Array<string> = ["Data Validation", "Create Chart", "Find and Replace"];
+const dataMenuItems: Array<string> = ["Data Validation", "Find and Replace"];
 
 
 // the react component for the entire spreadsheet frontend display
@@ -86,7 +85,6 @@ export default function SpreadSheetDisplay() {
   // calls the function associated with the command in the data menu at the provided index
   function dataFunctions(index: number) {
     let dataFunctions: Array<{ (): void; }> = [() => setCurrPanel("data validation"),
-    () => setCurrPanel("create chart"),
     () => setCurrPanel("find and replace")]
     dataFunctions[index]();
     // close the dropdown because we have performed the selected task
@@ -142,7 +140,6 @@ export default function SpreadSheetDisplay() {
         <div className={"sp-side-panel"} style={sidePanel ? { display: "block" } : { display: "none" }}>
           <div className={"sp-panel-close float-right"} onClick={() => setSidePanel(false)}><IoClose /></div>
           <DataValidationMenu disp={panelDisplayState("data validation")}/>
-          <CreateChartMenu disp={panelDisplayState("create chart")} />
           <FindReplaceMenu disp={panelDisplayState("find and replace")}  />
         </div>
       </div>
