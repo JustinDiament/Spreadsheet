@@ -1,6 +1,6 @@
 import CellDisplay from "./cellDisplay";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 
@@ -27,7 +27,7 @@ import React from "react";
 // the react component for the grid of cells
 function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
 
-  console.log("rerender cellgrid display");
+ 
   // track the changing state of the grid, which is the grid of cells of the provided spreadsheetState
   const getCells = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells)
 
@@ -51,8 +51,7 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
 
   // constant to be used in order to track the currently selected cells
    let currSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
-
-
+ console.log(currSelected.length + ' is curr selected');
   // function to update the shift useState depending on if the key being pressed is shift
   function downHandler({key}:{key:string}):void {
     if (key === 'Shift') {
@@ -89,6 +88,7 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
       setFirst(lastSelected);
       setSelectedOne(lastSelected);
       setSentSelected(true);
+      console.log("selecting" + sentSelected);
     }
     
     // if there is a first selected cell and the user is holding shift to select multiple,
@@ -113,11 +113,13 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
         // update the last-clicked cell to the one provided
         setLast(cell);
       }
-  }, [findReplaceOpen])
+  }, [])
 
   const setSelected = useCallback((col: number, row: number) => {
     select(indToLetter(col+1) + (row+1).toString())
   }, [select])
+
+  // const getDisplay = () => (useSpreadsheetController((controller) => controller.getCellDisplay));
 
   // the actual HTML of the grid of cells
   return (
@@ -144,7 +146,8 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
                                  // the key is to differentiate between the cells in the map for react
                                  key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
                                  index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
-                                 enabled={findReplaceOpen()}/></td> ))}
+                                 enabled={findReplaceOpen()}
+                                 /></td> ))}
                                  
                   </tr> ))}
           </tbody>

@@ -35,8 +35,10 @@ export default function SpreadSheetDisplay() {
   // what is the currently opened side panel?
   const [currPanel, setCurrPanel] = useState<string>("");
 
+  console.log(currPanel + "is selected");
+
   // is the find and replace menu open?
-  const findReplaceOpenF:(() => boolean) = () => (panelDisplayState("find and replace"));
+  const findReplaceOpenF:(() => boolean) = () => (("find and replace")=== currPanel && sidePanel);
 
   // close any opened dropdowns because the user clicked outside of the active dropdown area
   function clickOutside(e: any) {
@@ -89,6 +91,8 @@ export default function SpreadSheetDisplay() {
     setDropdown(false);
     // let the component know that a side panel was opened
     setSidePanel(true);
+
+    console.log("set panel" + currPanel);
   };
 
   // the actual HTML of the spreadsheet UI
@@ -138,7 +142,7 @@ export default function SpreadSheetDisplay() {
 
       <div className={(sidePanel ? 'sp-two-panel' : '') + ' sp-work-space'}>
         {/* actual grid of cells */}
-        <CellGridDisplay  findReplaceOpen={findReplaceOpenF}/>
+        <CellGridDisplay  findReplaceOpen={() => (("find and replace")=== currPanel && sidePanel)}/>
 
         <div className={"sp-side-panel"} style={sidePanel ? { display: "block" } : { display: "none" }}>
           <div className={"sp-panel-close float-right"} onClick={() => setSidePanel(false)}><IoClose /></div>

@@ -10,11 +10,13 @@ interface CellDisplayProps {
   index: string;
   setSelected: (x: number, y: number) => void;
   enabled: boolean;
+
 }
 
 // React component for rendering an editable cell
 
 function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
+
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setClickedIn]: Array<any> = useState<boolean>(false);
 
@@ -45,9 +47,10 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
   // rerender the cell and update its data/display data if the data it contains, shows, or refers to has changed
   // as well as if the currently selected cells changes
   useEffect(() => {
+    setData(cell.getEnteredValue());
     setDisplayData(cell.getDisplayValue());
     setStyle(cell.getStyle());
-  }, [cell, enabled, style, selected, displayData]);
+  }, [cell, enabled, style, selected, displayData, cell.getDisplayValue()]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell

@@ -255,13 +255,16 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         newGrid.push(element);
       });
 
-      for (let i = 0; i < numRowsToDelete; i++) {
-        newGrid.splice(rowToDelete, 1);
-      }
+      if(newGrid.length > 0 && numRowsToDelete < newGrid.length) {
 
-      for (let i = rowToDelete; i < newGrid.length; i++) {
-        for (let j = 0; j < newGrid[0].length; j++) {
-          newGrid[i][j].setRow(newGrid[i][j].getRow() - numRowsToDelete);
+        for (let i = 0; i < numRowsToDelete; i++) {
+          newGrid.splice(rowToDelete, 1);
+        }
+
+        for (let i = rowToDelete; i < newGrid.length; i++) {
+          for (let j = 0; j < newGrid[0].length; j++) {
+            newGrid[i][j].setRow(newGrid[i][j].getRow() - numRowsToDelete);
+          }
         }
       }
       set({ cells: newGrid });
@@ -293,17 +296,21 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         newGrid.push(element);
       });
 
-      for (let i = 0; i < numColsToDelete; i++) {
-        for (let j = 0; j < newGrid.length; j++) {
-          newGrid[j].splice(colToDelete, 1);
+      if(newGrid.length > 0 && numColsToDelete < newGrid[0].length) {
+        for (let i = 0; i < numColsToDelete; i++) {
+          for (let j = 0; j < newGrid.length; j++) {
+            newGrid[j].splice(colToDelete, 1);
+          }
+        }
+
+        for (let i = 0; i < newGrid.length; i++) {
+          for (let j = colToDelete; j < newGrid[0].length; j++) {
+            newGrid[i][j].setColumn(newGrid[i][j].getColumn() - numColsToDelete);
+          }
         }
       }
 
-      for (let i = 0; i < newGrid.length; i++) {
-        for (let j = colToDelete; j < newGrid[0].length; j++) {
-          newGrid[i][j].setColumn(newGrid[i][j].getColumn() - numColsToDelete);
-        }
-      }
+      
       set({ cells: newGrid });
     },
 
@@ -330,6 +337,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
       cell.updateDisplayValue(get().cells);
       set({ cells: newGrid });
     },
+
+   
 
     /**
      * Removes the value of all the currently selected cells
@@ -429,7 +438,6 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
             })
 
         });
-        console.log(findAndReplaceCellsTemp);
 
         if (findAndReplaceCellsTemp.length > 0) {
             selectCells = [];
@@ -464,21 +472,11 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
             return;
         }
 
-        
-        let newGrid:Array<Array<ICell>> = [];
-         get().cells.forEach((element) => {
-          let row: Array<ICell> = [];
-          element.forEach((cell) => row.push(cell));
-          newGrid.push(element);
-        });
-
         const rowCurrent: number = get().currentlySelected[0].getRow();
 
         const colCurrent: number = get().currentlySelected[0].getColumn();
 
         let currentlySelectedTemp: Array<ICell> = []
- 
- 
         let done = false;
         for (let i=rowCurrent; i < get().cells.length; i++) {
              for (let j=0; j < get().cells[0].length; j++) {
@@ -505,7 +503,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
              }
         }
 
-        set({ cells: newGrid, currentlySelected: currentlySelectedTemp });
+        set({ currentlySelected: currentlySelectedTemp });
     },
 
     /**

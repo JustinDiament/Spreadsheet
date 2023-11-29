@@ -248,14 +248,14 @@ function DataValidationMenu({ disp } : DataValidationMenuProps) {
                             <option value="less">less than</option>
                             <option value="greater">greater than</option>
                         </select>
-                        <input className="float-end w-100 my-1 form-control" type="number" disabled={comp===""} value={val} 
+                        <input className="float-end w-100 my-1 form-control" type="number" disabled={comp===""} value={isNaN(val) ? undefined: val} 
                         onChange={(e) => setVal(+e.target.value)}></input></div>
 
                     {/* add a rule for the list of values the cell can have */}
                     <div className={'d-flex flex-wrap w-100 my-2'} >
                         <span className="mb-1 w-100">Value is one of</span>
                         <div>{options.map((opt, ind) => (<input className = "w-100 my-1 form-control" type={type==="num" ? 'number' : 'text'} 
-                                                          onChange={(e) => editOption(ind, e.target.value)} value={opt}></input>))}
+                                                          onChange={(e) => editOption(ind, e.target.value)} value={opt} key={ind}></input>))}
                         </div>
                         <button className = {'btn btn-light btn-sm'} onClick={() => addOption()}>+ Add Option</button>
                     </div>

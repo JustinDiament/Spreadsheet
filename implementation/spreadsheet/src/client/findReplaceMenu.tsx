@@ -52,13 +52,21 @@ function FindReplaceMenu({ disp } : FindReplaceMenuProps) {
                     <hr className = {"w-100"}></hr>
                     <h6 className="w-100">Find</h6>
                     {/* enter the value to find */}
-                    <input id="find" onChange={(e) => e.currentTarget.textContent != null ? setFind((document.getElementById('find') as HTMLInputElement).value) : console.log("asd")}className="w-100 mb-3"></input>
+                    <input id="find" onChange={(e) => e.currentTarget.textContent != null && setFind((document.getElementById('find') as HTMLInputElement).value)}className="w-100 mb-3 form-control"></input>
+
                     <h6 className="w-100">Replace With</h6>
+
                     {/* enter the value to replace it with */}
-                    <input id="replace" onChange={(e) => e.currentTarget.textContent != null ? setReplace((document.getElementById('replace') as HTMLInputElement).value) : console.log("asd")} className="w-100"></input>
-                    <button className="w-100 my-2 border-0" onClick={() => findNextContaining(find)}>find next</button>
-                    <button className="w-100 my-2 border-0" onClick={() => replaceCurrentCell(find, replace)}>replace</button>
-                    <button className="w-100 my-2 border-0" onClick={() => findAndReplaceAll(find, replace)}>replace all</button>
+                    <input id="replace" onChange={(e) => e.currentTarget.textContent != null && setReplace((document.getElementById('replace') as HTMLInputElement).value)} className="w-100 form-control"></input>
+
+                    {/* find next cell containing value */}
+                    <button className="w-100 my-2 border-0 btn btn-light" onClick={() => findNextContaining(find)}>Find Next</button>
+
+                    {/* replace value of current cell */}
+                    <button className="w-100 my-2 border-0 btn btn-light" onClick={() => replaceCurrentCell(find, replace)}>Replace</button>
+
+                    {/* replace value of all cells */}
+                    <button className="w-100 my-2 border-0 btn btn-light" onClick={() => findAndReplaceAll(find, replace)}>Replace All</button>
                 </div>
             </div>
         </div>
