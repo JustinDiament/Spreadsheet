@@ -3,7 +3,7 @@ import { IStrategy } from "../interfaces/strategy-interface";
 
 export class PlusSignStrategy implements IStrategy {
     
-    private formulaCharacters: Array<string> = ['+', '-', '*', '^', '/', ')', '(', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '];
+    private formulaCharacters: Array<string> = ['+', '-', '*', '^', '/', ')', '(', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '.'];
 
 
     parse(currentValue: string): string {

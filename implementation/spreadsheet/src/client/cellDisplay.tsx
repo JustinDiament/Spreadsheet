@@ -33,6 +33,7 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDispla
   // a function to edit a cell's entered data
   const setValue:(cellID:string, newValue:any) => void = useSpreadsheetController((controller) => controller.editCell);
 
+  const grid:ICell[][] = useSpreadsheetController((controller) => controller.cells);
 
 
 
@@ -50,7 +51,7 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDispla
     setDisplayData(cell.getDisplayValue()); 
     setIsSelected(currentlySelected.includes(cell)); 
     setStyle(cell.getStyle());
-  }, [cell, currentlySelected, enabled, isSelected, style]);
+  }, [cell, currentlySelected, enabled, isSelected, style, grid]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell

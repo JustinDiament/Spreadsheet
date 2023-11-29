@@ -173,6 +173,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
       }
 
+      newGrid.forEach((row: ICell[]) => row.forEach((cell:ICell) => (cell.updateDisplayValue(newGrid))));
+
       set({ cells: newGrid });
     },
 
@@ -226,6 +228,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
           newGrid[i][j].setColumn(j);
         }
       }
+
+      newGrid.forEach((row: ICell[]) => row.forEach((cell:ICell) => (cell.updateDisplayValue(newGrid))));
       set({ cells: newGrid });
     },
 
@@ -370,8 +374,15 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param rule the new rule that the value must adhere to
      */
     createRule: (rule: IValidationRule) => {
+      let newSelectedGrid: Array<ICell> = [];
+      // iterate through all currently selected cells and adds them to the new list of currently selected cells
+      // doing this so that we can set the state of the spreadsheet at the end of this function
+      get().currentlySelected.forEach((element) => {
+        newSelectedGrid.push(element);
+      });
       // add rule to every selected cell
-      get().currentlySelected.forEach((element) => element.addRule(rule));
+      newSelectedGrid.forEach((element) => {element.addRule(rule); element.updateDisplayValue(get().cells)});
+      set({currentlySelected: newSelectedGrid});
     },
 
     /**
@@ -379,8 +390,16 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param rule the rule that should no longer apply
      */
     removeRule: (rule: IValidationRule) => {
+      let newSelectedGrid: Array<ICell> = [];
+      // iterate through all currently selected cells and adds them to the new list of currently selected cells
+      // doing this so that we can set the state of the spreadsheet at the end of this function
+      get().currentlySelected.forEach((element) => {
+        newSelectedGrid.push(element);
+      });
       // remove rule from every selected cell
-      get().currentlySelected.forEach((element) => element.removeRule(rule));
+      newSelectedGrid.forEach((element) => {element.removeRule(rule); element.updateDisplayValue(get().cells)});
+      set({currentlySelected: newSelectedGrid});
+      
     },
 
     /**

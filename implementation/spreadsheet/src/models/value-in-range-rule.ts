@@ -1,4 +1,5 @@
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 
 /**
  * Represents a data validation rule about if the data in the cell is in a range of numerical values
@@ -15,9 +16,9 @@ export class ValueInRangeRule implements IValidationRule{
      */
     private value: number;
 
-    constructor($equalGreaterLess:string, $value:number) {
-        this.equalGreaterLess=$equalGreaterLess;
-        this.value=$value;
+    constructor(equalGreaterLess:string, value:number) {
+        this.equalGreaterLess=equalGreaterLess;
+        this.value=value;
 
     }
 
@@ -27,12 +28,26 @@ export class ValueInRangeRule implements IValidationRule{
      * @return true if the data is valid, false if it is not 
      */
     checkRule(cellData: string): boolean {
-        return true;
+        const numericCellData = Number(cellData);
+
+        if (isNaN(numericCellData)) {
+            throw new Error(ErrorDisplays.INVALID_CELL_DATA);
+        }
+
+        switch (this.equalGreaterLess) {
+            case "equal":
+                return numericCellData === this.value;
+            case "greater":
+                return numericCellData > this.value;
+            case "less":
+                return numericCellData < this.value;
+            default:
+                throw new Error(ErrorDisplays.INVALID_CELL_DATA);
+        }
     }
 
     public getErrorMessage(): string {
-        
-        return "";
+        return ErrorDisplays.INVALID_CELL_DATA;
     }
 
     public getComparison():string {

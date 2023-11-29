@@ -1,4 +1,5 @@
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 
 /**
  * Represents a data validation rule about the type the data in a cell is allowed to be 
@@ -22,7 +23,17 @@ export class ValueTypeRule implements IValidationRule{
      * @return true if the data is valid, false if it is not 
      */
     public checkRule(cellData: string): boolean {
-        return true;
+        if (this.type === "num") {
+            return !isNaN(Number(cellData));
+        } else if (this.type === "word") {
+            return typeof cellData === "string";
+        } else if (this.type === "any") {
+            return true;
+        }
+        else {
+             // If the type is not recognized, consider it invalid
+            throw new Error(ErrorDisplays.INVALID_CELL_DATA);
+        }
     }
 
     public getType():string {
@@ -30,7 +41,6 @@ export class ValueTypeRule implements IValidationRule{
     }
 
     public getErrorMessage(): string {
-        
-        return "";
+        return ErrorDisplays.INVALID_CELL_REFERENCE;
     }
 }

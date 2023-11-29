@@ -60,12 +60,12 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
             throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
         }
 
-        if (this.otherCells[location[1]][location[0]].isObserving(this.otherCells[this.row][this.col])) {
-            throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
-        }
+        
 
         try {
-            
+            if (this.otherCells[location[1]][location[0]].isObserving(this.otherCells[this.row][this.col])) {
+            throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
+        }
             //get display value of referenced cell
             let refCell:ICell= this.otherCells[location[1]][location[0]];
             let thisCell:ICell = this.otherCells[this.row][this.col];
