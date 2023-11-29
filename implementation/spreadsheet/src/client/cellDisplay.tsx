@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+// import { Cell } from "../models/cell";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
+import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { ICellStyle } from "../interfaces/cell-style-interface";
 import { ICell } from "../interfaces/cell-interface";
 
@@ -8,13 +10,15 @@ import { ICell } from "../interfaces/cell-interface";
 interface CellDisplayProps {
   cell: ICell;
   index: string;
-  setSelected: (x: number, y: number) => void;
-  enabled: boolean;
+  setSelected: (x:number, y:number) => void;
+  isSelected: boolean;
+  enabled: boolean
 }
 
 // React component for rendering an editable cell
 
-function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
+function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDisplayProps) {
+
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setClickedIn]: Array<any> = useState<boolean>(false);
 
@@ -24,30 +28,29 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
   // set the 'display data' of the cell - the data displayed when the cell is not clicked in
   const [displayData, setDisplayData]: Array<any> = useState<string>(cell.getDisplayValue());
 
-// set the style of the cell - the state of whether it is bold, italic, and/or underlined and the color of its text
-  const [style, setStyle]: Array<any> = useState<ICellStyle>(cell.getStyle());
+  const [style, setStyle]: Array<any> = useState<ICellStyle>(cell.getStyle())
 
   // a function to edit a cell's entered data
-  const setValue: (cellID: string, newValue: any) => void =
-    useSpreadsheetController((controller) => controller.editCell);
-  
-  // The HTML style attributes to apply to this cell
-  const myComponentStyle = {
-    color: style.getTextColor(),
-    fontWeight: style.isCellBold() ? "bold" : "normal",
-    fontStyle: style.isCellItalic() ? "italic" : "normal",
-    textDecorationLine: style.isCellUnderlined() ? "underline" : "none",
-  };
+  const setValue:(cellID:string, newValue:any) => void = useSpreadsheetController((controller) => controller.editCell);
 
-  // the currently selected cells in the spreadsheet
-  let selected = useSpreadsheetController((controller) => controller.currentlySelected);
 
+
+
+
+  // storing the current state of the selected cells in the spreadsheet
+  const currentlySelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
+  const [isSelected2, setIsSelected] = useState<boolean>(currentlySelected.includes(cell));
+ 
   // rerender the cell and update its data/display data if the data it contains, shows, or refers to has changed
   // as well as if the currently selected cells changes
   useEffect(() => {
-    setDisplayData(cell.getDisplayValue());
+    setData(cell.getEnteredValue());
+    // check to see if the value of any of its cell dependencies have changed
+    // cell.updateDisplayValue(grid);
+    setDisplayData(cell.getDisplayValue()); 
+    setIsSelected(currentlySelected.includes(cell)); 
     setStyle(cell.getStyle());
-  }, [cell, enabled, style, selected, displayData]);
+  }, [cell, currentlySelected, enabled, isSelected, style]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
@@ -57,13 +60,26 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
     }
   }, [clickedIn, setSelected, cell]);
 
+  // useEffect(() => {
+  //   setStyle(cell.getStyle())
+  // }, [cell.getStyle(), cell, style]);
+
   // update the content of the cell based on the passed in data
   function update(newData: string): void {
     setValue(index, newData);
-    setData(newData);
+    setData(cell.getEnteredValue());
     setDisplayData(cell.getDisplayValue());
     setClickedIn(false);
-  }
+  };
+
+
+
+  const myComponentStyle = {
+   color: style.getTextColor(),
+   fontWeight: (style.isCellBold() ? 'bold' : 'normal'),
+   fontStyle: (style.isCellItalic() ? 'italic' : 'normal'),
+   textDecorationLine: (style.isCellUnderlined() ? 'underline' : 'none')
+}
 
   // the actual HTML of the cell
   return (
@@ -72,29 +88,22 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
            the actual content of the cell displays, not only the manually entered value */}
       <div
         tabIndex={0}
-        contentEditable={!enabled ? "true" : "false"}
-        className={
-          "border-0 rounded-0 sp-expandable-input " +
-          (!enabled ? "form-control " : "p-2 ")
-        }
-        // if the find and replace is not on, set this cell as clicked in
+        contentEditable={(!enabled ? "true" : "false")}
+        className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control ': 'p-2 ')}
         onClick={() => !enabled && setClickedIn(true)}
         style={myComponentStyle}
         // update cell value when user clicks away
         onBlur={(e) =>
           update(
-            e.currentTarget.textContent != null ? e.currentTarget.textContent : ""
+            e.currentTarget.textContent != null
+              ? e.currentTarget.textContent
+              : ""
           )
         }
-        // make sure the cell displays the entered value when it is clicked in,
-        // and the display value when it is not
-        dangerouslySetInnerHTML={{
-          __html:
-            clickedIn || (enabled && selected.includes(cell)) ? data : displayData,
-        }}
+        dangerouslySetInnerHTML={{ __html: ((clickedIn || (enabled && isSelected)) ? data : displayData) }}
       ></div>
     </div>
   );
-}
+};
 // memoize to avoid unnecessary rerenders
 export default React.memo(CellDisplay);

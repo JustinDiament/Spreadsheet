@@ -25,6 +25,7 @@ import React from "react";
 
 
 // the react component for the grid of cells
+
 function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
 
   console.log("rerender cellgrid display");
@@ -49,8 +50,9 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
   // constant to be used in order to call setSelectedOne on the controller
   const setSelectedOne = useSpreadsheetController((controller : ISpreadSheetState) => controller.setSelectedOne);
 
-  // constant to be used in order to track the currently selected cells
-   let currSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
+  // constant to be used in order to call isSelected on the controller
+  // const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
+   let currSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
 
 
   // function to update the shift useState depending on if the key being pressed is shift
@@ -66,6 +68,10 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
       setShiftHeld(false);
     }
   };
+
+  useEffect(() => {
+    
+  }, [useSpreadsheetController((controller) => controller.currentlySelected)])
 
   // useEffect to update if the shift key is being pressed or lifted
   useEffect(() => {
@@ -101,10 +107,9 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
  }, [lastSelected, setSelectedMany, setSelectedOne, setFirst, firstSelected, setSentSelected, sentSelected, shiftHeld]);
   
 
-  /** 
-   * function to select a cell or multiple cells using useCallback to prevent every cell rerendering everytime select is passed as Props
-    * @param cell the location of the cell that was selected in the frontend
-    **/
+  // function to select a cell or multiple cells
+  // using useCallback to prevent every cell rerendering everytime select is passed as Props
+  // @param cell the location of the cell that was selected in the frontend
   const select = useCallback((cell:string) => {
       // only allow selection if find and replace is not active
       if(!findReplaceOpen()) {
@@ -113,7 +118,7 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
         // update the last-clicked cell to the one provided
         setLast(cell);
       }
-  }, [findReplaceOpen])
+  }, [setLast])
 
   const setSelected = useCallback((col: number, row: number) => {
     select(indToLetter(col+1) + (row+1).toString())
@@ -137,15 +142,20 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
               {/* map through the grid to create the row headers */}
               {getCells.map((curr, row) => (<tr key={row+1}><th className="sp-grid-header sp-row-head" key={row+1}>{row+1}</th>
                   {/* map through the row in the grid to get the cells in the row */}
-                  {curr.map((cell, col) => (<td className={'m-0 p-1 sp-cell ' + (currSelected.includes(cell) ? 'sp-selected' : '')} key={indToLetter(col+1) + (row+1).toString()} >
+                  {curr.map((cell, col) => (<td className={'m-0 p-1 sp-cell ' + (currSelected().includes(cell) ? 'sp-selected' : '')} key={indToLetter(col+1) + (row+1).toString()} >
                     <CellDisplay cell = {cell}
                                  // the setSelected function in this cell will select cells given the location of this cell
+                                //  setSelected={() => select(indToLetter(cell.getColumn()) + (cell.getRow()).toString())}
                                 setSelected={setSelected}
-                                 // the key is to differentiate between the cells in the map for react
+                                isSelected={(currSelected().includes(cell))}
+                                 // the setValue function in this cell will edit the value of this cell given its location
+
                                  key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
                                  index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
                                  enabled={findReplaceOpen()}/></td> ))}
                                  
+
+
                   </tr> ))}
           </tbody>
         </table>
