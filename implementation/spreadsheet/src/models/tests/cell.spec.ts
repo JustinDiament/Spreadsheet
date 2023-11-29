@@ -146,32 +146,32 @@ describe('Cell Display', (): void => {
     
       it('should pass all validation rules', () => {
         const valueInRangeRule = new ValueInRangeRule('=', 5);
-        const valueIsOneOfRule = new ValueIsOneOfRule(['apple', 'orange', 'banana']);
+        const valueIsOneOfRule = new ValueIsOneOfRule(['rule0', 'rule', 'rules']);
         const valueTypeRule = new ValueTypeRule('string');
     
         cell.addRule(valueInRangeRule);
         cell.addRule(valueIsOneOfRule);
         cell.addRule(valueTypeRule);
     
-        cell.setEnteredValue('apple');
+        cell.setEnteredValue('rule0');
     
         // Assuming updateDisplayValue method is working correctly
         cell.updateDisplayValue([]);
     
         // Expect the cell to have the entered value because it passed all validation rules
-        expect(cell.getDisplayValue()).toEqual('apple');
+        expect(cell.getDisplayValue()).toEqual('rule0');
       });
     
       it('should fail one validation rule', () => {
         const valueInRangeRule = new ValueInRangeRule('=', 5);
-        const valueIsOneOfRule = new ValueIsOneOfRule(['apple', 'orange', 'banana']);
+        const valueIsOneOfRule = new ValueIsOneOfRule(['rule1', 'rule1', 'rule3']);
         const valueTypeRule = new ValueTypeRule('string');
     
         cell.addRule(valueInRangeRule);
         cell.addRule(valueIsOneOfRule);
         cell.addRule(valueTypeRule);
     
-        cell.setEnteredValue('grape'); // Violates valueIsOneOfRule
+        cell.setEnteredValue('rule4'); // Violates valueIsOneOfRule
     
         // Assuming updateDisplayValue method is working correctly
         cell.updateDisplayValue([]);
