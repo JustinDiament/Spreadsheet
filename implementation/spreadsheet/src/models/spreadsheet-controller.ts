@@ -450,16 +450,13 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
             })
 
         });
-        console.log(findAndReplaceCellsTemp);
 
         if (findAndReplaceCellsTemp.length > 0) {
             selectCells = [];
             selectCells.push(findAndReplaceCellsTemp[0]);
-            findAndReplaceCellsTemp.shift();
         }
-        set({ currentlySelected: selectCells, findAndReplaceCells: findAndReplaceCellsTemp });
+        set({ currentlySelected: selectCells});
         
- 
     },
 
     /**

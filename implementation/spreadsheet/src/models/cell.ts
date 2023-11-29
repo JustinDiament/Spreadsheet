@@ -105,12 +105,14 @@ export class Cell implements ICell {
         let index: number = this.observers.indexOf(observer);
         if(index > -1) {
             this.observers.splice(index, 1);
-            observer.attachObserving(this);
+            observer.detachObserving(this);
         }
     }
 
     public attachObserving(observing:ICell):void {
-        this.observing.push(observing);
+        if(!this.observing.includes(observing)) {
+            this.observing.push(observing);
+        }
     }
 
     public detachObserving(observing:ICell):void {

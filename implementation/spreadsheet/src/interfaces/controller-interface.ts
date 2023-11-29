@@ -1,18 +1,24 @@
+/**
+ * @file controller-interface.ts
+ * @interface ISpreadhSheetState
+ */
+
 import { ICell } from "./cell-interface";
 import { ICellStyle } from "./cell-style-interface";
 import { IValidationRule } from "./validation-rule-interface";
 
-// representation of the spreadsheet controller, which manages the current state
-// of the spreadsheet
+/**
+ * An interface to represent the spreadsheet store, which is our state tree that acts as a controller,
+ * passing data between the model and client
+ */
 export interface ISpreadSheetState {
-    // the 2d array/grid of cells in the spreadsheet, instantiated as an
-    // empty 10x10 grid of cells
+    // the 2D array/grid of ICells in the spreadsheet, instantiated as a 10x10 grid of empty ICells
     cells: ICell[][];
     
-    // the list of cells in the spreadsheet that are currently selected by the user
+    // the list of ICells in the spreadsheet that are currently selected by the user
     currentlySelected: ICell[];
 
-    findAndReplaceCells: ICell[];
+    
 
     /**
      * Set the list of currently selected cells in the spreadsheet to contain

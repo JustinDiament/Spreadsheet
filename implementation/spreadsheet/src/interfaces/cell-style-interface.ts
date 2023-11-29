@@ -1,52 +1,59 @@
+/**
+ * @file cell-style-interface.ts
+ * @interface ICellStyle
+ */
+
 
 /**
- * Represents the style attributes of a cell
+ * An interface that represents a set of style attribtues
  */
 export interface ICellStyle {
 
     /**
-     * Update whether or not this style is bolded
-     * @param isBold whether the style should be bold or not
+     * Update whether or not this ICellStyle is bolded
+     * @param isBold whether the ICellStyle should be bold or not
      */
     setBold(isBold:boolean): void;
 
      /**
-     * Update whether or not this style is italicized
-     * @param isItalic whether the style should be italicized or not
+     * Update whether or not this ICellStyle is italicized
+     * @param isItalic whether the ICellStyle should be italicized or not
      */
     setItalic(isItalic:boolean): void;
 
     /**
-     * Update whether or not this style is underlined
-     * @param isUnderlined whether the style should be bold or not
+     * Update whether or not this ICellStyle is underlined
+     * @param isUnderlined whether the ICellStyle should be bold or not
      */
     setUnderline(isUnderlined:boolean): void;
 
     /**
-     * Update the color of the text for this style
-     * @param textColor the color the text of this style should be
+     * Update the color of the text for this ICellStyle
+     * @param textColor the color the text of this ICellStyle should be
      */
     setTextColor(textColor:string): void;
 
     /**
-     * Return the value of isUnderlined
+     * Is this ICellStyle underlined?
+     * @returns true if this ICellStyle is underlined, else false
      */
     isCellUnderlined(): boolean;
 
     /**
-     * Return the value of isItalic
+     * Is this ICellStyle italicized?
+     * @returns true if this ICellStyle is italicized, else false
      */
     isCellItalic(): boolean;
 
     /**
-     * Return the value of isBold
+     * Is this ICellStyle bolded?
+     * @returns true if this ICellStyle is bolded, else false
      */
     isCellBold(): boolean;
 
     /**
-     * Update the color of the text for this style
-     * @returns the color of the text 
+     * Get the color of the text for this ICellStyle
+     * @returns a text color represented as a string containing a 6-digit hex code
      */
     getTextColor(): string;
-    
 };
