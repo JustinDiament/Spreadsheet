@@ -1,21 +1,30 @@
+/**
+ * @file cellDisplay.tsx
+ */
+
 import { useEffect, useState } from "react";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 import { ICellStyle } from "../interfaces/cell-style-interface";
 import { ICell } from "../interfaces/cell-interface";
 
+/**
+ * ==============================================================
+ *                     React component
+ * ==============================================================
+ */
+
 // an interface to define the CellDisplayProps type for the CellDisplay component
 interface CellDisplayProps {
-  cell: ICell;
-  index: string;
-  setSelected: (x: number, y: number) => void;
-  enabled: boolean;
-
+  cell: ICell; // the cell being displayed
+  index: string; // the string location of the cell (ex. A1)
+  setSelected: (x: number, y: number) => void; // the function to call on click to select a cell
+  disabled: boolean; // is the cell allowed to be clicked?
 }
 
 // React component for rendering an editable cell
 
-function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
+function CellDisplay({ cell, index, setSelected, disabled }: CellDisplayProps) {
 
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setClickedIn]: Array<any> = useState<boolean>(false);
@@ -26,7 +35,7 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
   // set the 'display data' of the cell - the data displayed when the cell is not clicked in
   const [displayData, setDisplayData]: Array<any> = useState<string>(cell.getDisplayValue());
 
-// set the style of the cell - the state of whether it is bold, italic, and/or underlined and the color of its text
+  // set the style of the cell - the state of whether it is bold, italic, and/or underlined and the color of its text
   const [style, setStyle]: Array<any> = useState<ICellStyle>(cell.getStyle());
 
   // a function to edit a cell's entered data
@@ -50,7 +59,7 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
     setData(cell.getEnteredValue());
     setDisplayData(cell.getDisplayValue());
     setStyle(cell.getStyle());
-  }, [cell, enabled, style, selected, displayData, cell.getDisplayValue()]);
+  }, [cell, disabled, style, selected, displayData, cell.getDisplayValue()]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
@@ -75,13 +84,13 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
            the actual content of the cell displays, not only the manually entered value */}
       <div
         tabIndex={0}
-        contentEditable={!enabled ? "true" : "false"}
+        contentEditable={!disabled ? "true" : "false"}
         className={
           "border-0 rounded-0 sp-expandable-input " +
-          (!enabled ? "form-control " : "p-2 ")
+          (!disabled ? "form-control " : "p-2 ")
         }
         // if the find and replace is not on, set this cell as clicked in
-        onClick={() => !enabled && setClickedIn(true)}
+        onClick={() => !disabled && setClickedIn(true)}
         style={myComponentStyle}
         // update cell value when user clicks away
         onBlur={(e) =>
@@ -93,7 +102,7 @@ function CellDisplay({ cell, index, setSelected, enabled }: CellDisplayProps) {
         // and the display value when it is not
         dangerouslySetInnerHTML={{
           __html:
-            clickedIn || (enabled && selected.includes(cell)) ? data : displayData,
+            clickedIn || (disabled && selected.includes(cell)) ? data : displayData,
         }}
       ></div>
     </div>

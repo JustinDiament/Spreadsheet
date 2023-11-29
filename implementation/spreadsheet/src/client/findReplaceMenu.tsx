@@ -1,13 +1,24 @@
+/**
+ * @file findReplaceMenu.tsx
+ */
+
 import { useState, useEffect } from "react";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 
+/**
+ * ==============================================================
+ *                     React component
+ * ==============================================================
+ */
+
 // an interface to define the FindReplaceMenuProps type for the FindReplaceMenu component
 interface FindReplaceMenuProps {
-  disp:boolean;
+  disp:boolean; // is the find and replace menu displayed?
 }
 
+// a react component for a find and replace side panel
 function FindReplaceMenu({ disp } : FindReplaceMenuProps) {
     // the value to find
     const [find, setFind] = useState<string>("");
@@ -33,6 +44,8 @@ function FindReplaceMenu({ disp } : FindReplaceMenuProps) {
         findCellsContaining(find);
     }, [find, findCellsContaining]);
 
+    // If the value of disp is changed to false, meaning the panel has closed,
+    // reset the find and replace values and their input fields back to empty
     useEffect(() => {
         if(!disp) {
             setFind("");

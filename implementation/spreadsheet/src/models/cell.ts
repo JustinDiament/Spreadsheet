@@ -133,7 +133,7 @@ export class Cell implements ICell {
      * Parses the entered value and evaluates the validation rules to update the display value
      */
     public updateDisplayValue(cells: Array<Array<ICell>>): void{
-        this.observing.forEach((observed: ICell) => observed.detachObserver(observed));
+        this.observing.forEach((observed: ICell) => observed.detachObserver(this));
         let strategies: Array<IStrategy> = [new CellRefStrategy(cells, this.row, this.col), new AverageStrategy(cells, this.row, this.col), new SumStrategy(cells, this.row, this.col), new PlusSignStrategy(), new StrategyFormulas()];
 
         
