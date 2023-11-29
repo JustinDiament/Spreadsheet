@@ -1,16 +1,17 @@
-import { error } from "console";
 import { IStrategy } from "../interfaces/strategy-interface";
-import { Cell } from "./cell";
+// import { Cell } from "./cell";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 import { Util } from "./util";
 import { ErrorDisplays } from "./cell-data-errors-enum";
+import { ICell } from "../interfaces/cell-interface";
 
 export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
-    private otherCells: Cell[][];
+    private otherCells: ICell[][];
 
-    public constructor(otherCells: Cell[][], row: number, col: number) {
+    public constructor(otherCells: ICell[][], row: number, col: number) {
         super("REF", row, col);
         this.otherCells = otherCells;
+        
 
     }
 
@@ -27,7 +28,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         return combinedValue;
     }
 
-    private evaluate(reference: string) {
+    private evaluate(reference: string): string {
         //split based on closing parenthesis
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
@@ -59,9 +60,18 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
             throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
         }
 
+        if (this.otherCells[location[1]][location[0]].isObserving(this.otherCells[this.row][this.col])) {
+            throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
+        }
+
         try {
+            
             //get display value of referenced cell
-            return this.otherCells[location[1]][location[0]].getDisplayValue();
+            let refCell:ICell= this.otherCells[location[1]][location[0]];
+            let thisCell:ICell = this.otherCells[this.row][this.col];
+            refCell.attachObserver(thisCell);
+            
+            return refCell.getDisplayValue();
         }
         catch {
             throw new Error(ErrorDisplays.REFERENCE_OUT_OF_RANGE);

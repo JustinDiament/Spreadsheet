@@ -1,10 +1,11 @@
+import { ICell } from "../interfaces/cell-interface";
 import { ICellStyle } from "../interfaces/cell-style-interface";
-import { IGraph } from "../interfaces/graph-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 import { CellStyle } from "./cell-style";
 import { AverageStrategy } from "./strategy-average";
-import {CellRefStrategy} from "./strategy-cell-ref";
+import { CellRefStrategy } from "./strategy-cell-ref";
 import { StrategyFormulas } from "./strategy-formulas";
 import { PlusSignStrategy } from "./strategy-plus-sign";
 import { SumStrategy } from "./strategy-sum";
@@ -12,7 +13,7 @@ import { SumStrategy } from "./strategy-sum";
 /**
  * Represents a spreadsheet cell
  */
-export class Cell {
+export class Cell implements ICell {
     /**
      * The data contained by this cell
      */
@@ -38,6 +39,16 @@ export class Cell {
     private style: ICellStyle;
 
     /**
+     * The list of cells observing this cell (OTHERS)
+     */
+    private observers: Array<ICell>;
+
+    /**
+     * The list of cells this cell is observing (MINE)
+     */
+    private observing: Array<ICell>;
+
+    /**
      * Create a new empty cell
      */
     public constructor(row: number, col: number) {
@@ -47,6 +58,8 @@ export class Cell {
         this.displayValue = "";
         this.validationRules = [];
         this.style = new CellStyle();
+        this.observers = [];
+        this.observing = [];
     }
 
     public getRow(): number {
@@ -81,11 +94,49 @@ export class Cell {
         return this.displayValue;
     }
 
+    public attachObserver(observer:ICell) : void {
+        if(!this.observers.includes(observer)) {
+            this.observers.push(observer);
+            observer.attachObserving(this);
+        }
+    }
+
+    public detachObserver(observer:ICell) : void {
+        let index: number = this.observers.indexOf(observer);
+        if(index > -1) {
+            this.observers.splice(index, 1);
+            observer.attachObserving(this);
+        }
+    }
+
+    public attachObserving(observing:ICell):void {
+        this.observing.push(observing);
+    }
+
+    public detachObserving(observing:ICell):void {
+        let index: number = this.observing.indexOf(observing);
+        if(index > -1) {
+            this.observing.splice(index, 1);
+        }
+    }
+
+    public isObserving(observing:ICell) :boolean {
+        let isObserving = this.observing.includes(observing);
+        if(!isObserving) {
+            this.observing.forEach((element:ICell) => (isObserving = isObserving && element.isObserving(observing)));
+        }
+
+        return isObserving;
+    }
+
     /**
      * Parses the entered value and evaluates the validation rules to update the display value
      */
-    public updateDisplayValue(cells: Array<Array<Cell>>): void{
+    public updateDisplayValue(cells: Array<Array<ICell>>): void{
+        this.observing.forEach((observed: ICell) => observed.detachObserver(observed));
         let strategies: Array<IStrategy> = [new CellRefStrategy(cells, this.row, this.col), new AverageStrategy(cells, this.row, this.col), new SumStrategy(cells, this.row, this.col), new PlusSignStrategy(), new StrategyFormulas()];
+
+        
 
         let foundError: boolean = false;
         for (const rule of this.validationRules) {
@@ -97,24 +148,34 @@ export class Cell {
           }
         //if an error has not been found through the validation rules, continue evaluating the value  
         if(!foundError) {
-
+            
             let currentString: string = this.enteredValue;
             try {
-                strategies.forEach((strategy) => {
+                for(let i:number = 0; i<strategies.length; i++) {
+                    let strategy=strategies[i];
                     currentString = strategy.parse(currentString);
-                });
+                    let noObservingError = true;
+                    this.observing.forEach((element:ICell) => 
+                    (noObservingError = noObservingError && !(Object.values(ErrorDisplays) as any).includes(element.getDisplayValue())));
+                        if(!noObservingError) {
+                            currentString=ErrorDisplays.INVALID_CELL_REFERENCE;
+                        break; 
+                    }
+                      
+                }
             }
             catch(error) {
                 if (error instanceof Error) currentString = error.message;
             }
-
-
+            
             // Need this so an update actually occurs if its empty
             if (!/\S/.test(currentString)) {
                 currentString+=" ";
               }
             this.displayValue = currentString;
-        }  
+        } 
+
+        this.observers.forEach((observer: ICell) => observer.updateDisplayValue(cells)); 
 
 
     }
@@ -133,6 +194,7 @@ export class Cell {
     public clearCell(): void {
         this.enteredValue = "";
         this.displayValue = "";
+        console.log("enum check: " + ((Object.values(ErrorDisplays) as any).includes('#INVALID-EXPR')));
     }
 
     /**

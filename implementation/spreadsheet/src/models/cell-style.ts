@@ -3,7 +3,7 @@ import { ICellStyle } from "../interfaces/cell-style-interface";
 /**
  * Represents the style attributes of a cell
  */
-export class CellStyle {
+export class CellStyle implements ICellStyle{
      /**
      * Is the text in the cell bolded?
      */

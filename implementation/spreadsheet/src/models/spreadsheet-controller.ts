@@ -1,12 +1,10 @@
 import { ISpreadSheetState } from "../interfaces/controller-interface";
-import { IGraph } from "../interfaces/graph-interface";
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { Cell } from "./cell";
-import { IStrategy } from "../interfaces/strategy-interface";
-import { CellRefStrategy } from "./strategy-cell-ref";
 import { create } from "zustand";
 import { ICellStyle } from "../interfaces/cell-style-interface";
-import { CellStyle } from "./cell-style";
+import { ICell } from "../interfaces/cell-interface";
+import { Util } from "./util";
 // todo fix errors and warnings in terminal
 // todo fix comments
 // todo fix imports
@@ -16,56 +14,14 @@ import { CellStyle } from "./cell-style";
 // todo check the key errors in inspect element console
 
 
-
-
-// local helper function to allow controller to easily convert a location such
-// as "A1" to a set of column/row coordinates
-const getIndicesFromLocation = (location: string): Array<number> => {
-  // initiate the value of column and number to return
-  let col: number = 0;
-  let row: number = 0;
-  // are we still parsing letters, or have we moved on to numbers?
-  let stillLetters = true;
-  // the remaining substring of the provided location
-  let remainder: string = location;
-  // check the provided location is not empty
-  if (remainder.length !== 0) {
-    // while there are characters to parse and we are still parsing letters
-    while (remainder.length > 0 && stillLetters) {
-      // is the first character of the remaining string an uppercase letter?
-      let sub: string = remainder[0];
-      if (sub.match(/[A-Z]/) !== null) {
-        // get unicode value of letter and convert it to the format where A=0, B=1, ... Z=25
-        // add to column because column values work as follows:
-        // A = column 0, B = column 1, ... Z = column 25, AA = column 26, BB = column 27, .. etc
-        col += sub.charCodeAt(0) - 65;
-        // remove the value we just parsed from the remaining string
-        remainder = remainder.substring(1);
-      } else {
-        // we are no longer parsing numbers, so convert what is left to a number
-        stillLetters = false;
-        row = Number(remainder.substring(0));
-        if (isNaN(row)) {
-          // if remaining location could not be converted to a number, it was invalid
-          throw new Error("invalid location");
-        }
-      }
-    }
-  } else {
-    throw new Error("invalid location");
-  }
-  // subtract 1 from row because the provided location started counting at 1, but we start at 0
-  return [col, row - 1];
-};
-
 // local helper function to create an empty 10x10 grid of cells
 // which the controller uses to instantiate the spreadsheet
-const createCells = (): Array<Array<Cell>> => {
+const createCells = (): Array<Array<ICell>> => {
   // create empty 2d array of cells
-  let cells: Array<Array<Cell>> = [];
+  let cells: Array<Array<ICell>> = [];
   // iterate through 10 rows and add 10 cells to each row
   for (let i: number = 0; i < 10; i++) {
-    let row: Array<Cell> = new Array<Cell>();
+    let row: Array<ICell> = new Array<ICell>();
     for (let j: number = 0; j < 10; j++) {
       row.push(new Cell(i, j));
     }
@@ -85,7 +41,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
     // the list of graphs created inside the spreadsheet by the user
     graphs: [],
 
-    findAndReplaceCells: new Array<Cell>(),
+    findAndReplaceCells: new Array<ICell>(),
 
     // the list of cells in the spreadsheet that are currently selected by the user
     currentlySelected: [],
@@ -96,11 +52,11 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param cell the cell to set as the currently selected cell, provided via its location
      */
     setSelectedOne: (cell: string) => {
-      let newSelect: Array<Cell> = [];
+      let newSelect: Array<ICell> = [];
       try {
         // parse the location of the cell and add the cell at that location to the new list
         // of currently selected cells
-        let location: Array<number> = getIndicesFromLocation(cell);
+        let location: Array<number> = Util.getIndicesFromLocation(cell);
         newSelect.push(get().cells[location[1]][location[0]]);
       } catch {
         // select nothing if there was an error
@@ -117,11 +73,11 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param cell2  the last cell in the range of cells to select
      */
     setSelectedMany: (cell1: string, cell2: string) => {
-      let newSelect: Array<Cell> = new Array<Cell>();
+      let newSelect: Array<ICell> = new Array<ICell>();
       try {
         // parse the location of the starting and ending cells and determine the range of values the selected cells fall within
-        let location1: Array<number> = getIndicesFromLocation(cell1);
-        let location2: Array<number> = getIndicesFromLocation(cell2);
+        let location1: Array<number> = Util.getIndicesFromLocation(cell1);
+        let location2: Array<number> = Util.getIndicesFromLocation(cell2);
         // using min and max so that a user could select a starting value that is below and to the right of the 
         // ending value, and still be able to select all cells within that range
         let colStart: number = Math.min(location1[0], location2[0]);
@@ -147,7 +103,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * selected cells
      * @param cell the cell to be determined if it is selected
      */
-    isSelected: (cell: Cell) => {
+    isSelected: (cell: ICell) => {
       try {
         return get().currentlySelected.includes(cell);
       } catch {
@@ -195,14 +151,14 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         insertLocation = belowRow + 1;
       }
 
-      let newCells: Array<Cell> = new Array<Cell>();
+      let newCells: Array<ICell> = new Array<ICell>();
       for (let i = 0; i < get().cells[0].length; i++) {
         newCells.push(new Cell(insertLocation, i));
       }
 
-      let newGrid: Array<Array<Cell>> = [];
+      let newGrid: Array<Array<ICell>> = [];
       get().cells.forEach((element) => {
-        let row: Array<Cell> = [];
+        let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
       });
@@ -252,9 +208,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         insertLocation = rightCol + 1;
       }
 
-      let newGrid: Array<Array<Cell>> = [];
+      let newGrid: Array<Array<ICell>> = [];
       get().cells.forEach((element) => {
-        let row: Array<Cell> = [];
+        let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
       });
@@ -292,9 +248,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
       }
 
-      let newGrid: Array<Array<Cell>> = [];
+      let newGrid: Array<Array<ICell>> = [];
       get().cells.forEach((element) => {
-        let row: Array<Cell> = [];
+        let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
       });
@@ -330,9 +286,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
       }
 
-      let newGrid: Array<Array<Cell>> = [];
+      let newGrid: Array<Array<ICell>> = [];
       get().cells.forEach((element) => {
-        let row: Array<Cell> = [];
+        let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
       });
@@ -357,31 +313,29 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param newValue the new value of the cell
      */
 
-    editCell: (cellId: string, newValue: any) => {
-      // todo: any should be string???
-      // todo: need interface for cell
+    editCell: (cellId: string, newValue: string) => {
 
-      let newGrid: Array<Array<Cell>> = [];
+
+      let newGrid: Array<Array<ICell>> = [];
       get().cells.forEach((element) => {
-        let row: Array<Cell> = [];
+        let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
       });
-      let loc: Array<number> = getIndicesFromLocation(cellId);
+      let loc: Array<number> = Util.getIndicesFromLocation(cellId);
       let row: number = loc[1];
       let col: number = loc[0];
-      let cell: Cell = newGrid[row][col];
+      let cell: ICell = newGrid[row][col];
       cell.setEnteredValue(newValue);
       cell.updateDisplayValue(get().cells);
       set({ cells: newGrid });
-      //I think this is where we would pass in the strategies and parse the string
     },
 
     /**
      * Removes the value of all the currently selected cells
      */
     clearSelectedCells: () => {
-      let newSelectedGrid: Array<Cell> = [];
+      let newSelectedGrid: Array<ICell> = [];
       // iterate through all currently selected cells and adds them to the new list of currently selected cells
       // doing this so that we can set the state of the spreadsheet at the end of this function
       get().currentlySelected.forEach((element) => {
@@ -397,11 +351,11 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * Removes the value of every cell in the spreadsheet
      */
     clearAllCells: () => {
-      let newGrid: Array<Array<Cell>> = [];
+      let newGrid: Array<Array<ICell>> = [];
       // iterate through all cells and adds them to the new grid of cells
       // doing this so that we can set the state of the spreadsheet at the end of this function
       get().cells.forEach((element) => {
-        let row: Array<Cell> = [];
+        let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
       });
@@ -463,16 +417,13 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param find the string that the cells' entered value should contain
      */
     findCellsContaining: (find: string) => {
-    //   TODO
-    //   find all the cells containing find and store them /somewhere/
+    //   find all the cells containing find and store them 
     //   set currently selected to contain only the first of the cells we just stored
-        let findAndReplaceCellsTemp: Array<Cell> = [];
-        let selectCells: Array<Cell> = get().currentlySelected;
-        console.log("did this");
+        let findAndReplaceCellsTemp: Array<ICell> = [];
+        let selectCells: Array<ICell> = get().currentlySelected;
         get().cells.forEach((row) => {
             row.forEach((element) => {
                 if (element.getEnteredValue().indexOf(find) !== -1) {
-                    console.log("adding");
                     findAndReplaceCellsTemp.push(element);
                 }
             })
@@ -481,23 +432,13 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         console.log(findAndReplaceCellsTemp);
 
         if (findAndReplaceCellsTemp.length > 0) {
-            console.log("doing this too");
             selectCells = [];
             selectCells.push(findAndReplaceCellsTemp[0]);
-            // set({ currentlySelected: [findAndReplaceCellsTemp[0]] });
             findAndReplaceCellsTemp.shift();
         }
-        console.log(findAndReplaceCellsTemp);
         set({ currentlySelected: selectCells, findAndReplaceCells: findAndReplaceCellsTemp });
-        // set({  });
-        console.log(get().findAndReplaceCells);
-        if(get().currentlySelected.length > 0) {
-          console.log(get().currentlySelected[0].getColumn() + " currently selected")
-        }
-        else {
-          console.log("nothing selected");
-        }
         
+ 
     },
 
     /**
@@ -512,60 +453,6 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
 
         get().findNextContaining(find);
-     
-      
-
-
-
-    //     const rowCurrent: number = get().currentlySelected[0].getRow();
-    //    const colCurrent: number = get().currentlySelected[0].getColumn();
-
-    //    set({ currentlySelected: [] });
-
-    //    let done = false;
-    //    for (let i=rowCurrent; i < get().cells.length; i++) {
-    //         for (let j=0; j < get().cells[0].length; j++) {
-    //             if (j===0) {
-    //                 j = j + colCurrent;
-    //             }
-    //             const currentCell = get().cells[i][j];
-    //             if (currentCell.getEnteredValue().indexOf(find) !== -1) {
-    //                 set({ currentlySelected: [currentCell] });
-    //                 done = true;
-    //                 break;
-    //             }
-    //         }  
-    //         if (done) {
-    //             break;
-    //         }
-    //    }
-
-
-       console.log("got out");
-
-        // get().cells.forEach((row) => {
-        //     row.forEach((element) => {
-        //         if (element.getEnteredValue().indexOf(find) !== -1 && element.getRow() >= get().currentlySelected[0].getRow() && element.getColumn() >= get().currentlySelected[0].getColumn()) {
-        //             console.log("adding");
-        //             findAndReplaceCellsTemp.push(element);
-        //         }
-        //     })
-
-        // });
-
-        // let findReplaceCellsTemp: Cell[] = get().findAndReplaceCells;
-        // let nextCell: Cell | undefined = findReplaceCellsTemp.shift();
-
-        // let currentlySelectedTemp: Cell[];
-        // if (!nextCell) {
-        //     currentlySelectedTemp = [];
-        // }
-        // else {
-        //     currentlySelectedTemp = [nextCell];
-        // }
-
-        // set({ findAndReplaceCells: findReplaceCellsTemp, currentlySelected: currentlySelectedTemp });
-              // TODO make page actually autoupdate for highlight (all else autoupdates already)
     },
 
     /**
@@ -577,12 +464,10 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
             return;
         }
 
-        console.log(get().currentlySelected[0]);
-        let newGrid:Array<Array<Cell>> = [];
-          // let selectCells: Array<Cell> = get().currentlySelected;
-          console.log("did this");
+        
+        let newGrid:Array<Array<ICell>> = [];
          get().cells.forEach((element) => {
-          let row: Array<Cell> = [];
+          let row: Array<ICell> = [];
           element.forEach((cell) => row.push(cell));
           newGrid.push(element);
         });
@@ -591,16 +476,15 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 
         const colCurrent: number = get().currentlySelected[0].getColumn();
 
-        let currentlySelectedTemp: Array<Cell> = []
+        let currentlySelectedTemp: Array<ICell> = []
  
-     //   set({ currentlySelected: [] });
  
         let done = false;
         for (let i=rowCurrent; i < get().cells.length; i++) {
              for (let j=0; j < get().cells[0].length; j++) {
                 let jj = j;
                  if (i===rowCurrent) {
-                    if (j==0) {
+                    if (j===0) {
                         continue;
                     }
                      jj = j + colCurrent;
@@ -622,15 +506,6 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
 
         set({ cells: newGrid, currentlySelected: currentlySelectedTemp });
- 
-        console.log("got out");
-
-
-      // TODO
-      // set currently selected to contain only the next of the cells we stored in
-      // findCellsContaining()
-      // if the currently selected is the last cell, set next to the first
-      // if there are no cells to be replaced, do nothing
     },
 
     /**
@@ -639,9 +514,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param replace the value to change to
      */
     findAndReplaceAll: (find: string, replace: string) => {
-        let newGrid: Array<Array<Cell>> = [];
+        let newGrid: Array<Array<ICell>> = [];
         get().cells.forEach((element) => {
-          let row: Array<Cell> = [];
+          let row: Array<ICell> = [];
           element.forEach((cell) => row.push(cell));
           newGrid.push(element);
         });
@@ -655,38 +530,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
       set( { cells: newGrid });
     },
 
-    /**
-     * Creates a graph based on a selection of cells
-     * @param cells the cells to base the graph on
-     */
-    createGraph: (cells: Array<Cell>) => {},
-
-    /**
-     * Deletes a graph from the spreadsheet
-     * @param graphId the id of the graph to remove
-     */
-    deleteGraph: (graphId: number) => {},
-
-    /**
-     * Sets a graph x axis name
-     * @param id the id of the graph to be renamed
-     * @param name the new name
-     */
-    setGraphXAxisName: (id: number, name: string) => {},
-
-    /**
-     * Sets a graph y axis name
-     * @param id the id of the graph to have its x axis renamed
-     * @param name the new name
-     */
-    setGraphYAxisName: (id: number, name: string) => {},
-
-    /**
-     * Sets a graph name
-     * @param id the id of the graph to have its y axis renamed
-     * @param name the new name
-     */
-    setGraphName: (id: number, name: string) => {},
+   
 
     
      /**
@@ -699,7 +543,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param setCellStyle the function to set a style property's value
      */
     setStyle:(isCellStyled:(style:ICellStyle) => boolean, setCellStyle:(style:ICellStyle, value:boolean) => void) =>{
-      let newSelected:Cell[] = [];
+      let newSelected:ICell[] = [];
       let allStyled:boolean = true;
       get().currentlySelected.forEach(cell => {
         allStyled = allStyled && isCellStyled(cell.getStyle());
@@ -720,7 +564,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param textColor the color the text in the cells should be
      */
     setTextColor: (textColor:string) => {
-      let newSelected:Cell[] = [];
+      let newSelected:ICell[] = [];
       get().currentlySelected.forEach(cell => {
           let newStyle: ICellStyle = cell.getStyle();
           newStyle.setTextColor(textColor);

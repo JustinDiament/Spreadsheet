@@ -1,6 +1,5 @@
-import { Cell } from "../models/cell";
+import { ICell } from "./cell-interface";
 import { ICellStyle } from "./cell-style-interface";
-import { IGraph } from "./graph-interface";
 import { IValidationRule } from "./validation-rule-interface";
 
 // representation of the spreadsheet controller, which manages the current state
@@ -8,15 +7,12 @@ import { IValidationRule } from "./validation-rule-interface";
 export interface ISpreadSheetState {
     // the 2d array/grid of cells in the spreadsheet, instantiated as an
     // empty 10x10 grid of cells
-    cells: Cell[][];
+    cells: ICell[][];
     
     // the list of cells in the spreadsheet that are currently selected by the user
-    currentlySelected: Cell[];
+    currentlySelected: ICell[];
 
-    // the list of graphs created inside the spreadsheet by the user
-    graphs: IGraph[];
-
-    findAndReplaceCells: Cell[];
+    findAndReplaceCells: ICell[];
 
     /**
      * Set the list of currently selected cells in the spreadsheet to contain
@@ -38,12 +34,12 @@ export interface ISpreadSheetState {
      * selected cells
      * @param cell the cell to be determined if it is selected
      */
-    isSelected(cell: Cell) : boolean;
+    isSelected(cell: ICell) : boolean;
 
     /**
      * Get the list of all currently selected cells
      */
-    getSelected() : Array<Cell>;
+    getSelected() : Array<ICell>;
 
     /**
      * Adds a new row to the spreadsheet
@@ -72,7 +68,7 @@ export interface ISpreadSheetState {
      * @param cellId the location of the cell to change
      * @param newValue the new value of the cell
      */
-    editCell(cellId: string, newValue: any): void;
+    editCell(cellId: string, newValue: string): void;
 
     /**
      * Removes the value for the selected cells
@@ -128,46 +124,7 @@ export interface ISpreadSheetState {
      * @param replace the value to change to
      */
     findAndReplaceAll(find: string, replace: string): void;
-
-    /**
-     * Creates a graph based on a selection of cells
-     * @param cells the cells to base the graph on
-     */
-    createGraph(cells: Array<Cell>): void;
-
-    /**
-     * Deletes a graph from the spreadsheet
-     * @param graphId the id of the graph to remove
-     */
-    deleteGraph(graphId: number): void;
-
-    /**
-     * Sets a graph x axis name
-     * @param id the id of the graph to be renamed
-     * @param name the new name
-     */
-    setGraphXAxisName(id: number, name: string): void;
-
-    /**
-     * Sets a graph y axis name
-     * @param id the id of the graph to have its x axis renamed
-     * @param name the new name
-     */
-    setGraphYAxisName(id: number, name: string): void;
-
-    /**
-     * Sets a graph name
-     * @param id the id of the graph to have its y axis renamed
-     * @param name the new name
-     */
-    setGraphName(id: number, name: string): void; 
-
-    /**
-     * Update whether or not the selected cells should be bolded
-     * If all cells are bold, unbold. Otherwise, bold all
-     */
-    
-
+  
     /**
      * Set the style of the selected cells using the provided functions for determining
      * if a style property is active, and function to set that property's value

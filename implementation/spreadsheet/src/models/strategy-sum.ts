@@ -1,12 +1,12 @@
+import { ICell } from "../interfaces/cell-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
-import { Cell } from "./cell";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 
 export class SumStrategy extends AExpressionStrategy implements IStrategy {
-    private otherCells: Cell[][];
+    private otherCells: ICell[][];
 
-    public constructor(otherCells: Cell[][], row: number, col: number) {
+    public constructor(otherCells: ICell[][], row: number, col: number) {
         super("SUM", row, col);
         this.otherCells = otherCells;
     }
@@ -22,16 +22,9 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
     }
 
     private evaluate(reference: string): string {
-        //split based on closing parenthesis
-        // let splitSections: string[] = reference.split(")", 2);
-        // //check that closed parenthesis exists
-        // if (splitSections.length < 2) {
-        //     //TODO: throw error that we set if there is no closing parenthesis and handle the error in the cell class
-        // }
-
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
-        if (index == -1) {
+        if (index === -1) {
             throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
         }
 
@@ -42,11 +35,11 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
 
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
         if(values.length < 1) {
-            return "ERROR: Cell range must contain at least one cell"
+            return ErrorDisplays.INVALID_RANGE_EXPR;
         }
         let sum = this.addRangeValues(values);
         if(isNaN(sum)) {
-            return "ERROR: Connot take sum of non-numbers"
+            return ErrorDisplays.INVALID_RANGE_EXPR;
         }
         return sum + splitSections[1];
     }

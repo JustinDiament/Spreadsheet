@@ -1,57 +1,56 @@
 import { useEffect, useState } from "react";
-import { Cell } from "../models/cell";
+// import { Cell } from "../models/cell";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { ICellStyle } from "../interfaces/cell-style-interface";
+import { ICell } from "../interfaces/cell-interface";
 
 // an interface to define the CellDisplayProps type for the CellDisplay component
 interface CellDisplayProps {
-  cell: Cell;
+  cell: ICell;
   index: string;
   setSelected: (x:number, y:number) => void;
+  isSelected: boolean;
   enabled: boolean
 }
 
 // React component for rendering an editable cell
 
-function CellDisplay({cell, index, setSelected, enabled}: CellDisplayProps) {
-  // console.log("cell rerender");
+function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDisplayProps) {
 
   // set whether the cell is currently "clicked in" / being edited
-  const [clickedIn, setClickedIn]: Array<any> = useState(false);
+  const [clickedIn, setClickedIn]: Array<any> = useState<boolean>(false);
 
   // set the 'entered data' of the cell - the data displayed when the cell is clicked in
-  const [data, setData]: Array<any> = useState(cell.getEnteredValue());
+  const [data, setData]: Array<any> = useState<string>(cell.getEnteredValue());
 
   // set the 'display data' of the cell - the data displayed when the cell is not clicked in
-  const [displayData, setDisplayData]: Array<any> = useState(cell.getDisplayValue());
+  const [displayData, setDisplayData]: Array<any> = useState<string>(cell.getDisplayValue());
 
   const [style, setStyle]: Array<any> = useState<ICellStyle>(cell.getStyle())
 
   // a function to edit a cell's entered data
-  const setValue = useSpreadsheetController((controller) => controller.editCell);
+  const setValue:(cellID:string, newValue:any) => void = useSpreadsheetController((controller) => controller.editCell);
 
 
 
 
 
-  // storing the current state of the cells in the spreadsheet
-  const grid = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells);
+  // storing the current state of the selected cells in the spreadsheet
   const currentlySelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
-  const [isSelected, setIsSelected] = useState<boolean>(currentlySelected.includes(cell));
+  const [isSelected2, setIsSelected] = useState<boolean>(currentlySelected.includes(cell));
  
   // rerender the cell and update its data/display data if the data it contains, shows, or refers to has changed
   // as well as if the currently selected cells changes
   useEffect(() => {
     setData(cell.getEnteredValue());
     // check to see if the value of any of its cell dependencies have changed
-    cell.updateDisplayValue(grid);
+    // cell.updateDisplayValue(grid);
     setDisplayData(cell.getDisplayValue()); 
     setIsSelected(currentlySelected.includes(cell)); 
     setStyle(cell.getStyle());
-    console.log(isSelected); 
-  }, [cell, grid, currentlySelected, enabled, isSelected, style]);
+  }, [cell, currentlySelected, enabled, isSelected, style]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell

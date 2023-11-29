@@ -52,7 +52,8 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
 
   // constant to be used in order to call isSelected on the controller
   // const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
-   let isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
+   let currSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
+
 
   // function to update the shift useState depending on if the key being pressed is shift
   function downHandler({key}:{key:string}):void {
@@ -141,11 +142,12 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
               {/* map through the grid to create the row headers */}
               {getCells.map((curr, row) => (<tr key={row+1}><th className="sp-grid-header sp-row-head" key={row+1}>{row+1}</th>
                   {/* map through the row in the grid to get the cells in the row */}
-                  {curr.map((cell, col) => (<td className={'m-0 p-1 sp-cell ' + (isSelected().includes(cell) ? 'sp-selected' : '')} key={indToLetter(col+1) + (row+1).toString()} >
+                  {curr.map((cell, col) => (<td className={'m-0 p-1 sp-cell ' + (currSelected().includes(cell) ? 'sp-selected' : '')} key={indToLetter(col+1) + (row+1).toString()} >
                     <CellDisplay cell = {cell}
                                  // the setSelected function in this cell will select cells given the location of this cell
                                 //  setSelected={() => select(indToLetter(cell.getColumn()) + (cell.getRow()).toString())}
                                 setSelected={setSelected}
+                                isSelected={(currSelected().includes(cell))}
                                  // the setValue function in this cell will edit the value of this cell given its location
 
                                  key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
