@@ -1,17 +1,15 @@
 import { IValidationRule } from "../interfaces/validation-rule-interface";
+import { ErrorDisplays } from "./cell-data-errors-enum";
 
 /**
- * Represents a data validation rule about if the data in the cell is one of a set number of options
+ * Represents a data validation rule about if the data in the cell 
+ * is one of a set number of options
  */
-export class ValueIsOneOfRule implements IValidationRule{
-
-    /**
-     * The set of values for the cell that it must be one of in order to be valid
-     */
+export class ValueIsOneOfRule implements IValidationRule {
     private values: Array<string | number>;
 
-    constructor($values:Array<string | number>) {
-        this.values = $values;
+    constructor(values: Array<string | number>) {
+        this.values = values;
     }
 
     /**
@@ -20,12 +18,12 @@ export class ValueIsOneOfRule implements IValidationRule{
      * @return true if the data is valid, false if it is not 
      */
     public checkRule(cellData: string): boolean {
-        return true;
+        // Check if cellData is in the set of allowed values
+        return this.values.includes(cellData);
     }
 
     public getErrorMessage(): string {
-        
-        return "";
+        return ErrorDisplays.INVALID_FORMULA;
     }
 
     public getValues(): Array<string | number> {

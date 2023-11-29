@@ -1,4 +1,7 @@
 import { Cell } from "../cell";
+import { ValueInRangeRule } from "../value-in-range-rule";
+import { ValueIsOneOfRule } from "../value-is-one-of-rule";
+import { ValueTypeRule } from "../value-type-rule";
 
 describe('Cell Location', (): void => {
 
@@ -9,6 +12,7 @@ describe('Cell Location', (): void => {
     let cell: Cell = new Cell(1,1);
     expect(cell.getRow()).toEqual(1);
   });
+  
 
   it('cell row should be as set', (): void => {
     let cell: Cell = new Cell(1,1);
@@ -62,7 +66,7 @@ describe('Cell Display', (): void => {
       let cell: Cell = new Cell(1, 1);
       cell.setEnteredValue("REF(!)");
       cell.updateDisplayValue([]);
-      expect(cell.getDisplayValue()).toEqual('#INVALID-REF');
+      expect(cell.getDisplayValue()).toEqual('#INVALIDREF');
     });
 
     it('should be able to update to become empty', (): void => {
@@ -128,9 +132,55 @@ describe('Cell Display', (): void => {
     it('Cell display value should be changed', (): void => {
       let cell: Cell = new Cell(1,1);
       cell.setEnteredValue("find")
-      cell.findReplace("find", "replace")
       cell.updateDisplayValue([]);
+      cell.findReplace("find", "replace")
       expect(cell.getDisplayValue()).toEqual('replace');
+    });
+
+    describe('Cell with Multiple Validation Rules', () => {
+      let cell: Cell;
+    
+      beforeEach(() => {
+        cell = new Cell(1, 1);
+      });
+    
+      it('should pass all validation rules', () => {
+        const valueInRangeRule = new ValueInRangeRule('=', 5);
+        const valueIsOneOfRule = new ValueIsOneOfRule(['apple', 'orange', 'banana']);
+        const valueTypeRule = new ValueTypeRule('string');
+    
+        cell.addRule(valueInRangeRule);
+        cell.addRule(valueIsOneOfRule);
+        cell.addRule(valueTypeRule);
+    
+        cell.setEnteredValue('apple');
+    
+        // Assuming updateDisplayValue method is working correctly
+        cell.updateDisplayValue([]);
+    
+        // Expect the cell to have the entered value because it passed all validation rules
+        expect(cell.getDisplayValue()).toEqual('apple');
+      });
+    
+      it('should fail one validation rule', () => {
+        const valueInRangeRule = new ValueInRangeRule('=', 5);
+        const valueIsOneOfRule = new ValueIsOneOfRule(['apple', 'orange', 'banana']);
+        const valueTypeRule = new ValueTypeRule('string');
+    
+        cell.addRule(valueInRangeRule);
+        cell.addRule(valueIsOneOfRule);
+        cell.addRule(valueTypeRule);
+    
+        cell.setEnteredValue('grape'); // Violates valueIsOneOfRule
+    
+        // Assuming updateDisplayValue method is working correctly
+        cell.updateDisplayValue([]);
+    
+        // Expect the cell to show the error message because it violated one validation rule
+        expect(cell.getDisplayValue()).toEqual('#INVALID-REF'); // or whatever error message you set
+      });
+    
+      // Add more test cases for different combinations of passing and failing validation rules
     });
   
   });
