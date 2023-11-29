@@ -20,11 +20,11 @@ describe('ValueIsOneOfRule', () => {
   });
 
   it('should not allow values that are not in the specified set', () => {
-    const allowedValues = ['apple', 'orange', 'banana'];
+    const allowedValues = ['oneallowed', 'twoallowed', 'threeallowed'];
     const rule = new ValueIsOneOfRule(allowedValues);
 
     // Values that are not in the specified set
-    const invalidValues = ['grape', 'kiwi', 'pear'];
+    const invalidValues = ['notallowed1', 'notallowed2', 'notallowed3'];
     for (const value of invalidValues) {
       const isValid = rule.checkRule(value.toString());
       expect(isValid).toBe(false);

@@ -23,7 +23,7 @@ export class ValueIsOneOfRule implements IValidationRule {
     }
 
     public getErrorMessage(): string {
-        return ErrorDisplays.INVALID_FORMULA;
+        return ErrorDisplays.INVALID_CELL_DATA;
     }
 
     public getValues(): Array<string | number> {
