@@ -268,6 +268,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
           newGrid[i][j].setRow(newGrid[i][j].getRow() - numRowsToDelete);
         }
       }
+      newGrid.forEach((row: ICell[]) => row.forEach((cell:ICell) => (cell.updateDisplayValue(newGrid))));
       set({ cells: newGrid });
     },
 
@@ -290,12 +291,12 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
         }
       }
 
-      let newGrid: Array<Array<ICell>> = [];
+       let newGrid: Array<Array<ICell>> = [];
       get().cells.forEach((element) => {
         let row: Array<ICell> = [];
         element.forEach((cell) => row.push(cell));
         newGrid.push(element);
-      });
+      }); 
 
       for (let i = 0; i < numColsToDelete; i++) {
         for (let j = 0; j < newGrid.length; j++) {
@@ -308,6 +309,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
           newGrid[i][j].setColumn(newGrid[i][j].getColumn() - numColsToDelete);
         }
       }
+      newGrid.forEach((row: ICell[]) => row.forEach((cell:ICell) => (cell.updateDisplayValue(newGrid))));
       set({ cells: newGrid });
     },
 

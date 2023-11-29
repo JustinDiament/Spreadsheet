@@ -138,7 +138,7 @@ export default function SpreadSheetDisplay() {
 
       <div className={(sidePanel ? 'sp-two-panel' : '') + ' sp-work-space'}>
         {/* actual grid of cells */}
-        <CellGridDisplay  findReplaceOpen={findReplaceOpenF}/>
+        <CellGridDisplay  findReplaceOpen={findReplaceOpenF()}/>
 
         <div className={"sp-side-panel"} style={sidePanel ? { display: "block" } : { display: "none" }}>
           <div className={"sp-panel-close float-right"} onClick={() => setSidePanel(false)}><IoClose /></div>

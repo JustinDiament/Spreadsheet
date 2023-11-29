@@ -3,6 +3,8 @@ import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useCallback, useEffect, useState } from "react";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
+import { transpileModule } from "typescript";
+import { ICell } from "../interfaces/cell-interface";
 
   // function to convert an number to its corresponding letter
   // where 1 = A, 2 = B,... 27 = AA, 28 = BB, 53 = AAA, etc
@@ -26,9 +28,9 @@ import React from "react";
 
 // the react component for the grid of cells
 
-function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
+function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:boolean}) {
 
-  console.log("rerender cellgrid display");
+  // console.log("rerender cellgrid display");
   // track the changing state of the grid, which is the grid of cells of the provided spreadsheetState
   const getCells = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells)
 
@@ -51,10 +53,10 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
   const setSelectedOne = useSpreadsheetController((controller : ISpreadSheetState) => controller.setSelectedOne);
 
   // constant to be used in order to call isSelected on the controller
-  // const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
+  const isSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.isSelected);
    let currSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.getSelected);
 
-
+// console.log(currSelected());
   // function to update the shift useState depending on if the key being pressed is shift
   function downHandler({key}:{key:string}):void {
     if (key === 'Shift') {
@@ -70,7 +72,7 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
   };
 
   useEffect(() => {
-    
+    console.log(currSelected());
   }, [useSpreadsheetController((controller) => controller.currentlySelected)])
 
   // useEffect to update if the shift key is being pressed or lifted
@@ -88,13 +90,16 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
  // useEffect to select a cell or multiple cells in the backend whenever the lastmost selected cell is changed
  useEffect(() => {
   // we only want to bother running the following code if we haven't already updated the selected cells in the model
+  
   if(!sentSelected) {
+    
     // if there is no first selected cell or the user is not trying to select multiple by holding shift
     // then just update the firstSelected cell, and clear any lastselected cell value
     if(firstSelected==="" || shiftHeld===false) {
       setFirst(lastSelected);
       setSelectedOne(lastSelected);
       setSentSelected(true);
+      console.log("change selecteds")
     }
     
     // if there is a first selected cell and the user is holding shift to select multiple,
@@ -102,6 +107,7 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
     else {
       setSelectedMany(firstSelected, lastSelected);
       setSentSelected(true);
+      console.log("change selectedf")
     }
   }
  }, [lastSelected, setSelectedMany, setSelectedOne, setFirst, firstSelected, setSentSelected, sentSelected, shiftHeld]);
@@ -112,17 +118,24 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
   // @param cell the location of the cell that was selected in the frontend
   const select = useCallback((cell:string) => {
       // only allow selection if find and replace is not active
-      if(!findReplaceOpen()) {
+      if(!findReplaceOpen) {
         // a new cell was clicked on, but we haven't sent it to the model yet
         setSentSelected(false);
         // update the last-clicked cell to the one provided
         setLast(cell);
       }
-  }, [setLast])
+      // console.log("calling select");
+  }, [findReplaceOpen])
 
   const setSelected = useCallback((col: number, row: number) => {
     select(indToLetter(col+1) + (row+1).toString())
+    //console.log("setSelected");
   }, [select])
+
+  const [clickedIn, setClickedIn] = useState<ICell | null>(null)
+  const getClickedIn:(cell:ICell) => boolean = (cell:ICell) => {
+    return clickedIn === cell;
+  }
 
   // the actual HTML of the grid of cells
   return (
@@ -150,9 +163,12 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
                                 isSelected={(currSelected().includes(cell))}
                                  // the setValue function in this cell will edit the value of this cell given its location
 
-                                 key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
+                                 key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString() + (cell.getDisplayValue()) + currSelected().includes(cell))}
                                  index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
-                                 enabled={findReplaceOpen()}/></td> ))}
+                                 enabled={findReplaceOpen}
+                                 getClickedIn={getClickedIn(cell)}
+                                 setClickedIn={setClickedIn}/></td> ))}
+                                 
                                  
 
 

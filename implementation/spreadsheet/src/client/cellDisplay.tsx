@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { Cell } from "../models/cell";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { ICellStyle } from "../interfaces/cell-style-interface";
 import { ICell } from "../interfaces/cell-interface";
+import { Component } from 'react';
 
 // an interface to define the CellDisplayProps type for the CellDisplay component
 interface CellDisplayProps {
@@ -12,16 +13,19 @@ interface CellDisplayProps {
   index: string;
   setSelected: (x:number, y:number) => void;
   isSelected: boolean;
-  enabled: boolean
+  enabled: boolean;
+  getClickedIn: boolean;
+  setClickedIn: (cell:ICell | null) => void;
 }
 
 // React component for rendering an editable cell
 
-function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDisplayProps) {
+function CellDisplay({cell, index, setSelected, isSelected, enabled, getClickedIn, setClickedIn}: CellDisplayProps) {
+  
 
   // set whether the cell is currently "clicked in" / being edited
-  const [clickedIn, setClickedIn]: Array<any> = useState<boolean>(false);
-
+  const [clickedIn, setLocalClickedIn]: Array<any> = useState<boolean>(getClickedIn);
+// console.log(getClickedIn);
   // set the 'entered data' of the cell - the data displayed when the cell is clicked in
   const [data, setData]: Array<any> = useState<string>(cell.getEnteredValue());
 
@@ -33,14 +37,15 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDispla
   // a function to edit a cell's entered data
   const setValue:(cellID:string, newValue:any) => void = useSpreadsheetController((controller) => controller.editCell);
 
-  const grid:ICell[][] = useSpreadsheetController((controller) => controller.cells);
+
+  //const grid:ICell[][] = useSpreadsheetController((controller) => controller.cells);
 
 
 
 
   // storing the current state of the selected cells in the spreadsheet
-  const currentlySelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
-  const [isSelected2, setIsSelected] = useState<boolean>(currentlySelected.includes(cell));
+  // const currentlySelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
+  // const [isSelected2, setIsSelected] = useState<boolean>(currentlySelected.includes(cell));
  
   // rerender the cell and update its data/display data if the data it contains, shows, or refers to has changed
   // as well as if the currently selected cells changes
@@ -49,17 +54,41 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDispla
     // check to see if the value of any of its cell dependencies have changed
     // cell.updateDisplayValue(grid);
     setDisplayData(cell.getDisplayValue()); 
-    setIsSelected(currentlySelected.includes(cell)); 
+    // setIsSelected(currentlySelected.includes(cell)); 
     setStyle(cell.getStyle());
-  }, [cell, currentlySelected, enabled, isSelected, style, grid]);
+  }, [cell, enabled, isSelected, style]);
 
   // when the cell is clicked on, set it as either selected in the range
   // or selected as the single active cell
   useEffect(() => {
     if (clickedIn) {
+      if(clickedIn !== getClickedIn) {
+      setClickedIn(cell);
       setSelected(cell.getColumn(), cell.getRow());
-    }
-  }, [clickedIn, setSelected, cell]);
+      console.log("focus? " + cell.getColumn() + ", " + cell.getRow())
+      document.getElementById("editable-cell-" + cell.getColumn() + ":" + cell.getRow())?.focus();
+      console.log("reselecting")
+      } else {
+        setClickedIn(cell);
+        document.getElementById("editable-cell-" + cell.getColumn() + ":" + cell.getRow())?.focus();
+
+
+      }
+      //document.getElementById("editable-cell")?.focus()
+    } 
+  }, [setSelected, cell, clickedIn, setClickedIn]);
+
+
+
+// const inputRef = useRef<boolean | null>(getClickedIn);
+
+  // useEffect(() => {
+  //   if (inputRef.current && getClickedIn) {
+  //     document.getElementById("editable-cell")?.focus();
+  //     console.log("focus " + cell.getColumn() + ", " + cell.getRow())
+  //   } 
+  //   //else inputRef.current = clickedIn;
+  // })
 
   // useEffect(() => {
   //   setStyle(cell.getStyle())
@@ -70,7 +99,9 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDispla
     setValue(index, newData);
     setData(cell.getEnteredValue());
     setDisplayData(cell.getDisplayValue());
-    setClickedIn(false);
+    setLocalClickedIn(false);
+    setClickedIn(null);
+    
   };
 
 
@@ -81,18 +112,19 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled}: CellDispla
    fontStyle: (style.isCellItalic() ? 'italic' : 'normal'),
    textDecorationLine: (style.isCellUnderlined() ? 'underline' : 'none')
 }
-
+// const inputRef = useRef(null);
   // the actual HTML of the cell
   return (
     <div className={"sp-input-sizer " + (clickedIn ? "active" : "")}>
       {/* using contentEditable so that the cell can resize based on content and dangerousltSetInnerHTML so that
            the actual content of the cell displays, not only the manually entered value */}
-      <div
+      <div  id={"editable-cell-" + cell.getColumn() + ":" + cell.getRow()}
         tabIndex={0}
         contentEditable={(!enabled ? "true" : "false")}
         className={'border-0 rounded-0 sp-expandable-input ' + (!enabled ? 'form-control ': 'p-2 ')}
-        onClick={() => !enabled && setClickedIn(true)}
+        onClick={() => {!enabled && setLocalClickedIn(cell)}}
         style={myComponentStyle}
+        // focus={}
         // update cell value when user clicks away
         onBlur={(e) =>
           update(
