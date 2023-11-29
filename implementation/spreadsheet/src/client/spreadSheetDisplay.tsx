@@ -36,7 +36,6 @@ export default function SpreadSheetDisplay() {
   const [currPanel, setCurrPanel] = useState<string>("");
 
   // is the find and replace menu open?
-  const findReplaceOpen:boolean = (sidePanel && currPanel==="find and replace");
   const findReplaceOpenF:(() => boolean) = () => (panelDisplayState("find and replace"));
 
   // close any opened dropdowns because the user clicked outside of the active dropdown area

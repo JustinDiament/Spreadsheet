@@ -1,4 +1,4 @@
-import { Cell } from "./cell";
+import { ICell } from "../interfaces/cell-interface";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 import { Util } from "./util";
 
@@ -25,20 +25,13 @@ export abstract class AExpressionStrategy {
         return combinedValue;
     }
 
-    public resolveRange(inputs: string, otherCells: Cell[][]): string[] {
+    public resolveRange(inputs: string, otherCells: ICell[][]): string[] {
         //split sum parameters by ...
         let splitInputs: string[] = inputs.split("..");
         //find top left row and col
-        // let firstCode: string[] = splitInputs[0].split(/(\d+)/);
-        // let firstCol: number = this.findCol(firstCode[0]);
-        console.log("did this");
-        // let firstRow: number = parseInt(firstCode[1]);
         let locationStart: Array<number> = Util.getIndicesFromLocation(splitInputs[0]);
 
         //find bottom right row and col
-        // let secondCode: string[] = splitInputs[1].split(/(\d+)/);
-        // let secondCol: number = this.findCol(secondCode[0]);
-        // let secondRow: number = parseInt(secondCode[1]);
         let locationEnd: Array<number> = Util.getIndicesFromLocation(splitInputs[1]);
 
         //TODO: handle improper inputs
@@ -55,15 +48,15 @@ export abstract class AExpressionStrategy {
             throw new Error(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
         }
 
-
-
         for(let i = locationStart[1];i<=locationEnd[1];i++) {
             for(let j = locationStart[0]; j<=locationEnd[0]; j++) {
                 if (this.row === i && this.col === j) {
                     throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
                 }
-
-                values.push(otherCells[i][j].getDisplayValue());
+                let refCell:ICell= otherCells[i][j];
+                let thisCell:ICell = otherCells[this.row][this.col];
+                refCell.attachObserver(thisCell);
+                values.push(refCell.getDisplayValue());
             }
          }
         return values;

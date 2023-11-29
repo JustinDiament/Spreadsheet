@@ -1,12 +1,13 @@
+import { ICell } from "../interfaces/cell-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
-import { Cell } from "./cell";
+// import { Cell } from "./cell";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 
 export class AverageStrategy extends AExpressionStrategy implements IStrategy {
-    private otherCells: Cell[][];
+    private otherCells: ICell[][];
 
-    public constructor(otherCells: Cell[][], row: number, col: number) {
+    public constructor(otherCells: ICell[][], row: number, col: number) {
         super("AVERAGE", row, col);
         this.otherCells = otherCells;
     }
@@ -23,12 +24,6 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
 
     private evaluate(reference: string): string {
         //split based on closing parenthesis
-        // let splitSections: string[] = reference.split(")", 2);
-        // //check that closed parenthesis exists
-        // if (splitSections.length < 2) {
-        //     throw new Error("#RANGE");
-        // }
-
         const index = reference.indexOf(')');
         //check that closed parenthesis exists
         if (index === -1) {
@@ -42,12 +37,12 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
 
         let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
         if(values.length < 1) {
-            return "ERROR: Cell range must contain at least one cell"
+            return ErrorDisplays.INVALID_RANGE_EXPR;
         }
         let sum: number = this.addRangeValues(values);
         let average: number = sum / values.length;
         if(isNaN(average)) {
-            return "ERROR: Connot take average of non-numbers"
+            return ErrorDisplays.INVALID_RANGE_EXPR;
         }
         return average + splitSections[1];
     }
