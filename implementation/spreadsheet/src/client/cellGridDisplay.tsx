@@ -1,8 +1,19 @@
+/**
+ * @file cellGridDisplay.tsx
+ */
+
 import CellDisplay from "./cellDisplay";
 import { ISpreadSheetState } from "../interfaces/controller-interface";
 import { useCallback, useEffect, useState } from "react";
 import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
+
+
+/**
+ * ==============================================================
+ * helper functions that do not need to be in the React component
+ * ==============================================================
+ */
 
   // function to convert an number to its corresponding letter
   // where 1 = A, 2 = B,... 27 = AA, 28 = BB, 53 = AAA, etc
@@ -23,11 +34,21 @@ import React from "react";
     return strInd;
   };
 
+/**
+ * ==============================================================
+ *                     React component
+ * ==============================================================
+ */
+
+// an interface to define the CellGridDisplayProps type for the CellGridDisplay component
+interface CellGridDisplayProps {
+  findReplaceOpen: () => boolean; // is the find and replace menu open?
+}
+
 
 // the react component for the grid of cells
-function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
-
-  console.log("rerender cellgrid display");
+function CellGridDisplay({findReplaceOpen} : CellGridDisplayProps) {
+ 
   // track the changing state of the grid, which is the grid of cells of the provided spreadsheetState
   const getCells = useSpreadsheetController((controller : ISpreadSheetState) => controller.cells)
 
@@ -51,7 +72,6 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
 
   // constant to be used in order to track the currently selected cells
    let currSelected = useSpreadsheetController((controller : ISpreadSheetState) => controller.currentlySelected);
-
 
   // function to update the shift useState depending on if the key being pressed is shift
   function downHandler({key}:{key:string}):void {
@@ -78,7 +98,6 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
   }, []);
 
 
-
  // useEffect to select a cell or multiple cells in the backend whenever the lastmost selected cell is changed
  useEffect(() => {
   // we only want to bother running the following code if we haven't already updated the selected cells in the model
@@ -98,13 +117,14 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
       setSentSelected(true);
     }
   }
- }, [lastSelected, setSelectedMany, setSelectedOne, setFirst, firstSelected, setSentSelected, sentSelected, shiftHeld]);
+  // run whenever a value related to the state of selection changes
+}, [lastSelected, setSelectedMany, setSelectedOne, setFirst, firstSelected, setSentSelected, sentSelected, shiftHeld]);
   
 
   /** 
    * function to select a cell or multiple cells using useCallback to prevent every cell rerendering everytime select is passed as Props
-    * @param cell the location of the cell that was selected in the frontend
-    **/
+   * @param cell the location of the cell that was selected in the frontend
+   */
   const select = useCallback((cell:string) => {
       // only allow selection if find and replace is not active
       if(!findReplaceOpen()) {
@@ -113,8 +133,13 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
         // update the last-clicked cell to the one provided
         setLast(cell);
       }
-  }, [findReplaceOpen])
+  }, [])
 
+  /**
+   * The function to update which cells are selected based on the location of the cell clicked
+   * @param col the column index
+   * @param row the row index
+   */
   const setSelected = useCallback((col: number, row: number) => {
     select(indToLetter(col+1) + (row+1).toString())
   }, [select])
@@ -140,12 +165,13 @@ function CellGridDisplay({findReplaceOpen} : {findReplaceOpen:() => boolean}) {
                   {curr.map((cell, col) => (<td className={'m-0 p-1 sp-cell ' + (currSelected.includes(cell) ? 'sp-selected' : '')} key={indToLetter(col+1) + (row+1).toString()} >
                     <CellDisplay cell = {cell}
                                  // the setSelected function in this cell will select cells given the location of this cell
-                                setSelected={setSelected}
+                                 setSelected={setSelected}
                                  // the key is to differentiate between the cells in the map for react
                                  key={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
+                                 // index is the string location of the cell (i.e. A1)
                                  index={(indToLetter(cell.getColumn()+1) + (cell.getRow()+1).toString())}
-                                 enabled={findReplaceOpen()}/></td> ))}
-                                 
+                                 // disabled states whether the cell can be edited, based on whether the find and replace panel is open
+                                 disabled={findReplaceOpen()}/></td> ))}
                   </tr> ))}
           </tbody>
         </table>

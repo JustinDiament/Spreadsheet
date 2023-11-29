@@ -1,10 +1,20 @@
+/**
+ * @file dropDownMenu.tsx
+ */
+
 import React from "react";
+
+/**
+ * ==============================================================
+ *                     React component
+ * ==============================================================
+ */
 
 // an interface to define the DropDownMenuProps type for the DropDownMenu component
 interface DropDownMenuProps {
-  disp:boolean;
-  menuItems:Array<string>;
-  functions:((index:number) => void);
+  disp:boolean; // is this dropdownmenu displayed?
+  menuItems:Array<string>; // the menu items in this dropdown menu
+  functions:((index:number) => void); // the functions corresponding to the menu items
 }
 
 // a react component for a dropdown menu display

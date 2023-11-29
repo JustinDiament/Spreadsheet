@@ -70,6 +70,7 @@ export interface ISpreadSheetState {
      */
     editCell(cellId: string, newValue: string): void;
 
+
     /**
      * Removes the value for the selected cells
      */
