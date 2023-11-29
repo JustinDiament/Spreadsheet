@@ -75,7 +75,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
   );
 
   // constant to be used in order to track the currently selected cells
-  let currSelected = useSpreadsheetController(
+  const currSelected = useSpreadsheetController(
     (controller: ISpreadSheetState) => controller.getSelected
   );
 
@@ -96,7 +96,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
   // force the grid to rerender whenever the currently selected cells are changed
   useEffect(() => {
     // no need to do anything in addition to rendering
-  }, [useSpreadsheetController((controller) => controller.currentlySelected)]);
+  }, [currSelected]);
 
   // useEffect to update if the shift key is being pressed or lifted
   useEffect(() => {

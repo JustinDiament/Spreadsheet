@@ -231,7 +231,9 @@ export class Cell implements ICell {
             let combinedString: string = sections.join('');
             console.log(sections)
             this.setEnteredValue(combinedString);
+
         }
+
         console.log(this.getEnteredValue());
     }
 
