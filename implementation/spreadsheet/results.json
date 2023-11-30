@@ -1,0 +1,241 @@
+{
+  "suites": {
+    "title": "",
+    "fullTitle": "",
+    "suites": [],
+    "tests": [
+      {
+        "title": "should allow values of the specified type (string)",
+        "fullTitle": "Value type rule should allow values of the specified type (string)",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should allow values of the specified type (num)",
+        "fullTitle": "Value type rule should allow values of the specified type (num)",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should not allow values of a different type",
+        "fullTitle": "Value type rule should not allow values of a different type",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should throw an error on an invalid type",
+        "fullTitle": "Value type rule should throw an error on an invalid type",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should handle edge case with an empty string and a number rule",
+        "fullTitle": "Value type rule should handle edge case with an empty string and a number rule",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should handle edge case with an empty string and a string rule",
+        "fullTitle": "Value type rule should handle edge case with an empty string and a string rule",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should return the proper value via the getter",
+        "fullTitle": "Value type rule should return the proper value via the getter",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should handle large numbers",
+        "fullTitle": "Value type rule should handle large numbers",
+        "status": "PASS",
+        "error": null
+      }
+    ],
+    "pass": 8,
+    "fail": 0
+  },
+  "stats": {
+    "numFailedTestSuites": 0,
+    "numFailedTests": 0,
+    "numPassedTestSuites": 1,
+    "numPassedTests": 8,
+    "numPendingTestSuites": 0,
+    "numPendingTests": 0,
+    "numRuntimeErrorTestSuites": 0,
+    "numTodoTests": 0,
+    "numTotalTestSuites": 1,
+    "numTotalTests": 8,
+    "openHandles": [],
+    "snapshot": {
+      "added": 0,
+      "didUpdate": false,
+      "failure": false,
+      "filesAdded": 0,
+      "filesRemoved": 0,
+      "filesRemovedList": [],
+      "filesUnmatched": 0,
+      "filesUpdated": 0,
+      "matched": 0,
+      "total": 0,
+      "unchecked": 0,
+      "uncheckedKeysByFile": [],
+      "unmatched": 0,
+      "updated": 0
+    },
+    "startTime": 1701372764227,
+    "success": false,
+    "testResults": [
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 8,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701372767350,
+          "runtime": 2912,
+          "slow": false,
+          "start": 1701372764438
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/value-type-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should allow values of the specified type (string)",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values of the specified type (string)"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should allow values of the specified type (num)",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values of the specified type (num)"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should not allow values of a different type",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values of a different type"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 8,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should throw an error on an invalid type",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw an error on an invalid type"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should handle edge case with an empty string and a number rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle edge case with an empty string and a number rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should handle edge case with an empty string and a string rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle edge case with an empty string and a string rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should return the proper value via the getter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the proper value via the getter"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should handle large numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle large numbers"
+          }
+        ],
+        "failureMessage": null
+      }
+    ],
+    "wasInterrupted": false
+  }
+}
