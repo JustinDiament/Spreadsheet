@@ -1,6 +1,6 @@
 /**
- * @file cell-style.ts
- * @class CellStyle
+ * @file cell.ts
+ * @class Cell
  */
 
 import { ICell } from "../interfaces/cell-interface";
@@ -208,6 +208,7 @@ export class Cell implements ICell {
       new StrategyFormulas(),
     ];
     let currentString: string = this.enteredValue;
+
     try {
       //iterate through the full list of strategies
       for (let i: number = 0; i < strategies.length; i++) {
@@ -232,9 +233,7 @@ export class Cell implements ICell {
       if (error instanceof Error) currentString = error.message;
     }
     // Need this so an update actually occurs if its empty
-    if (!/\S/.test(currentString)) {
-      currentString += " ";
-    }
+    
     this.displayValue = currentString;
     //check the cell against each of the validation rules that has been applied to it
     for (const rule of this.validationRules) {
