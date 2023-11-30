@@ -36,7 +36,6 @@ function dispValTypeRule(rule: ValueTypeRule, ind: number, onClick: (rule: IVali
         value={rule.getType()}>
         <option value="num">a number</option>
         <option value="word">a word</option>
-        <option value="any">anything</option>
       </select>
       {/* Allow user to delete this rule from the currently selected cells */}
       <button
@@ -92,7 +91,7 @@ function dispValIsRule(rule: ValueInRangeRule, ind: number, onClick: (rule: IVal
  * @param ind the index of the rule, to be used as a key
  * @param ind the index of the rule, to be used as a key
  * @param onClick the function to be called on click
- * @param type the rule's type (i.e. anything, word, number)
+ * @param type the rule's type (i.e. word, number)
  * @returns the HTML element to display
  */
 function dispValOneOf(rule: ValueIsOneOfRule, ind: number, onClick: (rule: IValidationRule) => void, type: string) {
@@ -127,7 +126,7 @@ function dispValOneOf(rule: ValueIsOneOfRule, ind: number, onClick: (rule: IVali
  * @param rule the data validation rule to be rendered
  * @param ind the index of the rule, to be used as a key
  * @param onClick the function to be called on click
- * @param type the rule's type (i.e. anything, word, number)
+ * @param type the rule's type (i.e. word, number)
  * @returns the HTML element to display
  */
 function dispRule(rule: IValidationRule, ind: number, onClick: (rule: IValidationRule) => void, type: string) {
@@ -164,8 +163,8 @@ function DataValidationMenu({ disp }: DataValidationMenuProps) {
   );
 
   // for the new set of rules being created, store the following information as it is being edited:
-  // the type of value that the cell will contain ("value is a number/a string/anything")
-  const [type, setType] = useState<string>("any");
+  // the type of value that the cell will contain ("value is a number/a word")
+  const [type, setType] = useState<string>("word");
 
   // the comparison function for the value, IFF type is a number ("value is greater than/less than/equal to")
   const [comp, setComp] = useState<string>("");
@@ -254,7 +253,7 @@ function DataValidationMenu({ disp }: DataValidationMenuProps) {
     // set the list of rules to make sure they include all rules, including the newly added ones
     setRules(getAllRules());
     // reset all the values of the states, as the user can now add a fresh rule if they would like
-    setType("any");
+    setType("word");
     setComp("");
     setVal(NaN);
     setOptions([]);
@@ -293,7 +292,7 @@ function DataValidationMenu({ disp }: DataValidationMenuProps) {
             style={rules.length > 0 ? { display: "flex" } : { display: "none" }}
           ></hr>
           {/* display the UI for adding a new set of rules */}
-          {/* add a rule for the type of value (number, word, anything) */}
+          {/* add a rule for the type of value (number, word) */}
           <div className={"d-flex flex-wrap w-100 my-2"}>
             <span className={"w-100"}>Value is</span>
             {/* drop down to select type */}
@@ -305,7 +304,6 @@ function DataValidationMenu({ disp }: DataValidationMenuProps) {
 
               <option value="num">a number</option>
               <option value="word">a word</option>
-              <option value="any">anything</option>
             </select>
           </div>
 

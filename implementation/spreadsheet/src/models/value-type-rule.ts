@@ -31,10 +31,7 @@ export class ValueTypeRule implements IValidationRule {
       //if type is supposed to be a string
     } else if (this.type === "word") {
       return typeof cellData === "string";
-      //if type does not matter return true
-    } else if (this.type === "any") {
-      return true;
-    }
+    } 
     // If the type is not recognized, consider it invalid
     else {
       throw new Error(ErrorDisplays.INVALID_CELL_DATA);
