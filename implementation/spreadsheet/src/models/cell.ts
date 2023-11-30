@@ -291,7 +291,13 @@ export class Cell implements ICell {
    * @param rule the rule to be added
    */
   public addRule(rule: IValidationRule): void {
-    this.validationRules.push(rule);
+    let contains:boolean = false;
+    // check if this rule already exists for this cell
+    this.validationRules.forEach((currRule:IValidationRule) => {
+      contains = contains || (JSON.stringify(currRule) === JSON.stringify(rule));
+    })
+    // if the rule doesn't already exist, add it
+    !contains && this.validationRules.push(rule);
   }
 
   /**

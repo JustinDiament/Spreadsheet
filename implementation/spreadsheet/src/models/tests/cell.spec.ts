@@ -4,8 +4,11 @@
  */
 
 import { ICell } from "../../interfaces/cell-interface";
+import { ICellStyle } from "../../interfaces/cell-style-interface";
+import { IValidationRule } from "../../interfaces/validation-rule-interface";
 import { Cell } from "../cell";
 import { ErrorDisplays } from "../cell-data-errors-enum";
+import { CellStyle } from "../cell-style";
 import { ValueInRangeRule } from "../value-in-range-rule";
 import { ValueIsOneOfRule } from "../value-is-one-of-rule";
 import { ValueTypeRule } from "../value-type-rule";
@@ -83,68 +86,6 @@ describe("Testing the ICell interface", (): void => {
 		// testing getDisplayValue(cells: Array<Array<ICell>>): string on initial value
 		it("getDisplayValue() should return the initial value of displayValue", (): void => {
 			expect(cell.getDisplayValue()).toEqual("");
-		});
-
-		/**
-		 * update display value with:
-		 *
-		 * =================
-		 * ERRORS:
-		 * =================
-		 *
-		 *
-		 * // #REF-OUT-OF-RANGE
-		 * entered references cell out of range
-		 * entered sum of cell out of range
-		 * entered average of cell out of range
-		 *
-		 * // #INVALID-INPUT
-		 * entered value is string but validation rule says word
-		 * entered value is number outside of range
-		 * entered value is string not one of options
-		 * entered value of number not one of options
-		 * entered value has contradicting rules
-		 *
-		 * // #SELF-REF
-		 * entered references itself
-		 * entered references cell that references it back
-		 * entered references cell that references cell that references initial cell
-		 * entered references cell that contains initial cell in sum
-		 * entered references cell that contains initial cell in average
-		 *
-		 *
-		 * // #INVALID-EXPR
-		 * entered sum in reverse order
-		 * entered average in reverse order
-		 * entered sum containing string
-		 * entered average containing string
-		 * entered sum missing ..
-		 * entered sum missing ()
-		 * entered sum missing a cell
-		 * entered average missing ..
-		 * entered average missing ()
-		 * entered average missing a cell
-		 *
-		 * // #INVALID-FORMULA
-		 * entered formula with number and string
-		 * entered formula ending in an operator
-		 * entered formula missing closing parenthesis
-		 * entered formula missing opening parenthesis
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 */
-
-		// testing updateDisplayValue(ICell[][]):void where:
-		//
-		it("...", (): void => {
-			cell.setEnteredValue("...");
-			cell.updateDisplayValue(grid);
-			expect(cell.getDisplayValue()).toEqual("...");
 		});
 
 		// BASIC VALUE ENTERING
@@ -623,13 +564,6 @@ describe("Testing the ICell interface", (): void => {
 			}
 			cell = grid[2][2];
 		});
-		// testing updateDisplayValue(ICell[][]):void where:
-		//
-		it("...", (): void => {
-			cell.setEnteredValue("...");
-			cell.updateDisplayValue(grid);
-			expect(cell.getDisplayValue()).toEqual("...");
-		});
 
 		// #INVALID-REF
 		// testing updateDisplayValue(ICell[][]):void where:
@@ -691,19 +625,6 @@ describe("Testing the ICell interface", (): void => {
 			);
 		});
 
-		// testing updateDisplayValue(ICell[][]):void where:
-		// the entered value contains an average expression that includes a cell referencing this cell
-		it("should display #INVALID-REF because it gets an average including a cell referring to it", (): void => {
-			grid[0][0].setEnteredValue("REF(C3)");
-			grid[0][0].updateDisplayValue(grid);
-			cell.setEnteredValue("SUM(A1..B2)");
-			cell.updateDisplayValue(grid);
-			expect(cell.getDisplayValue()).toEqual(
-				ErrorDisplays.INVALID_CELL_REFERENCE
-			);
-		});
-
-
 		// #REF-OUT-OF-RANGE
 
 		// testing updateDisplayValue(ICell[][]):void where:
@@ -711,139 +632,592 @@ describe("Testing the ICell interface", (): void => {
 		it("should display #REF-OUT-OF-RANGE because it references a cell out of range", (): void => {
 			cell.setEnteredValue("REF(A100)");
 			cell.updateDisplayValue(grid);
-			expect(cell.getDisplayValue()).toEqual(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_OUT_OF_RANGE
+			);
 		});
 
-    // testing updateDisplayValue(ICell[][]):void where:
+		// testing updateDisplayValue(ICell[][]):void where:
 		// entered value contains a sum including cells out of range
 		it("should display #REF-OUT-OF-RANGE because it contains a sum including cells out of range", (): void => {
 			cell.setEnteredValue("SUM(C1..D2)");
 			cell.updateDisplayValue(grid);
-			expect(cell.getDisplayValue()).toEqual(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_OUT_OF_RANGE
+			);
 		});
 
-    // testing updateDisplayValue(ICell[][]):void where:
+		// testing updateDisplayValue(ICell[][]):void where:
 		// entered value contains a average including cells out of range
 		it("should display #REF-OUT-OF-RANGE because it contains an average including cells out of range", (): void => {
 			cell.setEnteredValue("AVERAGE(A1..C5)");
 			cell.updateDisplayValue(grid);
-			expect(cell.getDisplayValue()).toEqual(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_OUT_OF_RANGE
+			);
 		});
 
 		// #INVALID-INPUT
 
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a word, but the value type rule requires it to be a number
+		it("should display #INVALID-INPUT because it contains a word and its validation rule requires number", (): void => {
+			cell.addRule(new ValueTypeRule("num"));
+			cell.updateDisplayValue(grid);
+			cell.setEnteredValue("a2");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_CELL_DATA
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a number outside of the range allowed by its value in range rule
+		it("should display #INVALID-INPUT because it contains a number outside of its rule's permitted range", (): void => {
+			cell.addRule(new ValueInRangeRule("equal", 7));
+			cell.updateDisplayValue(grid);
+			cell.setEnteredValue("2");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_CELL_DATA
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a string that is not included in its value one of rule
+		it("should display #INVALID-INPUT because it contains a string that is not one of the valid options", (): void => {
+			cell.addRule(new ValueIsOneOfRule(["cat", "dog", "bird"]));
+			cell.updateDisplayValue(grid);
+			cell.setEnteredValue("elephant");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_CELL_DATA
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a number that is not included in its value one of rule
+		it("should display #INVALID-INPUT because it contains a number that is not one of the valid options", (): void => {
+			cell.addRule(new ValueIsOneOfRule([1, 2, 3]));
+			cell.updateDisplayValue(grid);
+			cell.setEnteredValue("4");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_CELL_DATA
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a contradicting data validation rules
+		it("should display #INVALID-INPUT because it contains contradicting data validation rules", (): void => {
+			cell.addRule(new ValueIsOneOfRule([1, 2, 3]));
+			cell.updateDisplayValue(grid);
+			cell.addRule(new ValueIsOneOfRule(["a", "b", "c"]));
+			cell.updateDisplayValue(grid);
+			cell.setEnteredValue("a");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_CELL_DATA
+			);
+		});
+
 		// #SELF-REF
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a reference to itself
+		it("should display #SELF-REF because it contains reference to itself", (): void => {
+			cell.setEnteredValue("REF(C3)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_TO_SELF
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a reference to a cell referencing it back
+		it("should display #SELF-REF because it references a cell directly referencing it back", (): void => {
+			grid[0][0].setEnteredValue("REF(C3)");
+			grid[0][0].updateDisplayValue(grid);
+			cell.setEnteredValue("REF(A1)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_TO_SELF
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a reference to a cell that indirectly references it back
+		it("should display #SELF-REF because it references a cell indirectly referencing it back", (): void => {
+			grid[0][0].setEnteredValue("REF(A2)");
+			grid[0][0].updateDisplayValue(grid);
+			grid[1][0].setEnteredValue("REF(C3)");
+			grid[1][0].updateDisplayValue(grid);
+			cell.setEnteredValue("REF(A1)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_TO_SELF
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a reference to a cell that includes the original cell in a sum
+		it("should display #SELF-REF because it references a cell that contains a sum including it", (): void => {
+			grid[0][0].setEnteredValue("SUM(B2..C3)");
+			grid[0][0].updateDisplayValue(grid);
+			cell.setEnteredValue("REF(A1)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_TO_SELF
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a reference to a cell that includes the original cell in a average
+		it("should display #SELF-REF because it references a cell that contains a average including it", (): void => {
+			grid[0][0].setEnteredValue("AVERAGE(B2..C3)");
+			grid[0][0].updateDisplayValue(grid);
+			cell.setEnteredValue("REF(A1)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.REFERENCE_TO_SELF
+			);
+		});
 
 		// #INVALID-EXPR
 
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a sum with the cell range in reverse order (bottomright to topleft)
+		it("should display #INVALID-EXPR because it contains a sum in reverse order", (): void => {
+			cell.setEnteredValue("SUM(A3..A1)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a average with the cell range in reverse order (bottomright to topleft)
+		it("should display #INVALID-EXPR because it contains a average in reverse order", (): void => {
+			cell.setEnteredValue("AVERAGE(A3..A1)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a sum including a cell containing a stringing
+		it("should display #INVALID-EXPR because it contains a sum containing a string", (): void => {
+			grid[0][0].setEnteredValue("1");
+			grid[0][0].updateDisplayValue(grid);
+			grid[0][1].setEnteredValue("car");
+			grid[0][1].updateDisplayValue(grid);
+			cell.setEnteredValue("SUM(A1..B2)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a AVERAGE including a cell containing a stringing
+		it("should display #INVALID-EXPR because it contains a average containing a string", (): void => {
+			grid[0][0].setEnteredValue("1");
+			grid[0][0].updateDisplayValue(grid);
+			grid[0][1].setEnteredValue("car");
+			grid[0][1].updateDisplayValue(grid);
+			cell.setEnteredValue("AVERAGE(A1..B2)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a sum with improper syntax
+		it("should display #INVALID-EXPR because it contains a sum with improper syntax", (): void => {
+			grid[0][0].setEnteredValue("1");
+			grid[0][0].updateDisplayValue(grid);
+			grid[0][1].setEnteredValue("2");
+			grid[0][1].updateDisplayValue(grid);
+			cell.setEnteredValue("SUM(A1..B2");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a average with improper syntax
+		it("should display #INVALID-EXPR because it contains a average cwith improper syntax", (): void => {
+			grid[0][0].setEnteredValue("1");
+			grid[0][0].updateDisplayValue(grid);
+			grid[0][1].setEnteredValue("2");
+			grid[0][1].updateDisplayValue(grid);
+			cell.setEnteredValue("AVERAGE(A1..B2");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// the entered value contains an average expression that includes a cell referencing this cell
+		it("should display #INVALID-RANGE-EXPR because it gets an average including a cell referring to it", (): void => {
+			grid[0][0].setEnteredValue("REF(C3)");
+			grid[0][0].updateDisplayValue(grid);
+			cell.setEnteredValue("SUM(A1..B2)");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_RANGE_EXPR
+			);
+		});
+
 		// #INVALID-FORMULA
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a formula with a number and string
+		it("should display #INVALID-FORMULA because it contains a formula with anumber and string", (): void => {
+			cell.setEnteredValue("1*b");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_FORMULA
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a formula ending in an operator
+		it("should display #INVALID-FORMULA because it contains a formula ending in a operator", (): void => {
+			cell.setEnteredValue("1+");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_FORMULA
+			);
+		});
+
+		// testing updateDisplayValue(ICell[][]):void where:
+		// entered value contains a formula missing parenthesis
+		it("should display #INVALID-FORMULA because it contains a formula missing parenthesis", (): void => {
+			cell.setEnteredValue("1+(2*");
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual(
+				ErrorDisplays.INVALID_FORMULA
+			);
+		});
 	});
 
-	// describe("Clear Cell", (): void => {
-	// 	beforeEach((): void => {});
+	// Tests for attachObserver(ICell): void, detachObserver(ICell): void, attachObserving(ICell):void, detachObserving(ICell): void, and isObserving(ICell): boolean
+	describe("Testing attach and detach observer and observing", (): void => {
+		let cell1: ICell;
+		let cell2: ICell;
+		let cell3: ICell;
+		let cell4: ICell;
+		beforeEach((): void => {
+			cell1 = new Cell(0, 0);
+			cell2 = new Cell(0, 1);
+			cell3 = new Cell(1, 0);
+			cell4 = new Cell(1, 1);
+		});
 
-	// 	it("Cell entered value should be cleared", (): void => {
-	// 		let cell: Cell = new Cell(1, 1);
-	// 		cell.setEnteredValue("hi");
-	// 		cell.clearCell();
-	// 		expect(cell.getEnteredValue()).toEqual("");
-	// 	});
+		// testing isObserving(ICell): boolean with initial value
+		it("cell.isObserving() should return false for an ICells that have just been instantiated", (): void => {
+			expect(cell1.isObserving(cell2)).toEqual(false);
+		});
 
-	// 	it("Cell display should be cleared", (): void => {
-	// 		let cell: Cell = new Cell(1, 1);
-	// 		cell.setEnteredValue("hi");
-	// 		cell.updateDisplayValue([]);
-	// 		cell.clearCell();
-	// 		expect(cell.getDisplayValue()).toEqual("");
-	// 	});
-	// });
+		// testing attachObserver(ICell): void
+		it("cell1.isObserving(cell2) should return true when cell1 is set to observe cell2", (): void => {
+			cell2.attachObserver(cell1);
+			expect(cell1.isObserving(cell2)).toEqual(true);
+		});
 
-	// describe("Find and Replace", (): void => {
-	// 	beforeEach((): void => {});
+		// testing detachObserver(ICell): void
+		it("cell1.isObserving(cell2) should return false when cell1 is detached from being an observer of cell2", (): void => {
+			cell2.attachObserver(cell1);
+			cell2.detachObserver(cell1);
+			expect(cell1.isObserving(cell2)).toEqual(false);
+		});
 
-	// 	it("Should not change entered value if the value is not present", (): void => {
-	// 		let cell: Cell = new Cell(1, 1);
-	// 		cell.setEnteredValue("hi");
-	// 		cell.updateDisplayValue([]);
-	// 		cell.findReplace("find", "replace");
-	// 		expect(cell.getEnteredValue()).toEqual("hi");
-	// 	});
+		// testing detachObserver(ICell): void with cell not attace=hed
+		it("cell1.isObserving(cell2) should not throw an error when cell1 is detached from cell2 without ever being attached", (): void => {
+			expect(() => cell2.detachObserver(cell1)).not.toThrow();
+		});
 
-	// 	it("Should not change display value if the value is not present", (): void => {
-	// 		let cell: Cell = new Cell(1, 1);
-	// 		cell.setEnteredValue("hi");
-	// 		cell.updateDisplayValue([]);
-	// 		cell.findReplace("find", "replace");
-	// 		expect(cell.getDisplayValue()).toEqual("hi");
-	// 	});
+		// testing attachObserving(ICell): void
+		it("cell1.isObserving(cell2) should return true when cell1 added to cell2's list of cells it's observing", (): void => {
+			cell1.attachObserving(cell2);
+			expect(cell1.isObserving(cell2)).toEqual(true);
+		});
 
-	// 	it("Cell entered value should be changed", (): void => {
-	// 		let cell: Cell = new Cell(1, 1);
-	// 		cell.setEnteredValue("find");
-	// 		cell.updateDisplayValue([]);
-	// 		cell.findReplace("find", "replace");
-	// 		expect(cell.getEnteredValue()).toEqual("replace");
-	// 	});
+		// testing detachObserving(ICell): void
+		it("cell1.isObserving(cell2) should return false when cell1 added to then removed from cell2's list of cells it's observing", (): void => {
+			cell1.attachObserving(cell2);
+			cell1.detachObserving(cell2);
+			expect(cell1.isObserving(cell2)).toEqual(false);
+		});
 
-	// 	it("Cell display value should be changed", (): void => {
-	// 		let cell: Cell = new Cell(1, 1);
-	// 		cell.setEnteredValue("find");
-	// 		cell.findReplace("find", "replace");
-	// 		cell.updateDisplayValue([]);
-	// 		expect(cell.getDisplayValue()).toEqual("replace");
-	// 	});
-	// 	describe("Cell with Multiple Validation Rules", () => {
-	// 		let cell: Cell;
+		// testing detachObserving(ICell): void with cell not attace=hed
+		it("cell1.isObserving(cell2) should not throw an error when cell1 is detached from observing cell2 without ever being attached", (): void => {
+			expect(() => cell1.detachObserving(cell2)).not.toThrow();
+		});
 
-	// 		beforeEach(() => {
-	// 			cell = new Cell(1, 1);
-	// 		});
+		// testing isObserving(ICell): boolean with a cyclical chain of observers
+		it("cell1.isObserving(cell1) should return true for an ICell that has a cyclical observance", (): void => {
+			cell1.attachObserver(cell2);
+			cell2.attachObserver(cell3);
+			cell3.attachObserver(cell1);
+			expect(cell1.isObserving(cell1)).toEqual(true);
+		});
 
-	// 		it("should pass all validation rules", () => {
-	// 			const valueInRangeRule = new ValueInRangeRule("=", 5);
-	// 			const valueIsOneOfRule = new ValueIsOneOfRule([
-	// 				"rule0",
-	// 				"rule",
-	// 				"rules",
-	// 			]);
-	// 			const valueTypeRule = new ValueTypeRule("string");
+		// testing isObserving(ICell): boolean with a ICell that observes itself
+		it("cell1.isObserving(cell1) should return true for an ICell that directly observes itself", (): void => {
+			cell1.attachObserver(cell1);
+			expect(cell1.isObserving(cell1)).toEqual(true);
+		});
+	});
 
-	// 			cell.addRule(valueInRangeRule);
-	// 			cell.addRule(valueIsOneOfRule);
-	// 			cell.addRule(valueTypeRule);
+	// Tests for clearCell(): void
+	describe("Testing clear Cell", (): void => {
+		let cell: ICell;
+		let grid: ICell[][];
+		beforeEach((): void => {
+			cell = new Cell(1, 1);
+			grid = [];
+			for (let i: number = 0; i < 3; i++) {
+				let row: ICell[] = [];
+				for (let j: number = 0; j < 3; j++) {
+					row.push(new Cell(i, j));
+				}
+				grid.push(row);
+			}
+			cell = grid[2][2];
+		});
 
-	// 			cell.setEnteredValue("rule0");
+		// test clearing an empty cell keeps entered value as empty string
+		it("getEnteredValue() should return empty if clearCell is called on empty cell", (): void => {
+			cell.clearCell();
+			expect(cell.getEnteredValue()).toEqual("");
+		});
 
-	// 			// Assuming updateDisplayValue method is working correctly
-	// 			cell.updateDisplayValue([]);
+		// test clearing an empty cell keeps display value as empty string
+		it("getDisplayValue(ICell[][]) should return empty if clearCell is called on empty cell", (): void => {
+			cell.clearCell();
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual("");
+		});
 
-	// 			// Expect the cell to have the entered value because it passed all validation rules
-	// 			expect(cell.getDisplayValue()).toEqual("rule0");
-	// 		});
+		// test clearing a non-empty cell sets entered value as empty string
+		it("getEnteredValue() should return empty if clearCell is called on nonempty cell", (): void => {
+			cell.setEnteredValue("hello");
+			cell.updateDisplayValue(grid);
+			cell.clearCell();
+			cell.updateDisplayValue(grid);
+			expect(cell.getEnteredValue()).toEqual("");
+		});
 
-	// 		it("should fail one validation rule", () => {
-	// 			const valueInRangeRule = new ValueInRangeRule("=", 5);
-	// 			const valueIsOneOfRule = new ValueIsOneOfRule([
-	// 				"rule1",
-	// 				"rule1",
-	// 				"rule3",
-	// 			]);
-	// 			const valueTypeRule = new ValueTypeRule("string");
+		// test clearing a non-empty cell sets display value as empty string
+		it("getDisplayValue(ICell[][]) should return empty if clearCell is called on nonempty cell", (): void => {
+			cell.setEnteredValue("hello");
+			cell.updateDisplayValue(grid);
+			cell.clearCell();
+			cell.updateDisplayValue(grid);
+			expect(cell.getDisplayValue()).toEqual("");
+		});
 
-	// 			cell.addRule(valueInRangeRule);
-	// 			cell.addRule(valueIsOneOfRule);
-	// 			cell.addRule(valueTypeRule);
+		// test clearing a non-empty cell being referred to sets display value of the reference cel to empty string
+		it("getDisplayValue(ICell[][]) should return empty if clearCell is called on nonempty cell a cell is referencing", (): void => {
+			cell.setEnteredValue("hello");
+			cell.updateDisplayValue(grid);
+			grid[0][0].setEnteredValue("REF(C3)");
+			grid[0][0].updateDisplayValue(grid);
+			cell.clearCell();
+			cell.updateDisplayValue(grid);
+			expect(grid[0][0].getDisplayValue()).toEqual("");
+		});
+	});
 
-	// 			cell.setEnteredValue("rule4"); // Violates valueIsOneOfRule
+	// Tests for findReplace(string, string): void
+	describe("Testin find and replace", (): void => {
+		// create a fresh cell for each test
+		let cell: ICell;
+		beforeEach((): void => {
+			cell = new Cell(0, 0);
+		});
 
-	// 			// Assuming updateDisplayValue method is working correctly
-	// 			cell.updateDisplayValue([]);
+		// test findReplace(string, string) on empty cell
+		it("Should not change entered value if the cell is empty", (): void => {
+			cell.findReplace("find", "replace");
+			expect(cell.getEnteredValue()).toEqual("");
+		});
 
-	// 			// Expect the cell to show the error message because it violated one validation rule
-	// 			expect(cell.getDisplayValue()).toEqual("#INVALID-REF"); // or whatever error message you set
-	// 		});
+		// test findReplace(string, string) on cell that does not have find value in entered value
+		it("Should not change entered value if the find is not in the entered value", (): void => {
+			cell.setEnteredValue("hi");
+			cell.findReplace("find", "replace");
+			expect(cell.getEnteredValue()).toEqual("hi");
+		});
 
-	// 		// Add more test cases for different combinations of passing and failing validation rules
-	// 	});
-	// });
+		// test findReplace(string, string) on cell that has an entered value equal to the find value
+		it("Should replace the entire entered value when it is equal to the find value", (): void => {
+			cell.setEnteredValue("find");
+			cell.findReplace("find", "replace");
+			expect(cell.getEnteredValue()).toEqual("replace");
+		});
+
+		// test findReplace(string, string) on cell that has an one occurrence of find value in entered value
+		it("Should replace a portion of the entered value when it contains the find value", (): void => {
+			cell.setEnteredValue("finda");
+			cell.findReplace("find", "replace");
+			expect(cell.getEnteredValue()).toEqual("replacea");
+		});
+
+		// test findReplace(string, string) on cell that has multiple consecutive occurrences of find value
+		it("Should replace the entire entered value when it is has multiple consecutive occurrences of find value", (): void => {
+			cell.setEnteredValue("findfind");
+			cell.findReplace("find", "replace");
+			expect(cell.getEnteredValue()).toEqual("replacereplace");
+		});
+
+		// test findReplace(string, string) on cell that has multiple consecutive occurrences of find value
+		it("Should replace parts of entered value when it is has multiple non-consecutive occurrences of find value", (): void => {
+			cell.setEnteredValue("findorfind");
+			cell.findReplace("find", "replace");
+			expect(cell.getEnteredValue()).toEqual("replaceorreplace");
+		});
+
+		// test findReplace(string, string) on cell that has an occurrence of find value in entered value
+		// with an empty string for replace value
+		it("Should replace a portion of the entered value when it contains the find value with empty string", (): void => {
+			cell.setEnteredValue("replacer");
+			cell.findReplace("r", "");
+			expect(cell.getEnteredValue()).toEqual("eplace");
+		});
+	});
+
+	// Tests for addRule(IValidationRule):void, deleteRule(IValidationRule):void, and getRules(): Array<IValidationRule>
+	describe("Testing add and delete rule and get rules", (): void => {
+		// create a fresh cell for each test
+		let cell: ICell;
+		beforeEach((): void => {
+			cell = new Cell(0, 0);
+		});
+
+		// test getRules() returns an empty array for a newly instantiated ICell
+		it("getRules() should return an empty array when called on newly instantiated cell", (): void => {
+			expect(cell.getRules()).toEqual([]);
+		});
+
+		// test addRule() adds a value type rule to a cell that does not have any rules applied
+		it("getRules() should return an array of the value type rule applied to cell in addRule", (): void => {
+			let rule: IValidationRule = new ValueTypeRule("num");
+			cell.addRule(rule);
+			expect(cell.getRules()).toEqual([rule]);
+		});
+
+		// test addRule() adds a value type rule to a cell that does not have any rules applied
+		it("getRules() should return an array of the value in range rule applied to cell in addRule", (): void => {
+			let rule: IValidationRule = new ValueInRangeRule("equal", 10);
+			cell.addRule(rule);
+			expect(cell.getRules()).toEqual([rule]);
+		});
+
+		// test addRule() adds a value type rule to a cell that does not have any rules applied
+		it("getRules() should return an array of the value one of rule applied to cell in addRule", (): void => {
+			let rule: IValidationRule = new ValueIsOneOfRule(["a", "b", "c"]);
+			cell.addRule(rule);
+			expect(cell.getRules()).toEqual([rule]);
+		});
+
+		// test addRule() does not add a rule to a cell that already has that rule applied
+		it("getRules() should return an array of one rule applied to cell if rule object applied twice in addRule", (): void => {
+			let rule: IValidationRule = new ValueTypeRule("num");
+			cell.addRule(rule);
+			cell.addRule(rule);
+			expect(cell.getRules()).toEqual([rule]);
+		});
+
+		// test addRule() does not add a rule to a cell that already has a rule with the same value as the given rule applied
+		it("getRules() should return an array of one rule applied to cell if rule value applied twice in addRule", (): void => {
+			let rule1: IValidationRule = new ValueTypeRule("num");
+			let rule2: IValidationRule = new ValueTypeRule("num");
+			cell.addRule(rule1);
+			cell.addRule(rule2);
+			expect(cell.getRules()).toEqual([rule1]);
+		});
+
+		// test addRule() allows several different rules to be applied - not contradicting
+		it("getRules() should return an array of all the noncontradicting rules applied to cell in addRule", (): void => {
+			let rule1: IValidationRule = new ValueTypeRule("num");
+			let rule2: IValidationRule = new ValueInRangeRule("equal", 5);
+			let rule3: IValidationRule = new ValueIsOneOfRule([5, 10]);
+			let rule4: IValidationRule = new ValueInRangeRule("greater", 2);
+			cell.addRule(rule1);
+			cell.addRule(rule2);
+			cell.addRule(rule3);
+			cell.addRule(rule4);
+			expect(cell.getRules()).toEqual([rule1, rule2, rule3, rule4]);
+		});
+
+		// test addRule() allows several different rules to be applied - contradicting
+		it("getRules() should return an array of all the contradicting rules applied to cell in addRule", (): void => {
+			let rule1: IValidationRule = new ValueTypeRule("word");
+			let rule2: IValidationRule = new ValueInRangeRule("equal", 5);
+			let rule3: IValidationRule = new ValueIsOneOfRule(["cat"]);
+			let rule4: IValidationRule = new ValueInRangeRule("greater", 7);
+			cell.addRule(rule1);
+			cell.addRule(rule2);
+			cell.addRule(rule3);
+			cell.addRule(rule4);
+			expect(cell.getRules()).toEqual([rule1, rule2, rule3, rule4]);
+		});
+
+		// test removeRule() does nothing to a cell with no rules applied
+		it("removeRules() should do nothing to a cell with no rules applied", (): void => {
+			let rule: IValidationRule = new ValueTypeRule("num");
+			cell.removeRule(rule);
+			expect(cell.getRules()).toEqual([]);
+		});
+
+		// test removeRule() does nothing to a cell that has rules applied that are not what was passed
+		it("removeRules() should do nothing to a cell with rules that aren't what was passed", (): void => {
+			let rule1: IValidationRule = new ValueTypeRule("num");
+			let rule2: IValidationRule = new ValueTypeRule("word");
+			cell.addRule(rule1);
+			cell.removeRule(rule2);
+			expect(cell.getRules()).toEqual([rule1]);
+		});
+
+		// test removeRule() removes any instance of the provided rule from the cells list of rules
+		// there will only be one instance, as a cell will not apply duplicate rules
+		it("removeRules() should remove the provided rule from the cell's list of rules", (): void => {
+			let rule1: IValidationRule = new ValueTypeRule("num");
+			let rule2: IValidationRule = new ValueTypeRule("word");
+			cell.addRule(rule1);
+			cell.addRule(rule2);
+			cell.removeRule(rule2);
+			expect(cell.getRules()).toEqual([rule1]);
+		});
+	});
+	// Tests for getStyle() :ICellStyle and setStyle(ICellStyle):void
+	describe("Testing get and set style", (): void => {
+		// create a fresh cell for each test
+		let cell: ICell;
+		let style: ICellStyle;
+		beforeEach((): void => {
+			cell = new Cell(0, 0);
+			style = new CellStyle();
+		});
+
+		// test getStyle() returns the default style for a newly instantiated ICell
+		it("getStyle() should return the default style when called on newly instantiated cell", (): void => {
+			expect(cell.getStyle()).toEqual(style);
+		});
+
+    // test setStyle() sets the ICell's style to the provided ICellStyle
+		it("setStyle() should set the ICell's style with the provided style", (): void => {
+      style.setBold(true);
+      style.setTextColor("#110011");
+      cell.setStyle(style);
+			expect(cell.getStyle()).toEqual(style);
+		});
+	});
 });
