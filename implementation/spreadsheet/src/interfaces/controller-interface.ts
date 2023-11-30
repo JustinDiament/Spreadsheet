@@ -18,133 +18,159 @@ export interface ISpreadSheetState {
     // the list of ICells in the spreadsheet that are currently selected by the user
     currentlySelected: ICell[];
 
-    
-
     /**
-     * Set the list of currently selected cells in the spreadsheet to contain
-     * only the provided cell, and no other
-     * @param cell the cell to set as the currently selected cell, provided via its location
+     * Set the list of currently selected ICells in the spreadsheet to contain
+     * only the provided ICell, and no other
+     * @param cell the ICell to set as the currently selected ICells, provided via its location as a string
+     * @sets currentlySelected
      */
     setSelectedOne(cell: string):void;
 
     /**
-     * Set the list of currently selected cells in the spreadsheet to contain only
-     * the cells that fall within the range of cells determined by the provided starting and ending points
-     * @param cell1 the first cell in the range of cells to select
-     * @param cell2  the last cell in the range of cells to select
+     * Set the list of currently selected ICells in the spreadsheet to contain only
+     * the ICells that fall within the range of ICells determined by the provided starting and ending points
+     * @param cell1 the first ICell in the range of ICells to select, provided via its location as a string
+     * @param cell2  the last ICell in the range of ICells to select, provided via its location as a string
+     * @sets currentlySelected
      */
     setSelectedMany(cell1: string, cell2: string) : void;
 
     /**
-     * Returns whether the provided cell is contained in the list of currently
-     * selected cells
-     * @param cell the cell to be determined if it is selected
+     * Returns whether the provided ICell is contained in the list of currently
+     * selected ICells
+     * @param cell the ICell to be determined if it is selected
+     * @returns true if the ICell is selected, else false
      */
     isSelected(cell: ICell) : boolean;
 
     /**
-     * Get the list of all currently selected cells
+     * Get the list of all currently selected ICells
+     * @returns currentlySelected
      */
     getSelected() : Array<ICell>;
 
     /**
-     * Adds a new row to the spreadsheet
-     * FIX
+     * Adds a new, empty row above the topmost currently selected ICell
+     * or below the bottommost currently selected ICell
+     * 
+     * @param aboveOrBelow a string representing whether to add the row above or below
+     * @sets cells
      */
     addRow(aboveOrBelow: string): void;
 
     /**
-     * Adds a new column to the spreadsheet
-     * FIX
+     * Adds a new, empty column left of the leftmost currently selected ICell
+     * or right of the rightmost currently selected ICell
+     * 
+     * @param leftOrRight a string representing whether to add the column to the left or right
+     * @sets cells
      */
     addColumn(leftOrRight: string): void;
 
-    /**
-     * Removes the currently selected rows from the spreadsheet
+     /**
+     * Removes every row that contains a currently selected ICell, UNLESS doing so would
+     * result in the spreadsheet having no rows. In that case, it does nothing
+     * 
+     * @sets cells
      */
     deleteRow(): void;
 
     /**
-     * Removes the selected columns from the spreadsheet
+     * Removes every column that contains a currently selected ICell, UNLESS doing so would
+     * result in the spreadsheet having no columns. In that case, it does nothing
+     * 
+     * @sets cells
      */
     deleteColumn(): void;
 
     /**
-     * Changes the value of a cell
-     * @param cellId the location of the cell to change
-     * @param newValue the new value of the cell
+     * Changes the entered value of an ICell
+     * @param cellId the location of the ICell to change
+     * @param newValue the new value of the ICell
+     * @sets cells
      */
     editCell(cellId: string, newValue: string): void;
 
     /**
-     * Removes the value for the selected cells
+     * Changes the entered value of all currently selected ICells to be empty
+     * @sets cells
      */
     clearSelectedCells(): void;
 
      /**
-     * Removes the value for all cells
+     * Changes the entered value of all ICells to be empty
+     * @sets cells
      */
     clearAllCells(): void;
 
     /**
-     * Adds a validation rule to a cell
-     * @param rule the new rule that the value must adhere to
+     * Add the provided IValidationRule to the currently selected ICells
+     * @param rule the IValidationRule being added to the selected ICells that enforces restrictions on the ICells' display values
+     * @sets currentlySelected
      */
     createRule(rule: IValidationRule): void;
 
     /**
-     * Removes a validation rule from a cell
-     * @param rule the rule that should no longer apply
+     * Remove the provided IValidationRule from the currently selected ICells, if it is applied
+     * @param rule the IValidationRule being removed from the selected ICells
+     * @sets currentlySelected
      */
     removeRule(rule: IValidationRule): void;
 
     /**
-     * Returns an array containing all the validation rules that apply to EVERY selected cell
+     * Returns an array of IValidationRules that are applied to EVERY currently selected ICells
+     * @returns an array of IValidationRules that are applied to the currently selected ICells
      */
     getAllRules(): Array<IValidationRule>;
 
     /**
-     * Find all the cells in the spreadsheet that contain the provided string
-     * and stores the data in an array
-     * @param find the string that the cells' entered value should contain
+     * Find all the ICells in the spreadsheet that contain the provided string in their entered value, and selects the first ICell that does
+     * @param find the string that the ICells' entered value should contain
+     * @sets currentlySelected
      */
     findCellsContaining(find:string): void;
 
     /**
-     * Change the content of the currently selected cell by replacing any instance
-     * of the 'find' string in the cell with the 'replace' string 
-     * @param find the value to be replaced
-     * @param replace the value to replace with
+     * Change the content of the currently selected ICell by replacing any instance
+     * of the 'find' string in the ICell's entered value with the 'replace' string 
+     * @param find the string that the ICells' entered value should contain and be replaced
+     * @param replace the value to replace instances of the 'find' string with
+     * @sets cells, currentlySelected, via findNextContaining
      */
     replaceCurrentCell(find:string, replace:string):void;
     
     /**
-     * select the next cell that is in the list of currently found cells
-     * which is created in the findCellsContaining function
+     * Select the next ICell in the spreadsheet that contains the provided 'find' string in its entered value
+     * @param find the string that the ICells' entered value should contain
+     * @sets cells, currentlySelected
      */
     findNextContaining(find: string):void;
     
     /**
-     * Finds where a value is present and replaces all instances of it with a new value at the selected id
-     * @param find the value to find
-     * @param replace the value to change to
+     * Find all the ICells in the spreadsheet that contain the provided string in their entered value, 
+     * and replaces every instance of the 'find' string with the provided 'replace' string
+     * @param find the string that the ICells' entered value should contain and be replaced
+     * @param replace the value to replace instances of the 'find' string with
+     * @sets cells
      */
     findAndReplaceAll(find: string, replace: string): void;
   
     /**
-     * Set the style of the selected cells using the provided functions for determining
-     * if a style property is active, and function to set that property's value
+     * Set the style of the selected ICells using the provided functions for determining
+     * if an ICellStyle property is active, and a function to set that ICellStyle property's value
      * 
-     * If all selected cells have the provided style property activated, it will be deactivated. 
-     * Otherwise, it will be activated for all selected cells
-     * @param isCellStyled the function for determining if a style property is active
-     * @param setCellStyle the function to set a style property's value
+     * If all selected ICells have the provided ICellStyle property activated, it will be deactivated. 
+     * Otherwise, it will be activated for all selected ICells
+     * @param isCellStyled the function for determining if a ICellStyle property is active
+     * @param setCellStyle the function to set an ICellStyle property's value
+     * @sets currentlySelected
      */
     setStyle(isCellStyled:(style:ICellStyle) => boolean, setCellStyle:(style:ICellStyle, value:boolean) => void): void;
 
     /**
-     * Update the color of the text for all selected cells
-     * @param textColor the color the text in the cells should be
+     * Update the value of the text color property for all selected ICells' ICellStyle
+     * @param textColor the color the text in the ICell should be
+     * @sets currentlySelected
      */
     setTextColor(textColor:string): void;
 }

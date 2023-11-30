@@ -330,7 +330,7 @@ function DataValidationMenu({ disp }: DataValidationMenuProps) {
               className="float-end w-100 my-1 form-control"
               type="number"
               disabled={comp === ""}
-              value={val}
+              value={!isNaN(val) ? val : ''}
               onChange={(e) => setVal(+e.target.value)}></input>
           </div>
 
