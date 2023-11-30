@@ -23,23 +23,34 @@ export class ValueTypeRule implements IValidationRule{
      * @return true if the data is valid, false if it is not 
      */
     public checkRule(cellData: string): boolean {
+        //if type is supposed to be a number
         if (this.type === "num") {
             return !isNaN(Number(cellData));
+        //if type is supposed to be a string    
         } else if (this.type === "word") {
             return typeof cellData === "string";
+        //if type does not matter return true    
         } else if (this.type === "any") {
             return true;
         }
+         // If the type is not recognized, consider it invalid
         else {
-             // If the type is not recognized, consider it invalid
             throw new Error(ErrorDisplays.INVALID_CELL_DATA);
         }
     }
 
+    /**
+     * Gets the type of validation that this rule applies
+     * @returns the type of validation that this rule applies
+     */
     public getType():string {
         return this.type;
     }
 
+    /**
+     * Provides the error message to display for this rule
+     * @returns the correct error message to display
+     */
     public getErrorMessage(): string {
         return ErrorDisplays.INVALID_CELL_REFERENCE;
     }

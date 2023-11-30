@@ -23,19 +23,26 @@ export class ValueIsOneOfRule implements IValidationRule{
     public checkRule(cellData: string): boolean {
         // Check if cellData is in the set of allowed values
         let numericValue:number = Number(cellData);
+        //if value is a number also check that the number version of the cell data
         if(!isNaN(numericValue)) {
             return this.values.includes(cellData) || this.values.includes(numericValue);
         } else {
             return this.values.includes(cellData);
         }
-        
-        
     }
 
+    /**
+     * Provides the error message to display for this rule
+     * @returns the correct error message to display
+     */
     public getErrorMessage(): string {
         return ErrorDisplays.INVALID_CELL_DATA;
     }
 
+    /**
+     * Gets the values that the cell data must be in order to be valid
+     * @returns the values that the cell data must be in order to be valid
+     */
     public getValues(): Array<string | number> {
         return this.values;
     }
