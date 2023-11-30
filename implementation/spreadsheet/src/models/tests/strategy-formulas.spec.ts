@@ -23,7 +23,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test subtracting values in a formula
-  it("should add two values", (): void => {
+  it("should subtract two values", (): void => {
     // Set up the formula
     let originalString = "1 - 2";
     let parsedString = strategy.parse(originalString);
@@ -43,7 +43,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test dividing values in a formula
-  it("should multiply two values", (): void => {
+  it("should divide two values", (): void => {
     // Set up the formula
     let originalString = "5 / 2";
     let parsedString = strategy.parse(originalString);
@@ -53,7 +53,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test exponentiation in a formula
-  it("should multiply two values", (): void => {
+  it("should exponentiate two values", (): void => {
     // Set up the formula
     let originalString = "5 ^ 2";
     let parsedString = strategy.parse(originalString);
@@ -63,7 +63,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test order of operations with multiple operation in a formula
-  it("should multiply two values", (): void => {
+  it("should perform all operations", (): void => {
     // Set up the formula
     let originalString = "5 ^ 2 + 8 * (2 - 7)";
     let parsedString = strategy.parse(originalString);
@@ -73,7 +73,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test that a malformed formula with text in it throws the proper error
-  it("should multiply two values", (): void => {
+  it("should error due to text in the formula", (): void => {
     // Set up the malformed formula
     let originalString = "5 ^ 2 + 8 * (2 - hello)";
 
@@ -84,7 +84,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test that a malformed formula with an illegal symbol order throws the proper error
-  it("should multiply two values", (): void => {
+  it("should error due to malformed formula with too many symbols", (): void => {
     // Set up the malformed formula
     let originalString = "5 ^^^ 2 + 8 * (2 - 5)";
 
@@ -95,7 +95,7 @@ describe("Formula Strategy", (): void => {
   });
 
   // Test that a value containing no reserved formula characters is returned as-is
-  it("should multiply two values", (): void => {
+  it("should not apply any formula at all", (): void => {
     // Set up the non-formula
     let originalString = "hello bye 5";
     let parsedString = strategy.parse(originalString);

@@ -30,7 +30,7 @@ export class ValueInRangeRule implements IValidationRule {
    * @param cellData the data in a cell to be tested
    * @return true if the data is valid, false if it is not
    */
-  checkRule(cellData: string): boolean {
+  public checkRule(cellData: string): boolean {
     const numericCellData = Number(cellData);
 
     //check that the value in the cell is a number
