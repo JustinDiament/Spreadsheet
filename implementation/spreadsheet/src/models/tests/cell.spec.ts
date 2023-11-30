@@ -1,4 +1,7 @@
 import { Cell } from "../cell";
+import { ValueInRangeRule } from "../value-in-range-rule";
+import { ValueIsOneOfRule } from "../value-is-one-of-rule";
+import { ValueTypeRule } from "../value-type-rule";
 
 describe('Cell Location', (): void => {
 
@@ -131,6 +134,51 @@ describe('Cell Display', (): void => {
       cell.findReplace("find", "replace")
       cell.updateDisplayValue([]);
       expect(cell.getDisplayValue()).toEqual('replace');
+    });
+    describe('Cell with Multiple Validation Rules', () => {
+      let cell: Cell;
+    
+      beforeEach(() => {
+        cell = new Cell(1, 1);
+      });
+    
+      it('should pass all validation rules', () => {
+        const valueInRangeRule = new ValueInRangeRule('=', 5);
+        const valueIsOneOfRule = new ValueIsOneOfRule(['rule0', 'rule', 'rules']);
+        const valueTypeRule = new ValueTypeRule('string');
+    
+        cell.addRule(valueInRangeRule);
+        cell.addRule(valueIsOneOfRule);
+        cell.addRule(valueTypeRule);
+    
+        cell.setEnteredValue('rule0');
+    
+        // Assuming updateDisplayValue method is working correctly
+        cell.updateDisplayValue([]);
+    
+        // Expect the cell to have the entered value because it passed all validation rules
+        expect(cell.getDisplayValue()).toEqual('rule0');
+      });
+    
+      it('should fail one validation rule', () => {
+        const valueInRangeRule = new ValueInRangeRule('=', 5);
+        const valueIsOneOfRule = new ValueIsOneOfRule(['rule1', 'rule1', 'rule3']);
+        const valueTypeRule = new ValueTypeRule('string');
+    
+        cell.addRule(valueInRangeRule);
+        cell.addRule(valueIsOneOfRule);
+        cell.addRule(valueTypeRule);
+    
+        cell.setEnteredValue('rule4'); // Violates valueIsOneOfRule
+    
+        // Assuming updateDisplayValue method is working correctly
+        cell.updateDisplayValue([]);
+    
+        // Expect the cell to show the error message because it violated one validation rule
+        expect(cell.getDisplayValue()).toEqual('#INVALID-REF'); // or whatever error message you set
+      });
+    
+      // Add more test cases for different combinations of passing and failing validation rules
     });
   
   });
