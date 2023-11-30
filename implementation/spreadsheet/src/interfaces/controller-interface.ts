@@ -169,7 +169,7 @@ export interface ISpreadSheetState {
 
     /**
      * Update the value of the text color property for all selected ICells' ICellStyle
-     * @param textColor the color the text in the ICell should be
+     * @param textColor the color the text in the ICell should be as a string hex code
      * @sets currentlySelected
      */
     setTextColor(textColor:string): void;

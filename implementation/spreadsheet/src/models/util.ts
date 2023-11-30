@@ -1,5 +1,8 @@
 import { ErrorDisplays } from "./cell-data-errors-enum";
 
+/**
+ * Utility class containing static utility function(s)
+ */
 export class Util {
   // function to convert a location such as "A1" to a set of column/row coordinates
   public static getIndicesFromLocation(location: string): Array<number> {

@@ -1,5 +1,6 @@
 /**
  * @file strategy-abstract-expression.ts
+ * @class AExpressionStrategy
  */
 
 import { ICell } from "../interfaces/cell-interface";

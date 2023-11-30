@@ -1,5 +1,6 @@
 /**
  * @file strategy-average.ts
+ * @class AverageStrategy
  */
 
 import { ICell } from "../interfaces/cell-interface";

@@ -1,3 +1,8 @@
+/**
+ * @file cell-style.ts
+ * @class CellStyle
+ */
+
 import { ICell } from "../interfaces/cell-interface";
 import { ICellStyle } from "../interfaces/cell-style-interface";
 import { IStrategy } from "../interfaces/strategy-interface";

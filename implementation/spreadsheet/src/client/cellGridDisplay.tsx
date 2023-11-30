@@ -76,7 +76,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
 
   // constant to be used in order to track the currently selected cells
   const currSelected = useSpreadsheetController(
-    (controller: ISpreadSheetState) => controller.getSelected
+    (controller: ISpreadSheetState) => controller.currentlySelected
   );
 
   // function to update the shift useState depending on if the key being pressed is shift
@@ -199,7 +199,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
                   <td
                     className={
                       "m-0 p-1 sp-cell " +
-                      (currSelected().includes(cell) ? "sp-selected" : "")
+                      (currSelected.includes(cell) ? "sp-selected" : "")
                     }
                     key={indToLetter(col + 1) + (row + 1).toString()}
                   >
@@ -208,14 +208,14 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
                       // the setSelected function in this cell will select cells given the location of this cell
                       setSelected={setSelected}
                       // whether this cell is selected currently
-                      isSelected={currSelected().includes(cell)}
+                      isSelected={currSelected.includes(cell)}
                       //  The key is the unique identifier of the cell. Whenever the value of the key changes, the cell rerenders
                       // so, we include the display value in the key so the cell rerenders whenever its display value changes
                       key={
                         indToLetter(cell.getColumn() + 1) +
                         (cell.getRow() + 1).toString() +
                         cell.getDisplayValue() +
-                        currSelected().includes(cell)
+                        currSelected.includes(cell)
                       }
                       // index is the string location of the cell (i.e. A1)
                       index={

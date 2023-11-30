@@ -1,3 +1,8 @@
+/**
+ * @file strategy-formulas.ts
+ * @class StrategyFormulas
+ */
+
 import { IStrategy } from "../interfaces/strategy-interface";
 import { evaluate } from "mathjs";
 import { ErrorDisplays } from "./cell-data-errors-enum";

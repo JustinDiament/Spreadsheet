@@ -1,3 +1,8 @@
+/**
+ * @file cell-style.ts
+ * @class CellStyle
+ */
+
 import { ICellStyle } from "../interfaces/cell-style-interface";
 
 /**

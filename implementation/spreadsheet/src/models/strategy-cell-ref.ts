@@ -1,5 +1,6 @@
 /**
  * @file strategy-cell-ref.ts
+ * @class CellRefStrategy
  */
 
 import { IStrategy } from "../interfaces/strategy-interface";

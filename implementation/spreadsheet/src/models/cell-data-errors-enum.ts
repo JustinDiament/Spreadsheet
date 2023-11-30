@@ -1,4 +1,9 @@
 /**
+ * @file cell-data-errors-enum.ts
+ * @enum ErrorDisplays
+ */
+
+/**
  * Represents the possible error types that can be contained in a cell
  */
 export enum ErrorDisplays {

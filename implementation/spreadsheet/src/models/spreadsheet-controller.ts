@@ -36,6 +36,36 @@ const createCells = (): Array<Array<ICell>> => {
 	return cells;
 };
 
+/**
+ * local helper function to return a copy of the provided 2D array of ICells
+ * it does not make copies of the individual ICells
+ * @param grid the 2D array of ICells to copy
+ * @returns the copy of the provided 2D array of ICells
+ */
+const copyGrid = (grid:Array<Array<ICell>>): Array<Array<ICell>> => {
+  let newGrid: Array<Array<ICell>> = [];
+	grid.forEach((element) => {
+		let row: Array<ICell> = [];
+		element.forEach((cell) => row.push(cell));
+		newGrid.push(element);
+	});
+  return newGrid;
+}
+
+/**
+ * local helper function to return a copy of the provided 1D array of ICells
+ * it does not make copies of the individual ICells
+ * @param row the 1D array of ICells to copy
+ * @returns the copy of the provided 1D array of ICells
+ */
+const copyRow = (row:Array<ICell>): Array<ICell> => {
+  let newGrid: Array<ICell> = [];
+	row.forEach((element) => {
+		newGrid.push(element);
+	});
+  return newGrid;
+}
+
 
 /**
  * A store (state tree) to act as a controller that manages the state of the spreadsheet
@@ -60,6 +90,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets currentlySelected
      */
 		setSelectedOne: (cell: string) => {
+      // the new list of ICells that currentlySelected will be set to at the end of the function
 			let newSelect: Array<ICell> = [];
 			try {
 				// parse the location of the cell and add the cell at that location to the new list
@@ -122,6 +153,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      */
 		isSelected: (cell: ICell) => {
 			try {
+        // is the given cell inside the list of selected cells?
 				return get().currentlySelected.includes(cell);
 			} catch {
 				// invalid cell cannot be selected, so return false
@@ -145,6 +177,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets cells
      */
 		addRow: (aboveOrBelow: string) => {
+      // initiate values for the lowest and highest row numbers to be used in following comparisons
+      // to determine the topmost and bottom-most rows of the selected 
 			let belowRow: number = -1;
 			let aboveRow: number = get().cells[0].length;
 			let numRowsToAdd: number = 0;
@@ -176,14 +210,8 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 				newCells.push(new Cell(insertLocation, i));
 			}
 
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
-
-			for (let i = 0; i < numRowsToAdd; i++) {
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
+			for (let i = 0; i < 1; i++) {
 				newGrid.splice(insertLocation, 0, newCells);
 			}
 
@@ -234,15 +262,10 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 				insertLocation = rightCol + 1;
 			}
 
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
 
 			for (let i = 0; i < newGrid.length; i++) {
-				for (let j = 0; j < numColsToAdd; j++) {
+				for (let j = 0; j < 1; j++) {
 					newGrid[i].splice(
 						insertLocation,
 						0,
@@ -285,12 +308,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 				}
 			}
 
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
 
 			for (let i = 0; i < numRowsToDelete; i++) {
 				newGrid.splice(rowToDelete, 1);
@@ -331,13 +349,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 				}
 			}
 
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
-
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
 			for (let i = 0; i < numColsToDelete; i++) {
 				for (let j = 0; j < newGrid.length; j++) {
 					newGrid[j].splice(colToDelete, 1);
@@ -364,18 +376,23 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets cells
      */
 		editCell: (cellId: string, newValue: string) => {
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
+      // the new grid of ICells that cells will be set to at the end of the function
+      // initiate it to be the same as the current state of cells
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
+      // get the column and row number from the passed-in cellID
 			let loc: Array<number> = Util.getIndicesFromLocation(cellId);
 			let row: number = loc[1];
 			let col: number = loc[0];
-			let cell: ICell = newGrid[row][col];
-			cell.setEnteredValue(newValue);
-			cell.updateDisplayValue(get().cells);
+
+      // make sure the provided location is valid
+      if(row < newGrid.length && row >= 0 && col < newGrid[0]?.length && col>= 0) {
+        // get cell at the provided location
+        let cell: ICell = newGrid[row][col];
+        // set the entered value of that cell and update its display value
+        cell.setEnteredValue(newValue);
+        cell.updateDisplayValue(get().cells);
+      }
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
 			set({ cells: newGrid });
 		},
 
@@ -384,12 +401,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets cells
      */
 		clearSelectedCells: () => {
-			let newSelectedGrid: Array<ICell> = [];
-			// iterate through all currently selected cells and adds them to the new list of currently selected cells
-			// doing this so that we can set the state of the spreadsheet at the end of this function
-			get().currentlySelected.forEach((element) => {
-				newSelectedGrid.push(element);
-			});
+      // the new list of ICells that currentlySelected will be set to at the end of the function
+      // and make it the same as the current state of selected cells to start
+      let newSelectedGrid: Array<ICell> = copyRow(get().currentlySelected);
 			// clear every cell in the new list of selected cells
 			newSelectedGrid.forEach((cell) => cell.clearCell());
 			// this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
@@ -401,14 +415,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets cells
      */
 		clearAllCells: () => {
-			let newGrid: Array<Array<ICell>> = [];
-			// iterate through all cells and adds them to the new grid of cells
-			// doing this so that we can set the state of the spreadsheet at the end of this function
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
+      // the new grid of ICells that cells will be set to at the end of the function
+      // and make it the same as the current state of cells to start
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
 			// clear every cell in the new grid of cells
 			newGrid.forEach((row) => row.forEach((cell) => cell.clearCell()));
 			// this set is a feature of zustand - updates the state of the spreadsheet by updating the value of cells
@@ -421,17 +430,16 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets currentlySelected
      */
 		createRule: (rule: IValidationRule) => {
-			let newSelectedGrid: Array<ICell> = [];
 			// iterate through all currently selected cells and adds them to the new list of currently selected cells
 			// doing this so that we can set the state of the spreadsheet at the end of this function
-			get().currentlySelected.forEach((element) => {
-				newSelectedGrid.push(element);
-			});
+      let newSelectedGrid: Array<ICell> = copyRow(get().currentlySelected);
 			// add rule to every selected cell
 			newSelectedGrid.forEach((element) => {
 				element.addRule(rule);
+        // force cell to update its display value to show an error if it breaks the rule
 				element.updateDisplayValue(get().cells);
 			});
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
 			set({ currentlySelected: newSelectedGrid });
 		},
 
@@ -441,17 +449,16 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets currentlySelected
      */
 		removeRule: (rule: IValidationRule) => {
-			let newSelectedGrid: Array<ICell> = [];
 			// iterate through all currently selected cells and adds them to the new list of currently selected cells
 			// doing this so that we can set the state of the spreadsheet at the end of this function
-			get().currentlySelected.forEach((element) => {
-				newSelectedGrid.push(element);
-			});
+      let newSelectedGrid: Array<ICell> = copyRow(get().currentlySelected);
 			// remove rule from every selected cell
 			newSelectedGrid.forEach((element) => {
 				element.removeRule(rule);
+        // force cell to update its display value to clear an error if it broke the rule previously
 				element.updateDisplayValue(get().cells);
 			});
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
 			set({ currentlySelected: newSelectedGrid });
 		},
 
@@ -466,8 +473,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 				// start by getting all the rules of the first selected cell
 				// which cell is being used is arbitrary, but using the first works for any number of selected cells
 				// we do this because if a rule is not in the first cell, it is not in EVERY selected cell, and therefore wouldn't be returned
-				let firstRules: Array<IValidationRule> =
-					get().currentlySelected[0].getRules();
+				let firstRules: Array<IValidationRule> = get().currentlySelected[0].getRules();
 				// go through all currently selected cells and see if they contain the rules contained in firstRules
 				for (let i: number = 0; i < firstRules.length; i++) {
 					let contains: boolean = true;
@@ -490,30 +496,31 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets currentlySelected
      */
 		findCellsContaining: (find: string) => {
-			//   find all the cells containing find and store them
-			//   set currently selected to contain only the first of the cells we just stored
+			// reset selected cells
+			let selectCells: Array<ICell> = [];
 
-			let selectCells: Array<ICell> = get().currentlySelected;
-
+      // if no value being looked for, don't try to look
 			if (find !== "") {
 				let findAndReplaceCellsTemp: Array<ICell> = [];
-
+        // go through all the cells to look for the first instance of find
 				get().cells.forEach((row) => {
 					row.forEach((element) => {
 						if (element.getEnteredValue().indexOf(find) !== -1) {
-							findAndReplaceCellsTemp.push(element);
+              findAndReplaceCellsTemp.push(element);
 						}
 					});
 				});
 
+        // if at least one cell contains the find string, select the first one
 				if (findAndReplaceCellsTemp.length > 0) {
 					selectCells = [];
 					selectCells.push(findAndReplaceCellsTemp[0]);
 				}
 			} else {
+        // if there were no cells that contained the find string, don't select any cell
 				selectCells = [];
 			}
-
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
 			set({ currentlySelected: selectCells });
 		},
 
@@ -525,11 +532,14 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets cells, currentlySelected, via findNextContaining
      */
 		replaceCurrentCell: (find: string, replace: string) => {
+      // if no value being looked for, don't try to replace
 			if (find !== "") {
+        // if no cell selected, cannot replace
 				if (get().currentlySelected.length > 0) {
 					get().currentlySelected[0].findReplace(find, replace);
 				}
-
+        // now that we have replaced value, move onto the next instance of the find string in the grid
+        // if possible
 				get().findNextContaining(find);
 			}
 		},
@@ -544,12 +554,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 				return;
 			}
 
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
 
 			const rowCurrent: number = get().currentlySelected[0].getRow();
 
@@ -585,6 +590,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
 			newGrid.forEach((row: ICell[]) =>
 				row.forEach((cell: ICell) => cell.updateDisplayValue(newGrid))
 			);
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of cells and currentlySelected
 			set({ cells: newGrid, currentlySelected: currentlySelectedTemp });
 		},
 
@@ -596,25 +602,25 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @sets cells
      */
 		findAndReplaceAll: (find: string, replace: string) => {
-			let newGrid: Array<Array<ICell>> = [];
-			get().cells.forEach((element) => {
-				let row: Array<ICell> = [];
-				element.forEach((cell) => row.push(cell));
-				newGrid.push(element);
-			});
+      // iterate through all cells and adds them to the new grid of cells
+			// doing this so that we can set the state of the spreadsheet at the end of this function
+      let newGrid: Array<Array<ICell>> = copyGrid(get().cells);
+      // if no value being looked for, don't try to replace
 			if (find !== "") {
+        // go through every cell in the new grid and try to find+replace 
 				newGrid.forEach((row) => {
 					row.forEach((element) => {
 						element.findReplace(find, replace);
 					});
 				});
+        // go through every cell in the new grid and update the display value
 				newGrid.forEach((row: ICell[]) =>
 					row.forEach((cell: ICell) =>
 						cell.updateDisplayValue(newGrid)
 					)
 				);
 			}
-
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of cells
 			set({ cells: newGrid });
 		},
 
@@ -628,39 +634,43 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
      * @param setCellStyle the function to set an ICellStyle property's value
      * @sets currentlySelected
      */
-		setStyle: (
-			isCellStyled: (style: ICellStyle) => boolean,
-			setCellStyle: (style: ICellStyle, value: boolean) => void
-		) => {
-			let newSelected: ICell[] = [];
+		setStyle: (isCellStyled: (style: ICellStyle) => boolean, setCellStyle: (style: ICellStyle, value: boolean) => void) => {
+      // iterate through all currently selected cells and adds them to the new list of currently selected cells
+			// doing this so that we can set the state of the spreadsheet at the end of this function
+      let newSelected: Array<ICell> = copyRow(get().currentlySelected);
+			// determine if every selected cell is styled using provided evaluation function
 			let allStyled: boolean = true;
-			get().currentlySelected.forEach((cell) => {
+			newSelected.forEach((cell:ICell) => {
 				allStyled = allStyled && isCellStyled(cell.getStyle());
 			});
 
-			get().currentlySelected.forEach((cell) => {
+      // If all cells styled, unapply the style with provided style setting function
+      // Else, apply the style with provided style setting function
+			newSelected.forEach((cell) => {
 				let newStyle: ICellStyle = cell.getStyle();
 				setCellStyle(newStyle, !allStyled);
 				cell.setStyle(newStyle);
-				newSelected.push(cell);
 			});
-
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
 			set({ currentlySelected: newSelected });
 		},
 
 		/**
      * Update the value of the text color property for all selected ICells' ICellStyle
-     * @param textColor the color the text in the ICell should be
+     * @param textColor the color the text in the ICell should be as a string hex code
      * @sets currentlySelected
      */
 		setTextColor: (textColor: string) => {
-			let newSelected: ICell[] = [];
-			get().currentlySelected.forEach((cell) => {
+      // iterate through all currently selected cells and adds them to the new list of currently selected cells
+			// doing this so that we can set the state of the spreadsheet at the end of this function
+      let newSelected: Array<ICell> = copyRow(get().currentlySelected);
+      // for all selected cells, update their text color to provided color
+			newSelected.forEach((cell:ICell) => {
 				let newStyle: ICellStyle = cell.getStyle();
 				newStyle.setTextColor(textColor);
 				cell.setStyle(newStyle);
-				newSelected.push(cell);
 			});
+      // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
 			set({ currentlySelected: newSelected });
 		},
 	})

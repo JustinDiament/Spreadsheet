@@ -1,3 +1,4 @@
+
 import { IStrategy } from "../interfaces/strategy-interface";
 
 /**
