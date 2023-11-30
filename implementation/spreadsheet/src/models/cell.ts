@@ -29,8 +29,14 @@ export class Cell implements ICell {
      */
     private validationRules: IValidationRule[];
 
+    /**
+     * The row that this cell occupies in the spreadsheet
+     */
     private row: number;
 
+    /**
+     * The column that this cell occupies in the spreadsheet
+     */
     private col: number;
 
     /**
@@ -62,18 +68,34 @@ export class Cell implements ICell {
         this.observing = [];
     }
 
+    /**
+     * Gets the row this cell occupies
+     * @returns the row this cell occupies
+     */
     public getRow(): number {
         return this.row;
     }
 
+    /**
+     * Gets the column this cell occupies
+     * @returns the column this cell occupies
+     */
     public getColumn(): number {
         return this.col;
     }
 
+    /**
+     * Sets the row this cell occupies. This is used to check for self-references among other things.
+     * @param row the row this cell occupies in the spreadsheet
+     */
     public setRow(row: number): void {
         this.row = row;
     }
 
+    /**
+     * Sets the column this cell occupies. This is used to check for self-references among other things.
+     * @param col the column this cell occupies in the spreadsheet
+     */
     public setColumn(col: number): void {
         this.col = col;
     }
@@ -94,101 +116,112 @@ export class Cell implements ICell {
         return this.displayValue;
     }
 
+	/**
+	 * Add the provided ICell to the list of ICells observing this ICell if it is not already in the list
+	 * And add this ICell to the other ICell's list of ICells it is observing
+	 * @param observer the ICell observing this ICell
+	 */
     public attachObserver(observer:ICell) : void {
+        //check if the observer is already attached
         if(!this.observers.includes(observer)) {
             this.observers.push(observer);
             observer.attachObserving(this);
         }
     }
 
+    /**
+	 * Remove the provided ICell to the list of ICells observing this ICell if it is in the list
+	 * And removes this ICell from the other ICell's list of ICells it is observing
+	 * @param observer the ICell observing this ICell
+	 */
     public detachObserver(observer:ICell) : void {
         let index: number = this.observers.indexOf(observer);
+        //verify that the index exists / the observer given is one of the observers
         if(index > -1) {
             this.observers.splice(index, 1);
             observer.detachObserving(this);
         }
     }
 
+    /**
+     * Add the provided ICell to the list of ICells this ICell is observing if it is not already in the list
+     * @param observing the ICell this ICell is observing
+     */
     public attachObserving(observing:ICell):void {
+        //check that we are not duplicating observers
         if(!this.observing.includes(observing)) {
             this.observing.push(observing);
         }
     }
 
+    /**
+     * Remove the provided ICell to the list of ICells this ICell is observing if it is in the list
+     * @param observing the ICell this ICell is observing
+     */
     public detachObserving(observing:ICell):void {
         let index: number = this.observing.indexOf(observing);
+        //verify that the index exists / the observer given is one of the observers
         if(index > -1) {
             this.observing.splice(index, 1);
         }
     }
 
+    /**
+     * Is this ICell observing the provided ICell directly and/or indirectly through the ICells it is observing?
+     * @param observing the ICell this ICell is looking for
+     * @returns true if this ICell is observing the provided ICell directly or indirectly, false otherwise
+     */
     public isObserving(observing:ICell) :boolean {
         let isObserving = this.observing.includes(observing);
+        //check for indirect observation
         if(!isObserving) {
             this.observing.forEach((element:ICell) => (isObserving = isObserving && element.isObserving(observing)));
         }
-
         return isObserving;
     }
 
-    /**
-     * Parses the entered value and evaluates the validation rules to update the display value
-     */
+	/**
+	 * Parses the entered value of this ICell and evaluates the display value of this ICell,
+     * checking for any input errors
+	 * @param cells the grid of ICells this ICell is using to calculate the value of any references
+	 */
     public updateDisplayValue(cells: Array<Array<ICell>>): void{
         this.observing.forEach((observed: ICell) => observed.detachObserver(observed));
-        let strategies: Array<IStrategy> = [new CellRefStrategy(cells, this.row, this.col), new AverageStrategy(cells, this.row, this.col), new SumStrategy(cells, this.row, this.col), new PlusSignStrategy(), new StrategyFormulas()];
-
-        
-
-        // let foundError: boolean = false;
-        // for (const rule of this.validationRules) {
-        //     if (!rule.checkRule(this.enteredValue)) {
-        //       this.displayValue = rule.getErrorMessage();
-        //       foundError = true;  
-        //       break; // This will exit the loop when the condition is met
-        //     }
-        //   }
-        //if an error has not been found through the validation rules, continue evaluating the value  
-        //if(!foundError) {
-            
+        //the strategies represent the ways that we will parse the entered value to create the display value
+        let strategies: Array<IStrategy> = [new CellRefStrategy(cells, this.row, this.col), new AverageStrategy(cells, this.row, this.col), new SumStrategy(cells, this.row, this.col), new PlusSignStrategy(), new StrategyFormulas()];        
             let currentString: string = this.enteredValue;
             try {
+                //iterate through the full list of strategies
                 for(let i:number = 0; i<strategies.length; i++) {
                     let strategy=strategies[i];
                     currentString = strategy.parse(currentString);
                     let noObservingError = true;
+                    //check that an error has not been encountered
                     this.observing.forEach((element:ICell) => 
                     (noObservingError = noObservingError && !(Object.values(ErrorDisplays) as any).includes(element.getDisplayValue())));
                         if(!noObservingError) {
                             currentString=ErrorDisplays.INVALID_CELL_REFERENCE;
                         break; 
                     }
-                      
                 }
             }
             catch(error) {
                 if (error instanceof Error) currentString = error.message;
             }
-            
             // Need this so an update actually occurs if its empty
             if (!/\S/.test(currentString)) {
                 currentString+=" ";
               }
             this.displayValue = currentString;
-        //} 
-
-        // let foundError: boolean = false;
+        //check the cell against each of the validation rules that has been applied to it    
         for (const rule of this.validationRules) {
             if (!rule.checkRule(this.displayValue)) {
               this.displayValue = rule.getErrorMessage();
-            //   foundError = true;  
               break; // This will exit the loop when the condition is met
             }
           }
-
+        //update the display value of each observer as any reference to this cell will need to be updated
         this.observers.forEach((observer: ICell) => observer.updateDisplayValue(cells)); 
-
-
     }
 
     /**
@@ -205,7 +238,6 @@ export class Cell implements ICell {
     public clearCell(): void {
         this.enteredValue = "";
         this.displayValue = "";
-        console.log("enum check: " + ((Object.values(ErrorDisplays) as any).includes('#INVALID-EXPR')));
     }
 
     /**
@@ -214,27 +246,21 @@ export class Cell implements ICell {
      * @param replace the value to replace the found value in
      */
     public findReplace(find: string, replace: string): void {
-
+        //check if the entered value cntains the value we are trying to find
         if(this.enteredValue.includes(find)) {
-            console.log(find);
-            console.log(replace);
-            console.log("inside");
+            //split the value into sections based on the string we are trying to find
             let sections: string[] = this.enteredValue.split(new RegExp(`(${find})`));
-            console.log(sections);
-            
+            //for each section if it is the value we are finding, replace it with the new value
             for (let i=0; i < sections.length; i++) {
                 if (sections[i] === find) {
                     sections[i] = replace;
                 } 
             }
-
+            //recombine the sections of the value and update the stored entered value
             let combinedString: string = sections.join('');
-            console.log(sections)
             this.setEnteredValue(combinedString);
 
         }
-
-        console.log(this.getEnteredValue());
     }
 
     /**
@@ -254,7 +280,7 @@ export class Cell implements ICell {
     }
 
     /**
-     * 
+     * Retrieves a list of the rules that have been applied to the cell
      * @returns this Cell's validation rules
      */
     public getRules(): Array<IValidationRule> {
@@ -262,7 +288,7 @@ export class Cell implements ICell {
     }
 
     /**
-     * 
+     * Returns the current styles applied to the cell
      * @returns the style applied to this cell
      */
     public getStyle(): ICellStyle {
@@ -276,5 +302,4 @@ export class Cell implements ICell {
     public setStyle(newStyle: ICellStyle): void {
         this.style=newStyle;
     }
-
 }

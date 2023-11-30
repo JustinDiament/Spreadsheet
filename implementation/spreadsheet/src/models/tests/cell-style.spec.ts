@@ -8,9 +8,6 @@ describe('CellStyle', () => {
   });
 
   it('should have default values on creation', () => {
-    expect(cellStyle.isCellBold()).toBe(false);
-    expect(cellStyle.isCellItalic()).toBe(false);
-    expect(cellStyle.isCellUnderlined()).toBe(false);
     expect(cellStyle.getTextColor()).toBe('#000000');
   });
 

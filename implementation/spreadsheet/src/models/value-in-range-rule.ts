@@ -30,10 +30,12 @@ export class ValueInRangeRule implements IValidationRule{
     checkRule(cellData: string): boolean {
         const numericCellData = Number(cellData);
 
+        //check that the value in the cell is a number
         if (isNaN(numericCellData)) {
             throw new Error(ErrorDisplays.INVALID_CELL_DATA);
         }
 
+        //check based on the variation in the rule that 
         switch (this.equalGreaterLess) {
             case "equal":
                 return numericCellData === this.value;
@@ -46,14 +48,26 @@ export class ValueInRangeRule implements IValidationRule{
         }
     }
 
+    /**
+     * Provides the error message to display for this rule
+     * @returns the correct error message to display
+     */
     public getErrorMessage(): string {
         return ErrorDisplays.INVALID_CELL_DATA;
     }
 
+    /**
+     * Gets the type of comparison this rule applies
+     * @returns type of comparison this rule applies
+     */
     public getComparison():string {
         return this.equalGreaterLess;
     }
 
+    /**
+     * Gets the number that the cell data must be equal/greater/less than in order to be valid
+     * @returns the number that the cell data must be equal/greater/less than in order to be valid
+     */
     public getValue():number {
         return this.value;
     }
