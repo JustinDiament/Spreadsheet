@@ -1,3 +1,8 @@
+/**
+ * @file strategy-sumy.ts
+ * @class SumStrategy
+ */
+
 import { ICell } from "../interfaces/cell-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
 import { ErrorDisplays } from "./cell-data-errors-enum";

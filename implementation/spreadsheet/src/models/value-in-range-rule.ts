@@ -1,3 +1,8 @@
+/**
+ * @file value-in-range-rule.ts
+ * @class ValueInRangeRule
+ */
+
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 

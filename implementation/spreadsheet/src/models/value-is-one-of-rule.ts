@@ -1,3 +1,8 @@
+/**
+ * @file value-is-one-of-rule.ts
+ * @class ValueIsOneOf
+ */
+
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 
@@ -13,6 +18,7 @@ export class ValueIsOneOfRule implements IValidationRule{
 
     constructor(values:Array<string | number>) {
         this.values = values;
+       
     }
 
     /**
@@ -21,14 +27,20 @@ export class ValueIsOneOfRule implements IValidationRule{
      * @return true if the data is valid, false if it is not 
      */
     public checkRule(cellData: string): boolean {
-        // Check if cellData is in the set of allowed values
-        let numericValue:number = Number(cellData);
-        //if value is a number also check that the number version of the cell data
-        if(!isNaN(numericValue)) {
-            return this.values.includes(cellData) || this.values.includes(numericValue);
+        // Check if cellData is in the set of allowed values or if it is empty
+        if(cellData!== "" && cellData!==" ") {
+            let numericValue:number = Number(cellData);
+            //if value is a number also check that the number version of the cell data
+            if(!isNaN(numericValue)) {
+                return (this.values.includes(cellData) || this.values.includes(numericValue) || cellData===null);
+                
+            } else {
+                return (this.values.includes(cellData) || cellData===" " || cellData==="");
+            }
         } else {
-            return this.values.includes(cellData);
+            return true;
         }
+        
     }
 
     /**

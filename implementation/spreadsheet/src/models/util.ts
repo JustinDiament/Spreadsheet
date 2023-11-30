@@ -1,3 +1,8 @@
+/**
+ * @file util.ts
+ * @class Util
+ */
+
 import { ErrorDisplays } from "./cell-data-errors-enum";
 
 /**

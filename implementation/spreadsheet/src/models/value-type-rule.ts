@@ -1,3 +1,8 @@
+/**
+ * @file value-type-rule.ts
+ * @class ValueTypeRule
+ */
+
 import { IValidationRule } from "../interfaces/validation-rule-interface";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 

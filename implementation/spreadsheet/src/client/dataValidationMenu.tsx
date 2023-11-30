@@ -102,12 +102,13 @@ function dispValOneOf(rule: ValueIsOneOfRule, ind: number, onClick: (rule: IVali
       <div>
         {/* map through the values that the cell can contain and display them */}
         {/* disable editing - user can only view this rule or delete it */}
-        {rule.getValues().map((opt) => (
+        {rule.getValues().map((opt, ind) => (
           <input
             className={"form-control w-100 my-1"}
             type={type === "num" ? "number" : "text"}
             disabled
-            value={opt}></input>))}
+            value={opt}
+            key={ind}></input>))}
       </div>
       {/* Allow user to delete this rule from the currently selected cells */}
       <button
@@ -344,7 +345,8 @@ function DataValidationMenu({ disp }: DataValidationMenuProps) {
                   className="w-100 my-1 form-control"
                   type={type === "num" ? "number" : "text"}
                   onChange={(e) => editOption(ind, e.target.value)}
-                  value={opt}></input>))}
+                  value={opt}
+                  key={ind}></input>))}
             </div>
             {/* button to add another option */}
             <button
