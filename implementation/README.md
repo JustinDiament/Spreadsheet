@@ -8,7 +8,7 @@ HOW TO INSTALL THE SPREADSHEET:
 HOW TO RUN THE SPREADSHEET TESTS:
 - Navigate to the "spreadsheet" folder (/implementation/spreadsheet)
 - Run "npm install" in the terminal
-- Run "npm test --coverage" in the terminal  
+- Run "npm test models/tests -- --coverage" in the terminal (runs all tests except end to end tests)
 - Run "npm run e2e" in the terminal (exclusively runs the end to end tests) 
 
 
