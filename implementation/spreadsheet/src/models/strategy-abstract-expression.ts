@@ -97,8 +97,8 @@ export abstract class AExpressionStrategy implements IStrategy {
 
     // If the location is beyond the spreadsheet bounds, throw an error
     if (
-      locationEnd[1] > otherCells.length ||
-      locationEnd[0] > otherCells[0].length ||
+      locationEnd[1] >= otherCells.length ||
+      locationEnd[0] >= otherCells[0].length ||
       locationStart[1] < 0 ||
       locationStart[0] < 0
     ) {

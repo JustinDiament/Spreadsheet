@@ -69,14 +69,12 @@ export class SumStrategy extends AExpressionStrategy implements IStrategy {
 
     // Find the average of the cells in the reange
     let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
-    if (values.length < 1) {
-      return ErrorDisplays.INVALID_RANGE_EXPR;
-    }
+
     let sum = this.addRangeValues(values);
 
     // If the average results in a non-numerical answer, throw an error
     if (isNaN(sum)) {
-      return ErrorDisplays.INVALID_RANGE_EXPR;
+      throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
     }
 
     // Else, return the display value chunk with the AVERAGE value filled in

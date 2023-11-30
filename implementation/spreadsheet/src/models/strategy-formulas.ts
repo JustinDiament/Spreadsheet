@@ -61,13 +61,13 @@ export class StrategyFormulas implements IStrategy {
       // Attempt to evaluate the remaining display value as a formula. 
       // If it fails, throw an error.
       try {
-        return evaluate(currentValue);
+        return evaluate(currentValue).toString();
       } catch {
         throw new Error(ErrorDisplays.INVALID_FORMULA);
       }
     }
 
-    // If it succeeds, return the result
+    // If there are no reserved formula characters, return the current display value as is
     return currentValue;
   }
 }

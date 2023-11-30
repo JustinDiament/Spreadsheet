@@ -1,54 +1,53 @@
-import { assert } from "console";
+import { IStrategy } from "../../interfaces/strategy-interface";
 import { PlusSignStrategy } from "../strategy-plus-sign";
 
-describe('Plus Sign Strategy', (): void => {
-    let strategy = new PlusSignStrategy()
-  
-    it('should concatenate 2 strings', (): void => {
-        let originalString = "one + two";
-        let expectedString = "onetwo"
-        let parsedString = strategy.parse(originalString);
-    });
+// Test the plus sign concatenation strategy
+describe("Plus Sign Strategy", (): void => {
+  // A plus sign strategy object to use for all tests
+  let strategy: IStrategy;
 
-    it('should concatenate 1 string with 1 number', (): void => {
-        let originalString = "one + 2";
-        let expectedString = "one2"
-        let parsedString = strategy.parse(originalString);
-    });
-
-    it('should add two numbers', (): void => {
-        let originalString = "1 + 2";
-        let expectedString = "3"
-        let parsedString = strategy.parse(originalString);
-    });
-
-    it('should add two numbers when one is negative', (): void => {
-        let originalString = "1 + -2";
-        let expectedString = "-1"
-        let parsedString = strategy.parse(originalString);
-    });
-
-    it('should add more than two strings', (): void => {
-        let originalString = "a + b + c + d + e";
-        let expectedString = "abcde"
-        let parsedString = strategy.parse(originalString);
-});
-
-    it('should add more than two numbers', (): void => {
-            let originalString = "1 + 2 + 3 + 4 + 5";
-            let expectedString = "15"
-            let parsedString = strategy.parse(originalString);
-    });
-
-    it('should add more than two numbers with negatived', (): void => {
-        let originalString = "1 + 2 + -3 + 4 + -5";
-        let expectedString = "-1"
-        let parsedString = strategy.parse(originalString);
-    });
-
-    it('should return an error when the equation ends in +', (): void => {
-        let originalString = "1 + ";
-        let expectedString = "ERROR: Invalid equation"
-        let parsedString = strategy.parse(originalString);
-    });
+  // Initialize the object before every test
+  beforeEach(() => {
+    strategy = new PlusSignStrategy();
   });
+
+  // Check that two strings can be concatenated, including their trailing/leading spaces
+  it("should concatenate 2 strings", (): void => {
+    // Set up the concatenation
+    let originalString = "one + two";
+    let parsedString = strategy.parse(originalString);
+
+    // Check for the expected result including spacing
+    expect(parsedString).toBe("one  two");
+  });
+
+  // Check that a number can be concatenated with a string
+  it("should concatenate 1 string with 1 number", (): void => {
+    // Set up the concatenation
+    let originalString = "one+2";
+    let parsedString = strategy.parse(originalString);
+
+    // Check for the expected result including lack of spacing
+    expect(parsedString).toBe("one2");
+  });
+
+  // Check that a bunch of strings of varying spacing can be concatenated
+  it("should add more than two strings", (): void => {
+    // Set up the concatenation
+    let originalString = "a + b + c +d+e";
+    let parsedString = strategy.parse(originalString);
+
+    // Check for the expected result including varying spacing
+    expect(parsedString).toBe("a  b  c de");
+  });
+
+  // Check that this strategy does not concatenate numbers if they are a math/arithmetic expression
+  it("should not concatenate numbers", (): void => {
+    // Set up the concatenation
+    let originalString = "1 + 2 + 3 + 4 + 5";
+    let parsedString = strategy.parse(originalString);
+
+    // Check that the numbers were not concatenated
+    expect(parsedString).toBe("1 + 2 + 3 + 4 + 5");
+  });
+});

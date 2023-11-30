@@ -62,18 +62,13 @@ export class AverageStrategy extends AExpressionStrategy implements IStrategy {
       throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
     }
 
-    // Split into the range expression and the rest of the
+    // Split into the range expression and the rest of the display value
     const firstPart = reference.slice(0, index);
     const secondPart = reference.slice(index + 1);
     let splitSections: string[] = [firstPart, secondPart];
 
     // Get the values of the cells in the range
     let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
-
-    // If there are no values, throw an error
-    if (values.length < 1) {
-      throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
-    }
 
     // Find the average of the cells in the reange
     let sum: number = this.addRangeValues(values);
