@@ -81,4 +81,3 @@ GUIDE TO ERRORS AND THEIR MEANING:
     - A cell ref or range expression references itself, or creates an infinate loop via a chain of references. 
 - #INVALID-INPUT
     - A validation rule has been violated.
-}
