@@ -61,7 +61,6 @@ export class CellStyle implements ICellStyle {
    */
   public setUnderline(isUnderlined: boolean): void {
     this.isUnderlined = isUnderlined;
-    console.log("changed underline");
   }
 
   /**
@@ -70,7 +69,6 @@ export class CellStyle implements ICellStyle {
    */
   public setTextColor(textColor: string): void {
     this.textColor = textColor;
-    console.log("changed text color");
   }
 
   /**

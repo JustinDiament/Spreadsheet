@@ -54,6 +54,6 @@ export class ValueTypeRule implements IValidationRule {
    * @returns the correct error message to display
    */
   public getErrorMessage(): string {
-    return ErrorDisplays.INVALID_CELL_REFERENCE;
+    return ErrorDisplays.INVALID_CELL_DATA;
   }
 }

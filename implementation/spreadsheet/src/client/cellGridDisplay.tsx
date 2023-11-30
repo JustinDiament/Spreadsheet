@@ -208,7 +208,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
                       // the setSelected function in this cell will select cells given the location of this cell
                       setSelected={setSelected}
                       // whether this cell is selected currently
-                      isSelected={currSelected.includes(cell)}
+                      // isSelected={currSelected.includes(cell)}
                       //  The key is the unique identifier of the cell. Whenever the value of the key changes, the cell rerenders
                       // so, we include the display value in the key so the cell rerenders whenever its display value changes
                       key={
@@ -228,6 +228,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
                       getClickedIn={getClickedIn(cell)}
                       // the function to update which cell is currently clicked in/focused
                       setClickedIn={setClickedIn}
+                      currentSelected={currSelected.includes(cell) ? currSelected : null}
                     />
                   </td>
                 ))}

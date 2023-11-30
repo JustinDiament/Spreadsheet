@@ -685,6 +685,7 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
       // iterate through all currently selected cells and adds them to the new list of currently selected cells
       // doing this so that we can set the state of the spreadsheet at the end of this function
       let newSelected: Array<ICell> = copyRow(get().currentlySelected);
+  
       // determine if every selected cell is styled using provided evaluation function
       let allStyled: boolean = true;
       newSelected.forEach((cell: ICell) => {
@@ -696,10 +697,9 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
       newSelected.forEach((cell) => {
         let newStyle: ICellStyle = cell.getStyle();
         setCellStyle(newStyle, !allStyled);
-        cell.setStyle(newStyle);
       });
       // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
-      set({ currentlySelected: newSelected });
+      set({ currentlySelected: newSelected });    
     },
 
     /**
@@ -715,7 +715,6 @@ export const useSpreadsheetController = create<ISpreadSheetState>(
       newSelected.forEach((cell: ICell) => {
         let newStyle: ICellStyle = cell.getStyle();
         newStyle.setTextColor(textColor);
-        cell.setStyle(newStyle);
       });
       // this set is a feature of zustand - updates the state of the spreadsheet by updating the value of currentlySelected
       set({ currentlySelected: newSelected });

@@ -7,6 +7,7 @@ import { useSpreadsheetController } from "../models/spreadsheet-controller";
 import React from "react";
 import { ICellStyle } from "../interfaces/cell-style-interface";
 import { ICell } from "../interfaces/cell-interface";
+import { Util } from "../models/util";
 
 /**
  * ==============================================================
@@ -19,14 +20,17 @@ interface CellDisplayProps {
   cell: ICell; // the cell being displayed
   index: string; // the string location of the cell (ex. A1)
   setSelected: (x: number, y: number) => void; // the function to call on click to select a cel
-  isSelected: boolean; // is the cell currently selected
   enabled: boolean; // is the cell allowed to be clicked?
   getClickedIn: boolean; // is the cell currently clicked in/focused
   setClickedIn: (cell: ICell | null) => void; // the function to update which cell is clicked in/focused
+  currentSelected: ICell[] | null;
 }
 
 // React component for rendering an editable cell
-function CellDisplay({cell, index, setSelected, isSelected, enabled, getClickedIn, setClickedIn,}: CellDisplayProps) {
+function CellDisplay({cell, index, setSelected, enabled, getClickedIn, setClickedIn, currentSelected}: CellDisplayProps) {
+
+  let isSelected:boolean = !currentSelected===null;
+
   // set whether the cell is currently "clicked in" / being edited
   const [clickedIn, setLocalClickedIn]: Array<any> = useState<boolean>(getClickedIn);
 
@@ -38,7 +42,8 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled, getClickedI
   );
 
   // set the style of the cell - the state of whether it is bold, italic, and/or underlined and the color of its text
-  const [style, setStyle]: Array<any> = useState<ICellStyle>(cell.getStyle());
+  let loc:number[] = Util.getIndicesFromLocation(index);
+  const [style, setStyle]: Array<any> = useState<ICellStyle>(useSpreadsheetController((controller) => controller.cells[loc[1]][loc[0]].getStyle()));
 
   // a function to edit a cell's entered data
   const setValue: (cellID: string, newValue: any) => void =

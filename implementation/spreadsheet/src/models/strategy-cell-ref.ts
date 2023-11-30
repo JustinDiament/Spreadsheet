@@ -56,9 +56,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
         if(referenceSections.length < 2) {
             throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
         }
-        // let col: number = this.findCol(referenceSections[0]);
-        // let row: number = parseInt(referenceSections[1]);
-
+       
             let location: Array<number> = Util.getIndicesFromLocation(cellCode);
 
         if (location[1] === this.row && location[0] === this.col) {
@@ -67,19 +65,22 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
 
         
 
-        try {
-            if (this.otherCells[location[1]][location[0]].isObserving(this.otherCells[this.row][this.col])) {
+        
+        if (this.otherCells[location[1]][location[0]].isObserving(this.otherCells[this.row][this.col])) {
             throw new Error(ErrorDisplays.REFERENCE_TO_SELF);
-        }
-            //get display value of referenced cell
+        } else {
+            try {
+             //get display value of referenced cell
             let refCell:ICell= this.otherCells[location[1]][location[0]];
             let thisCell:ICell = this.otherCells[this.row][this.col];
             refCell.attachObserver(thisCell);
-            
             return refCell.getDisplayValue();
+
         }
         catch {
             throw new Error(ErrorDisplays.REFERENCE_OUT_OF_RANGE);
         }
+        }
+           
     }
 }

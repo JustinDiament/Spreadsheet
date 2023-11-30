@@ -140,6 +140,7 @@ export class Cell implements ICell {
    * @param observer the ICell observing this ICell
    */
   public detachObserver(observer: ICell): void {
+
     let index: number = this.observers.indexOf(observer);
     //verify that the index exists / the observer given is one of the observers
     if (index > -1) {
@@ -182,7 +183,7 @@ export class Cell implements ICell {
     if (!isObserving) {
       this.observing.forEach(
         (element: ICell) =>
-          (isObserving = isObserving && element.isObserving(observing))
+          (isObserving = isObserving || element.isObserving(observing))
       );
     }
     return isObserving;
@@ -194,8 +195,9 @@ export class Cell implements ICell {
    * @param cells the grid of ICells this ICell is using to calculate the value of any references
    */
   public updateDisplayValue(cells: Array<Array<ICell>>): void {
+    
     this.observing.forEach((observed: ICell) =>
-      observed.detachObserver(observed)
+      observed.detachObserver(this)
     );
     //the strategies represent the ways that we will parse the entered value to create the display value
     let strategies: Array<IStrategy> = [
