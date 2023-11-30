@@ -259,6 +259,7 @@ export class Cell implements ICell {
             //recombine the sections of the value and update the stored entered value
             let combinedString: string = sections.join('');
             this.setEnteredValue(combinedString);
+
         }
     }
 

@@ -88,7 +88,7 @@ function CellDisplay({cell, index, setSelected, isSelected, enabled, getClickedI
       }
     }
     // run this any time the state of whether the cell is clicked in changes
-  }, [clickedIn]);
+  }, [cell, clickedIn, getClickedIn, setClickedIn, setSelected]);
 
   // update the content and state of the cell based on the passed in data
   function update(newData: string): void {
