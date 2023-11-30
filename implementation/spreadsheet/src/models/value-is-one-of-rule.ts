@@ -9,12 +9,11 @@ import { ErrorDisplays } from "./cell-data-errors-enum";
 /**
  * Represents a data validation rule about if the data in the cell is one of a set number of options
  */
-export class ValueIsOneOfRule implements IValidationRule{
-
-    /**
-     * The set of values for the cell that it must be one of in order to be valid
-     */
-    private values: Array<string | number>;
+export class ValueIsOneOfRule implements IValidationRule {
+  /**
+   * The set of values for the cell that it must be one of in order to be valid
+   */
+  private values: Array<string | number>;
 
     constructor(values:Array<string | number>) {
         this.values = values;
@@ -43,19 +42,19 @@ export class ValueIsOneOfRule implements IValidationRule{
         
     }
 
-    /**
-     * Provides the error message to display for this rule
-     * @returns the correct error message to display
-     */
-    public getErrorMessage(): string {
-        return ErrorDisplays.INVALID_CELL_DATA;
-    }
+  /**
+   * Provides the error message to display for this rule
+   * @returns the correct error message to display
+   */
+  public getErrorMessage(): string {
+    return ErrorDisplays.INVALID_CELL_DATA;
+  }
 
-    /**
-     * Gets the values that the cell data must be in order to be valid
-     * @returns the values that the cell data must be in order to be valid
-     */
-    public getValues(): Array<string | number> {
-        return this.values;
-    }
+  /**
+   * Gets the values that the cell data must be in order to be valid
+   * @returns the values that the cell data must be in order to be valid
+   */
+  public getValues(): Array<string | number> {
+    return this.values;
+  }
 }
