@@ -87,7 +87,7 @@ describe('Sum Strategy', (): void => {
         expect(strategyWithSetValues.parse("SUM(B1..A1)")).toBe("ERROR: Cell range must contain at least one cell");
     });
 
-    it('should throw error when there are no cells in range'), (): void => {
+    it('should throw error when there are no cells in range', (): void => {
         expect(strategyWithSetValues.parse("SUM()")).toBe("ERROR: Cell range must contain at least one cell");
-    }
+    });
   });

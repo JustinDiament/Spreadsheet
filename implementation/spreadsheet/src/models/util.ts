@@ -12,7 +12,7 @@ export class Util {
   // function to convert a location such as "A1" to a set of column/row coordinates
   public static getIndicesFromLocation(location: string): Array<number> {
     // initiate the value of column and number to return
-    let col: number = 0;
+    let col: number = -26;
     let row: number = 0;
     let stillLetters = true; // are we still parsing letters?
     let remainder: string = location; // the remaining substring of the provided location
@@ -26,10 +26,13 @@ export class Util {
           // get unicode value of letter and convert it to the format where A=0, B=1, ... Z=25
           // add to column because column values work as follows:
           // A = column 0, B = column 1, ... Z = column 25, AA = column 26, BB = column 27, .. etc
-          col += sub.charCodeAt(0) - 65;
+          col += (sub.charCodeAt(0) - 65 + 26);
           // remove the value we just parsed from the remaining string
           remainder = remainder.substring(1);
         } else {
+          if(col < 0) {
+            throw new Error(ErrorDisplays.INVALID_CELL_REFERENCE);
+          }
           // we are no longer parsing numbers, so convert what is left to a number
           stillLetters = false;
           row = Number(remainder.substring(0));
