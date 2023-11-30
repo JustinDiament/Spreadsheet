@@ -1,3 +1,8 @@
+/**
+ * @file value-type-rule.spec.ts
+ * @testing ValueTypeRule
+ */
+
 import { ValueTypeRule } from "../value-type-rule";
 
 describe('Value type rule', (): void => {

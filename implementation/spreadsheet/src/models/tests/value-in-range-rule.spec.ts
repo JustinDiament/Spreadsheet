@@ -1,3 +1,8 @@
+/**
+ * @file value-in-range-rule.spec.ts
+ * @testing ValueInRangeRule
+ */
+
 import { ValueInRangeRule } from "../value-in-range-rule";
 
 describe('Value in Range Rule', (): void => {

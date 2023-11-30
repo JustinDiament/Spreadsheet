@@ -71,14 +71,14 @@ function FindReplaceMenu({ disp }: FindReplaceMenuProps) {
 
           <h6 className="w-100">Find</h6>
           {/* enter the value to find */}
-          <input id="find" onChange={(e) => e.currentTarget.textContent != null ? setFind(
-                    (document.getElementById("find") as HTMLInputElement).value) : console.log("asd")}
+          <input id="find" onChange={(e) => e.currentTarget.textContent != null && setFind(
+                    (document.getElementById("find") as HTMLInputElement).value)}
             className="w-100 mb-3 form-control"></input>
 
           <h6 className="w-100">Replace With</h6>
           {/* enter the value to replace it with */}
-          <input id="replace" onChange={(e) => e.currentTarget.textContent != null ? setReplace(
-                    (document.getElementById("replace") as HTMLInputElement).value) : console.log("asd")}
+          <input id="replace" onChange={(e) => e.currentTarget.textContent != null && setReplace(
+                    (document.getElementById("replace") as HTMLInputElement).value)}
             className="w-100 form-control"></input>
 
           {/* find next cell containing value */}

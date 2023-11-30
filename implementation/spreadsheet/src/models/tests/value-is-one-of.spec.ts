@@ -1,3 +1,8 @@
+/**
+ * @file value-in-one-of.spec.ts
+ * @testing ValueIsOneOfRule
+ */
+
 import { ValueIsOneOfRule } from "../value-is-one-of-rule";
 
 describe('Value is one of', (): void => {

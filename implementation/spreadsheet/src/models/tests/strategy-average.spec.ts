@@ -1,3 +1,8 @@
+/**
+ * @file strategy-average.spec.ts
+ * @testing AverageStrategy
+ */
+
 import { Cell } from "../cell";
 import { ErrorDisplays } from "../cell-data-errors-enum";
 import { AverageStrategy } from "../strategy-average";

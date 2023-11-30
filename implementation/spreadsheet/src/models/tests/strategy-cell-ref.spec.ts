@@ -1,3 +1,8 @@
+/**
+ * @file strategy-cell-ref.spec.ts
+ * @testing CellRefStrategy
+ */
+
 import { CellRefStrategy } from "../strategy-cell-ref";
 import { Cell } from "../cell";
 import { ErrorDisplays } from "../cell-data-errors-enum";

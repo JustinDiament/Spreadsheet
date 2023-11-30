@@ -1,3 +1,8 @@
+/**
+ * @file strategy-sum.spec.ts
+ * @testing SumStrategy
+ */
+
 import { Cell } from "../cell";
 import { SumStrategy } from "../strategy-sum";
 import { ErrorDisplays } from "../cell-data-errors-enum";

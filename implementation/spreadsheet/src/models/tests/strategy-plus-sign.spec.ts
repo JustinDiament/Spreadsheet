@@ -1,3 +1,8 @@
+/**
+ * @file strategy-plus-sign.spec.ts
+ * @testing PlusSignStrategy
+ */
+
 import { IStrategy } from "../../interfaces/strategy-interface";
 import { PlusSignStrategy } from "../strategy-plus-sign";
 

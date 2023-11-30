@@ -911,12 +911,10 @@ describe("Testing the ICell interface", (): void => {
 		let cell1: ICell;
 		let cell2: ICell;
 		let cell3: ICell;
-		let cell4: ICell;
 		beforeEach((): void => {
 			cell1 = new Cell(0, 0);
 			cell2 = new Cell(0, 1);
 			cell3 = new Cell(1, 0);
-			cell4 = new Cell(1, 1);
 		});
 
 		// testing isObserving(ICell): boolean with initial value

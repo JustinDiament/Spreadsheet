@@ -1,19 +1,25 @@
+/**
+ * @file index.tsx
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
- import './index.css';
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SpreadSheetDisplay from './client/spreadSheetDisplay';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * This is the root - the entry point to our react web app
+ */
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 document.title = "Spreadsheet";
 root.render(
   <React.StrictMode>
+    {/* the spreadsheet component */}
     <SpreadSheetDisplay />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// provided via create react app
 reportWebVitals();

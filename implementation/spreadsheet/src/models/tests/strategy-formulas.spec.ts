@@ -1,3 +1,8 @@
+/**
+ * @file strategy-formulas.spec.ts
+ * @testing StrategyFormulas
+ */
+
 import { IStrategy } from "../../interfaces/strategy-interface";
 import { ErrorDisplays } from "../cell-data-errors-enum";
 import { StrategyFormulas } from "../strategy-formulas";
