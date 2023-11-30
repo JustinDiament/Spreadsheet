@@ -15,32 +15,35 @@ export class ValueIsOneOfRule implements IValidationRule {
    */
   private values: Array<string | number>;
 
-    constructor(values:Array<string | number>) {
-        this.values = values;
-       
-    }
+  constructor(values: Array<string | number>) {
+    this.values = values;
+  }
 
-    /**
-     * Is the cell data this rule is applied to valid or invalid according to the rule?
-     * @param cellData the data in a cell to be tested 
-     * @return true if the data is valid, false if it is not 
-     */
-    public checkRule(cellData: string): boolean {
-        // Check if cellData is in the set of allowed values or if it is empty
-        if(cellData!== "" && cellData!==" ") {
-            let numericValue:number = Number(cellData);
-            //if value is a number also check that the number version of the cell data
-            if(!isNaN(numericValue)) {
-                return (this.values.includes(cellData) || this.values.includes(numericValue) || cellData===null);
-                
-            } else {
-                return (this.values.includes(cellData) || cellData===" " || cellData==="");
-            }
-        } else {
-            return true;
-        }
-        
+  /**
+   * Is the cell data this rule is applied to valid or invalid according to the rule?
+   * @param cellData the data in a cell to be tested
+   * @return true if the data is valid, false if it is not
+   */
+  public checkRule(cellData: string): boolean {
+    // Check if cellData is in the set of allowed values or if it is empty
+    if (cellData !== "" && cellData !== " ") {
+      let numericValue: number = Number(cellData);
+      //if value is a number also check that the number version of the cell data
+      if (!isNaN(numericValue)) {
+        return (
+          this.values.includes(cellData) ||
+          this.values.includes(numericValue) ||
+          cellData === null
+        );
+      } else {
+        return (
+          this.values.includes(cellData) || cellData === " " || cellData === ""
+        );
+      }
+    } else {
+      return true;
     }
+  }
 
   /**
    * Provides the error message to display for this rule
