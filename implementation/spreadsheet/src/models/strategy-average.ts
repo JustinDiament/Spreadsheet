@@ -1,49 +1,89 @@
+/**
+ * @file strategy-average.ts
+ */
+
 import { ICell } from "../interfaces/cell-interface";
 import { IStrategy } from "../interfaces/strategy-interface";
-// import { Cell } from "./cell";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 
+/**
+ * Represents a strategy for parsing an AVERAGE range expression
+ */
 export class AverageStrategy extends AExpressionStrategy implements IStrategy {
-    private otherCells: ICell[][];
+  // The cells grid that the average is to be taken from
+  private otherCells: ICell[][];
 
-    public constructor(otherCells: ICell[][], row: number, col: number) {
-        super("AVERAGE", row, col);
-        this.otherCells = otherCells;
+  /**
+   * Constructs an average strategy from the provided cells grid, row and column
+   * @param otherCells the cells grid that the average is to be taken from
+   * @param row the row of the cell being parsed
+   * @param col the column of the cell being parsed
+   */
+  public constructor(otherCells: ICell[][], row: number, col: number) {
+    // Call the super constructor to set up an AVERAGE range expression
+    super("AVERAGE", row, col);
+
+    this.otherCells = otherCells;
+  }
+
+  /**
+   * Replace all instances of AVERAGE(__) with the resulting value
+   * @param currentValue the display value as parsed so far
+   * @returns the display value with the average range expressions replaced
+   */
+  public parse(currentValue: string): string {
+    // Split the input on "AVERAGE("
+    let sections: string[] = this.splitInput(currentValue);
+
+    // For every instance of "AVERAGE(", replace it with the value of the average
+    let combinedValue = sections[0];
+    sections.splice(0, 1);
+    sections.forEach((element) => {
+      combinedValue += this.evaluate(element);
+    });
+
+    // Return the display value with the average range expressions replaced
+    return combinedValue;
+  }
+
+  /**
+   * Find the result of the first AVERAGE expression remaining and put that result in the display value
+   * @param reference the portion of the display value so far beginning with this AVERAGE expression's cells
+   * @returns the display value after replacing this instance of AVERAGE
+   */
+  private evaluate(reference: string): string {
+    // Find the location of the close parenthesis that ends the AVERAGE
+    const index = reference.indexOf(")");
+
+    // If there isn't a close parenthesis, throw an error
+    if (index === -1) {
+      throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
     }
 
-    parse(currentValue: string): string {
-        let sections: string[] = this.splitInput(currentValue);
-        let combinedValue = sections[0];
-        sections.splice(0, 1);
-        sections.forEach(element => {
-            combinedValue += this.evaluate(element);
-        });     
-        return combinedValue;
+    // Split into the range expression and the rest of the
+    const firstPart = reference.slice(0, index);
+    const secondPart = reference.slice(index + 1);
+    let splitSections: string[] = [firstPart, secondPart];
+
+    // Get the values of the cells in the range
+    let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
+
+    // If there are no values, throw an error
+    if (values.length < 1) {
+      throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
     }
 
-    private evaluate(reference: string): string {
-        //split based on closing parenthesis
-        const index = reference.indexOf(')');
-        //check that closed parenthesis exists
-        if (index === -1) {
-            throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
-        }
+    // Find the average of the cells in the reange
+    let sum: number = this.addRangeValues(values);
+    let average: number = sum / values.length;
 
-        const firstPart = reference.slice(0, index);
-        const secondPart = reference.slice(index + 1);
-
-        let splitSections: string[] = [firstPart, secondPart];
-
-        let values: string[] = this.resolveRange(splitSections[0], this.otherCells);
-        if(values.length < 1) {
-            return ErrorDisplays.INVALID_RANGE_EXPR;
-        }
-        let sum: number = this.addRangeValues(values);
-        let average: number = sum / values.length;
-        if(isNaN(average)) {
-            return ErrorDisplays.INVALID_RANGE_EXPR;
-        }
-        return average + splitSections[1];
+    // If the average results in a non-numerical answer, throw an error
+    if (isNaN(average)) {
+      throw new Error(ErrorDisplays.INVALID_RANGE_EXPR);
     }
+
+    // Else, return the display value chunk with the AVERAGE value filled in
+    return average + splitSections[1];
+  }
 }

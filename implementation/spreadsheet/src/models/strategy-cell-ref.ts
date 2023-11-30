@@ -1,9 +1,13 @@
+/**
+ * @file strategy-cell-ref.ts
+ */
+
 import { IStrategy } from "../interfaces/strategy-interface";
-// import { Cell } from "./cell";
 import { AExpressionStrategy } from "./strategy-abstract-expression";
 import { Util } from "./util";
 import { ErrorDisplays } from "./cell-data-errors-enum";
 import { ICell } from "../interfaces/cell-interface";
+
 
 export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
     private otherCells: ICell[][];
@@ -15,7 +19,7 @@ export class CellRefStrategy extends AExpressionStrategy implements IStrategy {
 
     }
 
-    parse(currentValue: string): string {
+    public parse(currentValue: string): string {
         let sections: string[] = this.splitInput(currentValue);
         let combinedValue = "";
         //add first string in array because it will be whatever is before the cell reference
