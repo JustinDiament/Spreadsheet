@@ -379,21 +379,69 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
       expect(currentState.cells.length).toEqual(4)
     });
 
-    // testing delete row with one selected row and more than one row in the grd
+    // testing delete row with one selected row and more than one row in the grid
+    it('deleteRow with one row selected - valid', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.deleteRow(currentState);
+      expect(currentState.cells.length).toEqual(3);
+    })
 
     // testing delete row with multiple selected rows, less than the number of rows in the grid
+    it('deleteRow with two rows selected - valid', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      SpreadsheetStateMachine.deleteRow(currentState);
+      expect(currentState.cells.length).toEqual(2);
+    })
 
     // testing delete row where number of selected rows equal number of cell rows
+    it('deleteRow with all rows selected -invalid', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(new Cell(1,1));
+      currentState.currentlySelected.push(cell2);
+      currentState.currentlySelected.push(new Cell(3,3));
+      SpreadsheetStateMachine.deleteRow(currentState);
+      expect(currentState.cells.length).toEqual(4);
+    })
 
     // testing delete row with no cell selected
+    it('deleteRow with no rows selected - valid', () => {
+      SpreadsheetStateMachine.deleteRow(currentState);
+      expect(currentState.cells.length).toEqual(4);
+    })
 
     // testing delete column with one selected column and more than column row in the grd
+    it('deleteColumn with one column selected - valid', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.deleteColumn(currentState);
+      expect(currentState.cells[0].length).toEqual(3);
+    })
 
-    // testing delete column with multiple selected column, less than the number of column in the grid
+    // testing delete column with multiple selected columns, less than the number of columns in the grid
+    it('deleteColumn with two columns selected - valid', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      SpreadsheetStateMachine.deleteColumn(currentState);
+      expect(currentState.cells[0].length).toEqual(2);
+    })
 
+    
     // testing delete column where number of selected column equal number of cell column
+it('deleteColumn with all columns selected -invalid', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(new Cell(1,3));
+      currentState.currentlySelected.push(cell2);
+      currentState.currentlySelected.push(new Cell(3,2));
+      SpreadsheetStateMachine.deleteRow(currentState);
+      expect(currentState.cells[0].length).toEqual(4);
+    })
+
 
     // testing delete column with no cell selected
+      it('deletecolumn with no columns selected - valid', () => {
+      SpreadsheetStateMachine.deleteColumn(currentState);
+      expect(currentState.cells[0].length).toEqual(4);
+    })
 
   });
 
@@ -482,7 +530,7 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
       expect(emptyCells[1][1].getEnteredValue()).toEqual('bye');
     });
 
-    it('f and r', () => {
+    it('f and r2', () => {
       emptyCells[1][1].setEnteredValue('hi');
       emptyCells[2][2].setEnteredValue('hi');
       emptyCells[3][3].setEnteredValue('hi');
@@ -490,7 +538,7 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
       expect(emptyCells[2][2].getEnteredValue()).toEqual('bye');
     });
 
-    it('f and r', () => {
+    it('f and r3', () => {
       emptyCells[1][1].setEnteredValue('hi');
       emptyCells[2][2].setEnteredValue('hi');
       emptyCells[3][3].setEnteredValue('hi');
