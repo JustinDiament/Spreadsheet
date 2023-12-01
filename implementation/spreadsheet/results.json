@@ -119,32 +119,32 @@
         "error": null
       },
       {
-        "title": "addRow above with one selected cell results in the correct value of cells",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow above with one selected cell results in the correct value of cells",
+        "title": "addRow above with one selected cell results in the correct amount of rows",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow above with one selected cell results in the correct amount of rows",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "addRow below with one selected cell results in the correct value of cells",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow below with one selected cell results in the correct value of cells",
+        "title": "addRow below with one selected cell results in the correct amount of rows",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow below with one selected cell results in the correct amount of rows",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "addColumn left with one selected cell results in the correct value of cells",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn left with one selected cell results in the correct value of cells",
+        "title": "addColumn left with one selected cell results in the correct amount of columns",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn left with one selected cell results in the correct amount of columns",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "addColumn right with one selected cell results in the correct value of cells",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn right with one selected cell results in the correct value of cells",
+        "title": "addColumn right with one selected cell results in the correct amount of columns",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn right with one selected cell results in the correct amount of columns",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "addColumn with no cells selected causes no change in the value of cells",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn with no cells selected causes no change in the value of cells",
+        "title": "addColumn with no cells selected causes no change in the number of columns",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn with no cells selected causes no change in the number of columns",
         "status": "PASS",
         "error": null
       },
@@ -155,50 +155,50 @@
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should find the first instance of hi",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should find the first instance of hi",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should not find bye and currentlySelected should be empty",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should not find bye and currentlySelected should be empty",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should move up to the next instance of hi",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should move up to the next instance of hi",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should replace the first instance of hi with bye",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should replace the first instance of hi with bye",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should replace nothing",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should replace nothing",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should replace the first hi with bye (among others)",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should replace the first hi with bye (among others)",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should replace the second hi with bye (among others)",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should replace the second hi with bye (among others)",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "f and r",
-        "fullTitle": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+        "title": "should replace the third hi with bye (among others)",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Find and replace should replace the third hi with bye (among others)",
         "status": "PASS",
         "error": null
       },
@@ -209,26 +209,146 @@
         "error": null
       },
       {
+        "title": "test editCell does not throw error when given invalid cell location",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test editCell does not throw error when given invalid cell location",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "test clearing selected cells with one cell selected, it has content",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing selected cells with one cell selected, it has content",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "test clearing selected cells with multiple cells selected, all with content",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing selected cells with multiple cells selected, all with content",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "test clearing all cells with only one nonempty cell",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing all cells with only one nonempty cell",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "test clearing all cells with multiple nonempty cells",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing all cells with multiple nonempty cells",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "create rule when the currently selecte cell has no rules",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when the currently selecte cell has no rules",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "create rule when the currently selected cell has a contradicting rule",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when the currently selected cell has a contradicting rule",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "create rule when the currently selected cell has that rule",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when the currently selected cell has that rule",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "create rule when there are multiple selected cells",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when there are multiple selected cells",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "delete rule when the currently selected cell has that rule",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules delete rule when the currently selected cell has that rule",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "delete rule when the currently selected cell does not have that rule",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules delete rule when the currently selected cell does not have that rule",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "delte rule when there are multiple selected cells",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules delte rule when there are multiple selected cells",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "get all rules from cell with no rules",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules get all rules from cell with no rules",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "get all rules from cells with the same rules",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules get all rules from cells with the same rules",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "get all rules from cells with different rules",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules get all rules from cells with different rules",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "testing setStyle : bold when all selected cells are bolded",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setStyle : bold when all selected cells are bolded",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "testing setStyle : underlined when all selected cells are not underlined",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setStyle : underlined when all selected cells are not underlined",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "testing setStyle : italics when some selected cells are italic and some are not",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setStyle : italics when some selected cells are italic and some are not",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "testing setTextColor with valid hex code",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setTextColor with valid hex code",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "testing setTextColor with invalid hex code",
+        "fullTitle": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setTextColor with invalid hex code",
+        "status": "PASS",
+        "error": null
+      },
+      {
         "title": "currentlySelected cells should change color with setTextColor",
         "fullTitle": "Testing the SpreadsheetStateMachine class currentlySelected cells should change color with setTextColor",
         "status": "PASS",
         "error": null
       }
     ],
-    "pass": 35,
+    "pass": 55,
     "fail": 0
   },
   "stats": {
     "numFailedTestSuites": 0,
     "numFailedTests": 0,
     "numPassedTestSuites": 1,
-    "numPassedTests": 35,
+    "numPassedTests": 55,
     "numPendingTestSuites": 0,
     "numPendingTests": 0,
     "numRuntimeErrorTestSuites": 0,
     "numTodoTests": 0,
     "numTotalTestSuites": 1,
-    "numTotalTests": 35,
+    "numTotalTests": 55,
     "openHandles": [],
     "snapshot": {
       "added": 0,
@@ -246,21 +366,21 @@
       "unmatched": 0,
       "updated": 0
     },
-    "startTime": 1701397912097,
+    "startTime": 1701399802207,
     "success": false,
     "testResults": [
       {
         "leaks": false,
         "numFailingTests": 0,
-        "numPassingTests": 35,
+        "numPassingTests": 55,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701397915671,
-          "runtime": 3500,
+          "end": 1701399806801,
+          "runtime": 4512,
           "slow": false,
-          "start": 1701397912171
+          "start": 1701399802289
         },
         "skipped": false,
         "snapshot": {
@@ -279,7 +399,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 3,
+            "duration": 2,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected isSelected should return false if the grid is empty",
@@ -327,7 +447,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected isSelected should return true if single cell is selected",
@@ -343,7 +463,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 0,
+            "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected isSelected should return true if cell is one of many selected",
@@ -359,7 +479,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected isSelected should not throw an error if given an out of bounds cell",
@@ -391,7 +511,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected getSelected should not through an error if the grid has no cells",
@@ -423,7 +543,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected getSelected should return an array of multiple selected cells",
@@ -455,7 +575,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected set select one should not throw an error for an out of bounds cell location",
@@ -471,7 +591,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 0,
+            "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected set select one should not throw an error for an invalid cell location syntax",
@@ -487,7 +607,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected currentlySelected should contain cells in one row sent to set select many",
@@ -503,7 +623,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 0,
+            "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected currentlySelected should contain cells in one column sent to set select many",
@@ -519,7 +639,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected currentlySelected should contain cells in multiple columns and rows sent to set select many",
@@ -551,7 +671,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 0,
+            "duration": 2,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected set select many should not throw an error for a cell out of bounds",
@@ -567,7 +687,7 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing getters and setter for selected"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
             "fullName": "Testing the SpreadsheetStateMachine class Testing getters and setter for selected set select many should not throw an error for an invalid cell location syntax",
@@ -583,16 +703,16 @@
               "Testing the SpreadsheetStateMachine class",
               "Testing add and delete columns and rows"
             ],
-            "duration": 2,
+            "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow above with one selected cell results in the correct value of cells",
+            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow above with one selected cell results in the correct amount of rows",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "addRow above with one selected cell results in the correct value of cells"
+            "title": "addRow above with one selected cell results in the correct amount of rows"
           },
           {
             "ancestorTitles": [
@@ -602,13 +722,13 @@
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow below with one selected cell results in the correct value of cells",
+            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addRow below with one selected cell results in the correct amount of rows",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "addRow below with one selected cell results in the correct value of cells"
+            "title": "addRow below with one selected cell results in the correct amount of rows"
           },
           {
             "ancestorTitles": [
@@ -618,13 +738,13 @@
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn left with one selected cell results in the correct value of cells",
+            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn left with one selected cell results in the correct amount of columns",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "addColumn left with one selected cell results in the correct value of cells"
+            "title": "addColumn left with one selected cell results in the correct amount of columns"
           },
           {
             "ancestorTitles": [
@@ -634,13 +754,13 @@
             "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn right with one selected cell results in the correct value of cells",
+            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn right with one selected cell results in the correct amount of columns",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "addColumn right with one selected cell results in the correct value of cells"
+            "title": "addColumn right with one selected cell results in the correct amount of columns"
           },
           {
             "ancestorTitles": [
@@ -650,13 +770,13 @@
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn with no cells selected causes no change in the value of cells",
+            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows addColumn with no cells selected causes no change in the number of columns",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "addColumn with no cells selected causes no change in the value of cells"
+            "title": "addColumn with no cells selected causes no change in the number of columns"
           },
           {
             "ancestorTitles": [
@@ -677,130 +797,146 @@
           {
             "ancestorTitles": [
               "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
+              "Find and replace"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should find the first instance of hi",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should find the first instance of hi"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Find and replace"
             ],
             "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should not find bye and currentlySelected should be empty",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "f and r"
+            "title": "should not find bye and currentlySelected should be empty"
           },
           {
             "ancestorTitles": [
               "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
+              "Find and replace"
             ],
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should move up to the next instance of hi",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "f and r"
+            "title": "should move up to the next instance of hi"
           },
           {
             "ancestorTitles": [
               "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
+              "Find and replace"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should replace the first instance of hi with bye",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should replace the first instance of hi with bye"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Find and replace"
             ],
             "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should replace nothing",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "f and r"
+            "title": "should replace nothing"
           },
           {
             "ancestorTitles": [
               "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
+              "Find and replace"
             ],
             "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should replace the first hi with bye (among others)",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "f and r"
+            "title": "should replace the first hi with bye (among others)"
           },
           {
             "ancestorTitles": [
               "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
-            ],
-            "duration": 4,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "f and r"
-          },
-          {
-            "ancestorTitles": [
-              "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
-            ],
-            "duration": 1,
-            "failureDetails": [],
-            "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
-            "invocations": 1,
-            "location": null,
-            "numPassingAsserts": 1,
-            "retryReasons": [],
-            "status": "passed",
-            "title": "f and r"
-          },
-          {
-            "ancestorTitles": [
-              "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
+              "Find and replace"
             ],
             "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should replace the second hi with bye (among others)",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "f and r"
+            "title": "should replace the second hi with bye (among others)"
           },
           {
             "ancestorTitles": [
               "Testing the SpreadsheetStateMachine class",
-              "Testing add and delete columns and rows"
+              "Find and replace"
             ],
-            "duration": 1,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing add and delete columns and rows f and r",
+            "fullName": "Testing the SpreadsheetStateMachine class Find and replace should replace the third hi with bye (among others)",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "f and r"
+            "title": "should replace the third hi with bye (among others)"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing edit, clear selected, and clear all cells"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test editCell changes the entered value of a cell at the given location",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "test editCell changes the entered value of a cell at the given location"
           },
           {
             "ancestorTitles": [
@@ -810,13 +946,317 @@
             "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test editCell changes the entered value of a cell at the given location",
+            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test editCell does not throw error when given invalid cell location",
             "invocations": 1,
             "location": null,
-            "numPassingAsserts": 0,
+            "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "test editCell changes the entered value of a cell at the given location"
+            "title": "test editCell does not throw error when given invalid cell location"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing edit, clear selected, and clear all cells"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing selected cells with one cell selected, it has content",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "test clearing selected cells with one cell selected, it has content"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing edit, clear selected, and clear all cells"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing selected cells with multiple cells selected, all with content",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "test clearing selected cells with multiple cells selected, all with content"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing edit, clear selected, and clear all cells"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing all cells with only one nonempty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "test clearing all cells with only one nonempty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing edit, clear selected, and clear all cells"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing edit, clear selected, and clear all cells test clearing all cells with multiple nonempty cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "test clearing all cells with multiple nonempty cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when the currently selecte cell has no rules",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "create rule when the currently selecte cell has no rules"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when the currently selected cell has a contradicting rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "create rule when the currently selected cell has a contradicting rule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when the currently selected cell has that rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "create rule when the currently selected cell has that rule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules create rule when there are multiple selected cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "create rule when there are multiple selected cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules delete rule when the currently selected cell has that rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "delete rule when the currently selected cell has that rule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules delete rule when the currently selected cell does not have that rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "delete rule when the currently selected cell does not have that rule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules delte rule when there are multiple selected cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "delte rule when there are multiple selected cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules get all rules from cell with no rules",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "get all rules from cell with no rules"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules get all rules from cells with the same rules",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "get all rules from cells with the same rules"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing create, delete, and get all rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing create, delete, and get all rules get all rules from cells with different rules",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "get all rules from cells with different rules"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing set style and set text color"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setStyle : bold when all selected cells are bolded",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "testing setStyle : bold when all selected cells are bolded"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing set style and set text color"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setStyle : underlined when all selected cells are not underlined",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "testing setStyle : underlined when all selected cells are not underlined"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing set style and set text color"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setStyle : italics when some selected cells are italic and some are not",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "testing setStyle : italics when some selected cells are italic and some are not"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing set style and set text color"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setTextColor with valid hex code",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "testing setTextColor with valid hex code"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the SpreadsheetStateMachine class",
+              "Testing set style and set text color"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the SpreadsheetStateMachine class Testing set style and set text color testing setTextColor with invalid hex code",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "testing setTextColor with invalid hex code"
           },
           {
             "ancestorTitles": [

@@ -769,6 +769,5 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 
  
 
-});
 
 
