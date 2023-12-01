@@ -83,9 +83,9 @@ describe("Formula Strategy", (): void => {
     let originalString = "5 ^ 2 + 8 * (2 - hello)";
 
     // Check that the formula throws the proper error
-    expect(strategy.parse(originalString)).toThrow(
-      ErrorDisplays.INVALID_FORMULA
-    );
+    expect(() => {
+      strategy.parse(originalString);
+    }).toThrow(ErrorDisplays.INVALID_FORMULA);
   });
 
   // Test that a malformed formula with an illegal symbol order throws the proper error
@@ -94,9 +94,9 @@ describe("Formula Strategy", (): void => {
     let originalString = "5 ^^^ 2 + 8 * (2 - 5)";
 
     // Check that the formula throws the proper error
-    expect(strategy.parse(originalString)).toThrow(
-      ErrorDisplays.INVALID_FORMULA
-    );
+    expect(() => {
+      strategy.parse(originalString);
+    }).toThrow(ErrorDisplays.INVALID_FORMULA);
   });
 
   // Test that a value containing no reserved formula characters is returned as-is

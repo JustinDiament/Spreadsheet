@@ -197,7 +197,8 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
                 {/* map through the row in the grid to get the cells in the row */}
                 {curr.map((cell, col) => (
                   <td
-                    className={
+                  id={indToLetter(col + 1) + (row + 1).toString()}
+                    className={ 
                       "m-0 p-1 sp-cell " +
                       (currSelected.includes(cell) ? "sp-selected" : "")
                     }

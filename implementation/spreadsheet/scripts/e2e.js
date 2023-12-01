@@ -12,7 +12,7 @@
     return new Promise((resolve, reject) => {
       const options = { detached: false, cwd: process.cwd(), shell: true, stdio: 'pipe' };
 
-      const child = spawn('npm', ['run', 'test'], options);
+      const child = spawn('npm', ['run', 'test', '--', 'cellDisplay.e2e.test.ts'], options);
       testScriptPid = child.pid;
 
       child.stdout.on('data', (data) => {
