@@ -500,7 +500,7 @@ export class SpreadsheetStateMachine {
           // if the rule is not in every cell, contains will be false, and we will not add the rule to our final list of rules
           // if it is every cell, contains will be true, and we will add the rule to our final list of rules
           currentState.currentlySelected.forEach(
-            (cell) => contains && cell.getRules().includes(firstRules[i])
+            (cell) => contains = contains && cell.getRules().includes(firstRules[i])
           );
           contains && rules.push(firstRules[i]);
         }
