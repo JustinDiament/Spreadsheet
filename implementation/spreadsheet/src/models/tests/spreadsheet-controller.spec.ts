@@ -83,8 +83,8 @@ export class TestSpreadsheetState implements ISpreadSheetState {
     throw new Error("replaceCurrentCell not implemented.");
   }
   findNextContaining(find: string): void {
-    throw new Error("findNextContaining not implemented.");
   }
+
   findAndReplaceAll(find: string, replace: string): void {
     throw new Error("findAndReplaceAll not implemented.");
   }
@@ -302,59 +302,81 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
     cell2 = new Cell(2,1);
 	});
 
-    // testing addRow above results in the correct value of cells
+    // testing addRow above results in the correct amount of cells
     it('addRow above with one selected cell results in the correct value of cells', () => {
       cell1.setEnteredValue("hello");
       currentState.currentlySelected = [cell1];
       SpreadsheetStateMachine.addRow(currentState, "above");
-      //expect(currentState.cells).toEqual()
-
+      expect(currentState.cells.length).toEqual(5)
     });
 
-    // testing addRow below results in the correct value of cells
+    // testing addRow below results in the correct amount of cells
     it('addRow below with one selected cell results in the correct value of cells', () => {
-
+      cell1.setEnteredValue("hello");
+      currentState.currentlySelected = [cell1];
+      SpreadsheetStateMachine.addRow(currentState, "below");
+      expect(currentState.cells.length).toEqual(5)
     });
 
-    // testing addRow above with multiple selected results in the correct value of cells
-    it('addRow above with multiple selected cells results in the correct value of cells', () => {
+    // // testing addRow above with multiple selected results in the correct value of cells
+    // it('addRow above with multiple selected cells results in the correct value of cells', () => {
+    //   // testing addRow below results in the correct amount of cells
+    //   it('addRow below with one selected cell results in the correct value of cells', () => {
+    //     cell1.setEnteredValue("hello");
+    //     currentState.currentlySelected = [cell1, ];
+    //     SpreadsheetStateMachine.addRow(currentState, "below");
+    //     expect(currentState.cells.length).toEqual(5)
+    //   });
+    // });
 
-    });
+    // // testing addRow below with multiple selected results in the correct value of cells
+    // it('addRow below with multiple selected cells results in the correct value of cells', () => {
 
-    // testing addRow below with multiple selected results in the correct value of cells
-    it('addRow below with multiple selected cells results in the correct value of cells', () => {
+    // });
 
-    });
+    // // testing addRow with no cells selected causes no change in the value of cells
+    // it('addRow with no cells selected causes no change in the value of cells', () => {
 
-    // testing addRow with no cells selected causes no change in the value of cells
-    it('addRow with no cells selected causes no change in the value of cells', () => {
-
-    });
+    // });
 
     // testing addColumn left results in the correct value of cells
     it('addColumn left with one selected cell results in the correct value of cells', () => {
-
+      cell1.setEnteredValue("hello");
+      currentState.currentlySelected = [cell1];
+      SpreadsheetStateMachine.addColumn(currentState, "left");
+      expect(currentState.cells[0].length).toEqual(5)
     });
 
     // testing addColumn right results in the correct value of cells
     it('addColumn right with one selected cell results in the correct value of cells', () => {
-
+      cell1.setEnteredValue("hello");
+      currentState.currentlySelected = [cell1];
+      SpreadsheetStateMachine.addColumn(currentState, "right");
+      expect(currentState.cells[0].length).toEqual(5)
     });
 
-    // testing addColumn left with multiple selected results in the correct value of cells
-    it('addColumn left with multiple selected cells results in the correct value of cells', () => {
+    // // testing addColumn left with multiple selected results in the correct value of cells
+    // it('addColumn left with multiple selected cells results in the correct value of cells', () => {
 
-    });
+    // });
 
-    // testing addColumn right with multiple selected results in the correct value of cells
-    it('addColumn right with multiple selected cells results in the correct value of cells', () => {
+    // // testing addColumn right with multiple selected results in the correct value of cells
+    // it('addColumn right with multiple selected cells results in the correct value of cells', () => {
 
-    });
+    // });
 
     // testing addColumn with no cells selected causes no change in the value of cells
 
     it('addColumn with no cells selected causes no change in the value of cells', () => {
+      currentState.currentlySelected = [];
+      SpreadsheetStateMachine.addColumn(currentState, "right");
+      expect(currentState.cells[0].length).toEqual(4)
+    });
 
+    it('addRow with no cells selected causes no change in the number of rows', () => {
+      currentState.currentlySelected = [];
+      SpreadsheetStateMachine.addRow(currentState, "above");
+      expect(currentState.cells.length).toEqual(4)
     });
 
     // testing delete row with one selected row and more than one row in the grd
@@ -373,8 +395,109 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 
     // testing delete column with no cell selected
 
-
   });
+
+  // Tests on find and replace functions
+  describe("Find and replace", ()=> {
+    // Test finding the first instance of a word in the grid
+    it('should find the first instance of hi', () => {
+      // Set up a grid with 3 "hi"
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+
+      // Find the first one
+      SpreadsheetStateMachine.findCellsContaining(currentState, 'hi');
+
+      // Check that the first instance of hi was found
+      expect(currentState.currentlySelected[0]).toEqual(emptyCells[1][1]);
+    });
+
+    // Test finding the first instance of a word that is not in the grid
+    it('should not find bye and currentlySelected should be empty', () => {
+      // Set up a grid with 3 "hi"
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+
+      // Find the first bye, which doesn't exist
+      SpreadsheetStateMachine.findCellsContaining(currentState, 'bye');
+
+      // Check that currentlySelected is empty as a result
+      expect(currentState.currentlySelected).toEqual([]);
+    });
+
+    // Test that currentlySelected moves up to the next instance of the find word
+    // when findNextContaining is called
+    it('should move up to the next instance of hi', () => {
+      // Set up a grid with 3 "hi"
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+
+      // Set currentlySelected to the first instance of hi
+      currentState.currentlySelected = [emptyCells[1][1]];
+
+      // Find the next instance of hi and check that it is now selected
+      SpreadsheetStateMachine.findNextContaining(currentState, 'hi');
+      expect(currentState.currentlySelected).toEqual([emptyCells[2][2]]);
+    });
+
+    // Test that replaceCurrentCell replaces the current cell that is selected
+    it('should replace the first instance of hi with bye', () => {
+      // Set up a grid with 3 "hi"
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+
+      // Set currentlySelected to the first instance of hi
+      currentState.currentlySelected = [emptyCells[1][1]];
+
+      // Replace the currently selected instance of hi with bye and check that this occured
+      SpreadsheetStateMachine.replaceCurrentCell(currentState, 'hi', 'bye');
+      expect(emptyCells[1][1].getEnteredValue()).toEqual('bye');
+    });
+
+    // Test that nothing is replaced by replaceCurrentCell if nothing is selected
+    it('should replace nothing', () => {
+      // Set up a grid with 3 "hi"
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+      
+      // Set currentlySelected to no cell
+      currentState.currentlySelected = [];
+
+      // "Replace" hi with bye, but check that nothing actually happened because nothing was selected
+      SpreadsheetStateMachine.replaceCurrentCell(currentState, 'hi', 'bye');
+      expect(emptyCells[1][1].getEnteredValue()).toEqual('hi');
+    });
+
+    // Test that nothing is replaced by replaceCurrentCell if nothing is selected
+    it('f and r', () => {
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+      SpreadsheetStateMachine.findAndReplaceAll(currentState, 'hi', 'bye');
+      expect(emptyCells[1][1].getEnteredValue()).toEqual('bye');
+    });
+
+    it('f and r', () => {
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+      SpreadsheetStateMachine.findAndReplaceAll(currentState, 'hi', 'bye');
+      expect(emptyCells[2][2].getEnteredValue()).toEqual('bye');
+    });
+
+    it('f and r', () => {
+      emptyCells[1][1].setEnteredValue('hi');
+      emptyCells[2][2].setEnteredValue('hi');
+      emptyCells[3][3].setEnteredValue('hi');
+      SpreadsheetStateMachine.findAndReplaceAll(currentState, 'hi', 'bye');
+      expect(emptyCells[3][3].getEnteredValue()).toEqual('bye');
+    });
+  })
 
 	// Tests for editCell(currentState: ISpreadSheetState, cellId: string, newValue: string): ISpreadSheetState,
 	// clearSelectedCells(currentState: ISpreadSheetState): ISpreadSheetState, and
@@ -589,6 +712,20 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 
 
   });
+
+
+    // Tests that a currently selected cell's can be set with setTextColor
+    it('currentlySelected cells should change color with setTextColor', () => {
+      // Set up currently selected to contain a cell
+      currentState.currentlySelected = [new Cell(0, 0)];
+
+      // Set the text color to white
+      SpreadsheetStateMachine.setTextColor(currentState, "#FFFFFF");
+      
+      // Check that the color of the text in the cell is now white
+      expect(currentState.currentlySelected[0].getStyle().getTextColor()).toEqual("#FFFFFF");
+    });
+
 });
 
 
