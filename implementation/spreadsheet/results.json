@@ -5,44 +5,74 @@
     "suites": [],
     "tests": [
       {
-        "title": "should have the title \"Spreadsheet\"",
-        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
+        "title": "should add two values",
+        "fullTitle": "Formula Strategy should add two values",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "should have the title \"Spreadsheet\"",
-        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
+        "title": "should subtract two values",
+        "fullTitle": "Formula Strategy should subtract two values",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "should have the title \"Spreadsheet\"",
-        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
+        "title": "should multiply two values",
+        "fullTitle": "Formula Strategy should multiply two values",
         "status": "PASS",
         "error": null
       },
       {
-        "title": "should have the title \"Spreadsheet\"",
-        "fullTitle": "cellDisplay component should have the title \"Spreadsheet\"",
+        "title": "should divide two values",
+        "fullTitle": "Formula Strategy should divide two values",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should exponentiate two values",
+        "fullTitle": "Formula Strategy should exponentiate two values",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should perform all operations",
+        "fullTitle": "Formula Strategy should perform all operations",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should error due to text in the formula",
+        "fullTitle": "Formula Strategy should error due to text in the formula",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should error due to malformed formula with too many symbols",
+        "fullTitle": "Formula Strategy should error due to malformed formula with too many symbols",
+        "status": "PASS",
+        "error": null
+      },
+      {
+        "title": "should not apply any formula at all",
+        "fullTitle": "Formula Strategy should not apply any formula at all",
         "status": "PASS",
         "error": null
       }
     ],
-    "pass": 4,
+    "pass": 9,
     "fail": 0
   },
   "stats": {
-    "numFailedTestSuites": 0,
+    "numFailedTestSuites": 1,
     "numFailedTests": 0,
-    "numPassedTestSuites": 1,
-    "numPassedTests": 4,
+    "numPassedTestSuites": 12,
+    "numPassedTests": 220,
     "numPendingTestSuites": 0,
     "numPendingTests": 0,
-    "numRuntimeErrorTestSuites": 0,
+    "numRuntimeErrorTestSuites": 1,
     "numTodoTests": 0,
-    "numTotalTestSuites": 1,
-    "numTotalTests": 4,
+    "numTotalTestSuites": 13,
+    "numTotalTests": 220,
     "openHandles": [],
     "snapshot": {
       "added": 0,
@@ -60,21 +90,21 @@
       "unmatched": 0,
       "updated": 0
     },
-    "startTime": 1701390432301,
+    "startTime": 1701393896727,
     "success": false,
     "testResults": [
       {
         "leaks": false,
         "numFailingTests": 0,
-        "numPassingTests": 4,
+        "numPassingTests": 11,
         "numPendingTests": 0,
         "numTodoTests": 0,
         "openHandles": [],
         "perfStats": {
-          "end": 1701390479274,
-          "runtime": 46883,
+          "end": 1701393902560,
+          "runtime": 5469,
           "slow": true,
-          "start": 1701390432391
+          "start": 1701393897091
         },
         "skipped": false,
         "snapshot": {
@@ -86,67 +116,3785 @@
           "unmatched": 0,
           "updated": 0
         },
-        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/client/tests/cellDisplay.e2e.test.ts",
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/cell-style.spec.ts",
         "testResults": [
           {
             "ancestorTitles": [
-              "cellDisplay component"
+              "Testing ICellStyle"
             ],
-            "duration": 12075,
+            "duration": 9,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
+            "fullName": "Testing ICellStyle should have default values on creation",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should have the title \"Spreadsheet\""
+            "title": "should have default values on creation"
           },
           {
             "ancestorTitles": [
-              "cellDisplay component"
+              "Testing ICellStyle"
             ],
-            "duration": 10253,
+            "duration": 0,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
+            "fullName": "Testing ICellStyle should not be underlined by default",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should have the title \"Spreadsheet\""
+            "title": "should not be underlined by default"
           },
           {
             "ancestorTitles": [
-              "cellDisplay component"
+              "Testing ICellStyle"
             ],
-            "duration": 11077,
+            "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
+            "fullName": "Testing ICellStyle should not be italicized by default",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should have the title \"Spreadsheet\""
+            "title": "should not be italicized by default"
           },
           {
             "ancestorTitles": [
-              "cellDisplay component"
+              "Testing ICellStyle"
             ],
-            "duration": 7761,
+            "duration": 1,
             "failureDetails": [],
             "failureMessages": [],
-            "fullName": "cellDisplay component should have the title \"Spreadsheet\"",
+            "fullName": "Testing ICellStyle should not be bold by default",
             "invocations": 1,
             "location": null,
             "numPassingAsserts": 1,
             "retryReasons": [],
             "status": "passed",
-            "title": "should have the title \"Spreadsheet\""
+            "title": "should not be bold by default"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the bold property to true",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the bold property to true"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the bold property to false",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the bold property to false"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the italic property to true",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the italic property to true"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the italic property to false",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the italic property to false"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the underline property to true",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the underline property to true"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the underline property to false",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the underline property to false"
+          },
+          {
+            "ancestorTitles": [
+              "Testing ICellStyle"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing ICellStyle should set the text color property",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should set the text color property"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 28,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393902627,
+          "runtime": 5511,
+          "slow": true,
+          "start": 1701393897116
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/util.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 8,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return an array of size 2 with a valid input",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 2,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an array of size 2 with a valid input"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return column as first value given valid input",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return column as first value given valid input"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return row as second value given valid input",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return row as second value given valid input"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 1 uppercase and 1 digit positive",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 1 uppercase and 1 digit positive"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 1 uppercase and 2 digit positive",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 1 uppercase and 2 digit positive"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 1 uppercase and 2 digit positive ending 0",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 1 uppercase and 2 digit positive ending 0"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 1 uppercase and 2 digit positive leading zero",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 1 uppercase and 2 digit positive leading zero"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 2 uppercase and 1 digit positive",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 2 uppercase and 1 digit positive"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 2 uppercase and 2 digit positive",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 2 uppercase and 2 digit positive"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given 2 uppercase and 3 digit positive",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given 2 uppercase and 3 digit positive"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should return correct indices given >3 uppercases and >3 digits positive",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return correct indices given >3 uppercases and >3 digits positive"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 31,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given only number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given only number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 1 lowercase letter and 1 digit number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 1 lowercase letter and 1 digit number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 2 lowercase letters and 1 digit number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 2 lowercase letters and 1 digit number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 1 nonletter character and 1 digit number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 1 nonletter character and 1 digit number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 1 lowercase letter and no number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 1 lowercase letter and no number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 1 uppercase letter and 0",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 1 uppercase letter and 0"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 2 uppercase letter and 0",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 2 uppercase letter and 0"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 2 mismatched uppercase letter and number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 2 mismatched uppercase letter and number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 2 mismatched uppercase letter and no number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 2 mismatched uppercase letter and no number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given empty string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given empty string"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given number then uppercase letter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given number then uppercase letter"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given space between letter and number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given space between letter and number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given leading space",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given leading space"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given trailing space",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given trailing space"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given only space",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given only space"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 1 uppercase, 1 invalid character, and 1 number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 1 uppercase, 1 invalid character, and 1 number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the Util Class",
+              "Testing getIndicesFromLocation"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the Util Class Testing getIndicesFromLocation should throw error given 1 uppercase, and 1 negative",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error given 1 uppercase, and 1 negative"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 4,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393902651,
+          "runtime": 5536,
+          "slow": true,
+          "start": 1701393897115
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/strategy-plus-sign.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 7,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should concatenate 2 strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should concatenate 2 strings"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should concatenate 1 string with 1 number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should concatenate 1 string with 1 number"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should add more than two strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add more than two strings"
+          },
+          {
+            "ancestorTitles": [
+              "Plus Sign Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Plus Sign Strategy should not concatenate numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not concatenate numbers"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 14,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393902824,
+          "runtime": 252,
+          "slow": false,
+          "start": 1701393902572
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/value-in-range-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should allow values that are equal to the specified value when the rule is \"equal\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that are equal to the specified value when the rule is \"equal\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should handle the case where numbers being compared are negative and positive when the rule is \"equal\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle the case where numbers being compared are negative and positive when the rule is \"equal\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should not allow values that are not equal to the specified value when the rule is \"equals\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that are not equal to the specified value when the rule is \"equals\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule numbers less than the given number are allowed when the rule is \"less\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "numbers less than the given number are allowed when the rule is \"less\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule numbers equal to than the given number are not allowed when the rule is \"less\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "numbers equal to than the given number are not allowed when the rule is \"less\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule numbers greater to than the given number are not allowed when the rule is \"less\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "numbers greater to than the given number are not allowed when the rule is \"less\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule numbers greater than the given number are allowed when the rule is \"greater\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "numbers greater than the given number are allowed when the rule is \"greater\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule numbers equal to the given number are not allowed when the rule is \"greater\"",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "numbers equal to the given number are not allowed when the rule is \"greater\""
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should handle large numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle large numbers"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 20,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should throw an error on text cell data",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw an error on text cell data"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should throw error on nonexistant rule mode",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw error on nonexistant rule mode"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should return the proper comparison via the getter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the proper comparison via the getter"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should return the proper value via the getter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the proper value via the getter"
+          },
+          {
+            "ancestorTitles": [
+              "Value in Range Rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value in Range Rule should handle large numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle large numbers"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 1,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393902842,
+          "runtime": 201,
+          "slow": false,
+          "start": 1701393902641
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/spreadsheet-controller.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Spreadsheet Controller"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Spreadsheet Controller should invoke the correct service when each method is called",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 0,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should invoke the correct service when each method is called"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 8,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393903039,
+          "runtime": 374,
+          "slow": false,
+          "start": 1701393902665
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/value-type-rule.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should allow values of the specified type (string)",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values of the specified type (string)"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should allow values of the specified type (num)",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values of the specified type (num)"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should not allow values of a different type",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values of a different type"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 153,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should throw an error on an invalid type",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should throw an error on an invalid type"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should handle edge case with an empty string and a number rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle edge case with an empty string and a number rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should handle edge case with an empty string and a string rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle edge case with an empty string and a string rule"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should return the proper value via the getter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the proper value via the getter"
+          },
+          {
+            "ancestorTitles": [
+              "Value type rule"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value type rule should handle large numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle large numbers"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 6,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393903191,
+          "runtime": 358,
+          "slow": false,
+          "start": 1701393902833
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/value-is-one-of.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should allow values that are numbers in the specified set",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow values that are numbers in the specified set"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should not allow values that are not in the specified set",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not allow values that are not in the specified set"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should handle edge case with an empty set and reject any value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle edge case with an empty set and reject any value"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should handle edge case with an empty set and reject any value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle edge case with an empty set and reject any value"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should return the proper value via the getter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the proper value via the getter"
+          },
+          {
+            "ancestorTitles": [
+              "Value is one of"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Value is one of should handle large numbers",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should handle large numbers"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 9,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393904169,
+          "runtime": 7071,
+          "slow": true,
+          "start": 1701393897098
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/strategy-average.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 9,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should sum a single cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should sum a single cell"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should sum a group of cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should sum a group of cells"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 29,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should error on no close parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on no close parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should error on string in the range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on string in the range"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 9,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should error on backwards range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on backwards range"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should error on out of bounds cell in range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on out of bounds cell in range"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should error on self-reference",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on self-reference"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should maintain other text in dispaly value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should maintain other text in dispaly value"
+          },
+          {
+            "ancestorTitles": [
+              "Average Strategy"
+            ],
+            "duration": 5,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Average Strategy should allow for multiple averages",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow for multiple averages"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 9,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393904218,
+          "runtime": 7129,
+          "slow": true,
+          "start": 1701393897089
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/strategy-sum.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 14,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should sum a single cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should sum a single cell"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should sum a group of cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should sum a group of cells"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 42,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should error on no close parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on no close parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should error on string in the range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on string in the range"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 7,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should error on backwards range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on backwards range"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should error on out of bounds cell in range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on out of bounds cell in range"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should error on self-reference",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error on self-reference"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should maintain other text in dispaly value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should maintain other text in dispaly value"
+          },
+          {
+            "ancestorTitles": [
+              "Sum Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Sum Strategy should allow for multiple summations",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should allow for multiple summations"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 10,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393904234,
+          "runtime": 7144,
+          "slow": true,
+          "start": 1701393897090
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/strategy-cell-ref.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 11,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return the display value of a cell with a set value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the display value of a cell with a set value"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return the display value of a cell with an entered value that is different than the display value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return the display value of a cell with an entered value that is different than the display value"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an empty string for a cell with no entered value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an empty string for a cell with no entered value"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return a simplified equation when the cell ref is not all that is present",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return a simplified equation when the cell ref is not all that is present"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 49,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an error when there is no closing parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is no closing parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an error when there is not a number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is not a number"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 8,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an error when there is not a letter",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is not a letter"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an error when there is an out of range cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is an out of range cell"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an error when there is a self reference",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is a self reference"
+          },
+          {
+            "ancestorTitles": [
+              "Cell Reference Strategy"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Cell Reference Strategy should return an error when there is a circular reference loop",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should return an error when there is a circular reference loop"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 111,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393904252,
+          "runtime": 7156,
+          "slow": true,
+          "start": 1701393897096
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/cell.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getters and setters for row and column"
+            ],
+            "duration": 8,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getters and setters for row and column getRow() return the initial value of row",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRow() return the initial value of row"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getters and setters for row and column"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getters and setters for row and column getColumn() return the initial value of column",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getColumn() return the initial value of column"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getters and setters for row and column"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getters and setters for row and column getRow() should return the value sent to setRow()",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRow() should return the value sent to setRow()"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getters and setters for row and column"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getters and setters for row and column getColumn() should return the value sent to setColumn()",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getColumn() should return the value sent to setColumn()"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and setter for entered value"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and setter for entered value getEnteredValue() should return the initial value of enteredValue",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getEnteredValue() should return the initial value of enteredValue"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and setter for entered value"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and setter for entered value getEnteredValue() should return the value sent to setEnteredValue()",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getEnteredValue() should return the value sent to setEnteredValue()"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input getDisplayValue() should return the initial value of displayValue",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getDisplayValue() should return the initial value of displayValue"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should not change display value if entered value stays the same",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not change display value if entered value stays the same"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the plain string entered value was set to",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the plain string entered value was set to"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display an empty cell when the entered value is changed to empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display an empty cell when the entered value is changed to empty"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display an empty cell when entered value references empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display an empty cell when entered value references empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the correct value when entered value references plain nonempty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the correct value when entered value references plain nonempty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 6,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the correct value when entered value references a cell that references a third cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the correct value when entered value references a cell that references a third cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the correct value when entered value references a cell whose value has since changed",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the correct value when entered value references a cell whose value has since changed"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display an empty cell when entered value references a cell whose value has since cleared",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display an empty cell when entered value references a cell whose value has since cleared"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the correct value when entered value references two cells in a row",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the correct value when entered value references two cells in a row"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the sum of one empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the sum of one empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the sum of one non empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the sum of one non empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the sum of multiple empty cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the sum of multiple empty cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the sum of multiple non empty cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the sum of multiple non empty cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the sum of multiple non empty cells after one has changed",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the sum of multiple non empty cells after one has changed"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the average of one empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the average of one empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the average of one non empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the average of one non empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the average of multiple empty cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the average of multiple empty cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the average of multiple non empty cells",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the average of multiple non empty cells"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 5,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should contain the average of multiple non empty cells after one has changed",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should contain the average of multiple non empty cells after one has changed"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the concatenation of two strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the concatenation of two strings"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the concatenation of four strings",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the concatenation of four strings"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 3,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result of a negative number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result of a negative number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display a number when the entered number contains plus first",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display a number when the entered number contains plus first"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result a simple formula",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result a simple formula"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result a formula using order of operations",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result a formula using order of operations"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result a formula that contains a reference to another cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result a formula that contains a reference to another cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 5,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result a formula that contains a SUM",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result a formula that contains a SUM"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result a formula that contains an AVERAGE",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result a formula that contains an AVERAGE"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display the result of a complex formula",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display the result of a complex formula"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value type rule of word",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value type rule of word"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value type rule of number and is number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value type rule of number and is number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value in range rule and is number in range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value in range rule and is number in range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value in range rule and is empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value in range rule and is empty"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value one of rule and contains option",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value one of rule and contains option"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value one of rule and is empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value one of rule and is empty"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display entered value when it has a value type, value in range, and value one of rule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display entered value when it has a value type, value in range, and value one of rule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display correct value when it has a value type rule of number and references a number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display correct value when it has a value type rule of number and references a number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display correct value when it has a value in range rule and references a number in the range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display correct value when it has a value in range rule and references a number in the range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display correct value when it has a value one of rule and references one of the options",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display correct value when it has a value one of rule and references one of the options"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display correct value when it has a value type rule of number and contains a formula",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display correct value when it has a value type rule of number and contains a formula"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display correct value when it has a value in range rule and contains a formula that calculates in the range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display correct value when it has a value in range rule and contains a formula that calculates in the range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - valid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - valid entered input should display correct value when it has a value one of rule and contains a formula that calculates to one of the options",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display correct value when it has a value one of rule and contains a formula that calculates to one of the options"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-REF because the entered value refers to a cell containing an error",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-REF because the entered value refers to a cell containing an error"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-REF because the REF is missing closing parens",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-REF because the REF is missing closing parens"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-REF because the REF is bad format",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-REF because the REF is bad format"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-REF because another cell directly refers to itself through it",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-REF because another cell directly refers to itself through it"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-REF because another cell indirectly refers to itself through it",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-REF because another cell indirectly refers to itself through it"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #REF-OUT-OF-RANGE because it references a cell out of range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #REF-OUT-OF-RANGE because it references a cell out of range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #REF-OUT-OF-RANGE because it contains a sum including cells out of range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #REF-OUT-OF-RANGE because it contains a sum including cells out of range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 2,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #REF-OUT-OF-RANGE because it contains an average including cells out of range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #REF-OUT-OF-RANGE because it contains an average including cells out of range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-INPUT because it contains a word and its validation rule requires number",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-INPUT because it contains a word and its validation rule requires number"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-INPUT because it contains a number outside of its rule's permitted range",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-INPUT because it contains a number outside of its rule's permitted range"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-INPUT because it contains a string that is not one of the valid options",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-INPUT because it contains a string that is not one of the valid options"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-INPUT because it contains a number that is not one of the valid options",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-INPUT because it contains a number that is not one of the valid options"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-INPUT because it contains contradicting data validation rules",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-INPUT because it contains contradicting data validation rules"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #SELF-REF because it contains reference to itself",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #SELF-REF because it contains reference to itself"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #SELF-REF because it references a cell directly referencing it back",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #SELF-REF because it references a cell directly referencing it back"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #SELF-REF because it references a cell indirectly referencing it back",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #SELF-REF because it references a cell indirectly referencing it back"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #SELF-REF because it references a cell that contains a sum including it",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #SELF-REF because it references a cell that contains a sum including it"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #SELF-REF because it references a cell that contains a average including it",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #SELF-REF because it references a cell that contains a average including it"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-EXPR because it contains a sum in reverse order",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-EXPR because it contains a sum in reverse order"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-EXPR because it contains a average in reverse order",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-EXPR because it contains a average in reverse order"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-EXPR because it contains a sum containing a string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-EXPR because it contains a sum containing a string"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-EXPR because it contains a average containing a string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-EXPR because it contains a average containing a string"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-EXPR because it contains a sum with improper syntax",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-EXPR because it contains a sum with improper syntax"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-EXPR because it contains a average cwith improper syntax",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-EXPR because it contains a average cwith improper syntax"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-RANGE-EXPR because it gets an average including a cell referring to it",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-RANGE-EXPR because it gets an average including a cell referring to it"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-FORMULA because it contains a formula with anumber and string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-FORMULA because it contains a formula with anumber and string"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-FORMULA because it contains a formula ending in a operator",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-FORMULA because it contains a formula ending in a operator"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing getter and update for display value - invalid entered input"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing getter and update for display value - invalid entered input should display #INVALID-FORMULA because it contains a formula missing parenthesis",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should display #INVALID-FORMULA because it contains a formula missing parenthesis"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell.isObserving() should return false for an ICells that have just been instantiated",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell.isObserving() should return false for an ICells that have just been instantiated"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell2) should return true when cell1 is set to observe cell2",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell2) should return true when cell1 is set to observe cell2"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell2) should return false when cell1 is detached from being an observer of cell2",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell2) should return false when cell1 is detached from being an observer of cell2"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell2) should not throw an error when cell1 is detached from cell2 without ever being attached",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell2) should not throw an error when cell1 is detached from cell2 without ever being attached"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell2) should return true when cell1 added to cell2's list of cells it's observing",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell2) should return true when cell1 added to cell2's list of cells it's observing"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell2) should return false when cell1 added to then removed from cell2's list of cells it's observing",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell2) should return false when cell1 added to then removed from cell2's list of cells it's observing"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell2) should not throw an error when cell1 is detached from observing cell2 without ever being attached",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell2) should not throw an error when cell1 is detached from observing cell2 without ever being attached"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell1) should return true for an ICell that has a cyclical observance",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell1) should return true for an ICell that has a cyclical observance"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing attach and detach observer and observing"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing attach and detach observer and observing cell1.isObserving(cell1) should return true for an ICell that directly observes itself",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "cell1.isObserving(cell1) should return true for an ICell that directly observes itself"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing clear Cell"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing clear Cell getEnteredValue() should return empty if clearCell is called on empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getEnteredValue() should return empty if clearCell is called on empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing clear Cell"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing clear Cell getDisplayValue(ICell[][]) should return empty if clearCell is called on empty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getDisplayValue(ICell[][]) should return empty if clearCell is called on empty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing clear Cell"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing clear Cell getEnteredValue() should return empty if clearCell is called on nonempty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getEnteredValue() should return empty if clearCell is called on nonempty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing clear Cell"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing clear Cell getDisplayValue(ICell[][]) should return empty if clearCell is called on nonempty cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getDisplayValue(ICell[][]) should return empty if clearCell is called on nonempty cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing clear Cell"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing clear Cell getDisplayValue(ICell[][]) should return empty if clearCell is called on nonempty cell a cell is referencing",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getDisplayValue(ICell[][]) should return empty if clearCell is called on nonempty cell a cell is referencing"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should not change entered value if the cell is empty",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should not change entered value if the cell is empty"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should not change entered value if the find is not in the entered value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should not change entered value if the find is not in the entered value"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 5,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should replace the entire entered value when it is equal to the find value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should replace the entire entered value when it is equal to the find value"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should replace a portion of the entered value when it contains the find value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should replace a portion of the entered value when it contains the find value"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should replace the entire entered value when it is has multiple consecutive occurrences of find value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should replace the entire entered value when it is has multiple consecutive occurrences of find value"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should replace parts of entered value when it is has multiple non-consecutive occurrences of find value",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should replace parts of entered value when it is has multiple non-consecutive occurrences of find value"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testin find and replace"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testin find and replace Should replace a portion of the entered value when it contains the find value with empty string",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "Should replace a portion of the entered value when it contains the find value with empty string"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an empty array when called on newly instantiated cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an empty array when called on newly instantiated cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of the value type rule applied to cell in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of the value type rule applied to cell in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of the value in range rule applied to cell in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of the value in range rule applied to cell in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of the value one of rule applied to cell in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of the value one of rule applied to cell in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of one rule applied to cell if rule object applied twice in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of one rule applied to cell if rule object applied twice in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of one rule applied to cell if rule value applied twice in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of one rule applied to cell if rule value applied twice in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of all the noncontradicting rules applied to cell in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of all the noncontradicting rules applied to cell in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules getRules() should return an array of all the contradicting rules applied to cell in addRule",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getRules() should return an array of all the contradicting rules applied to cell in addRule"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules removeRules() should do nothing to a cell with no rules applied",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "removeRules() should do nothing to a cell with no rules applied"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules removeRules() should do nothing to a cell with rules that aren't what was passed",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "removeRules() should do nothing to a cell with rules that aren't what was passed"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing add and delete rule and get rules"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing add and delete rule and get rules removeRules() should remove the provided rule from the cell's list of rules",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "removeRules() should remove the provided rule from the cell's list of rules"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing get and set style"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing get and set style getStyle() should return the default style when called on newly instantiated cell",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "getStyle() should return the default style when called on newly instantiated cell"
+          },
+          {
+            "ancestorTitles": [
+              "Testing the ICell interface",
+              "Testing get and set style"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Testing the ICell interface Testing get and set style setStyle() should set the ICell's style with the provided style",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "setStyle() should set the ICell's style with the provided style"
+          }
+        ],
+        "failureMessage": null
+      },
+      {
+        "failureMessage": "  \u001b[1m● \u001b[22mTest suite failed to run\n\n    Your test suite must contain at least one test.\n\n      \u001b[2mat onResult (\u001b[22mnode_modules/@jest/core/build/TestScheduler.js\u001b[2m:133:18)\u001b[22m\n      \u001b[2mat \u001b[22mnode_modules/@jest/core/build/TestScheduler.js\u001b[2m:254:19\u001b[22m\n      \u001b[2mat \u001b[22mnode_modules/emittery/index.js\u001b[2m:363:13\u001b[22m\n          at Array.map (<anonymous>)\n      \u001b[2mat Emittery.emit (\u001b[22mnode_modules/emittery/index.js\u001b[2m:361:23)\u001b[22m\n",
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 0,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 0,
+          "runtime": 0,
+          "slow": false,
+          "start": 0
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testExecError": {
+          "message": "Your test suite must contain at least one test.",
+          "stack": "Error: Your test suite must contain at least one test.\n    at onResult (/Users/Justin/Documents/team508-project/implementation/spreadsheet/node_modules/@jest/core/build/TestScheduler.js:133:18)\n    at /Users/Justin/Documents/team508-project/implementation/spreadsheet/node_modules/@jest/core/build/TestScheduler.js:254:19\n    at /Users/Justin/Documents/team508-project/implementation/spreadsheet/node_modules/emittery/index.js:363:13\n    at Array.map (<anonymous>)\n    at Emittery.emit (/Users/Justin/Documents/team508-project/implementation/spreadsheet/node_modules/emittery/index.js:361:23)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/spreadsheet-controller.test.tsx",
+        "testResults": []
+      },
+      {
+        "leaks": false,
+        "numFailingTests": 0,
+        "numPassingTests": 9,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "openHandles": [],
+        "perfStats": {
+          "end": 1701393905494,
+          "runtime": 2641,
+          "slow": false,
+          "start": 1701393902853
+        },
+        "skipped": false,
+        "snapshot": {
+          "added": 0,
+          "fileDeleted": false,
+          "matched": 0,
+          "unchecked": 0,
+          "uncheckedKeys": [],
+          "unmatched": 0,
+          "updated": 0
+        },
+        "testFilePath": "/Users/Justin/Documents/team508-project/implementation/spreadsheet/src/models/tests/strategy-formulas.spec.ts",
+        "testResults": [
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 4,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should add two values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should add two values"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should subtract two values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should subtract two values"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should multiply two values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should multiply two values"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should divide two values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should divide two values"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should exponentiate two values",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should exponentiate two values"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should perform all operations",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should perform all operations"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 13,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should error due to text in the formula",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error due to text in the formula"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 1,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should error due to malformed formula with too many symbols",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should error due to malformed formula with too many symbols"
+          },
+          {
+            "ancestorTitles": [
+              "Formula Strategy"
+            ],
+            "duration": 0,
+            "failureDetails": [],
+            "failureMessages": [],
+            "fullName": "Formula Strategy should not apply any formula at all",
+            "invocations": 1,
+            "location": null,
+            "numPassingAsserts": 1,
+            "retryReasons": [],
+            "status": "passed",
+            "title": "should not apply any formula at all"
           }
         ],
         "failureMessage": null
