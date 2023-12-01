@@ -170,6 +170,7 @@ export default function SpreadSheetDisplay() {
           <button
             className={"sp-menu-button " + (dropDisplayState("edit") ? "selected" : "")}
             type="button"
+            id="edit"
             aria-haspopup="menu"
             aria-expanded={dropdown ? "true" : "false"}
             onClick={() => {
@@ -201,6 +202,7 @@ export default function SpreadSheetDisplay() {
           <button
             className={"sp-menu-button " + (dropDisplayState("data") ? "selected" : "")}
             type="button"
+            id="data"
             aria-haspopup="menu"
             aria-expanded={dropdown ? "true" : "false"}
             onClick={() => {

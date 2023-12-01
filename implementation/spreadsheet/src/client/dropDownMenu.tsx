@@ -25,7 +25,7 @@ interface DropDownMenuProps {
         <div className="sp-dropdown p-0"style={disp ? {display:"block"} : {display:"none"}}>
             <ul className="m-0 pt-3 pb-3 p-0">
                 {/* map through provided list of dropdown items */}
-                {menuItems.map((item, index) => (<li className="sp-submenu-option" onClick={() => functions(index)} key={index}>{item}</li>))}
+                {menuItems.map((item, index) => (<li className="sp-submenu-option" id={item} onClick={() => functions(index)} key={index}>{item}</li>))}
             </ul>
         </div>
     )
