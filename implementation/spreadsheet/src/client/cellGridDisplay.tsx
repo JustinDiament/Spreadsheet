@@ -96,7 +96,7 @@ function CellGridDisplay({ findReplaceOpen }: CellGridDisplayProps) {
   // force the grid to rerender whenever the currently selected cells are changed
   useEffect(() => {
     // no need to do anything in addition to rendering
-  }, [currSelected]);
+  }, [currSelected, getCells]);
 
   // useEffect to update if the shift key is being pressed or lifted
   useEffect(() => {

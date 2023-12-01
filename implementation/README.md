@@ -8,7 +8,8 @@ HOW TO INSTALL THE SPREADSHEET:
 HOW TO RUN THE SPREADSHEET TESTS:
 - Navigate to the "spreadsheet" folder (/implementation/spreadsheet)
 - Run "npm install" in the terminal
-- Run "npm test --coverage" in the terminal  
+- Run "npm test models/tests -- --coverage" in the terminal (runs all tests except end to end tests)
+- Run "npm run e2e" in the terminal (exclusively runs the end to end tests) 
 
 
 HOW TO USE THE SPREADSHEET: 
@@ -66,4 +67,18 @@ HOW TO USE THE SPREADSHEET:
     - Text styles are applied to all selected cells (you can use multi-select with SHIFT as described above). 
         - In order to remove bolded/italicized/underline, ALL selected cells must have that quality. If only some do, the quality will be applied to the ones that do not have it when clicking the button.   
     
-- To view this guide, click the Help button next to the Edit and Data dropdown menus.
+- To view an abridged version of this guide within the Spreadsheet application, click the Help button next to the Edit and Data dropdown menus.  
+
+GUIDE TO ERRORS AND THEIR MEANING: 
+- #INVALID-EXPR
+    - Malformed range expression (such as missing closing parenthesis, incorrect format of the cells being referred to between the parenthesis, etc). 
+- #INVALID-REF
+    - Malformed cell reference (such as missing closing parenthesis, incorrect format of the cell being referred to between the parenthesis, etc). 
+- #REF-OUT-OF-RANGE
+    - Cell ref or range expression refers to cell beyond the bounds of the current spreadsheet size.
+- #INVALID-FORMULA
+    - Malformed arithmetic formula (such as bad symbols, bad order of numbers and symbols, text within the formula, etc). 
+- #SELF-REF
+    - A cell ref or range expression references itself, or creates an infinate loop via a chain of references. 
+- #INVALID-INPUT
+    - A validation rule has been violated.
