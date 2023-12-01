@@ -9,9 +9,19 @@ import { ISpreadSheetState } from "../../interfaces/controller-interface";
 import { IValidationRule } from "../../interfaces/validation-rule-interface";
 import { Cell } from "../cell";
 import { SpreadsheetStateMachine } from "../spreadsheet-state-machine";
+import { ValueInRangeRule } from "../value-in-range-rule";
+import { ValueIsOneOfRule } from "../value-is-one-of-rule";
+import { ValueTypeRule } from "../value-type-rule";
 
 /**
- * small class that implements ISpreadSheetState for testing purposes 
+ * TestSpreadsheetState is a small class that implements ISpreadSheetState for testing purposes only.
+ * It is needed so that we can instantiate an object of type ISpreadSheetState, which
+ * we cannot do with only an interface. 
+ * 
+ * We do not need to implement the functions because the TestSpreadsheetState is only being used for
+ * its state - which is cells and currentlySelected. All functions being tested here are the static
+ * functions in the SpreadsheetStateMachine class, and these functions need a non-undefined ISpreadSheetState
+ * to perform operations on
  */
 
 export class TestSpreadsheetState implements ISpreadSheetState {
@@ -534,24 +544,48 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 	describe("Testing edit, clear selected, and clear all cells", () => {
     // test the entered value of a cell after editCell with valid cellID
     it('test editCell changes the entered value of a cell at the given location', () => {
-
+      SpreadsheetStateMachine.editCell(currentState, "A1", "caffeine");
+      expect(currentState.cells[0][0].getEnteredValue()).toEqual("caffeine")
     });
 
     // test that edit cell does not throw error if invalid cellID provided
+    it('test editCell does not throw error when given invalid cell location', () => {
+      expect(() => SpreadsheetStateMachine.editCell(currentState, "G1", "car")).not.toThrow();
+    });
 
     // test clearing one selected cell with content works
+    it('test clearing selected cells with one cell selected, it has content', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.editCell(currentState, "A1", "caffeine");
+      SpreadsheetStateMachine.clearSelectedCells(currentState);
+      expect(cell1.getEnteredValue()).toEqual("")
+    });
 
     // test clearing multiple selected cells with content works
-
-    // test clearing multiple empty cells results in the same value of cells
+    it('test clearing selected cells with multiple cells selected, all with content', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      SpreadsheetStateMachine.editCell(currentState, "A1", "caffeine");
+      SpreadsheetStateMachine.editCell(currentState, "B3", "tea");
+      SpreadsheetStateMachine.clearSelectedCells(currentState);
+      expect(cell1.getEnteredValue()).toEqual("");
+    });
 
     // test clearing all cells with one nonempty cell
+    it('test clearing all cells with only one nonempty cell', () => {
+      SpreadsheetStateMachine.editCell(currentState, "A1", "caffeine");
+      SpreadsheetStateMachine.clearAllCells(currentState);
+      expect(cell1.getEnteredValue()).toEqual("");
+    });
+
 
     // test clearing all cells with multiple nonempty cells
-
-
-    
-
+   it('test clearing all cells with multiple nonempty cells', () => {
+      SpreadsheetStateMachine.editCell(currentState, "A1", "caffeine");
+      SpreadsheetStateMachine.editCell(currentState, "B3", "tea");
+      SpreadsheetStateMachine.clearAllCells(currentState);
+      expect(cell2.getEnteredValue()).toEqual("");
+    });
 
   });
 
@@ -559,6 +593,104 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 	// removeRule(currentState: ISpreadSheetState, rule: IValidationRule): ISpreadSheetState, and
 	// getAllRules(currentState: ISpreadSheetState): IValidationRule[]
 	describe("Testing create, delete, and get all rules", () => {
+    let isNumber:IValidationRule;
+    let isWord: IValidationRule;
+    let greaterThan5: IValidationRule;
+    beforeAll(() => {
+      isNumber = new ValueTypeRule("num");
+      isWord = new ValueTypeRule("word");
+      greaterThan5 = new ValueInRangeRule("greater", 5);
+
+    })
+
+    // createRule for cell that has no rules
+    it('create rule when the currently selecte cell has no rules', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.createRule(currentState, isNumber);
+      expect(cell1.getRules()).toContain(isNumber);
+    })
+
+    // create Rule for cell that has contradicting rule
+    it('create rule when the currently selected cell has a contradicting rule', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.createRule(currentState, isWord);
+      SpreadsheetStateMachine.createRule(currentState, greaterThan5);
+      expect(cell1.getRules()).toEqual([isWord, greaterThan5]);
+      
+    })
+
+    // create Rule for cell that has that rule
+    it('create rule when the currently selected cell has that rule', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.createRule(currentState, isWord);
+      SpreadsheetStateMachine.createRule(currentState, isWord);
+      expect(cell1.getRules()).toEqual([isWord]);
+      
+    })
+
+    // create Rule for multple cells
+    it('create rule when there are multiple selected cells', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      SpreadsheetStateMachine.createRule(currentState, isWord);
+      expect(cell2.getRules()).toEqual([isWord]);
+      
+    })
+
+    // deleteRule for cell that has that rule
+    it('delete rule when the currently selected cell has that rule', () => {
+      currentState.currentlySelected.push(cell1);
+      cell1.addRule(isWord);
+      SpreadsheetStateMachine.removeRule(currentState, isWord);
+      expect(cell1.getRules()).toEqual([]);
+      
+    })
+
+    // delete Rule for cell that doesn't have that rule
+    it('delete rule when the currently selected cell does not have that rule', () => {
+      currentState.currentlySelected.push(cell1);
+      cell1.addRule(isWord);
+      SpreadsheetStateMachine.removeRule(currentState, isNumber);
+      expect(cell1.getRules()).toEqual([isWord]);
+      
+    })
+
+    // delete Rule from multiple cells
+    it('delte rule when there are multiple selected cells', () => {
+      currentState.currentlySelected.push(cell1);
+      cell1.addRule(isWord);
+      currentState.currentlySelected.push(cell2);
+      cell2.addRule(isWord);
+      SpreadsheetStateMachine.removeRule(currentState, isWord);
+      expect(cell2.getRules()).toEqual([]);
+      
+    })
+
+    // get all rules from cell with no rule
+    it('get all rules from cell with no rules', () => {
+      currentState.currentlySelected.push(cell1);
+      expect(SpreadsheetStateMachine.getAllRules(currentState)).toEqual([]);
+    })
+
+    // get all rules from cells with same rules
+     it('get all rules from cells with the same rules', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      cell1.addRule(isWord);
+      cell2.addRule(isWord);
+      expect(SpreadsheetStateMachine.getAllRules(currentState)).toEqual([isWord]);
+      
+    })
+
+    // get all rules from cells with different rules
+     it('get all rules from cells with different rules', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      cell1.addRule(isWord);
+      cell2.addRule(isNumber);
+      expect(SpreadsheetStateMachine.getAllRules(currentState)).toEqual([]);
+      
+    })
 
 
   });
@@ -576,6 +708,50 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
   //                    setCellStyle: (style: ICellStyle, value: boolean) => void): ISpreadSheetState, and
   // setTextColor(currentState: ISpreadSheetState, textColor: string): ISpreadSheetState
   describe("Testing set style and set text color", () => {
+
+    // test setstyle - all selected from bolded to unbolded
+    it('testing setStyle : bold when all selected cells are bolded', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      cell1.getStyle().setBold(true);
+      cell2.getStyle().setBold(true);
+      SpreadsheetStateMachine.setStyle(currentState, (style:ICellStyle) => style.isCellBold(), (style:ICellStyle, val:boolean) => style.setBold(val));
+      expect(cell1.getStyle().isCellBold()).toBe(false);
+    });
+
+    // test setStyle - all selected from not underlined to underlined
+    it('testing setStyle : underlined when all selected cells are not underlined', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      SpreadsheetStateMachine.setStyle(currentState, (style:ICellStyle) => style.isCellUnderlined(), (style:ICellStyle, val:boolean) => style.setUnderline(val));
+      expect(cell1.getStyle().isCellUnderlined()).toBe(true);
+    });
+
+    // test setStyle - some selected italics to all selected italics
+    it('testing setStyle : italics when some selected cells are italic and some are not', () => {
+      currentState.currentlySelected.push(cell1);
+      currentState.currentlySelected.push(cell2);
+      cell1.getStyle().setItalic(true);
+      SpreadsheetStateMachine.setStyle(currentState, (style:ICellStyle) => style.isCellItalic(), (style:ICellStyle, val:boolean) => style.setItalic(val));
+      expect(cell1.getStyle().isCellItalic()).toBe(true);
+    });
+
+    // test setTextColor - valid hex code
+    it('testing setTextColor with valid hex code', () => {
+      currentState.currentlySelected.push(cell1);
+      SpreadsheetStateMachine.setTextColor(currentState, "#f0f0f0");
+      expect(cell1.getStyle().getTextColor()).toEqual("#f0f0f0");
+    });
+
+    // test setTextColor - invalid hex code
+    it('testing setTextColor with invalid hex code', () => {
+      currentState.currentlySelected.push(cell1);
+      expect(() => SpreadsheetStateMachine.setTextColor(currentState, "f0p0f0")).not.toThrow();
+    });
+
+
+  });
+
 
     // Tests that a currently selected cell's can be set with setTextColor
     it('currentlySelected cells should change color with setTextColor', () => {
