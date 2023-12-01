@@ -278,6 +278,10 @@ export class SpreadsheetStateMachine {
      * @returns currentState - the new state of the spreadsheet
      */
     public static deleteRow(currentState: ISpreadSheetState): ISpreadSheetState {
+      // if there are no selected cells, there is nothing to delete
+      if(currentState.currentlySelected.length === 0) {
+        return currentState;
+      }
       // Start first row to delete at the last row
       let rowToDelete: number = currentState.cells[0].length;
 
@@ -298,8 +302,12 @@ export class SpreadsheetStateMachine {
           numRowsToDelete++;
         }
       }
-
+    if(numRowsToDelete >= currentState.cells.length) {
+      return currentState;
+    }
       let newGrid: Array<Array<ICell>> = copyGrid(currentState.cells);
+
+      
 
       // Remove the proper number of rows from the temperary grid
       for (let i = 0; i < numRowsToDelete; i++) {
@@ -329,6 +337,10 @@ export class SpreadsheetStateMachine {
      * @returns currentState - the new state of the spreadsheet
      */
     public static deleteColumn(currentState: ISpreadSheetState): ISpreadSheetState {
+     // if there are no selected cells, there is nothing to delete
+      if(currentState.currentlySelected.length === 0) {
+        return currentState;
+      }
       // Start first col to delete at the last row
       let colToDelete: number = currentState.cells.length;
 
@@ -349,6 +361,10 @@ export class SpreadsheetStateMachine {
           numColsToDelete++;
         }
       }
+
+      if((numColsToDelete >= currentState.cells[0].length)) {
+      return currentState;
+    }
 
       // Create a temporary grid
       let newGrid: Array<Array<ICell>> = copyGrid(currentState.cells);
