@@ -292,19 +292,27 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
     cell2 = new Cell(2,1);
 	});
 
-    // testing addRow above results in the correct amount of cells
-    it('addRow above with one selected cell results in the correct value of cells', () => {
-      cell1.setEnteredValue("hello");
+    // Testing addRow above results in the correct amount of rows
+    it('addRow above with one selected cell results in the correct amount of rows', () => {
+      // Set currentlySelected to a cell in the top row
       currentState.currentlySelected = [cell1];
+
+      // Add a row above
       SpreadsheetStateMachine.addRow(currentState, "above");
+
+      // Check that there are now 5 rows instead of 4
       expect(currentState.cells.length).toEqual(5)
     });
 
-    // testing addRow below results in the correct amount of cells
-    it('addRow below with one selected cell results in the correct value of cells', () => {
-      cell1.setEnteredValue("hello");
+    // Testing addRow below results in the correct amount of rows
+    it('addRow below with one selected cell results in the correct amount of rows', () => {
+      // Set currentlySelected to a cell in the top row
       currentState.currentlySelected = [cell1];
+
+      // Add a row below
       SpreadsheetStateMachine.addRow(currentState, "below");
+
+      // Check that there are now 5 rows instead of 4
       expect(currentState.cells.length).toEqual(5)
     });
 
@@ -329,19 +337,27 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 
     // });
 
-    // testing addColumn left results in the correct value of cells
-    it('addColumn left with one selected cell results in the correct value of cells', () => {
-      cell1.setEnteredValue("hello");
+    // Testing addColumn left results in the correct amount of columns
+    it('addColumn left with one selected cell results in the correct amount of columns', () => {
+      // Set currentlySelected to a cell in the left column
       currentState.currentlySelected = [cell1];
+        
+      // Add a column to the left
       SpreadsheetStateMachine.addColumn(currentState, "left");
+
+      // Check that there are now 5 columns instead of 4
       expect(currentState.cells[0].length).toEqual(5)
     });
 
-    // testing addColumn right results in the correct value of cells
-    it('addColumn right with one selected cell results in the correct value of cells', () => {
-      cell1.setEnteredValue("hello");
+    // Testing addColumn right results in the correct amount of columns
+    it('addColumn right with one selected cell results in the correct amount of columns', () => {
+      // Set currentlySelected to a cell in the left column
       currentState.currentlySelected = [cell1];
+
+      // Add a column to the right
       SpreadsheetStateMachine.addColumn(currentState, "right");
+
+      // Check that there are now 5 columns instead of 4
       expect(currentState.cells[0].length).toEqual(5)
     });
 
@@ -357,15 +373,27 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
 
     // testing addColumn with no cells selected causes no change in the value of cells
 
-    it('addColumn with no cells selected causes no change in the value of cells', () => {
+    // Test that adding a column with nothing selected does not add any columns
+    it('addColumn with no cells selected causes no change in the number of columns', () => {
+      // Set currentlySelected to no cells
       currentState.currentlySelected = [];
+
+      // "Add" a column right, but nothing should be added
       SpreadsheetStateMachine.addColumn(currentState, "right");
+
+      // Check that there are still 4 columns
       expect(currentState.cells[0].length).toEqual(4)
     });
 
+    // Test that adding a row with nothing selected does not add any rows
     it('addRow with no cells selected causes no change in the number of rows', () => {
+      // Set currentlySelected to no cells
       currentState.currentlySelected = [];
+      
+      // "Add" a row above, but nothing should be added
       SpreadsheetStateMachine.addRow(currentState, "above");
+
+      // Check that there are still 4 rows
       expect(currentState.cells.length).toEqual(4)
     });
 
@@ -463,27 +491,38 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
       expect(emptyCells[1][1].getEnteredValue()).toEqual('hi');
     });
 
-    // Test that nothing is replaced by replaceCurrentCell if nothing is selected
-    it('f and r', () => {
+    // Test find and replace all replacces all instances, part 1
+    it('should replace the first hi with bye (among others)', () => {
+      // Set up a grid with 3 "hi"
       emptyCells[1][1].setEnteredValue('hi');
       emptyCells[2][2].setEnteredValue('hi');
       emptyCells[3][3].setEnteredValue('hi');
+
+      // Do a find and repalce all and check that this included replacing the first hi
       SpreadsheetStateMachine.findAndReplaceAll(currentState, 'hi', 'bye');
       expect(emptyCells[1][1].getEnteredValue()).toEqual('bye');
     });
 
-    it('f and r', () => {
+    // Test find and replace all replacces all instances, part 2
+    it('should replace the second hi with bye (among others)', () => {
+      // Set up a grid with 3 "hi"
       emptyCells[1][1].setEnteredValue('hi');
       emptyCells[2][2].setEnteredValue('hi');
       emptyCells[3][3].setEnteredValue('hi');
+
+      // Do a find and repalce all and check that this included replacing the second hi
       SpreadsheetStateMachine.findAndReplaceAll(currentState, 'hi', 'bye');
       expect(emptyCells[2][2].getEnteredValue()).toEqual('bye');
     });
 
-    it('f and r', () => {
+    // Do a find and repalce all and check that this included replacing the third hi
+    it('should replace the third hi with bye (among others)', () => {
+      // Set up a grid with 3 "hi"
       emptyCells[1][1].setEnteredValue('hi');
       emptyCells[2][2].setEnteredValue('hi');
       emptyCells[3][3].setEnteredValue('hi');
+
+      // Do a find and repalce all and check that this included replacing the third hi
       SpreadsheetStateMachine.findAndReplaceAll(currentState, 'hi', 'bye');
       expect(emptyCells[3][3].getEnteredValue()).toEqual('bye');
     });
@@ -538,10 +577,6 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
   // setTextColor(currentState: ISpreadSheetState, textColor: string): ISpreadSheetState
   describe("Testing set style and set text color", () => {
 
-
-  });
-
-
     // Tests that a currently selected cell's can be set with setTextColor
     it('currentlySelected cells should change color with setTextColor', () => {
       // Set up currently selected to contain a cell
@@ -553,6 +588,10 @@ describe("Testing the SpreadsheetStateMachine class", (): void => {
       // Check that the color of the text in the cell is now white
       expect(currentState.currentlySelected[0].getStyle().getTextColor()).toEqual("#FFFFFF");
     });
+  });
+
+
+ 
 
 });
 
